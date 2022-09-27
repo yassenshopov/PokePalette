@@ -2,14 +2,13 @@
   "name": "pokeapi",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yassenshopov.github.io",
+  "homepage": "https://yassenshopov.github.io/pokeapi",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
     "axios": "^0.27.2",
     "fast-average-color": "^9.1.1",
-    "gh-pages": "^4.0.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-scripts": "5.0.1",
@@ -40,5 +39,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "gh-pages": "^4.0.0"
   }
 }
