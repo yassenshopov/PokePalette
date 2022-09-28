@@ -1,1 +1,1 @@
-# pokeapi
+# PokePalette
