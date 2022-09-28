@@ -12,7 +12,7 @@ export default function Poke() {
       async function getData() {
         let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Find}`);
         console.log(res);
-        setImg(res.data.sprites.front_default);
+        setImg(res.data.sprites.other['official-artwork'].front_default);
         setType(res.data.types[0].type.name);
       }
   
