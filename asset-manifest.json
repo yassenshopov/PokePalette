@@ -1,15 +1,15 @@
 {
   "files": {
-    "main.css": "/pokeapi/static/css/main.7849e435.css",
-    "main.js": "/pokeapi/static/js/main.092c3a2f.js",
-    "static/js/787.20ea48e4.chunk.js": "/pokeapi/static/js/787.20ea48e4.chunk.js",
-    "index.html": "/pokeapi/index.html",
-    "main.7849e435.css.map": "/pokeapi/static/css/main.7849e435.css.map",
-    "main.092c3a2f.js.map": "/pokeapi/static/js/main.092c3a2f.js.map",
-    "787.20ea48e4.chunk.js.map": "/pokeapi/static/js/787.20ea48e4.chunk.js.map"
+    "main.css": "/PokePalette/static/css/main.7849e435.css",
+    "main.js": "/PokePalette/static/js/main.d16b46f3.js",
+    "static/js/787.573542ee.chunk.js": "/PokePalette/static/js/787.573542ee.chunk.js",
+    "index.html": "/PokePalette/index.html",
+    "main.7849e435.css.map": "/PokePalette/static/css/main.7849e435.css.map",
+    "main.d16b46f3.js.map": "/PokePalette/static/js/main.d16b46f3.js.map",
+    "787.573542ee.chunk.js.map": "/PokePalette/static/js/787.573542ee.chunk.js.map"
   },
   "entrypoints": [
     "static/css/main.7849e435.css",
-    "static/js/main.092c3a2f.js"
+    "static/js/main.d16b46f3.js"
   ]
 }
