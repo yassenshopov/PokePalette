@@ -1,8 +1,8 @@
 {
-  "name": "pokeapi",
+  "name": "pokepalette",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://yassenshopov.github.io/pokeapi",
+  "homepage": "https://yassenshopov.github.io/PokePalette",
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.5",
     "@testing-library/react": "^13.4.0",
