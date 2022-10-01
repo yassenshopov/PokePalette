@@ -1,17 +1,15 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import {FastAverageColor} from "fast-average-color";
 
 export default function Poke() {
     const [name, setname] = useState("");
-    const [Find, setFind] = useState("");
+    const [Find, setFind] = useState("scizor");
     const [Img, setImg] = useState("");
     const [Type, setType] = useState("");
   
     useEffect(() => {
       async function getData() {
         let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Find}`);
-        console.log(res);
         setImg(res.data.sprites.front_default);
         setType(res.data.types[0].type.name);
       }
@@ -24,24 +22,13 @@ export default function Poke() {
     };
   
     const Search = () => {
-      if (name !== "") setFind(name);
+      if (name !== "") setFind(name.toLowerCase());
       setname("");
     };
 
     useEffect(() => {
-        const fac = new FastAverageColor();
-        const container = document.querySelector('.App');
-  
-        fac
-          .getColorAsync(container.querySelector('img'), {
-            ignoredColor: [
-                // [255, 255, 255, 0]
-                [0, 0, 0, 0]
-            ]
-          })
-          .then((color) => {
-            // container.style.backgroundColor = color.hex;
-            container.style.color = color.isDark ? '#fff' : '#000';
+
+            const container = document.querySelector('.App');
             const myCanvas = document.getElementById('my-canvas'); 
             const imgData = document.getElementById('imgData'); 
             const myContext = myCanvas.getContext('2d');
@@ -80,23 +67,18 @@ export default function Poke() {
                 else {
                   counts[rgbValues[i]] = counts[rgbValues[i]] + 1; 
                 }
-                
               }
-              console.log(counts);
+
+              delete counts["#101010"];
+              delete counts["#000000"];
 
               let colorScheme = Object.entries(counts);
               let sortedScheme = colorScheme.sort((a,b) => a[1] - b[1]).reverse();
-
               console.log(sortedScheme)
-              let bgStr = "linear-gradient(to right," + sortedScheme[1][0] + " 0%," + sortedScheme[1][0] + " 33%," + sortedScheme[2][0] + " 33%," + sortedScheme[2][0] + " 66%," + sortedScheme[3][0] + " 66%," + sortedScheme[3][0] + " 100%)";
-              console.log(bgStr)
+              let bgStr = "linear-gradient(to right," + sortedScheme[0][0] + " 0%," + sortedScheme[0][0] + " 33%," + sortedScheme[1][0] + " 33%," + sortedScheme[1][0] + " 66%," + sortedScheme[2][0] + " 66%," + sortedScheme[2][0] + " 100%)";
               container.style.background = bgStr;
             };
-          })
-          .catch((e) => {
-            // console.log(e);
           });
-    });
     
   
     return (

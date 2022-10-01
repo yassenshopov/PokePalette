@@ -1,14 +1,11 @@
 body {
+  padding: 0;
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
 }
 
 code {
@@ -20,31 +17,8 @@ code {
   text-align: center;
   justify-content: center;
   align-items: center;
-
-  margin: 50px;
   padding: 50px;
-  border-radius: 22.5px;
   box-shadow: 0px 5px 20px #00000015;
-  width: fit-content;
-
+  width: 100%;
   transition: all 0.3s ease-in-out;
-
-  border: 1px solid black;
-}
-
-.clock,
-.App h1 {
-  color: #121212;
-}
-
-/* .App:hover {
-  background-color: #141414;
-} */
-
-.back {
-  width: 500px;
-}
-
-.back img {
-  width: 50%;
 }
