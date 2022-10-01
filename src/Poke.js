@@ -7,18 +7,32 @@ export default function Poke() {
     const [Img, setImg] = useState("");
     const [Type, setType] = useState("");
   
+    let shiny = true;
+
     useEffect(() => {
       async function getData() {
         let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Find}`);
-        setImg(res.data.sprites.front_default);
+        console.log(res);
+
+        if (shiny == true) {
+          setImg(res.data.sprites.front_shiny);
+        }
+        else {
+          setImg(res.data.sprites.front_default);
+        }
         setType(res.data.types[0].type.name);
       }
-  
       getData();
     }, [Find]);
   
     const Typename = (event) => {
       setname(event.target.value);
+    };
+
+    const ShinyChange = () => {
+      shiny = !shiny;
+      console.log(shiny);
+      setFind(name.toLowerCase());
     };
   
     const Search = () => {
@@ -94,6 +108,7 @@ export default function Poke() {
             <input type="text" onChange={Typename} value={name} />
   
             <button onClick={Search}>Search</button>
+            <button onClick={ShinyChange}>Shiny</button>
             <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
           </div>
         </div>
