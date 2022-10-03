@@ -1,28 +1,33 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+let shiny = false;
+
 export default function Poke() {
+
     const [name, setname] = useState("");
-    const [Find, setFind] = useState("scizor");
+    let [Find, setFind] = useState("pikachu");
     const [Img, setImg] = useState("");
     const [Type, setType] = useState("");
-  
-    let shiny = true;
 
     useEffect(() => {
       async function getData() {
         let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Find}`);
         console.log(res);
-
         if (shiny == true) {
           setImg(res.data.sprites.front_shiny);
         }
         else {
           setImg(res.data.sprites.front_default);
         }
-        setType(res.data.types[0].type.name);
-      }
-      getData();
+        if (res.data.types.length == 2) {
+          setType((res.data.types[0].type.name + "/" + res.data.types[1].type.name).toUpperCase());
+        }
+        else {
+          setType(res.data.types[0].type.name.toUpperCase());
+        }
+      };
+    getData();
     }, [Find]);
   
     const Typename = (event) => {
@@ -31,8 +36,13 @@ export default function Poke() {
 
     const ShinyChange = () => {
       shiny = !shiny;
-      console.log(shiny);
-      setFind(name.toLowerCase());
+      console.log(Find);
+      if (name !== "") {
+        name = Find;
+        setFind(name.toLowerCase())
+      };
+      setname("");
+      ;
     };
   
     const Search = () => {
@@ -42,7 +52,7 @@ export default function Poke() {
 
     useEffect(() => {
 
-            const container = document.querySelector('.App');
+            const container = document.querySelector('.pokeCard');
             const myCanvas = document.getElementById('my-canvas'); 
             const imgData = document.getElementById('imgData'); 
             const myContext = myCanvas.getContext('2d');
@@ -51,9 +61,7 @@ export default function Poke() {
             img.src = imgData.src;        
             img.onload = () => {
               myContext.beginPath();
-              myContext.fillStyle = "#FFFFFF";
               myContext.clearRect(0, 0, 100, 100);
-              // myContext.globalAlpha = 0;
               myContext.stroke(); 
               myContext.drawImage(img, 0, 0);        
               const imageData = myContext.getImageData(0, 0, myCanvas.width, myCanvas.height);
@@ -73,7 +81,6 @@ export default function Poke() {
               }
 
               let counts = {};
-              let compare = 0;
               for (let i = 0; i < rgbValues.length; i++) {
                 if (!(rgbValues[i] in counts)) {
                   counts[rgbValues[i]] = 1;
@@ -88,16 +95,17 @@ export default function Poke() {
 
               let colorScheme = Object.entries(counts);
               let sortedScheme = colorScheme.sort((a,b) => a[1] - b[1]).reverse();
-              console.log(sortedScheme)
-              let bgStr = "linear-gradient(to right," + sortedScheme[0][0] + " 0%," + sortedScheme[0][0] + " 33%," + sortedScheme[1][0] + " 33%," + sortedScheme[1][0] + " 66%," + sortedScheme[2][0] + " 66%," + sortedScheme[2][0] + " 100%)";
+              let bgStr = "linear-gradient(-0deg," + sortedScheme[0][0] + " 0%," + sortedScheme[0][0] + " 25%," + sortedScheme[1][0] + " 25%," + sortedScheme[1][0] + " 75%," + sortedScheme[2][0] + " 75%," + sortedScheme[2][0] + " 100%)";
               container.style.background = bgStr;
+
+              const website = document.getElementById('example');
+              website.style["background-color"] = sortedScheme[0][0];
+              website.style["color"] = sortedScheme[1][0];
             };
           });
-    
-  
+
     return (
-        <div className="back">
-          <div className="card">
+        <div className="pokeCard">
             <canvas id="my-canvas" width="100px" height="100px"></canvas>
 
             <img style={{display: "none"}} id="imgData" crossOrigin="Anonymous" src={`${Img}`} alt="" />
@@ -107,10 +115,11 @@ export default function Poke() {
   
             <input type="text" onChange={Typename} value={name} />
   
-            <button onClick={Search}>Search</button>
-            <button onClick={ShinyChange}>Shiny</button>
-            <script src="https://unpkg.com/fast-average-color/dist/index.browser.min.js"></script>
-          </div>
+            <div id="buttons">
+              <button onClick={Search}>Search</button>
+              <button onClick={ShinyChange}>Shiny</button>
+            </div>
         </div>
     );
-  }
+    
+};

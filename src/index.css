@@ -1,9 +1,18 @@
+html {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
 body {
   width: 100%;
   height: 100%;
   padding: 0px;
   margin: 0px;
   /* overflow-x: hidden; */
+  display: flex;
+  flex-direction: row;
 
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -11,18 +20,89 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
+/* 
+.App > * {
+  border: 1px solid black;
+} */
 
 .App {
+  display: flex;
+  flex-direction: row;
+  /* padding: 10px; */
+  box-shadow: 0px 5px 20px #00000015;
+  width: 100vw;
+  margin: 0px;
+  transition: all 0.3s ease-in-out;
+}
+
+.poke {
+  width: 40vw;
+}
+
+.pokeCard {
+  display: flex;
+  flex-direction: column;
   text-align: center;
   justify-content: center;
   align-items: center;
-  padding: 50px;
-  box-shadow: 0px 5px 20px #00000015;
-  /* width: 100%; */
-  transition: all 0.3s ease-in-out;
+  width: 100%;
+  height: 100vh;
+
+  font-family: 'Times New Roman', Times, serif;
+}
+
+.pokeCard input {
+  border-radius: 15px;
+  border: 0 solid #121212;
+  font-size: 20px;
+  padding: 5px 20px 5px 20px;
+  margin: 10px 0 10px 0;
+  text-align: center;
+  text-transform: capitalize;
+  font-family: 'Times New Roman', Times, serif;
+  outline: none;
+}
+
+.pokeCard #my-canvas {
+  border-radius: 15px;
+  box-shadow: 0px 5px 20px #f7f1f125;
+  padding: 15px;
+  margin-bottom: 25px;
+}
+
+.pokeCard #buttons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
+}
+
+.pokeCard #buttons > * {
+  padding: 10px;
+  font-size: 18px;
+  font-family: 'Times New Roman', Times, serif;
+  background-color: #00000000;
+  border-radius: 15px;
+  color: #ffffff;
+  border: 2px solid #ffffff;
+  outline: none;
+}
+
+.example {
+  width: 60vw;
+  padding: 20px 5vw 20px 5vw;
+}
+
+@media screen and (max-width: 800px) {
+  .App {
+    flex-direction: column;
+  }
+
+  .example,
+  .poke {
+    width: 100vw;
+  }
+  /* 
+  .poke {
+    height: 60vh;
+  } */
 }
