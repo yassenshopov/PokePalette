@@ -8,7 +8,7 @@ const App = () => {
       <div className='poke'>
         <Poke />
       </div>
-      <div id="example" className='example'>
+      <div className='example'>
         <Example />
       </div>
     </div>

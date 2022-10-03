@@ -13,7 +13,6 @@ body {
   /* overflow-x: hidden; */
   display: flex;
   flex-direction: row;
-
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
     sans-serif;
@@ -36,7 +35,8 @@ body {
 }
 
 .poke {
-  width: 40vw;
+  width: 30vw;
+  position: sticky;
 }
 
 .pokeCard {
@@ -47,7 +47,6 @@ body {
   align-items: center;
   width: 100%;
   height: 100vh;
-
   font-family: 'Times New Roman', Times, serif;
 }
 
@@ -80,16 +79,85 @@ body {
   padding: 10px;
   font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
-  background-color: #00000000;
+  /* background-color: #00000000; */
   border-radius: 15px;
   color: #ffffff;
   border: 2px solid #ffffff;
   outline: none;
 }
 
-.example {
-  width: 60vw;
+.pokeCard #buttons #searchBtn {
+  transition: all 300ms ease-in-out;
+}
+
+.pokeCard #buttons #searchBtn:active {
+  background-color: #121212;
+}
+
+#example {
+  width: 70vw;
+  background-color: #00000000;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100vh;
+  background: linear-gradient(
+      217deg,
+      rgba(0, 0, 0, 0.8),
+      rgba(2, 0, 0, 0.5) 99.71%
+    ),
+    linear-gradient(127deg, rgba(0, 2, 0, 0.8), rgba(0, 2, 0, 0) 99.71%),
+    linear-gradient(336deg, rgba(0, 0, 2, 0.8), rgba(0, 0, 5, 0) 99.71%);
+}
+
+#example main {
   padding: 20px 5vw 20px 5vw;
+  display: flex;
+  flex-direction: row-reverse;
+  gap: 5vw;
+}
+
+#example section {
+  width: 50%;
+  height: 400px;
+  background: rgba(238, 238, 238, 0.27);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  backdrop-filter: blur(3.4px);
+  -webkit-backdrop-filter: blur(3.4px);
+}
+
+#example aside {
+  display: flex;
+  flex-direction: column;
+  width: 50%;
+  gap: 20px;
+}
+
+#example h1 {
+  color: #ffffff;
+}
+
+#example aside article {
+  width: 100%;
+  height: 150px;
+  background: rgba(238, 238, 238, 0.27);
+  border-radius: 16px;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+#example nav {
+  background-color: #f7f1f185;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 80px;
+}
+
+#example footer {
+  background-color: #f7f1f185;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  height: 80px;
 }
 
 @media screen and (max-width: 800px) {

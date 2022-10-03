@@ -36,13 +36,20 @@ export default function Poke() {
 
     const ShinyChange = () => {
       shiny = !shiny;
+      const shinyBtn = document.getElementById('shinyBtn');
+
+      if (shiny === true) {
+        shinyBtn.style["background-color"] = "#121212";
+      }
+      else {
+        shinyBtn.style["background-color"] = "#ffffff";
+      }
       console.log(Find);
       if (name !== "") {
         name = Find;
         setFind(name.toLowerCase())
       };
       setname("");
-      ;
     };
   
     const Search = () => {
@@ -51,6 +58,13 @@ export default function Poke() {
     };
 
     useEffect(() => {
+            let input = document.getElementById("nameInput");
+
+            input.addEventListener("keypress", function(event) {
+              if (event.key === "Enter") {
+                document.getElementById("searchBtn").click();
+              };
+            });
 
             const container = document.querySelector('.pokeCard');
             const myCanvas = document.getElementById('my-canvas'); 
@@ -99,11 +113,23 @@ export default function Poke() {
               container.style.background = bgStr;
 
               const website = document.getElementById('example');
-              website.style["background-color"] = sortedScheme[0][0];
-              website.style["color"] = sortedScheme[1][0];
+              const nav = document.getElementById('nav');
+              const section1 = document.getElementById('section1');
+              const article1 = document.getElementById('article1');
+              const article2 = document.getElementById('article2');
+              const footer = document.getElementById('footer');
+              section1.style["background"] = sortedScheme[0][0];
+              article1.style["background"] = sortedScheme[0][0];
+              article2.style["background"] = sortedScheme[0][0];
+              nav.style["background"] = sortedScheme[0][0];
+              footer.style["background"] = sortedScheme[0][0];
+              // website["main"]["section"].style["background-color"] = sortedScheme[0][0];
+
+              
             };
           });
 
+    
     return (
         <div className="pokeCard">
             <canvas id="my-canvas" width="100px" height="100px"></canvas>
@@ -113,11 +139,11 @@ export default function Poke() {
   
             <div className="type">{Type}</div>
   
-            <input type="text" onChange={Typename} value={name} />
+            <input type="text" id="nameInput" onChange={Typename} value={name} />
   
             <div id="buttons">
-              <button onClick={Search}>Search</button>
-              <button onClick={ShinyChange}>Shiny</button>
+              <button id="searchBtn" onClick={Search}>Search</button>
+              <button id="shinyBtn" onClick={ShinyChange}>Shiny</button>
             </div>
         </div>
     );
