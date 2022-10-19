@@ -5,16 +5,28 @@ let shiny = false;
 
 export default function Poke() {
 
+    let [value, setStateFind] = useState("mewtwo");
+
+    const Changer = (e) => {
+      setStateFind(e.target.value)
+    }
+
+    let [shiny, setShiny] = useState(false);
+
+    const ShinyChange = (e) => {
+      setShiny(!shiny)
+    }
+
     const [name, setname] = useState("");
-    let [Find, setFind] = useState("pikachu");
-    const [Img, setImg] = useState("");
+    let [Img, setImg] = useState("");
     const [Type, setType] = useState("");
 
     useEffect(() => {
       async function getData() {
-        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${Find}`);
+        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
         console.log(res);
         if (shiny == true) {
+          // setImg(res.data.sprites.front_shiny);
           setImg(res.data.sprites.front_shiny);
         }
         else {
@@ -28,43 +40,18 @@ export default function Poke() {
         }
       };
     getData();
-    }, [Find]);
+    }, [value, shiny]);
   
     const Typename = (event) => {
       setname(event.target.value);
     };
-
-    const ShinyChange = () => {
-      shiny = !shiny;
-      const shinyBtn = document.getElementById('shinyBtn');
-
-      if (shiny === true) {
-        shinyBtn.style["background-color"] = "#121212";
-      }
-      else {
-        shinyBtn.style["background-color"] = "#ffffff";
-      }
-      console.log(Find);
-      if (name !== "") {
-        name = Find;
-        setFind(name.toLowerCase())
-      };
-      setname("");
-    };
   
     const Search = () => {
-      if (name !== "") setFind(name.toLowerCase());
+      if (name !== "") setStateFind(name.toLowerCase());
       setname("");
     };
 
     useEffect(() => {
-            let input = document.getElementById("nameInput");
-
-            input.addEventListener("keypress", function(event) {
-              if (event.key === "Enter") {
-                document.getElementById("searchBtn").click();
-              };
-            });
 
             const container = document.querySelector('.pokeCard');
             const myCanvas = document.getElementById('my-canvas'); 
@@ -132,17 +119,16 @@ export default function Poke() {
     
     return (
         <div className="pokeCard">
+
             <canvas id="my-canvas" width="100px" height="100px"></canvas>
 
             <img style={{display: "none"}} id="imgData" crossOrigin="Anonymous" src={`${Img}`} alt="" />
-            <div className="name">{Find.toUpperCase()}</div>
   
             <div className="type">{Type}</div>
   
-            <input type="text" id="nameInput" onChange={Typename} value={name} />
+            <input type="text" id="nameInput" onChange={Changer} value={value} />
   
             <div id="buttons">
-              <button id="searchBtn" onClick={Search}>Search</button>
               <button id="shinyBtn" onClick={ShinyChange}>Shiny</button>
             </div>
         </div>
