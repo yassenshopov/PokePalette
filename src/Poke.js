@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { IconName } from "react-icons/fa";
 import axios from "axios";
 
 let shiny = false;
@@ -99,20 +100,25 @@ export default function Poke() {
               let bgStr = "linear-gradient(-0deg," + sortedScheme[0][0] + " 0%," + sortedScheme[0][0] + " 25%," + sortedScheme[1][0] + " 25%," + sortedScheme[1][0] + " 75%," + sortedScheme[2][0] + " 75%," + sortedScheme[2][0] + " 100%)";
               container.style.background = bgStr;
 
+              let root = document.querySelector(":root");
+              root.style.setProperty('--color1', sortedScheme[0][0])
+              root.style.setProperty('--color2', sortedScheme[2][0])
+
+              let gradientA = document.getElementById('gradientArticle');
+              let gradient = "linear-gradient(149deg," + sortedScheme[0][0] + " 0%," + sortedScheme[2][0] + " 100%";
+
               const website = document.getElementById('example');
               const nav = document.getElementById('nav');
-              const section1 = document.getElementById('section1');
-              const article1 = document.getElementById('article1');
-              const article2 = document.getElementById('article2');
+              const logo = document.getElementById('logo');
+              logo.style["color"] = sortedScheme[2][0];
+
+              const section = document.getElementById('section');
               const footer = document.getElementById('footer');
-              section1.style["background"] = sortedScheme[0][0];
-              article1.style["background"] = sortedScheme[0][0];
-              article2.style["background"] = sortedScheme[0][0];
+              website.style["background"] = sortedScheme[1][0]
+              section.style["color"] = sortedScheme[0][0];
               nav.style["background"] = sortedScheme[0][0];
               footer.style["background"] = sortedScheme[0][0];
-              // website["main"]["section"].style["background-color"] = sortedScheme[0][0];
-
-              
+              footer.style["color"] = sortedScheme[2][0]
             };
           });
 
