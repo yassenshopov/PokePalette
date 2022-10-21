@@ -26,14 +26,14 @@ export default function Poke() {
       async function getData() {
         let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
         console.log(res);
-        if (shiny == true) {
+        if (shiny === true) {
           // setImg(res.data.sprites.front_shiny);
           setImg(res.data.sprites.front_shiny);
         }
         else {
           setImg(res.data.sprites.front_default);
         }
-        if (res.data.types.length == 2) {
+        if (res.data.types.length === 2) {
           setType((res.data.types[0].type.name + "/" + res.data.types[1].type.name).toUpperCase());
         }
         else {
@@ -45,6 +45,7 @@ export default function Poke() {
   
     const Typename = (event) => {
       setname(event.target.value);
+      console.log(event.target)
     };
   
     const Search = () => {
@@ -97,28 +98,18 @@ export default function Poke() {
 
               let colorScheme = Object.entries(counts);
               let sortedScheme = colorScheme.sort((a,b) => a[1] - b[1]).reverse();
-              let bgStr = "linear-gradient(-0deg," + sortedScheme[0][0] + " 0%," + sortedScheme[0][0] + " 25%," + sortedScheme[1][0] + " 25%," + sortedScheme[1][0] + " 75%," + sortedScheme[2][0] + " 75%," + sortedScheme[2][0] + " 100%)";
+              let bgStr = "linear-gradient(0deg," + sortedScheme[2][0] + " 0%," + sortedScheme[2][0] + " 25%," + sortedScheme[1][0] + " 25%," + sortedScheme[1][0] + " 75%," + sortedScheme[0][0] + " 75%," + sortedScheme[0][0] + " 100%)";
               container.style.background = bgStr;
 
               let root = document.querySelector(":root");
-              root.style.setProperty('--color1', sortedScheme[0][0])
-              root.style.setProperty('--color2', sortedScheme[2][0])
+              root.style.setProperty('--color2', sortedScheme[0][0])
+              root.style.setProperty('--color3', sortedScheme[1][0])
+              root.style.setProperty('--color4', sortedScheme[2][0])
 
               let gradientA = document.getElementById('gradientArticle');
               let gradient = "linear-gradient(149deg," + sortedScheme[0][0] + " 0%," + sortedScheme[2][0] + " 100%";
 
-              const website = document.getElementById('example');
-              const nav = document.getElementById('nav');
-              const logo = document.getElementById('logo');
-              logo.style["color"] = sortedScheme[2][0];
 
-              const section = document.getElementById('section');
-              const footer = document.getElementById('footer');
-              website.style["background"] = sortedScheme[1][0]
-              section.style["color"] = sortedScheme[0][0];
-              nav.style["background"] = sortedScheme[0][0];
-              footer.style["background"] = sortedScheme[0][0];
-              footer.style["color"] = sortedScheme[2][0]
             };
           });
 

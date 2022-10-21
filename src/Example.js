@@ -1,19 +1,65 @@
-import React, { useState, useEffect } from 'react';
 import { GiAbstract006 } from "react-icons/gi";
 
 export default function Example() {
+
   return (
     <div id="example">
-      <nav id="nav">
-        <GiAbstract006 id="logo" style={{fontSize: '50px', padding: '20px'}} />
-      </nav>
+
       <main>
+        <div id="backdrop">
+        </div>
+
         <section id="section">
-          <h1>Lorem ipsum website</h1>
-          <p>Start with your closest colleagues, since these are the people who you know the best and will be sure to reciprocate. After endorsing your closest colleagues, endorse the skills of those you met at important functions or during your time spent at work, such as clients, vendors, or freelancers.</p>
+          <h1>Your website - inspired by colours</h1>
+          <p>This page was built with <strong>React</strong>.<br/>It allows you to enter a Pokemon's name (or simply its number in the Pokedex), and its top 3 colours will be extracted. This will then be used to create a stylish pallete that you can use for your website.</p>
+        <button id="scrollDown">Scroll down ⬇</button>
+        <button id="darkMode">Dark Mode</button>
+        
         </section>
         <aside>
-            <article id="gradientArticle"></article>
+            <article id="gradientArticle">
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+              <div class="gridItem"></div>
+            </article>
         </aside>
       </main>
       <footer id="footer">
