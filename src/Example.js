@@ -1,4 +1,4 @@
-import { GiAbstract006 } from "react-icons/gi";
+import { FaReact } from "react-icons/fa";
 
 export default function Example() {
 
@@ -11,7 +11,8 @@ export default function Example() {
 
         <section id="section">
           <h1>Your website - inspired by colours</h1>
-          <p>This page was built with <strong>React</strong>.<br/>It allows you to enter a Pokemon's name (or simply its number in the Pokedex), and its top 3 colours will be extracted. This will then be used to create a stylish pallete that you can use for your website.</p>
+          <p>This page was built with <strong>React</strong> < FaReact id="faReact" /></p>
+          <p>It allows you to enter a Pokemon's name (or simply its number in the Pokedex), and its top 3 colours will be extracted. This will then be used to create a stylish pallete that you can use for your website.</p>
         <button id="scrollDown">Scroll down ⬇</button>
         <button id="darkMode">Dark Mode</button>
         
