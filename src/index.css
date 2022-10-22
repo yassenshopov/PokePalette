@@ -19,9 +19,7 @@ body {
   /* overflow-y: hidden; */
   display: flex;
   flex-direction: row;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Open Sans', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none;
@@ -60,6 +58,7 @@ body::-webkit-scrollbar {
   width: 100%;
   height: 100vh;
   font-family: 'Times New Roman', Times, serif;
+  border-right: 4px solid var(--color1);
 }
 
 .pokeCard input {
@@ -112,15 +111,6 @@ body::-webkit-scrollbar {
   background-color: #00000000;
   display: flex;
   flex-direction: column;
-  /* justify-content: space-between; */
-  height: 120vh;
-  /* background: linear-gradient(
-      217deg,
-      rgba(0, 0, 0, 0.8),
-      rgba(2, 0, 0, 0.5) 99.71%
-    ),
-    linear-gradient(127deg, rgba(0, 2, 0, 0.8), rgba(0, 2, 0, 0) 99.71%),
-    linear-gradient(336deg, rgba(0, 0, 2, 0.8), rgba(0, 0, 5, 0) 99.71%); */
 }
 
 #example h1 {
@@ -128,13 +118,13 @@ body::-webkit-scrollbar {
 }
 
 #example main p {
-  font-size: 18px;
+  font-size: 16px;
   margin-bottom: 10px;
+  width: 80%;
 }
 
 #example #faReact {
   display: inline;
-  /* background-color: #050505; */
 }
 
 #example button {
@@ -146,7 +136,7 @@ body::-webkit-scrollbar {
   color: var(--color1);
   border-radius: 5px;
   border: 0px solid #121212;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 400ms ease-in-out;
 }
@@ -156,7 +146,7 @@ body::-webkit-scrollbar {
 }
 
 #example #scrollDown {
-  background-color: var(--color2);
+  background-color: var(--color4);
 }
 
 #example #darkMode {
@@ -167,27 +157,27 @@ body::-webkit-scrollbar {
   background-color: var(--color2);
 
   mix-blend-mode: color;
-  opacity: 1;
+  opacity: 0.7;
   width: 100%;
-  height: 105vh;
-  /* padding: 20px 5vw 20px 5vw; */
+  height: 80vh;
   position: absolute;
-  left: 30vw;
+  left: 30.2vw;
   top: 0;
   z-index: 0;
-  /* filter: blur(5px); */
 }
 
 #example main {
   background-image: url(../public/bg.jpg);
-  background-size: 200vh auto;
-  background-position: center;
-  padding: 20px 5vw 20px 5vw;
+  background-size: 300vh auto;
+  background-position: right;
+  padding: 0px 5vw 20px 5vw;
   display: flex;
   flex-direction: row;
   gap: 5vw;
-  /* filter: blur(1px); */
-  height: 70vh;
+  /* backdrop-filter: blur(1px); */
+  height: 74vh;
+  align-items: center;
+  justify-content: center;
 }
 
 #example main section {
@@ -219,12 +209,20 @@ body::-webkit-scrollbar {
   mix-blend-mode: color;
   opacity: 1;
   border-radius: 10px;
+  padding: 10px;
 
   display: grid;
-  grid-template-columns: repeat(6, 1fr);
-  grid-template-rows: repeat(6, 1fr);
+  grid-template-columns: repeat(5, 1fr);
+  grid-template-rows: repeat(5, 1fr);
   gap: 2px;
   /* filter: blur(1px); */
+}
+
+#example aside article:hover > .gridItem:nth-child(2n + 1) {
+  opacity: 0;
+}
+#example aside article:hover > .gridItem:nth-child(2n) {
+  opacity: 1;
 }
 
 .gridItem {
@@ -234,9 +232,8 @@ body::-webkit-scrollbar {
   transition: all 400ms ease-in-out;
 }
 
-.gridItem:hover {
+.gridItem:nth-child(2n) {
   opacity: 0;
-  /* mix-blend-mode: exclusion; */
 }
 
 @keyframes gradient {
@@ -305,16 +302,15 @@ body::-webkit-scrollbar {
   }
 }
 
-#example nav {
-  /* background-color: #f7f1f185; */
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+#example #cards {
+  background-color: var(--color1);
   width: 100%;
-  /* height: 80px; */
-  /* opacity: 0.3; */
+  height: 500px;
 }
 
 #example footer {
-  /* background-color: #f7f1f185; */
+  color: var(--color1);
+  background-color: var(--color2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   /* height: 80px; */
@@ -326,12 +322,47 @@ body::-webkit-scrollbar {
     flex-direction: column;
   }
 
-  .example,
+  .pokeCard {
+    height: 70vh;
+    border: 0px solid #121212;
+  }
+
+  #example,
   .poke {
     width: 100vw;
+    position: relative;
+    margin: 0;
+    left: 0;
   }
-  /* 
-  .poke {
-    height: 60vh;
-  } */
+
+  #example main {
+    align-items: center;
+    text-align: center;
+    flex-direction: column;
+    width: 100%;
+    padding: 0;
+  }
+
+  #example main section {
+    width: 100%;
+    align-items: center;
+    text-align: center;
+    margin: 0;
+  }
+
+  #example main h1,
+  #example main p {
+    width: 100%;
+  }
+
+  #example main #backdrop {
+    width: 100%;
+    padding: 0;
+    left: 0;
+    top: 0;
+  }
+
+  #example aside {
+    width: 90%;
+  }
 }

@@ -6,13 +6,12 @@ export default function Example() {
     <div id="example">
 
       <main>
-        <div id="backdrop">
-        </div>
+        <div id="backdrop"></div>
 
         <section id="section">
           <h1>Your website - inspired by colours</h1>
           <p>This page was built with <strong>React</strong> < FaReact id="faReact" /></p>
-          <p>It allows you to enter a Pokemon's name (or simply its number in the Pokedex), and its top 3 colours will be extracted. This will then be used to create a stylish pallete that you can use for your website.</p>
+          <p>It allows you to enter a Pokemon's name (or simply its number in the Pokedex), and its top 3 colours will be extracted.</p>
         <button id="scrollDown">Scroll down ⬇</button>
         <button id="darkMode">Dark Mode</button>
         
@@ -24,16 +23,7 @@ export default function Example() {
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
-              <div class="gridItem"></div>
 
-              <div class="gridItem"></div>
-              <div class="gridItem"></div>
-              <div class="gridItem"></div>
-              <div class="gridItem"></div>
-              <div class="gridItem"></div>
-              <div class="gridItem"></div>
-
-              <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
@@ -45,16 +35,13 @@ export default function Example() {
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
-              <div class="gridItem"></div>
 
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
-              <div class="gridItem"></div>
 
-              <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
               <div class="gridItem"></div>
@@ -63,6 +50,7 @@ export default function Example() {
             </article>
         </aside>
       </main>
+      <div id="cards"></div>
       <footer id="footer">
         <p style={{padding: '20px'}}>Copyright © PokePalette Studio</p>
       </footer>

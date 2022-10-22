@@ -1,12 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { IconName } from "react-icons/fa";
 import axios from "axios";
 
 let shiny = false;
 
 export default function Poke() {
 
-    let [value, setStateFind] = useState("mewtwo");
+    let [value, setStateFind] = useState("charmander");
 
     const Changer = (e) => {
       setStateFind(e.target.value)
@@ -14,7 +13,7 @@ export default function Poke() {
 
     let [shiny, setShiny] = useState(false);
 
-    const ShinyChange = (e) => {
+    const ShinyChange = () => {
       setShiny(!shiny)
     }
 
@@ -54,7 +53,6 @@ export default function Poke() {
     };
 
     useEffect(() => {
-
             const container = document.querySelector('.pokeCard');
             const myCanvas = document.getElementById('my-canvas'); 
             const imgData = document.getElementById('imgData'); 
