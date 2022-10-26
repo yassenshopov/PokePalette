@@ -2,31 +2,45 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 
 let shiny = false;
+let randomSwitch = false;
 
 export default function Poke() {
 
-    let [value, setStateFind] = useState("charmander");
+    let [nameValue, setStateFind] = useState("froakie");
+    let [numValue, setNumValue] = useState(0);
 
-    const Changer = (e) => {
+    const NumChanger = (e) => {
+      setNumValue(e.target.value);
+      setStateFind(e.target.value)
+    }
+
+    const NameChanger = (e) => {
       setStateFind(e.target.value)
     }
 
     let [shiny, setShiny] = useState(false);
+    let [random, setRandom] = useState(81);
 
     const ShinyChange = () => {
       setShiny(!shiny)
     }
 
-    const [name, setname] = useState("");
+    const Randomize = () => {
+      let random = 1 + Math.floor(Math.random() * 898);
+      setRandom(random);
+      random = random.toString();
+      setStateFind(random);
+    }
+
+    let [name, setname] = useState("");
     let [Img, setImg] = useState("");
     const [Type, setType] = useState("");
 
     useEffect(() => {
       async function getData() {
-        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${value.toLowerCase()}`);
+        let res = await axios.get(`https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`);
         console.log(res);
         if (shiny === true) {
-          // setImg(res.data.sprites.front_shiny);
           setImg(res.data.sprites.front_shiny);
         }
         else {
@@ -38,9 +52,13 @@ export default function Poke() {
         else {
           setType(res.data.types[0].type.name.toUpperCase());
         }
+        
+        setStateFind(res.data.name)
+        setNumValue(res.data.id)
       };
-    getData();
-    }, [value, shiny]);
+
+      getData();
+    }, [nameValue, shiny]);
   
     const Typename = (event) => {
       setname(event.target.value);
@@ -57,7 +75,8 @@ export default function Poke() {
             const myCanvas = document.getElementById('my-canvas'); 
             const imgData = document.getElementById('imgData'); 
             const myContext = myCanvas.getContext('2d');
-            const img = new Image();   
+            const img = new Image();
+            myCanvas.willReadFrequently = true;
             img.crossOrigin = "Anonymous";   
             img.src = imgData.src;        
             img.onload = () => {
@@ -107,7 +126,6 @@ export default function Poke() {
               let gradientA = document.getElementById('gradientArticle');
               let gradient = "linear-gradient(149deg," + sortedScheme[0][0] + " 0%," + sortedScheme[2][0] + " 100%";
 
-
             };
           });
 
@@ -119,12 +137,15 @@ export default function Poke() {
 
             <img style={{display: "none"}} id="imgData" crossOrigin="Anonymous" src={`${Img}`} alt="" />
   
+            <div className="random">{random}</div>
             <div className="type">{Type}</div>
   
-            <input type="text" id="nameInput" onChange={Changer} value={value} />
+            <input type="text" id="nameInput" onChange={NameChanger} value={nameValue} />
+            <input type="number" id="numInput" step="1" max="10250" min="1" onChange={NumChanger} value={numValue} />
   
             <div id="buttons">
               <button id="shinyBtn" onClick={ShinyChange}>Shiny</button>
+              <button id="randomBtn" onClick={Randomize}>Randomize</button>
             </div>
         </div>
     );

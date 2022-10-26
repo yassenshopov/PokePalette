@@ -77,7 +77,7 @@ body::-webkit-scrollbar {
   border-radius: 15px;
   /* box-shadow: 0px 5px 20px #f7f1f125; */
   padding: 15px;
-  margin-bottom: 25px;
+  margin-bottom: 2px;
 }
 
 .pokeCard #buttons {
@@ -103,6 +103,10 @@ body::-webkit-scrollbar {
 
 .pokeCard #buttons #searchBtn:active {
   background-color: #121212;
+}
+
+.pokeCard input {
+  text-align: center;
 }
 
 #example {
@@ -323,8 +327,12 @@ body::-webkit-scrollbar {
   }
 
   .pokeCard {
-    height: 70vh;
+    /* height: 70vh; */
     border: 0px solid #121212;
+  }
+
+  .pokeCard #buttons {
+    margin-top: 20px;
   }
 
   #example,
@@ -333,6 +341,11 @@ body::-webkit-scrollbar {
     position: relative;
     margin: 0;
     left: 0;
+    border: 0px solid #121212;
+  }
+
+  #example {
+    /* padding-top: 50vh; */
   }
 
   #example main {
@@ -341,18 +354,28 @@ body::-webkit-scrollbar {
     flex-direction: column;
     width: 100%;
     padding: 0;
+    background-size: auto;
+    height: fit-content;
+  }
+
+  #example main {
+    margin: 0;
+    padding: 0;
   }
 
   #example main section {
     width: 100%;
     align-items: center;
+    justify-content: center;
     text-align: center;
     margin: 0;
+    padding: 0;
   }
 
   #example main h1,
   #example main p {
-    width: 100%;
+    text-align: center;
+    width: 90%;
   }
 
   #example main #backdrop {
@@ -360,9 +383,11 @@ body::-webkit-scrollbar {
     padding: 0;
     left: 0;
     top: 0;
+    margin: 0;
   }
 
   #example aside {
     width: 90%;
+    display: none;
   }
 }
