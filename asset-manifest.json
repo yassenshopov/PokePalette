@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/PokePalette/static/css/main.0d5d75f5.css",
-    "main.js": "/PokePalette/static/js/main.f6622827.js",
+    "main.css": "/PokePalette/static/css/main.dd66ee52.css",
+    "main.js": "/PokePalette/static/js/main.17007b82.js",
     "static/js/787.573542ee.chunk.js": "/PokePalette/static/js/787.573542ee.chunk.js",
     "static/media/bg.jpg": "/PokePalette/static/media/bg.46d9d3f722187ce6417e.jpg",
     "index.html": "/PokePalette/index.html",
-    "main.0d5d75f5.css.map": "/PokePalette/static/css/main.0d5d75f5.css.map",
-    "main.f6622827.js.map": "/PokePalette/static/js/main.f6622827.js.map",
+    "main.dd66ee52.css.map": "/PokePalette/static/css/main.dd66ee52.css.map",
+    "main.17007b82.js.map": "/PokePalette/static/js/main.17007b82.js.map",
     "787.573542ee.chunk.js.map": "/PokePalette/static/js/787.573542ee.chunk.js.map"
   },
   "entrypoints": [
-    "static/css/main.0d5d75f5.css",
-    "static/js/main.f6622827.js"
+    "static/css/main.dd66ee52.css",
+    "static/js/main.17007b82.js"
   ]
 }
