@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { BsArrowDownSquareFill, BsArrowUpSquareFill } from "react-icons/bs";
 import axios from "axios";
 
 let shiny = false;
@@ -6,7 +7,7 @@ let randomSwitch = false;
 
 export default function Poke() {
 
-    let [nameValue, setStateFind] = useState("froakie");
+    let [nameValue, setStateFind] = useState("wooper");
     let [numValue, setNumValue] = useState(0);
 
     const NumChanger = (e) => {
@@ -58,17 +59,23 @@ export default function Poke() {
       };
 
       getData();
-    }, [nameValue, shiny]);
+    }, [nameValue, shiny, numValue]);
   
-    const Typename = (event) => {
-      setname(event.target.value);
-      console.log(event.target)
+    const increase = () => {
+      numValue = numValue + 1;
+      setNumValue(numValue);
+      console.log(numValue)
+      setStateFind(numValue.toString());
     };
-  
-    const Search = () => {
-      if (name !== "") setStateFind(name.toLowerCase());
-      setname("");
+   
+    const decrease = () => {
+      console.log(typeof numValue)
+      numValue = numValue - 1;
+      setNumValue(numValue);
+      console.log(numValue)
+      setStateFind(numValue.toString());
     };
+
 
     useEffect(() => {
             const container = document.querySelector('.pokeCard');
@@ -141,8 +148,12 @@ export default function Poke() {
             <div className="type">{Type}</div>
   
             <input type="text" id="nameInput" onChange={NameChanger} value={nameValue} />
-            <input type="number" id="numInput" step="1" max="10250" min="1" onChange={NumChanger} value={numValue} />
-  
+            <div id="numLine">
+              <button class="noSelect" onClick={decrease}><p>< BsArrowDownSquareFill size={25} /></p></button>
+              <input type="number" id="numInput" step="1" max="10250" min="1" onChange={NumChanger} value={numValue} />
+              <button class="noSelect" onClick={increase}><p>< BsArrowUpSquareFill size={25} /></p></button>
+            </div>
+
             <div id="buttons">
               <button id="shinyBtn" onClick={ShinyChange}>Shiny</button>
               <button id="randomBtn" onClick={Randomize}>Randomize</button>
