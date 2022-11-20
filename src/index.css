@@ -40,11 +40,13 @@ body::-webkit-scrollbar {
 .App {
   display: flex;
   flex-direction: row;
-  /* padding: 10px; */
-  /* box-shadow: 0px 5px 20px #00000015; */
   width: 100vw;
   margin: 0px;
   transition: all 0.3s ease-in-out;
+}
+
+.example * {
+  transition: all 800ms;
 }
 
 .poke {
@@ -160,6 +162,14 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   font-family: 'Times New Roman', Times, serif;
+}
+
+#example > *:nth-child(2n + 1) {
+  background-color: var(--color5);
+}
+
+#example > *:nth-child(2n):not(footer) {
+  background-color: var(--color1);
 }
 
 #example h1 {
@@ -285,54 +295,6 @@ body::-webkit-scrollbar {
   opacity: 0;
 }
 
-#example #cards {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  gap: 2%;
-  min-height: fit-content;
-}
-
-#example #cards > div {
-  width: 25%;
-  height: 150px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 200ms ease-in-out;
-}
-
-#example #cards > div:active {
-  opacity: 0.8;
-}
-
-#example #cards div p {
-  font-size: 24px;
-}
-
-#example #cards div:nth-child(1) {
-  background-color: var(--color2);
-}
-
-#example #cards div:nth-child(2) {
-  background-color: var(--color3);
-}
-
-#example #cards div:nth-child(3) {
-  background-color: var(--color4);
-}
-
-#example #cards {
-  background-color: var(--color1);
-  width: 100%;
-  min-height: fit-content;
-  padding: 50px 0 50px 0;
-}
-
 @keyframes gradient {
   0% {
     background: linear-gradient(0deg, var(--color2), var(--color4));
@@ -399,6 +361,59 @@ body::-webkit-scrollbar {
   }
 }
 
+#example #cards {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 2%;
+  min-height: fit-content;
+}
+
+#example #cards > div {
+  width: 25%;
+  height: 150px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+  color: var(--color1);
+  border-radius: 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  transition: all 200ms ease-in-out;
+}
+
+#example #cards > div:active {
+  opacity: 0.8;
+}
+
+#example #cards div p {
+  font-size: 24px;
+}
+
+#example #cards div:nth-child(1) {
+  background-color: var(--color2);
+}
+
+#example #cards div:nth-child(2) {
+  background-color: var(--color3);
+}
+
+#example #cards div:nth-child(3) {
+  background-color: var(--color4);
+}
+
+#example #cards {
+  background-color: var(--color1);
+  width: 100%;
+  min-height: fit-content;
+  padding: 50px 0 50px 0;
+}
+
+#example #posts {
+  min-height: 100px;
+}
+
 #example footer {
   color: var(--color1);
   background-color: var(--color2);
@@ -441,11 +456,12 @@ body::-webkit-scrollbar {
   }
 
   #example main {
+    background-position: center;
     flex-direction: column;
     width: 100%;
     padding: 0;
     margin: 0;
-    background-size: auto;
+    background-size: 650%;
     height: fit-content;
   }
 
@@ -477,6 +493,14 @@ body::-webkit-scrollbar {
 
   #example aside {
     display: none;
+  }
+
+  #example #cards {
+    gap: 20px;
+  }
+
+  #example #cards div p {
+    font-size: 16px;
   }
 
   #example #cards,

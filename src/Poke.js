@@ -222,7 +222,6 @@ export default function Poke() {
         alt=""
       />
 
-      <div className="random">{random}</div>
       <div className="type">{Type}</div>
 
       <input

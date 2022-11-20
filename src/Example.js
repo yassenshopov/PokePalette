@@ -19,55 +19,61 @@ export default function Example() {
           </p>
           <div>
             <button id="scrollDown">Scroll down ⬇</button>
-            <button id="darkMode">Light Mode</button>
+            <button id="darkMode" onClick={() => {
+              // let root = document.querySelector(":root");
+              // let temp_color = getComputedStyle(root).getPropertyValue("--color1");
+              // root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
+              // root.style.setProperty('--color5', temp_color); 
+            }}>Light Mode</button>
           </div>
         </section>
         <aside>
           <article id="gradientArticle">
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
 
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
 
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
 
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
 
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
-            <div class="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
+            <div className="gridItem"></div>
           </article>
         </aside>
       </main>
+      
       <div id="cards">
         <div onClick={() => {
             navigator.clipboard.writeText(document.getElementsByClassName("color2")[0].innerHTML);
             }}>
-          <div class="color-card"></div>
-          <p class="color2"></p>
+          <div className="color-card"></div>
+          <p className="color2"></p>
         </div>
         <div onClick={() => {
             navigator.clipboard.writeText(document.getElementsByClassName("color3")[0].innerHTML);
             }}>
-          <div class="color-card"></div>
-          <p class="color3"></p>
+          <div className="color-card"></div>
+          <p className="color3"></p>
         </div>
         <div onClick={() => {
             navigator.clipboard.writeText(document.getElementsByClassName("color4")[0].innerHTML);
@@ -76,6 +82,9 @@ export default function Example() {
           <p class="color4"></p>
         </div>
       </div>
+
+      <div id="posts"></div>
+
       <footer id="footer">
         <p style={{ padding: '20px' }}>Copyright © PokePalette Studio - by <a href='https://github.com/yassenshopov'>Yassen Shopov</a></p>
       </footer>
