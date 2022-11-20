@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import { FaReact } from 'react-icons/fa';
 
 export default function Example() {
@@ -55,9 +56,28 @@ export default function Example() {
           </article>
         </aside>
       </main>
-      <div id="cards"></div>
+      <div id="cards">
+        <div onClick={() => {
+            navigator.clipboard.writeText(document.getElementsByClassName("color2")[0].innerHTML);
+            }}>
+          <div class="color-card"></div>
+          <p class="color2"></p>
+        </div>
+        <div onClick={() => {
+            navigator.clipboard.writeText(document.getElementsByClassName("color3")[0].innerHTML);
+            }}>
+          <div class="color-card"></div>
+          <p class="color3"></p>
+        </div>
+        <div onClick={() => {
+            navigator.clipboard.writeText(document.getElementsByClassName("color4")[0].innerHTML);
+            }}>
+          <div class="color-card"></div>
+          <p class="color4"></p>
+        </div>
+      </div>
       <footer id="footer">
-        <p style={{ padding: '20px' }}>Copyright © PokePalette Studio</p>
+        <p style={{ padding: '20px' }}>Copyright © PokePalette Studio - by <a href='https://github.com/yassenshopov'>Yassen Shopov</a></p>
       </footer>
     </div>
   );

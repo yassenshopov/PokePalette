@@ -13,6 +13,8 @@ import enamorus from "../src/img/enamorus.png"
 let shiny = false;
 let randomSwitch = false;
 
+let color2, color3, color4;
+
 export default function Poke() {
   let [nameValue, setStateFind] = useState('wooper');
   let [numValue, setNumValue] = useState(0);
@@ -50,7 +52,7 @@ export default function Poke() {
         `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
       );
       console.log(res);
-      if (res.data.id > 898) {
+      if (res.data.id >= 899 && res.data.id <=905) {
         switch (res.data.id) {
           case 899:
             setImg(wyrdeer);
@@ -181,10 +183,22 @@ export default function Poke() {
         ' 100%)';
       container.style.background = bgStr;
 
+      color2 = sortedScheme[0][0];
+      color3 = sortedScheme[1][0];
+      color4 = sortedScheme[2][0];
+
+      let color_list = {"color2":color2, "color3":color3, "color4":color4};
+
+      for (const [key, value] of Object.entries(color_list)) {
+        for (let j=0; j<document.getElementsByClassName(key).length; j++) {
+          document.getElementsByClassName(key)[j].innerHTML = value.toUpperCase()
+        }
+      }
+
       let root = document.querySelector(':root');
-      root.style.setProperty('--color2', sortedScheme[0][0]);
-      root.style.setProperty('--color3', sortedScheme[1][0]);
-      root.style.setProperty('--color4', sortedScheme[2][0]);
+      root.style.setProperty('--color2', color2);
+      root.style.setProperty('--color3', color3);
+      root.style.setProperty('--color4', color4);
 
       let gradientA = document.getElementById('gradientArticle');
       let gradient =
