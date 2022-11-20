@@ -3,7 +3,10 @@
   --color2: #f1f1f1;
   --color3: #f1f1f1;
   --color4: #f1f1f1;
-  --color5: #050505;
+  --color5: #121212;
+  --hsp2: #121212;
+  --hsp3: #f1f1f1;
+  --hsp4: #f1f1f1;
 }
 
 html {
@@ -66,9 +69,15 @@ body::-webkit-scrollbar {
   border-right: 4px solid var(--color1);
 }
 
+.poke * {
+  transition: all 100ms ease-in-out;
+}
+
 .pokeCard input {
   border-radius: 15px;
   border: 0 solid #121212;
+  background-color: var(--hsp3);
+  color: var(--anti_hsp3);
   font-size: 20px;
   padding: 5px 20px 5px 20px;
   margin: 5px 0 0px 0;
@@ -76,6 +85,10 @@ body::-webkit-scrollbar {
   text-transform: capitalize;
   font-family: 'Times New Roman', Times, serif;
   outline: none;
+}
+
+.pokeCard .type {
+  color: var(--hsp3);
 }
 
 .pokeCard #my-canvas {
@@ -94,19 +107,12 @@ body::-webkit-scrollbar {
   padding: 10px;
   font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
-  /* background-color: #00000000; */
+  background-color: var(--hsp3);
+  color: var(--anti_hsp3);
   border-radius: 15px;
   /* color: #ffffff; */
-  border: 2px solid #ffffff;
+  border: 2px solid var(--hsp3);
   outline: none;
-}
-
-.pokeCard #buttons #searchBtn {
-  transition: all 300ms ease-in-out;
-}
-
-.pokeCard #buttons #searchBtn:active {
-  background-color: #121212;
 }
 
 .pokeCard input {
@@ -135,7 +141,7 @@ body::-webkit-scrollbar {
 }
 
 .pokeCard #numLine button {
-  color: var(--color1);
+  color: var(--hsp3);
   padding: 0 10px 0 10px;
   margin: 0 10px 0 10px;
   background: none;
@@ -158,7 +164,6 @@ body::-webkit-scrollbar {
 #example {
   margin-left: 30vw;
   width: 70vw;
-  background-color: #00000000;
   display: flex;
   flex-direction: column;
   font-family: 'Times New Roman', Times, serif;
@@ -192,12 +197,13 @@ body::-webkit-scrollbar {
   margin-top: 50px;
   margin-right: 20px;
   text-transform: uppercase;
-  color: var(--color1);
+  /* color: var(--color1); */
   border-radius: 5px;
   border: 0px solid #121212;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 400ms ease-in-out;
+  font-family: 'Times New Roman', Times, serif;
 }
 
 #example button:hover {
@@ -205,10 +211,12 @@ body::-webkit-scrollbar {
 }
 
 #example #scrollDown {
+  color: var(--hsp4);
   background-color: var(--color4);
 }
 
 #example #darkMode {
+  color: var(--hsp3);
   background-color: var(--color3);
 }
 
@@ -246,7 +254,7 @@ body::-webkit-scrollbar {
   border-radius: 16px;
   /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
   z-index: 1;
-  color: var(--color1);
+  color: #f1f1f1;
 }
 
 #example aside {
@@ -368,6 +376,7 @@ body::-webkit-scrollbar {
   align-items: center;
   gap: 2%;
   min-height: fit-content;
+  z-index: 9;
 }
 
 #example #cards > div {
@@ -393,14 +402,17 @@ body::-webkit-scrollbar {
 
 #example #cards div:nth-child(1) {
   background-color: var(--color2);
+  color: var(--hsp2);
 }
 
 #example #cards div:nth-child(2) {
   background-color: var(--color3);
+  color: var(--hsp3);
 }
 
 #example #cards div:nth-child(3) {
   background-color: var(--color4);
+  color: var(--hsp4);
 }
 
 #example #cards {
@@ -415,7 +427,7 @@ body::-webkit-scrollbar {
 }
 
 #example footer {
-  color: var(--color1);
+  color: var(--hsp2);
   background-color: var(--color2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
@@ -424,7 +436,7 @@ body::-webkit-scrollbar {
 }
 
 #example a {
-  color: var(--color1);
+  color: var(--hsp2);
 }
 
 @media screen and (max-width: 800px) {

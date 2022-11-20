@@ -188,14 +188,26 @@ export default function Poke() {
       color4 = sortedScheme[2][0];
 
       let color_list = {"color2":color2, "color3":color3, "color4":color4};
+      let hsp_list = ["--hsp2", "--hsp3", "--hsp4"]
+      let anti_hsp_list = ["--anti_hsp2", "--anti_hsp3", "--anti_hsp4"]
+      let root = document.querySelector(':root');
 
+
+      let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
+        if (hsp(value.toUpperCase()) > 127) {
+          root.style.setProperty(hsp_list[i], "#121212")
+          root.style.setProperty(anti_hsp_list[i], "#f1f1f1")
+        } else {
+          root.style.setProperty(hsp_list[i], "#f1f1f1")
+          root.style.setProperty(anti_hsp_list[i], "#121212")
+        }
         for (let j=0; j<document.getElementsByClassName(key).length; j++) {
           document.getElementsByClassName(key)[j].innerHTML = value.toUpperCase()
         }
+        i++;
       }
 
-      let root = document.querySelector(':root');
       root.style.setProperty('--color2', color2);
       root.style.setProperty('--color3', color3);
       root.style.setProperty('--color4', color4);
@@ -209,6 +221,25 @@ export default function Poke() {
         ' 100%';
     };
   });
+
+  function hsp(color) {
+    color = color.slice(1,7);
+    let rgb = []
+    for (let i = 0; i < (color.length); i = i + 2) {
+      let rgb_value1 = parseInt(color[i],16) * 16;
+      let rgb_value2 = parseInt(color[i+1],16);
+      let rgb_value_full = rgb_value1 + rgb_value2;
+      rgb.push(rgb_value_full);
+    };
+
+    let hsp = Math.sqrt(
+      0.299 * (rgb[0]*rgb[0]) +
+      0.587 * (rgb[1]*rgb[1]) +
+      0.114 * (rgb[2]*rgb[2])
+      );
+    console.log(hsp)
+    return hsp;
+  }
 
   return (
     <div className="pokeCard">

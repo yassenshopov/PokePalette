@@ -2,6 +2,9 @@ import { useEffect, useState } from 'react';
 import { FaReact } from 'react-icons/fa';
 
 export default function Example() {
+  
+  // document.querySelector("p").style.color = "var(--color5)"
+
   return (
     <div id="example">
       <main>
@@ -20,10 +23,10 @@ export default function Example() {
           <div>
             <button id="scrollDown">Scroll down ⬇</button>
             <button id="darkMode" onClick={() => {
-              // let root = document.querySelector(":root");
-              // let temp_color = getComputedStyle(root).getPropertyValue("--color1");
-              // root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
-              // root.style.setProperty('--color5', temp_color); 
+              let root = document.querySelector(":root");
+              let temp_color = getComputedStyle(root).getPropertyValue("--color1");
+              root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
+              root.style.setProperty('--color5', temp_color); 
             }}>Light Mode</button>
           </div>
         </section>
