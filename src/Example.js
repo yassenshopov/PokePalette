@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
 import { FaReact } from 'react-icons/fa';
+import { GrSun } from 'react-icons/gr';
 
 export default function Example() {
-  
-  // document.querySelector("p").style.color = "var(--color5)"
-
   return (
     <div id="example">
       <main>
@@ -27,7 +25,7 @@ export default function Example() {
               let temp_color = getComputedStyle(root).getPropertyValue("--color1");
               root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
               root.style.setProperty('--color5', temp_color); 
-            }}>Light Mode</button>
+            }}><p><GrSun /></p></button>
           </div>
         </section>
         <aside>

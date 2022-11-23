@@ -164,6 +164,8 @@ export default function Poke() {
 
       delete counts['#101010'];
       delete counts['#000000'];
+      delete counts['#010101'];
+      delete counts['#080808'];
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
@@ -195,7 +197,7 @@ export default function Poke() {
 
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
-        if (hsp(value.toUpperCase()) > 127) {
+        if (hsp(value.toUpperCase()) > 70) {
           root.style.setProperty(hsp_list[i], "#121212")
           root.style.setProperty(anti_hsp_list[i], "#f1f1f1")
         } else {

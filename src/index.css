@@ -22,7 +22,6 @@ body {
   padding: 0px;
   margin: 0px;
   overflow-x: hidden;
-  /* overflow-y: hidden; */
   display: flex;
   flex-direction: row;
   font-family: 'Open Sans', sans-serif;
@@ -55,6 +54,7 @@ body::-webkit-scrollbar {
 .poke {
   width: 30vw;
   position: fixed;
+  z-index: 10;
 }
 
 .pokeCard {
@@ -76,11 +76,12 @@ body::-webkit-scrollbar {
 .pokeCard input {
   border-radius: 15px;
   border: 0 solid #121212;
-  background-color: var(--hsp3);
-  color: var(--anti_hsp3);
+  background-color: var(--color1);
+  color: var(--color5);
   font-size: 20px;
   padding: 5px 20px 5px 20px;
   margin: 5px 0 0px 0;
+  border: 1px solid var(--hsp3);
   text-align: center;
   text-transform: capitalize;
   font-family: 'Times New Roman', Times, serif;
@@ -107,11 +108,10 @@ body::-webkit-scrollbar {
   padding: 10px;
   font-size: 18px;
   font-family: 'Times New Roman', Times, serif;
-  background-color: var(--hsp3);
-  color: var(--anti_hsp3);
+  background-color: var(--color1);
+  color: var(--color5);
   border-radius: 15px;
-  /* color: #ffffff; */
-  border: 2px solid var(--hsp3);
+  border: 1px solid var(--hsp3);
   outline: none;
 }
 
@@ -141,11 +141,13 @@ body::-webkit-scrollbar {
 }
 
 .pokeCard #numLine button {
-  color: var(--hsp3);
-  padding: 0 10px 0 10px;
+  color: var(--color1);
+  /* border: 1px solid var(--hsp3); */
+  padding: 0 0px 0 0px;
   margin: 0 10px 0 10px;
   background: none;
   border: #00000000;
+  filter: drop-shadow(0 0 1px #121212);
 }
 
 .noSelect {
@@ -218,6 +220,13 @@ body::-webkit-scrollbar {
 #example #darkMode {
   color: var(--hsp3);
   background-color: var(--color3);
+}
+
+#example #darkMode p {
+  font-size: 16px;
+  padding: 0;
+  margin: 0;
+  color: var(--hsp3);
 }
 
 #example main #backdrop {
@@ -293,8 +302,8 @@ body::-webkit-scrollbar {
 }
 
 .gridItem {
-  background-color: var(--color1);
-  border-radius: 5px;
+  background-color: var(--color3);
+  border-radius: 0%;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
   transition: all 400ms ease-in-out;
 }
@@ -307,65 +316,305 @@ body::-webkit-scrollbar {
   0% {
     background: linear-gradient(0deg, var(--color2), var(--color4));
   }
+  1% {
+    background: linear-gradient(3.6deg, var(--color2), var(--color4));
+  }
+  2% {
+    background: linear-gradient(7.2deg, var(--color2), var(--color4));
+  }
+  3% {
+    background: linear-gradient(10.8deg, var(--color2), var(--color4));
+  }
+  4% {
+    background: linear-gradient(14.4deg, var(--color2), var(--color4));
+  }
   5% {
     background: linear-gradient(18deg, var(--color2), var(--color4));
+  }
+  6% {
+    background: linear-gradient(21.6deg, var(--color2), var(--color4));
+  }
+  7% {
+    background: linear-gradient(25.2deg, var(--color2), var(--color4));
+  }
+  8% {
+    background: linear-gradient(28.8deg, var(--color2), var(--color4));
+  }
+  9% {
+    background: linear-gradient(32.4deg, var(--color2), var(--color4));
   }
   10% {
     background: linear-gradient(36deg, var(--color2), var(--color4));
   }
+  11% {
+    background: linear-gradient(39.6deg, var(--color2), var(--color4));
+  }
+  12% {
+    background: linear-gradient(43.2deg, var(--color2), var(--color4));
+  }
+  13% {
+    background: linear-gradient(46.8deg, var(--color2), var(--color4));
+  }
+  14% {
+    background: linear-gradient(50.4deg, var(--color2), var(--color4));
+  }
   15% {
     background: linear-gradient(54deg, var(--color2), var(--color4));
+  }
+  16% {
+    background: linear-gradient(57.6deg, var(--color2), var(--color4));
+  }
+  17% {
+    background: linear-gradient(61.2deg, var(--color2), var(--color4));
+  }
+  18% {
+    background: linear-gradient(64.8deg, var(--color2), var(--color4));
+  }
+  19% {
+    background: linear-gradient(68.4deg, var(--color2), var(--color4));
   }
   20% {
     background: linear-gradient(72deg, var(--color2), var(--color4));
   }
+  21% {
+    background: linear-gradient(75.6deg, var(--color2), var(--color4));
+  }
+  22% {
+    background: linear-gradient(79.2deg, var(--color2), var(--color4));
+  }
+  23% {
+    background: linear-gradient(82.8deg, var(--color2), var(--color4));
+  }
+  24% {
+    background: linear-gradient(86.4deg, var(--color2), var(--color4));
+  }
   25% {
     background: linear-gradient(90deg, var(--color2), var(--color4));
+  }
+  26% {
+    background: linear-gradient(93.6deg, var(--color2), var(--color4));
+  }
+  27% {
+    background: linear-gradient(97.2deg, var(--color2), var(--color4));
+  }
+  28% {
+    background: linear-gradient(100.8deg, var(--color2), var(--color4));
+  }
+  29% {
+    background: linear-gradient(104.4deg, var(--color2), var(--color4));
   }
   30% {
     background: linear-gradient(108deg, var(--color2), var(--color4));
   }
+  31% {
+    background: linear-gradient(111.6deg, var(--color2), var(--color4));
+  }
+  32% {
+    background: linear-gradient(115.2deg, var(--color2), var(--color4));
+  }
+  33% {
+    background: linear-gradient(118.8deg, var(--color2), var(--color4));
+  }
+  34% {
+    background: linear-gradient(122.4deg, var(--color2), var(--color4));
+  }
   35% {
     background: linear-gradient(126deg, var(--color2), var(--color4));
+  }
+  36% {
+    background: linear-gradient(129.6deg, var(--color2), var(--color4));
+  }
+  37% {
+    background: linear-gradient(133.2deg, var(--color2), var(--color4));
+  }
+  38% {
+    background: linear-gradient(136.8deg, var(--color2), var(--color4));
+  }
+  39% {
+    background: linear-gradient(140.4deg, var(--color2), var(--color4));
   }
   40% {
     background: linear-gradient(144deg, var(--color2), var(--color4));
   }
+  41% {
+    background: linear-gradient(147.6deg, var(--color2), var(--color4));
+  }
+  42% {
+    background: linear-gradient(151.2deg, var(--color2), var(--color4));
+  }
+  43% {
+    background: linear-gradient(154.8deg, var(--color2), var(--color4));
+  }
+  44% {
+    background: linear-gradient(158.4deg, var(--color2), var(--color4));
+  }
   45% {
     background: linear-gradient(162deg, var(--color2), var(--color4));
+  }
+  46% {
+    background: linear-gradient(165.6deg, var(--color2), var(--color4));
+  }
+  47% {
+    background: linear-gradient(169.2deg, var(--color2), var(--color4));
+  }
+  48% {
+    background: linear-gradient(172.8deg, var(--color2), var(--color4));
+  }
+  49% {
+    background: linear-gradient(176.4deg, var(--color2), var(--color4));
   }
   50% {
     background: linear-gradient(180deg, var(--color2), var(--color4));
   }
+  51% {
+    background: linear-gradient(3.6deg, var(--color4), var(--color2));
+  }
+  52% {
+    background: linear-gradient(7.2deg, var(--color4), var(--color2));
+  }
+  53% {
+    background: linear-gradient(10.8deg, var(--color4), var(--color2));
+  }
+  54% {
+    background: linear-gradient(14.4deg, var(--color4), var(--color2));
+  }
   55% {
-    background: linear-gradient(198deg, var(--color2), var(--color4));
+    background: linear-gradient(18deg, var(--color4), var(--color2));
+  }
+  56% {
+    background: linear-gradient(21.6deg, var(--color4), var(--color2));
+  }
+  57% {
+    background: linear-gradient(25.2deg, var(--color4), var(--color2));
+  }
+  58% {
+    background: linear-gradient(28.8deg, var(--color4), var(--color2));
+  }
+  59% {
+    background: linear-gradient(32.4deg, var(--color4), var(--color2));
   }
   60% {
-    background: linear-gradient(216deg, var(--color2), var(--color4));
+    background: linear-gradient(36deg, var(--color4), var(--color2));
+  }
+  61% {
+    background: linear-gradient(39.6deg, var(--color4), var(--color2));
+  }
+  62% {
+    background: linear-gradient(43.2deg, var(--color4), var(--color2));
+  }
+  63% {
+    background: linear-gradient(46.8deg, var(--color4), var(--color2));
+  }
+  64% {
+    background: linear-gradient(50.4deg, var(--color4), var(--color2));
   }
   65% {
-    background: linear-gradient(234deg, var(--color2), var(--color4));
+    background: linear-gradient(54deg, var(--color4), var(--color2));
+  }
+  66% {
+    background: linear-gradient(57.6deg, var(--color4), var(--color2));
+  }
+  67% {
+    background: linear-gradient(61.2deg, var(--color4), var(--color2));
+  }
+  68% {
+    background: linear-gradient(64.8deg, var(--color4), var(--color2));
+  }
+  69% {
+    background: linear-gradient(68.4deg, var(--color4), var(--color2));
   }
   70% {
-    background: linear-gradient(252deg, var(--color2), var(--color4));
+    background: linear-gradient(72deg, var(--color4), var(--color2));
+  }
+  71% {
+    background: linear-gradient(75.6deg, var(--color4), var(--color2));
+  }
+  72% {
+    background: linear-gradient(79.2deg, var(--color4), var(--color2));
+  }
+  73% {
+    background: linear-gradient(82.8deg, var(--color4), var(--color2));
+  }
+  74% {
+    background: linear-gradient(86.4deg, var(--color4), var(--color2));
   }
   75% {
-    background: linear-gradient(270deg, var(--color2), var(--color4));
+    background: linear-gradient(90deg, var(--color4), var(--color2));
+  }
+  76% {
+    background: linear-gradient(93.6deg, var(--color4), var(--color2));
+  }
+  77% {
+    background: linear-gradient(97.2deg, var(--color4), var(--color2));
+  }
+  78% {
+    background: linear-gradient(100.8deg, var(--color4), var(--color2));
+  }
+  79% {
+    background: linear-gradient(104.4deg, var(--color4), var(--color2));
   }
   80% {
-    background: linear-gradient(288deg, var(--color2), var(--color4));
+    background: linear-gradient(108deg, var(--color4), var(--color2));
+  }
+  81% {
+    background: linear-gradient(111.6deg, var(--color4), var(--color2));
+  }
+  82% {
+    background: linear-gradient(115.2deg, var(--color4), var(--color2));
+  }
+  83% {
+    background: linear-gradient(118.8deg, var(--color4), var(--color2));
+  }
+  84% {
+    background: linear-gradient(122.4deg, var(--color4), var(--color2));
   }
   85% {
-    background: linear-gradient(306deg, var(--color2), var(--color4));
+    background: linear-gradient(126deg, var(--color4), var(--color2));
+  }
+  86% {
+    background: linear-gradient(129.6deg, var(--color4), var(--color2));
+  }
+  87% {
+    background: linear-gradient(133.2deg, var(--color4), var(--color2));
+  }
+  88% {
+    background: linear-gradient(136.8deg, var(--color4), var(--color2));
+  }
+  89% {
+    background: linear-gradient(140.4deg, var(--color4), var(--color2));
   }
   90% {
-    background: linear-gradient(324deg, var(--color2), var(--color4));
+    background: linear-gradient(144deg, var(--color4), var(--color2));
+  }
+  91% {
+    background: linear-gradient(147.6deg, var(--color4), var(--color2));
+  }
+  92% {
+    background: linear-gradient(151.2deg, var(--color4), var(--color2));
+  }
+  93% {
+    background: linear-gradient(154.8deg, var(--color4), var(--color2));
+  }
+  94% {
+    background: linear-gradient(158.4deg, var(--color4), var(--color2));
   }
   95% {
-    background: linear-gradient(342deg, var(--color2), var(--color4));
+    background: linear-gradient(162deg, var(--color4), var(--color2));
+  }
+  96% {
+    background: linear-gradient(165.6deg, var(--color4), var(--color2));
+  }
+  97% {
+    background: linear-gradient(169.2deg, var(--color4), var(--color2));
+  }
+  98% {
+    background: linear-gradient(172.8deg, var(--color4), var(--color2));
+  }
+  99% {
+    background: linear-gradient(176.4deg, var(--color4), var(--color2));
   }
   100% {
-    background: linear-gradient(360deg, var(--color2), var(--color4));
+    background: linear-gradient(180deg, var(--color4), var(--color2));
   }
 }
 
