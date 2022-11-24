@@ -5,7 +5,7 @@ import { GrSun } from 'react-icons/gr';
 export default function Example() {
   return (
     <div id="example">
-      <main>
+      <main id="main">
         <div id="backdrop"></div>
 
         <section id="section">
@@ -21,6 +21,8 @@ export default function Example() {
           <div>
             <button id="scrollDown">Scroll down ⬇</button>
             <button id="darkMode" onClick={() => {
+              console.log(document.querySelector("#example main").style.padding)
+
               let root = document.querySelector(":root");
               let temp_color = getComputedStyle(root).getPropertyValue("--color1");
               root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
