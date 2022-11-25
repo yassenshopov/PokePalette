@@ -1,17 +1,17 @@
 {
   "files": {
-    "main.css": "/PokePalette/static/css/main.c829e85f.css",
-    "main.js": "/PokePalette/static/js/main.c04b9766.js",
+    "main.css": "/PokePalette/static/css/main.5cdcc65a.css",
+    "main.js": "/PokePalette/static/js/main.435176b2.js",
     "static/media/bg.jpg": "/PokePalette/static/media/bg.46d9d3f722187ce6417e.jpg",
     "static/media/kleavor.png": "/PokePalette/static/media/kleavor.612154194b32edcfc724.png",
     "static/media/wyrdeer.png": "/PokePalette/static/media/wyrdeer.1d38dd292d65982d6147.png",
     "static/media/ursaluna.png": "/PokePalette/static/media/ursaluna.6cfccf239dd9d7af2934.png",
     "index.html": "/PokePalette/index.html",
-    "main.c829e85f.css.map": "/PokePalette/static/css/main.c829e85f.css.map",
-    "main.c04b9766.js.map": "/PokePalette/static/js/main.c04b9766.js.map"
+    "main.5cdcc65a.css.map": "/PokePalette/static/css/main.5cdcc65a.css.map",
+    "main.435176b2.js.map": "/PokePalette/static/js/main.435176b2.js.map"
   },
   "entrypoints": [
-    "static/css/main.c829e85f.css",
-    "static/js/main.c04b9766.js"
+    "static/css/main.5cdcc65a.css",
+    "static/js/main.435176b2.js"
   ]
 }
