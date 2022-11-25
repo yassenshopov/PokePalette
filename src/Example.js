@@ -31,7 +31,9 @@ export default function Example() {
           </div>
         </section>
         <aside>
-          <article id="gradientArticle">
+          <div id="artCanvas"></div>
+
+          {/* <article id="gradientArticle">
             <div className="gridItem"></div>
             <div className="gridItem"></div>
             <div className="gridItem"></div>
@@ -61,7 +63,7 @@ export default function Example() {
             <div className="gridItem"></div>
             <div className="gridItem"></div>
             <div className="gridItem"></div>
-          </article>
+          </article> */}
         </aside>
       </main>
       

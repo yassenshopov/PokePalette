@@ -14,6 +14,7 @@ let shiny = false;
 let randomSwitch = false;
 
 let color2, color3, color4;
+let artURL;
 
 export default function Poke() {
   let [nameValue, setStateFind] = useState('wooper');
@@ -44,6 +45,7 @@ export default function Poke() {
 
   let [name, setname] = useState('');
   let [Img, setImg] = useState('');
+  let [artURL, setURL] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/853.png");
   const [Type, setType] = useState('');
 
   useEffect(() => {
@@ -81,6 +83,7 @@ export default function Poke() {
           setImg(res.data.sprites.front_shiny);
         } else {
           setImg(res.data.sprites.front_default);
+          setURL(res.data.sprites.other["official-artwork"].front_default);
         }
       };
 
@@ -194,7 +197,6 @@ export default function Poke() {
       let anti_hsp_list = ["--anti_hsp2", "--anti_hsp3", "--anti_hsp4"]
       let root = document.querySelector(':root');
 
-
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
         if (hsp(value.toUpperCase()) > 70) {
@@ -210,9 +212,13 @@ export default function Poke() {
         i++;
       }
 
+      let fullArtURL = "url('" + artURL + "')"
+
       root.style.setProperty('--color2', color2);
       root.style.setProperty('--color3', color3);
       root.style.setProperty('--color4', color4);
+
+      root.style.setProperty('--artURL', fullArtURL)
 
       let gradientA = document.getElementById('gradientArticle');
       let gradient =
