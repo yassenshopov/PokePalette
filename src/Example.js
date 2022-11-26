@@ -1,6 +1,9 @@
-import { useEffect, useState } from 'react';
-import { FaReact } from 'react-icons/fa';
-import { GrSun } from 'react-icons/gr';
+import { FaReact, FaMoon, FaSun } from 'react-icons/fa';
+import bgDark from "../src/img/bgDark.jpg"
+import bgLight from "../src/img/bgLight.jpg"
+// let bg = bgDark;
+
+let darkTheme = true;
 
 export default function Example() {
   return (
@@ -21,13 +24,26 @@ export default function Example() {
           <div>
             <button id="scrollDown">Scroll down ⬇</button>
             <button id="darkMode" onClick={() => {
-              console.log(document.querySelector("#example main").style.padding)
 
               let root = document.querySelector(":root");
               let temp_color = getComputedStyle(root).getPropertyValue("--color1");
               root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
-              root.style.setProperty('--color5', temp_color); 
-            }}><p><GrSun /></p></button>
+              root.style.setProperty('--color5', temp_color);
+              if (darkTheme) {
+                document.getElementById("main").style["background-position"] = 'left'
+                root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
+                // bg = bgDark;
+              } else {
+                // bg = bgLight;
+                document.getElementById("main").style["background-position"] = 'right'
+                root.style.setProperty('--bgURL', "url('"+ bgDark + "')")
+              }
+              darkTheme = !darkTheme;
+            }}>    
+            <div>
+              <FaMoon />
+            </div>
+            </button>
           </div>
         </section>
         <aside>

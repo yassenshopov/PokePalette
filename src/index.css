@@ -8,6 +8,13 @@
   --hsp3: #f1f1f1;
   --hsp4: #f1f1f1;
   --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/194.png');
+  --bgURL: url(../public/bgDark.jpg);
+  --font1: carnacLight;
+}
+
+@font-face {
+  font-family: carnacLight;
+  src: url(fonts/Carnac-Light.otf);
 }
 
 html {
@@ -25,7 +32,7 @@ body {
   overflow-x: hidden;
   display: flex;
   flex-direction: row;
-  font-family: 'Open Sans', sans-serif;
+  font-family: var(--font1);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -ms-overflow-style: none;
@@ -49,7 +56,7 @@ body::-webkit-scrollbar {
 }
 
 .example * {
-  transition: all 800ms;
+  transition: all 300ms;
 }
 
 .poke {
@@ -66,7 +73,7 @@ body::-webkit-scrollbar {
   align-items: center;
   width: 100%;
   height: 100vh;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font1);
   border-right: 4px solid var(--color1);
 }
 
@@ -85,7 +92,7 @@ body::-webkit-scrollbar {
   border: 1px solid var(--hsp3);
   text-align: center;
   text-transform: capitalize;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font1);
   outline: none;
 }
 
@@ -108,7 +115,7 @@ body::-webkit-scrollbar {
 .pokeCard #buttons > * {
   padding: 10px;
   font-size: 18px;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font1);
   background-color: var(--color1);
   color: var(--color5);
   border-radius: 15px;
@@ -169,7 +176,7 @@ body::-webkit-scrollbar {
   width: 70vw;
   display: flex;
   flex-direction: column;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font1);
 }
 
 #example > *:nth-child(2n + 1) {
@@ -206,7 +213,7 @@ body::-webkit-scrollbar {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
   transition: all 400ms ease-in-out;
-  font-family: 'Times New Roman', Times, serif;
+  font-family: var(--font1);
 }
 
 #example button:hover {
@@ -233,6 +240,10 @@ body::-webkit-scrollbar {
   color: var(--hsp3);
 }
 
+FaMoon {
+  color: var(--hsp3);
+}
+
 #example main #backdrop {
   background-color: var(--color2);
   mix-blend-mode: color;
@@ -246,36 +257,38 @@ body::-webkit-scrollbar {
 }
 
 #example main {
-  background-image: url(../public/bg.jpg);
+  background-image: var(--bgURL);
   background-size: 300vh auto;
   background-position: right;
-  padding: 0px 5vw 20px 5vw;
+  padding: 0px 10% 20px 10%;
   display: flex;
   flex-direction: row;
-  gap: 5vw;
+  gap: 6vw;
   height: 74vh;
   align-items: center;
   justify-content: center;
 }
 
+/* #example main:hover {
+  background-image: url(../public/bgLight.jpg);
+} */
+
 #example main section {
   width: 50%;
-  /* height: 400px; */
-  /* background: rgba(238, 238, 238, 0.27); */
   border-radius: 16px;
-  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1); */
   z-index: 1;
-  color: #f1f1f1;
+  color: var(--color1);
 }
 
 #example #artCanvas {
   background-image: var(--artURL);
-  background-position: right;
+  background-position: center;
   background-size: 55vh auto;
+  background-repeat: no-repeat;
 
   width: 100%;
   height: 400px;
-  filter: drop-shadow(0 0 20px #f1f1f150);
+  filter: drop-shadow(0 0 20px var(--color5));
 }
 
 #example aside {
@@ -689,6 +702,10 @@ body::-webkit-scrollbar {
 }
 
 #example footer {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
   color: var(--hsp2);
   background-color: var(--color2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);

@@ -53,29 +53,61 @@ export default function Poke() {
       let res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
       );
-      console.log(res);
+      // console.log(res);
+
+      let evoRes = await axios.get(
+        `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
+      );
+
+      console.log(evoRes.data.evolution_chain.url)
+
+      let evoChain = await axios.get(
+        evoRes.data.evolution_chain.url
+      );
+
+      console.log(document.getElementById("buttons").children.length)
+      console.log(evoChain.data)
+
+      if (evoChain.data.chain.evolves_to != []) {
+        if ((document.getElementById("buttons").children.length) < 3) {
+          let evoBtn = document.createElement("button");
+          evoBtn.innerHTML = "Evolve!";
+          evoBtn.id = "evoBtn"
+          document.getElementById("buttons").appendChild(evoBtn)
+        }
+      } else {
+        document.getElementById("evoBtn").remove();
+      }
+
       if (res.data.id >= 899 && res.data.id <=905) {
         switch (res.data.id) {
           case 899:
             setImg(wyrdeer);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 900:
             setImg(kleavor);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 901:
             setImg(ursaluna);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 902:
             setImg(basculegion_male);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 903:
             setImg(sneasler);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 904:
             setImg(overqwil);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 905:
             setImg(enamorus);
+            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
         }
       } else {
@@ -109,15 +141,12 @@ export default function Poke() {
   const increase = () => {
     numValue = numValue + 1;
     setNumValue(numValue);
-    console.log(numValue);
     setStateFind(numValue.toString());
   };
 
   const decrease = () => {
-    console.log(typeof numValue);
     numValue = numValue - 1;
     setNumValue(numValue);
-    console.log(numValue);
     setStateFind(numValue.toString());
   };
 
@@ -199,7 +228,7 @@ export default function Poke() {
 
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
-        if (hsp(value.toUpperCase()) > 70) {
+        if (hsp(value.toUpperCase()) > 150) {
           root.style.setProperty(hsp_list[i], "#121212")
           root.style.setProperty(anti_hsp_list[i], "#f1f1f1")
         } else {
@@ -219,14 +248,6 @@ export default function Poke() {
       root.style.setProperty('--color4', color4);
 
       root.style.setProperty('--artURL', fullArtURL)
-
-      let gradientA = document.getElementById('gradientArticle');
-      let gradient =
-        'linear-gradient(149deg,' +
-        sortedScheme[0][0] +
-        ' 0%,' +
-        sortedScheme[2][0] +
-        ' 100%';
     };
   });
 
@@ -245,7 +266,6 @@ export default function Poke() {
       0.587 * (rgb[1]*rgb[1]) +
       0.114 * (rgb[2]*rgb[2])
       );
-    console.log(hsp)
     return hsp;
   }
 
