@@ -1,7 +1,7 @@
 {
   "files": {
-    "main.css": "/PokePalette/static/css/main.33f2d375.css",
-    "main.js": "/PokePalette/static/js/main.10042c5d.js",
+    "main.css": "/PokePalette/static/css/main.9f79967d.css",
+    "main.js": "/PokePalette/static/js/main.b477756d.js",
     "static/media/bgLight.jpg": "/PokePalette/static/media/bgLight.70922e501bedee9f1b49.jpg",
     "static/media/bgDark.jpg": "/PokePalette/static/media/bgDark.46d9d3f722187ce6417e.jpg",
     "static/media/Carnac-Light.otf": "/PokePalette/static/media/Carnac-Light.8fa7584e8b1431e1665a.otf",
@@ -9,11 +9,11 @@
     "static/media/wyrdeer.png": "/PokePalette/static/media/wyrdeer.1d38dd292d65982d6147.png",
     "static/media/ursaluna.png": "/PokePalette/static/media/ursaluna.6cfccf239dd9d7af2934.png",
     "index.html": "/PokePalette/index.html",
-    "main.33f2d375.css.map": "/PokePalette/static/css/main.33f2d375.css.map",
-    "main.10042c5d.js.map": "/PokePalette/static/js/main.10042c5d.js.map"
+    "main.9f79967d.css.map": "/PokePalette/static/css/main.9f79967d.css.map",
+    "main.b477756d.js.map": "/PokePalette/static/js/main.b477756d.js.map"
   },
   "entrypoints": [
-    "static/css/main.33f2d375.css",
-    "static/js/main.10042c5d.js"
+    "static/css/main.9f79967d.css",
+    "static/js/main.b477756d.js"
   ]
 }
