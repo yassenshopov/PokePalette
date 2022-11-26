@@ -73,10 +73,11 @@ export default function Poke() {
           let evoBtn = document.createElement("button");
           evoBtn.innerHTML = "Evolve!";
           evoBtn.id = "evoBtn"
-          document.getElementById("buttons").appendChild(evoBtn)
+          document.getElementById("buttons").appendChild(evoBtn);
+          document.remove(document.getElementById("numLine"));
         }
       } else {
-        document.getElementById("evoBtn").remove();
+        document.getElementById("numLine").remove();
       }
 
       if (res.data.id >= 899 && res.data.id <=905) {

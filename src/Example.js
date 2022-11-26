@@ -30,12 +30,12 @@ export default function Example() {
               root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
               root.style.setProperty('--color5', temp_color);
               if (darkTheme) {
-                document.getElementById("main").style["background-position"] = 'left'
+                // document.getElementById("main").style["background-position"] = 'left'
                 root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
                 // bg = bgDark;
               } else {
                 // bg = bgLight;
-                document.getElementById("main").style["background-position"] = 'right'
+                // document.getElementById("main").style["background-position"] = 'right'
                 root.style.setProperty('--bgURL', "url('"+ bgDark + "')")
               }
               darkTheme = !darkTheme;
