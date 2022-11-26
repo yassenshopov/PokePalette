@@ -1,11 +1,11 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #f1f1f1;
-  --color3: #f1f1f1;
-  --color4: #f1f1f1;
+  --color2: #397bc5;
+  --color3: #73bdff;
+  --color4: #62396a;
   --color5: #121212;
-  --hsp2: #121212;
-  --hsp3: #f1f1f1;
+  --hsp2: #f1f1f1;
+  --hsp3: #121212;
   --hsp4: #f1f1f1;
   --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/194.png');
   --bgURL: url(../public/bgDark.jpg);
@@ -121,6 +121,7 @@ body::-webkit-scrollbar {
   border-radius: 15px;
   border: 1px solid var(--hsp3);
   outline: none;
+  cursor: pointer;
 }
 
 .pokeCard input {
@@ -156,6 +157,7 @@ body::-webkit-scrollbar {
   background: none;
   border: #00000000;
   filter: drop-shadow(0 0 1px #121212);
+  cursor: pointer;
 }
 
 .noSelect {
@@ -177,6 +179,7 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: column;
   font-family: var(--font1);
+  scroll-behavior: smooth;
 }
 
 #example > *:nth-child(2n + 1) {
@@ -223,6 +226,14 @@ body::-webkit-scrollbar {
 #example #scrollDown {
   color: var(--hsp4);
   background-color: var(--color4);
+  padding: 15px 20px 15px 20px;
+  font-size: 17px;
+  margin-top: 50px;
+  margin-right: 20px;
+  border-radius: 5px;
+  cursor: pointer;
+
+  text-decoration: none;
 }
 
 #example #darkMode {
@@ -755,6 +766,7 @@ FaMoon {
     background-size: 650%;
     background-position: center;
     height: fit-content;
+    gap: 0;
   }
 
   #example main section {
@@ -788,6 +800,11 @@ FaMoon {
     /* display: none; */
     width: 100%;
     margin: 50px 0 0 0;
+  }
+
+  #example #artCanvas {
+    background-size: 45vh auto;
+    margin-bottom: 0;
   }
 
   #example #cards {

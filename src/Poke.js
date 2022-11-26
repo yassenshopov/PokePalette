@@ -68,16 +68,15 @@ export default function Poke() {
       console.log(document.getElementById("buttons").children.length)
       console.log(evoChain.data)
 
-      if (evoChain.data.chain.evolves_to != []) {
+      if (evoChain.data.chain.evolves_to.length != 0) {
         if ((document.getElementById("buttons").children.length) < 3) {
           let evoBtn = document.createElement("button");
           evoBtn.innerHTML = "Evolve!";
           evoBtn.id = "evoBtn"
           document.getElementById("buttons").appendChild(evoBtn);
-          document.remove(document.getElementById("numLine"));
         }
       } else {
-        document.getElementById("numLine").remove();
+        document.getElementById("evoBtn").remove();
       }
 
       if (res.data.id >= 899 && res.data.id <=905) {

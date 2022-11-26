@@ -22,7 +22,7 @@ export default function Example() {
             Pokedex), and its top 3 colours will be extracted.
           </p>
           <div>
-            <button id="scrollDown">Scroll down ⬇</button>
+            <a id="scrollDown" href='#posts'>Scroll down ⬇</a>
             <button id="darkMode" onClick={() => {
 
               let root = document.querySelector(":root");
@@ -85,19 +85,28 @@ export default function Example() {
       
       <div id="cards">
         <div onClick={() => {
-            navigator.clipboard.writeText(document.getElementsByClassName("color2")[0].innerHTML);
+            let copyText = document.getElementsByClassName("color2")[0].innerHTML;
+            navigator.clipboard.writeText(copyText);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
             }}>
           <div className="color-card"></div>
           <p className="color2"></p>
         </div>
         <div onClick={() => {
-            navigator.clipboard.writeText(document.getElementsByClassName("color3")[0].innerHTML);
+            let copyText = document.getElementsByClassName("color3")[0].innerHTML;
+            navigator.clipboard.writeText(copyText);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
             }}>
           <div className="color-card"></div>
           <p className="color3"></p>
         </div>
         <div onClick={() => {
-            navigator.clipboard.writeText(document.getElementsByClassName("color4")[0].innerHTML);
+            let copyText = document.getElementsByClassName("color4")[0].innerHTML;
+            navigator.clipboard.writeText(copyText);
+            copyText.select();
+            copyText.setSelectionRange(0, 99999); // For mobile devices
             }}>
           <div class="color-card"></div>
           <p class="color4"></p>
