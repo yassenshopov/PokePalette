@@ -65,36 +65,85 @@ export default function Poke() {
         evoRes.data.evolution_chain.url
       );
 
-      // console.log(document.getElementById("buttons").children.length)
-      // console.log(evoChain.data)
+      let evoBtnCheck = true;
+      let stageNumber = 1;
+      let evoData;
 
-      if (evoChain.data.chain.evolves_to.length != 0) {
-        if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
-          console.log((document.getElementById("evoBtn")))
-          document.getElementById("evoBtn").remove();
+      // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
+
+      if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
+        document.getElementById("evoBtn").remove();
+      };
+
+      if (evoChain.data.chain.evolves_to.length != 0) { // This check eliminates single-stage mons
+        
+        evoData = evoChain.data.chain.evolves_to[0].species.name;
+
+        console.log(nameValue, evoData, evoChain.data.chain.species.name)
+
+        // This check determines the length of the evolution family
+        if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
+          stageNumber = 2;
+        } else {
+          stageNumber = 3;
         };
-        if ((document.getElementById("buttons").children.length) < 3) {
-          if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
-            console.log((document.getElementById("evoBtn")))
-            document.getElementById("evoBtn").remove();
-          };
-          let evoBtn = document.createElement("button");
-          evoBtn.innerHTML = "Evolve!";
-          evoBtn.id = "evoBtn";
 
-          let evoData = evoChain.data.chain.evolves_to[0].species.name;
-          evoBtn.onclick = () => {
-            console.log(evoData);
-            setStateFind(evoData)
-          };
-          document.getElementById("buttons").appendChild(evoBtn);
+        console.log(stageNumber)
+
+        switch (stageNumber) {
+          case 2:
+            if ((nameValue == evoData)  && (nameValue != evoChain.data.chain.species.name)) {
+              console.log("This mon is the final stage of a 2-stager")
+              evoBtnCheck = false;
+            } else {
+              console.log("This mon is the 1st stage of a 2-stager")     
+              evoBtnCheck = true;
+            }
+            break
+          case 3:
+            if ((nameValue != evoData) && (nameValue != evoChain.data.chain.species.name)) { // This check eliminates mons that are final stages
+              console.log("This mon is the final stage of a 3-stager")
+              evoBtnCheck = false;
+              if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
+                document.getElementById("evoBtn").remove();
+                break
+              };
+            } else if ((nameValue == evoData)  && (nameValue != evoChain.data.chain.species.name)) {
+              console.log("This mon is the middle stage of a 3-stager")
+              evoBtnCheck = true;
+              // Check for branch-evos
+              console.log(evoChain.data.chain.evolves_to[0])
+              if (evoChain.data.chain.evolves_to[0].length > 1) {
+                let randInt = Math.random(evoChain.data.chain.evolves_to[0].length) - 1
+                console.log(randInt)
+              }
+              evoData = evoChain.data.chain.evolves_to[0].evolves_to[0].species.name;
+              break;
+            }
         }
-      } else {
+
+      } else { // Either remove or simply not put the evoBtn there
+        evoBtnCheck = false;
         if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
-          console.log((document.getElementById("evoBtn")))
+          console.log("evoBtn was removed.")
           document.getElementById("evoBtn").remove();
         };
       }
+
+      if (evoBtnCheck) { // Only create evoBtn if all conditions are right
+        let evoBtn = document.createElement("button");
+        evoBtn.innerHTML = "Evolve!";
+        evoBtn.id = "evoBtn";
+
+        evoBtn.onclick = () => {
+          console.log(evoChain.data.chain);
+          // Check for branch-evos
+
+          console.log(evoData)
+          setStateFind(evoData)
+        };
+        document.getElementById("buttons").appendChild(evoBtn);
+      };
 
       if (res.data.id >= 899 && res.data.id <=905) {
         switch (res.data.id) {

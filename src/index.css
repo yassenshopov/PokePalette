@@ -295,6 +295,32 @@ FaSun {
   width: 50%;
   height: 400px;
   filter: drop-shadow(0 0 20px var(--color5));
+  z-index: 9;
+  /* padding: 0 50px 0 50px; */
+  /* background-blend-mode: color; */
+  transition: all 0.2s ease-in-out;
+}
+
+#example main #artCanvas:hover {
+  filter: drop-shadow(0 0 15px var(--color1)) contrast(1.3) saturate(1.5);
+}
+
+#example main #artCanvas #colorFilter {
+  width: 100%;
+  height: 100%;
+  background-color: var(--color2);
+  opacity: 0.85;
+  border-radius: 100px;
+  mix-blend-mode: hue;
+  filter: blur(100px);
+  transition: all 1s ease-in-out;
+  opacity: 0.4;
+  /* padding: 0 10px 0 10px; */
+}
+
+#example main #artCanvas #colorFilter:hover {
+  z-index: 8;
+  opacity: 0.2;
 }
 
 /* #example aside article {
@@ -744,13 +770,12 @@ FaSun {
   }
 
   #example main {
-    background-position: center;
     flex-direction: column;
     width: 100%;
     padding: 0;
     margin: 0;
     background-size: 650%;
-    background-position: center;
+    background-position: left;
     height: fit-content;
     gap: 0;
   }

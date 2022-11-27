@@ -1,4 +1,5 @@
 import { FaReact, FaMoon, FaSun } from 'react-icons/fa';
+import { MdCatchingPokemon } from 'react-icons/md';
 import bgDark from "../src/img/bgDark.jpg"
 import bgLight from "../src/img/bgLight.jpg"
 // let bg = bgDark;
@@ -14,11 +15,11 @@ export default function Example() {
         <section id="section">
           <h1>Your website - inspired by colours</h1>
           <p>
-            This page was built with <strong>React</strong>{' '}
-            <FaReact id="faReact" />
+            [Built with <strong>React</strong>{' '}
+            <FaReact id="faReact" /> and the <strong>PokeAPI</strong> <MdCatchingPokemon />]
           </p>
           <p>
-            It allows you to enter a Pokemon's name (or simply its number in the
+            This website allows you to enter a Pokemon's name (or simply its number in the
             Pokedex), and its top 3 colours will be extracted.
           </p>
           <div>
@@ -58,6 +59,7 @@ export default function Example() {
           </div>
         </section>
         <aside id="artCanvas">
+          <div id="colorFilter"></div>
           {/* <article id="gradientArticle">
             <div className="gridItem"></div>
             <div className="gridItem"></div>
