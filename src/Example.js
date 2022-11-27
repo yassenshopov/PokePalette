@@ -33,22 +33,31 @@ export default function Example() {
                 // document.getElementById("main").style["background-position"] = 'left'
                 root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
                 // bg = bgDark;
+                // document.getElementById("darkModeIcon").remove()
+                // let faMoon = document.createElement("FaMoon");
+                // document.getElementById("container").appendChild(faMoon)
+                document.getElementById("sun").style.display = "none"
+                document.getElementById("moon").style.display = "inline-block"
+
               } else {
                 // bg = bgLight;
                 // document.getElementById("main").style["background-position"] = 'right'
                 root.style.setProperty('--bgURL', "url('"+ bgDark + "')")
+                document.getElementById("moon").style.display = "none"
+                document.getElementById("sun").style.display = "inline-block"
               }
               darkTheme = !darkTheme;
             }}>    
-            <div>
-              <FaMoon />
+            <div id="sun">
+              <FaSun/>
             </div>
+
+            <div id="moon"><FaMoon/></div>
+
             </button>
           </div>
         </section>
-        <aside>
-          <div id="artCanvas"></div>
-
+        <aside id="artCanvas">
           {/* <article id="gradientArticle">
             <div className="gridItem"></div>
             <div className="gridItem"></div>

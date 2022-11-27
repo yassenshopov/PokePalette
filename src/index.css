@@ -43,7 +43,7 @@ body::-webkit-scrollbar {
   display: none;
 }
 
-/* .App > * {
+/* .App * {
   border: 1px solid black;
 } */
 
@@ -151,12 +151,11 @@ body::-webkit-scrollbar {
 
 .pokeCard #numLine button {
   color: var(--color1);
-  /* border: 1px solid var(--hsp3); */
   padding: 0 0px 0 0px;
   margin: 0 10px 0 10px;
   background: none;
   border: #00000000;
-  filter: drop-shadow(0 0 1px #121212);
+  filter: drop-shadow(0 0 1px var(--color5));
   cursor: pointer;
 }
 
@@ -196,7 +195,7 @@ body::-webkit-scrollbar {
 
 #example main p {
   font-size: 16px;
-  margin-bottom: 10px;
+  margin-bottom: 30px;
   width: 80%;
 }
 
@@ -232,7 +231,6 @@ body::-webkit-scrollbar {
   margin-right: 20px;
   border-radius: 5px;
   cursor: pointer;
-
   text-decoration: none;
 }
 
@@ -244,15 +242,13 @@ body::-webkit-scrollbar {
   margin: 0;
 }
 
-#example #darkMode p {
-  font-size: 20px;
-  padding: 0;
-  margin: 0;
+FaMoon,
+FaSun {
   color: var(--hsp3);
 }
 
-FaMoon {
-  color: var(--hsp3);
+#moon {
+  display: none;
 }
 
 #example main #backdrop {
@@ -260,7 +256,7 @@ FaMoon {
   mix-blend-mode: color;
   opacity: 0.7;
   width: 100%;
-  height: 80vh;
+  height: 90vh;
   position: absolute;
   left: 30.2vw;
   top: 0;
@@ -274,8 +270,8 @@ FaMoon {
   padding: 0px 10% 20px 10%;
   display: flex;
   flex-direction: row;
-  gap: 6vw;
-  height: 74vh;
+  gap: 2vw;
+  height: 80vh;
   align-items: center;
   justify-content: center;
 }
@@ -291,26 +287,17 @@ FaMoon {
   color: var(--color1);
 }
 
-#example #artCanvas {
+#example main #artCanvas {
   background-image: var(--artURL);
   background-position: center;
-  background-size: 55vh auto;
+  background-size: 100% auto;
   background-repeat: no-repeat;
-
-  width: 100%;
+  width: 50%;
   height: 400px;
   filter: drop-shadow(0 0 20px var(--color5));
 }
 
-#example aside {
-  display: flex;
-  flex-direction: column;
-  width: 50%;
-  /* gap: 20px; */
-  z-index: 1;
-}
-
-#example aside article {
+/* #example aside article {
   width: 100%;
   height: 400px;
   margin-top: 20px;
@@ -326,17 +313,17 @@ FaMoon {
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(5, 1fr);
   gap: 2px;
-  /* filter: blur(1px); */
-}
+} */
 
-#example aside article:hover > .gridItem:nth-child(2n + 1) {
+/* #example aside article:hover > .gridItem:nth-child(2n + 1) {
   opacity: 0;
 }
+
 #example aside article:hover > .gridItem:nth-child(2n) {
   opacity: 1;
-}
+} */
 
-.gridItem {
+/* .gridItem {
   background-color: var(--color3);
   border-radius: 50%;
   box-shadow: 0 0 20px var(--hsp2);
@@ -653,7 +640,7 @@ FaMoon {
   100% {
     background: linear-gradient(180deg, var(--color4), var(--color2));
   }
-}
+} */
 
 #example #cards {
   display: flex;
@@ -702,7 +689,6 @@ FaMoon {
 }
 
 #example #cards {
-  background-color: var(--color1);
   width: 100%;
   min-height: fit-content;
   padding: 50px 0 50px 0;
@@ -759,7 +745,7 @@ FaMoon {
 
   #example main {
     background-position: center;
-    flex-direction: column-reverse;
+    flex-direction: column;
     width: 100%;
     padding: 0;
     margin: 0;
@@ -796,15 +782,11 @@ FaMoon {
     /* display: none; */
   }
 
-  #example aside {
+  #example main #artCanvas {
     /* display: none; */
-    width: 100%;
-    margin: 50px 0 0 0;
-  }
-
-  #example #artCanvas {
-    background-size: 45vh auto;
-    margin-bottom: 0;
+    width: 80%;
+    margin: 0px 0 20px 0;
+    height: 35vh;
   }
 
   #example #cards {

@@ -53,61 +53,71 @@ export default function Poke() {
       let res = await axios.get(
         `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
       );
-      // console.log(res);
+      console.log(res);
 
       let evoRes = await axios.get(
         `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
       );
 
-      console.log(evoRes.data.evolution_chain.url)
+      console.log(evoRes.data)
 
       let evoChain = await axios.get(
         evoRes.data.evolution_chain.url
       );
 
-      console.log(document.getElementById("buttons").children.length)
-      console.log(evoChain.data)
+      // console.log(document.getElementById("buttons").children.length)
+      // console.log(evoChain.data)
 
       if (evoChain.data.chain.evolves_to.length != 0) {
+        if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
+          console.log((document.getElementById("evoBtn")))
+          document.getElementById("evoBtn").remove();
+        };
         if ((document.getElementById("buttons").children.length) < 3) {
+          if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
+            console.log((document.getElementById("evoBtn")))
+            document.getElementById("evoBtn").remove();
+          };
           let evoBtn = document.createElement("button");
           evoBtn.innerHTML = "Evolve!";
-          evoBtn.id = "evoBtn"
+          evoBtn.id = "evoBtn";
+
+          let evoData = evoChain.data.chain.evolves_to[0].species.name;
+          evoBtn.onclick = () => {
+            console.log(evoData);
+            setStateFind(evoData)
+          };
           document.getElementById("buttons").appendChild(evoBtn);
         }
       } else {
-        document.getElementById("evoBtn").remove();
+        if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
+          console.log((document.getElementById("evoBtn")))
+          document.getElementById("evoBtn").remove();
+        };
       }
 
       if (res.data.id >= 899 && res.data.id <=905) {
         switch (res.data.id) {
           case 899:
             setImg(wyrdeer);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 900:
             setImg(kleavor);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 901:
             setImg(ursaluna);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 902:
             setImg(basculegion_male);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 903:
             setImg(sneasler);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 904:
             setImg(overqwil);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
           case 905:
             setImg(enamorus);
-            setURL(res.data.sprites.other["official-artwork"].front_default);
             break;
         }
       } else {
@@ -115,21 +125,23 @@ export default function Poke() {
           setImg(res.data.sprites.front_shiny);
         } else {
           setImg(res.data.sprites.front_default);
-          setURL(res.data.sprites.other["official-artwork"].front_default);
         }
+        setURL(res.data.sprites.other["official-artwork"].front_default);
       };
 
-      if (res.data.types.length === 2) {
-        setType(
-          (
-            res.data.types[0].type.name +
-            '/' +
-            res.data.types[1].type.name
-          ).toUpperCase()
-        );
-      } else {
-        setType(res.data.types[0].type.name.toUpperCase());
-      }
+      setType("The " + evoRes.data.genera[7].genus)
+
+      // if (res.data.types.length === 2) {
+      //   setType(
+      //     (
+      //       res.data.types[0].type.name +
+      //       '/' +
+      //       res.data.types[1].type.name
+      //     ).toUpperCase()
+      //   );
+      // } else {
+      //   setType(res.data.types[0].type.name.toUpperCase());
+      // }
 
       setStateFind(res.data.name);
       setNumValue(res.data.id);
@@ -196,11 +208,13 @@ export default function Poke() {
 
       delete counts['#101010'];
       delete counts['#000000'];
+      delete counts['#0f0f0f'];
       delete counts['#010101'];
       delete counts['#080808'];
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
+
       let bgStr =
         'linear-gradient(0deg,' +
         sortedScheme[2][0] +
