@@ -92,16 +92,25 @@ export default function Poke() {
 
         switch (stageNumber) {
           case 2:
-            if ((nameValue == evoData)  && (nameValue != evoChain.data.chain.species.name)) {
+            if ((nameValue != evoChain.data.chain.species.name)) {
               console.log("This mon is the final stage of a 2-stager")
               evoBtnCheck = false;
             } else {
               console.log("This mon is the 1st stage of a 2-stager")     
               evoBtnCheck = true;
+              // Check for branch-evos
+              console.log(evoChain.data.chain.evolves_to[0])
+              let randInt = 0;
+              if (evoChain.data.chain.evolves_to.length > 1) {
+                randInt = Math.floor(Math.random() * evoChain.data.chain.evolves_to.length)
+                console.log(randInt)
+                evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+              }
+              evoData = evoChain.data.chain.evolves_to[randInt].species.name;
             }
             break
           case 3:
-            if ((nameValue != evoData) && (nameValue != evoChain.data.chain.species.name)) { // This check eliminates mons that are final stages
+            if ((nameValue != "cascoon") && (nameValue != evoData) && (nameValue != evoChain.data.chain.species.name)) { // This check eliminates mons that are final stages
               console.log("This mon is the final stage of a 3-stager")
               evoBtnCheck = false;
               if (typeof(document.getElementById("evoBtn")) != 'undefined' && (document.getElementById("evoBtn")) != null) {
@@ -113,13 +122,27 @@ export default function Poke() {
               evoBtnCheck = true;
               // Check for branch-evos
               console.log(evoChain.data.chain.evolves_to[0])
-              if (evoChain.data.chain.evolves_to[0].length > 1) {
-                let randInt = Math.random(evoChain.data.chain.evolves_to[0].length) - 1
+              let randInt = 0;
+              if (evoChain.data.chain.evolves_to[0].evolves_to.length > 1) {
+                randInt = Math.floor(Math.random() * evoChain.data.chain.evolves_to[0].evolves_to.length)
                 console.log(randInt)
+                evoData = evoChain.data.chain.evolves_to[0].evolves_to[randInt].species.name;
               }
-              evoData = evoChain.data.chain.evolves_to[0].evolves_to[0].species.name;
-              break;
+              evoData = evoChain.data.chain.evolves_to[0].evolves_to[randInt].species.name;
+            } else {
+              console.log("This mon is the 1st stage of a 3-stager")
+              evoBtnCheck = true;
+              // Check for branch-evos
+              console.log(evoChain.data.chain.evolves_to[0])
+              let randInt = 0;
+              if (evoChain.data.chain.evolves_to.length > 1) {
+                randInt = Math.floor(Math.random() * evoChain.data.chain.evolves_to.length)
+                console.log(randInt)
+                evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+              }
+              evoData = evoChain.data.chain.evolves_to[randInt].species.name;
             }
+            break;
         }
 
       } else { // Either remove or simply not put the evoBtn there
