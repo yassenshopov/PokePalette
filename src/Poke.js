@@ -446,6 +446,7 @@ export default function Poke() {
       delete counts['#0f0f0f'];
       delete counts['#010101'];
       delete counts['#080808'];
+      delete counts['#202020'];
       delete counts['#181818'];
       delete counts['#181810'];
       delete counts['#292929'];
