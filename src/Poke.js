@@ -123,13 +123,6 @@ export default function Poke() {
         `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
       );
 
-      console.log(evoRes.data);
-
-      let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-
-      let stageNumber = 1;
-      let evoData;
-
       if (megaEvoList.includes(nameValue)) {
         evoBtnCheck = false;
 
@@ -193,133 +186,144 @@ export default function Poke() {
 
       } else {
 
-        if (evoChain.data.chain.evolves_to.length != 0) {
-          // This check eliminates single-stage mons
-  
-          evoData = evoChain.data.chain.evolves_to[0].species.name;
-  
-          console.log(nameValue, evoData, evoChain.data.chain.species.name);
-  
-          // This check determines the length of the evolution family
-          if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
-            stageNumber = 2;
-          } else {
-            stageNumber = 3;
-          }
-  
-          console.log(stageNumber);
-  
-          switch (stageNumber) {
-            case 2:
-              if (nameValue != evoChain.data.chain.species.name) {
-                console.log('This mon is the final stage of a 2-stager');
-                evoBtnCheck = false;
-              } else {
-                console.log('This mon is the 1st stage of a 2-stager');
-                evoBtnCheck = true;
-                // Check for branch-evos
-                console.log(evoChain.data.chain.evolves_to[0]);
-                let randInt = 0;
-                if (evoChain.data.chain.evolves_to.length > 1) {
-                  randInt = Math.floor(
-                    Math.random() * evoChain.data.chain.evolves_to.length
-                  );
-                  console.log(randInt);
+        let evoChain;
+        try {
+          evoChain = await axios.get(evoRes.data.evolution_chain.url);
+
+          let stageNumber = 1;
+          let evoData;
+
+          if (evoChain.data.chain.evolves_to.length != 0) {
+            // This check eliminates single-stage mons
+    
+            evoData = evoChain.data.chain.evolves_to[0].species.name;
+    
+            console.log(nameValue, evoData, evoChain.data.chain.species.name);
+    
+            // This check determines the length of the evolution family
+            if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
+              stageNumber = 2;
+            } else {
+              stageNumber = 3;
+            }
+    
+            console.log(stageNumber);
+    
+            switch (stageNumber) {
+              case 2:
+                if (nameValue != evoChain.data.chain.species.name) {
+                  console.log('This mon is the final stage of a 2-stager');
+                  evoBtnCheck = false;
+                } else {
+                  console.log('This mon is the 1st stage of a 2-stager');
+                  evoBtnCheck = true;
+                  // Check for branch-evos
+                  console.log(evoChain.data.chain.evolves_to[0]);
+                  let randInt = 0;
+                  if (evoChain.data.chain.evolves_to.length > 1) {
+                    randInt = Math.floor(
+                      Math.random() * evoChain.data.chain.evolves_to.length
+                    );
+                    console.log(randInt);
+                    evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                  }
                   evoData = evoChain.data.chain.evolves_to[randInt].species.name;
                 }
-                evoData = evoChain.data.chain.evolves_to[randInt].species.name;
-              }
-              break;
-            case 3:
-              if (
-                nameValue != 'cascoon' &&
-                nameValue != evoData &&
-                nameValue != evoChain.data.chain.species.name
-              ) {
-                // This check eliminates mons that are final stages
-                console.log('This mon is the final stage of a 3-stager');
-                evoBtnCheck = false;
+                break;
+              case 3:
                 if (
-                  typeof document.getElementById('evoBtn') != 'undefined' &&
-                  document.getElementById('evoBtn') != null
+                  nameValue != 'cascoon' &&
+                  nameValue != evoData &&
+                  nameValue != evoChain.data.chain.species.name
                 ) {
-                  document.getElementById('evoBtn').remove();
-                  break;
-                }
-              } else if (
-                nameValue == evoData &&
-                nameValue != evoChain.data.chain.species.name
-              ) {
-                console.log('This mon is the middle stage of a 3-stager');
-                evoBtnCheck = true;
-                // Check for branch-evos
-                console.log(evoChain.data.chain.evolves_to[0]);
-                let randInt = 0;
-                if (evoChain.data.chain.evolves_to[0].evolves_to.length > 1) {
-                  randInt = Math.floor(
-                    Math.random() *
-                      evoChain.data.chain.evolves_to[0].evolves_to.length
-                  );
-                  console.log(randInt);
+                  // This check eliminates mons that are final stages
+                  console.log('This mon is the final stage of a 3-stager');
+                  evoBtnCheck = false;
+                  if (
+                    typeof document.getElementById('evoBtn') != 'undefined' &&
+                    document.getElementById('evoBtn') != null
+                  ) {
+                    document.getElementById('evoBtn').remove();
+                    break;
+                  }
+                } else if (
+                  nameValue == evoData &&
+                  nameValue != evoChain.data.chain.species.name
+                ) {
+                  console.log('This mon is the middle stage of a 3-stager');
+                  evoBtnCheck = true;
+                  // Check for branch-evos
+                  console.log(evoChain.data.chain.evolves_to[0]);
+                  let randInt = 0;
+                  if (evoChain.data.chain.evolves_to[0].evolves_to.length > 1) {
+                    randInt = Math.floor(
+                      Math.random() *
+                        evoChain.data.chain.evolves_to[0].evolves_to.length
+                    );
+                    console.log(randInt);
+                    evoData =
+                      evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
+                        .name;
+                  }
                   evoData =
                     evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
                       .name;
-                }
-                evoData =
-                  evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
-                    .name;
-              } else {
-                console.log('This mon is the 1st stage of a 3-stager');
-                evoBtnCheck = true;
-                // Check for branch-evos
-                console.log(evoChain.data.chain.evolves_to[0]);
-                let randInt = 0;
-                if (evoChain.data.chain.evolves_to.length > 1) {
-                  randInt = Math.floor(
-                    Math.random() * evoChain.data.chain.evolves_to.length
-                  );
-                  console.log(randInt);
+                } else {
+                  console.log('This mon is the 1st stage of a 3-stager');
+                  evoBtnCheck = true;
+                  // Check for branch-evos
+                  console.log(evoChain.data.chain.evolves_to[0]);
+                  let randInt = 0;
+                  if (evoChain.data.chain.evolves_to.length > 1) {
+                    randInt = Math.floor(
+                      Math.random() * evoChain.data.chain.evolves_to.length
+                    );
+                    console.log(randInt);
+                    evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                  }
                   evoData = evoChain.data.chain.evolves_to[randInt].species.name;
                 }
-                evoData = evoChain.data.chain.evolves_to[randInt].species.name;
-              }
-              break;
+                break;
+            }
+          } else {
+            // Either remove or simply not put the evoBtn there
+            evoBtnCheck = false;
+            if (
+              typeof document.getElementById('evoBtn') != 'undefined' &&
+              document.getElementById('evoBtn') != null
+            ) {
+              console.log('evoBtn was removed.');
+              document.getElementById('evoBtn').remove();
+            }
           }
-        } else {
-          // Either remove or simply not put the evoBtn there
-          evoBtnCheck = false;
-          if (
-            typeof document.getElementById('evoBtn') != 'undefined' &&
-            document.getElementById('evoBtn') != null
-          ) {
-            console.log('evoBtn was removed.');
-            document.getElementById('evoBtn').remove();
+    
+          if (evoBtnCheck && document.getElementById("buttons").children.length < 3) {
+            // Only create evoBtn if all conditions are right
+            let evoBtn = document.createElement('button');
+            evoBtn.innerHTML = 'Evolve!';
+            evoBtn.id = 'evoBtn';
+    
+            evoBtn.onclick = () => {
+              console.log(document.getElementById("artCanvas").classList);
+              // Check for branch-evos
+    
+              console.log(evoData);
+
+              document.getElementById("artCanvas").classList.toggle("shine");
+              setTimeout(() => {
+                document.getElementById("artCanvas").classList.toggle("shine");
+              }, 6000)
+              
+              setTimeout(() => {
+                setStateFind(evoData);
+              }, 3000)
+            };
+            document.getElementById('buttons').appendChild(evoBtn);
           }
+        } catch(err) {
+          console.log(err)
         }
   
-        if (evoBtnCheck && document.getElementById("buttons").children.length < 3) {
-          // Only create evoBtn if all conditions are right
-          let evoBtn = document.createElement('button');
-          evoBtn.innerHTML = 'Evolve!';
-          evoBtn.id = 'evoBtn';
-  
-          evoBtn.onclick = () => {
-            console.log(document.getElementById("artCanvas").classList);
-            // Check for branch-evos
-  
-            console.log(evoData);
-
-            document.getElementById("artCanvas").classList.toggle("shine");
-            setTimeout(() => {
-              document.getElementById("artCanvas").classList.toggle("shine");
-            }, 6000)
-            
-            setTimeout(() => {
-              setStateFind(evoData);
-            }, 3000)
-          };
-          document.getElementById('buttons').appendChild(evoBtn);
-        }  
       }
       
       if (res.data.id >= 899 && res.data.id <= 905) {
@@ -361,23 +365,11 @@ export default function Poke() {
           }
         }
 
-        setURL(res.data.sprites.other['official-artwork'].front_default);
       }
+      setURL(res.data.sprites.other['official-artwork'].front_default);
+
 
       setType('The ' + evoRes.data.genera[7].genus);
-
-      // if (res.data.types.length === 2) {
-      //   setType(
-      //     (
-      //       res.data.types[0].type.name +
-      //       '/' +
-      //       res.data.types[1].type.name
-      //     ).toUpperCase()
-      //   );
-      // } else {
-      //   setType(res.data.types[0].type.name.toUpperCase());
-      // }
-
       setStateFind(res.data.name);
       setNumValue(res.data.id);
     }
