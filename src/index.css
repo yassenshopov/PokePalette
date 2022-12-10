@@ -684,25 +684,30 @@ FaSun {
   10% {
     filter: brightness(1) contrast(1.2) saturate(1.2)
       drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform: rotate(10deg);
+    transform: rotate(5deg);
+    transform-origin: 0% 20%;
   }
   20% {
     filter: brightness(1.3) contrast(1.2) saturate(1.2)
       drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform: rotate(-10deg);
+    transform: rotate(-5deg);
+    transform-origin: 0% 0%;
   }
   30% {
     filter: brightness(1.8) contrast(1.2) saturate(1.2)
       drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform: rotate(10deg);
+    transform-origin: 0% 20%;
+    transform: rotate(5deg);
   }
   40% {
     filter: brightness(2) drop-shadow(0 0 100px var(--color1)) blur(15px);
-    transform: rotate(-10deg);
+    transform: rotate(-5deg);
+    transform-origin: 0% 0%;
   }
   50% {
     filter: brightness(30) drop-shadow(0 0 100px var(--color1)) blur(15px);
-    transform: rotate(10deg);
+    transform-origin: 0% 20%;
+    transform: rotate(5deg);
   }
   60% {
     filter: brightness(100) drop-shadow(0 0 10px var(--color1)) blur(50px);

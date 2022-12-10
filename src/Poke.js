@@ -199,18 +199,13 @@ export default function Poke() {
                 // This check eliminates single-stage mons
         
                 evoData = evoChain.data.chain.evolves_to[0].species.name;
-        
-                console.log(nameValue, evoData, evoChain.data.chain.species.name);
-        
+                
                 // This check determines the length of the evolution family
                 if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
                   stageNumber = 2;
                 } else {
                   stageNumber = 3;
-                }
-        
-                console.log(stageNumber);
-        
+                }      
                 switch (stageNumber) {
                   case 2:
                     if (nameValue != evoChain.data.chain.species.name) {
@@ -226,7 +221,6 @@ export default function Poke() {
                         randInt = Math.floor(
                           Math.random() * evoChain.data.chain.evolves_to.length
                         );
-                        console.log(randInt);
                         evoData = evoChain.data.chain.evolves_to[randInt].species.name;
                       }
                       evoData = evoChain.data.chain.evolves_to[randInt].species.name;
@@ -249,20 +243,18 @@ export default function Poke() {
                         break;
                       }
                     } else if (
-                      nameValue == evoData &&
-                      nameValue != evoChain.data.chain.species.name
+                      (nameValue == evoData &&
+                      nameValue != evoChain.data.chain.species.name)
                     ) {
                       console.log('This mon is the middle stage of a 3-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
-                      console.log(evoChain.data.chain.evolves_to[0]);
                       let randInt = 0;
                       if (evoChain.data.chain.evolves_to[0].evolves_to.length > 1) {
                         randInt = Math.floor(
                           Math.random() *
                             evoChain.data.chain.evolves_to[0].evolves_to.length
                         );
-                        console.log(randInt);
                         evoData =
                           evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
                             .name;
@@ -270,7 +262,11 @@ export default function Poke() {
                       evoData =
                         evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
                           .name;
-                    } else {
+                    } else if (nameValue == 'cascoon') {
+                      evoBtnCheck = true;
+                      evoData = 'dustox';
+                    }
+                    else {
                       console.log('This mon is the 1st stage of a 3-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
@@ -294,7 +290,6 @@ export default function Poke() {
                   typeof document.getElementById('evoBtn') != 'undefined' &&
                   document.getElementById('evoBtn') != null
                 ) {
-                  console.log('evoBtn was removed.');
                   document.getElementById('evoBtn').remove();
                 }
               }
@@ -306,11 +301,7 @@ export default function Poke() {
                 evoBtn.id = 'evoBtn';
         
                 evoBtn.onclick = () => {
-                  console.log(document.getElementById("artCanvas").classList);
-                  // Check for branch-evos
-        
-                  console.log(evoData);
-  
+                  // Check for branch-evos  
                   document.getElementById("artCanvas").classList.toggle("shine");
                   setTimeout(() => {
                     document.getElementById("artCanvas").classList.toggle("shine");
