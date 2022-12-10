@@ -2,14 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { BsArrowDownSquareFill, BsArrowUpSquareFill } from 'react-icons/bs';
 import axios from 'axios';
 
-import wyrdeer from '../src/img/wyrdeer.png';
-import kleavor from '../src/img/kleavor.png';
-import ursaluna from '../src/img/ursaluna.png';
-import basculegion_male from '../src/img/basculegion.png';
-import sneasler from '../src/img/sneasler.png';
-import overqwil from '../src/img/overqwil.png';
-import enamorus from '../src/img/enamorus.png';
-
 let shiny = false;
 let randomSwitch = false;
 
@@ -46,7 +38,7 @@ export default function Poke() {
   let [name, setname] = useState('');
   let [Img, setImg] = useState('');
   let [artURL, setURL] = useState(
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/853.png'
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png'
   );
   const [Type, setType] = useState('');
   let megaEvoRes;
@@ -321,46 +313,19 @@ export default function Poke() {
           }
     
         }
-        
-        if (res.data.id >= 899 && res.data.id <= 905) {
-          switch (res.data.id) {
-            case 899:
-              setImg(wyrdeer);
-              break;
-            case 900:
-              setImg(kleavor);
-              break;
-            case 901:
-              setImg(ursaluna);
-              break;
-            case 902:
-              setImg(basculegion_male);
-              break;
-            case 903:
-              setImg(sneasler);
-              break;
-            case 904:
-              setImg(overqwil);
-              break;
-            case 905:
-              setImg(enamorus);
-              break;
+
+        if (megaEvoBtnToggle) {
+          if (shiny === true) {
+            setImg(megaEvoRes.data.sprites.front_shiny);
+          } else {
+            setImg(megaEvoRes.data.sprites.front_default);
           }
         } else {
-          if (megaEvoBtnToggle) {
-            if (shiny === true) {
-              setImg(megaEvoRes.data.sprites.front_shiny);
-            } else {
-              setImg(megaEvoRes.data.sprites.front_default);
-            }
+          if (shiny === true) {
+            setImg(res.data.sprites.front_shiny);
           } else {
-            if (shiny === true) {
-              setImg(res.data.sprites.front_shiny);
-            } else {
-              setImg(res.data.sprites.front_default);
-            }
+            setImg(res.data.sprites.front_default);
           }
-
         }
         setURL(res.data.sprites.other['official-artwork'].front_default);
         setType('The ' + evoRes.data.genera[7].genus);
@@ -440,22 +405,26 @@ export default function Poke() {
       delete counts['#181818'];
       delete counts['#181810'];
       delete counts['#292929'];
+      delete counts['#0f110d'];
+      delete counts['#e8e8e8'];
+      delete counts['#020501'];
+      delete counts['#050505'];
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
 
       let bgStr =
-        'linear-gradient(0deg,' +
+        'linear-gradient(-5deg,' +
         sortedScheme[2][0] +
         ' 0%,' +
         sortedScheme[2][0] +
-        ' 25%,' +
+        ' 20%,' +
         sortedScheme[1][0] +
-        ' 25%,' +
+        ' 20%,' +
         sortedScheme[1][0] +
-        ' 75%,' +
+        ' 80%,' +
         sortedScheme[0][0] +
-        ' 75%,' +
+        ' 80%,' +
         sortedScheme[0][0] +
         ' 100%)';
       container.style.background = bgStr;
