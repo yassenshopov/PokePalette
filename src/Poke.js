@@ -10,7 +10,7 @@ let artURL;
 
 export default function Poke() {
   let [nameValue, setStateFind] = useState('wooper');
-  let [numValue, setNumValue] = useState(0);
+  let [numValue, setNumValue] = useState(81);
 
   const NumChanger = (e) => {
     setNumValue(e.target.value);
@@ -35,7 +35,6 @@ export default function Poke() {
     setStateFind(random);
   };
 
-  let [name, setname] = useState('');
   let [Img, setImg] = useState('');
   let [artURL, setURL] = useState(
     'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png'
