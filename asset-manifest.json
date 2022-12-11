@@ -1,16 +1,16 @@
 {
   "files": {
-    "main.css": "/PokePalette/static/css/main.88048fff.css",
-    "main.js": "/PokePalette/static/js/main.4c7bfda0.js",
+    "main.css": "/PokePalette/static/css/main.ed335529.css",
+    "main.js": "/PokePalette/static/js/main.259dce22.js",
     "static/media/bgLight.webp": "/PokePalette/static/media/bgLight.93d7348012e0e7270c51.webp",
     "static/media/Carnac-Light.otf": "/PokePalette/static/media/Carnac-Light.8fa7584e8b1431e1665a.otf",
     "static/media/bgDark.webp": "/PokePalette/static/media/bgDark.3e9fed29ceecf9fc67ef.webp",
     "index.html": "/PokePalette/index.html",
-    "main.88048fff.css.map": "/PokePalette/static/css/main.88048fff.css.map",
-    "main.4c7bfda0.js.map": "/PokePalette/static/js/main.4c7bfda0.js.map"
+    "main.ed335529.css.map": "/PokePalette/static/css/main.ed335529.css.map",
+    "main.259dce22.js.map": "/PokePalette/static/js/main.259dce22.js.map"
   },
   "entrypoints": [
-    "static/css/main.88048fff.css",
-    "static/js/main.4c7bfda0.js"
+    "static/css/main.ed335529.css",
+    "static/js/main.259dce22.js"
   ]
 }
