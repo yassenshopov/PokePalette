@@ -97,7 +97,66 @@ export default function Poke() {
           'lopunny',
           'gallade',
           'audino',
-          'diancie'
+          'diancie',
+        ];
+        let alolaList = [
+          'rattata',
+          'raticate',
+          'raichu',
+          'sandshrew',
+          'sandslash',
+          'vulpix',
+          'ninetales',
+          'diglett',
+          'dugtrio',
+          'meowth',
+          'persian',
+          'geodude',
+          'graveler',
+          'golem',
+          'grimer',
+          'muk',
+          'exeggutor',
+          'marowak',
+        ];
+        let galarList = [
+          'meowth',
+          'ponyta',
+          'rapidash',
+          'slowpoke',
+          'slowbro',
+          'farfetchd',
+          'weezing',
+          'mr-mime',
+          'articuno',
+          'zapdos',
+          'moltres',
+          'slowking',
+          'corsola',
+          'zigzagoon',
+          'linoone',
+          'darumaka',
+          'darmanitan',
+          'yamask',
+          'stunfisk',
+        ];
+        let hisuiList = [
+          'growlithe',
+          'arcanine',
+          'voltorb',
+          'electrode',
+          'typhlosion',
+          'qwilfish',
+          'sneasel',
+          'samurott',
+          'lilligant',
+          'zorua',
+          'zoroark',
+          'braviary',
+          'sliggoo',
+          'goodra',
+          'avalugg',
+          'decidueye',
         ];
 
         // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
@@ -108,16 +167,80 @@ export default function Poke() {
         ) {
           document.getElementById('evoBtn').remove();
         }
+
+        if (
+          typeof document.getElementById('alolaBtn') != 'undefined' &&
+          document.getElementById('alolaBtn') != null
+        ) {
+          document.getElementById('alolaBtn').remove();
+        }
+
         let evoRes;
         try {
           evoRes = await axios.get(
             `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
           );
-        } catch(err) {
-          console.log(err)
+        } catch (err) {
+          console.log(err);
         }
         console.log(evoRes);
         let evoData;
+
+        if (alolaList.includes(nameValue)) {
+          let alolaBtn = document.createElement('button');
+          alolaBtn.innerHTML = 'Alola Form ☀️';
+          alolaBtn.id = 'alolaBtn';
+
+          let alolaBtnToggle = true;
+          alolaBtn.onclick = async () => {
+            if (alolaBtnToggle) {
+              let alola = nameValue + '-alola';
+              let alolaRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${alola}`
+              );
+
+              console.log(alolaRes);
+
+              if (shiny === true) {
+                setImg(alolaRes.data.sprites.front_shiny);
+              } else {
+                setImg(alolaRes.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('shine');
+              setTimeout(() => {
+                document.getElementById('artCanvas').classList.toggle('shine');
+              }, 6000);
+              setTimeout(() => {
+                setURL(
+                  alolaRes.data.sprites.other['official-artwork']
+                    .front_default
+                );
+              }, 3000);
+              alolaBtn.innerHTML = '↩️';
+            } else {
+              if (shiny === true) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('deshine');
+              setTimeout(() => {
+                document
+                  .getElementById('artCanvas')
+                  .classList.toggle('deshine');
+              }, 2000);
+              setTimeout(() => {
+                setURL(
+                  res.data.sprites.other['official-artwork'].front_default
+                );
+              }, 500);
+              alolaBtn.innerHTML = 'Alola Form ☀️';
+            }
+            alolaBtnToggle = !alolaBtnToggle;
+            console.log(alolaBtn);
+          };
+          document.getElementById('buttons').appendChild(alolaBtn);
+        }
 
         if (megaEvoList.includes(nameValue)) {
           evoBtnCheck = false;
@@ -130,74 +253,77 @@ export default function Poke() {
           megaEvoBtn.onclick = async () => {
             if (megaEvoBtnToggle) {
               let megaEvo;
-
-              let megaXY = ["x", "y"]
-              if (nameValue=="charizard" || nameValue=="mewtwo") {
-                let randInt = Math.floor(
-                  Math.random() * 2
-                );
-                megaEvo = nameValue + "-mega-" + megaXY[randInt] 
+              let megaXY = ['x', 'y'];
+              if (nameValue == 'charizard' || nameValue == 'mewtwo') {
+                let randInt = Math.floor(Math.random() * 2);
+                megaEvo = nameValue + '-mega-' + megaXY[randInt];
               } else {
-                megaEvo = nameValue + "-mega" 
+                megaEvo = nameValue + '-mega';
               }
-      
+
               megaEvoRes = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${megaEvo}`
               );
 
-              console.log(megaEvoRes)
+              console.log(megaEvoRes);
 
               if (shiny === true) {
                 setImg(megaEvoRes.data.sprites.front_shiny);
               } else {
                 setImg(megaEvoRes.data.sprites.front_default);
               }
-              document.getElementById("artCanvas").classList.toggle("shine");
+              document.getElementById('artCanvas').classList.toggle('shine');
               setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("shine");
-              }, 6000) 
+                document.getElementById('artCanvas').classList.toggle('shine');
+              }, 6000);
               setTimeout(() => {
-                setURL(megaEvoRes.data.sprites.other['official-artwork'].front_default);
-              }, 3000)
-              megaEvoBtn.innerHTML = "↩️";
+                setURL(
+                  megaEvoRes.data.sprites.other['official-artwork']
+                    .front_default
+                );
+              }, 3000);
+              megaEvoBtn.innerHTML = '↩️';
             } else {
               if (shiny === true) {
                 setImg(res.data.sprites.front_shiny);
               } else {
                 setImg(res.data.sprites.front_default);
               }
-              document.getElementById("artCanvas").classList.toggle("deshine");
+              document.getElementById('artCanvas').classList.toggle('deshine');
               setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("deshine");
-              }, 2000) 
+                document
+                  .getElementById('artCanvas')
+                  .classList.toggle('deshine');
+              }, 2000);
               setTimeout(() => {
-                setURL(res.data.sprites.other['official-artwork'].front_default);
-              }, 500)    
-              megaEvoBtn.innerHTML = "Mega Evolve! ✨";
+                setURL(
+                  res.data.sprites.other['official-artwork'].front_default
+                );
+              }, 500);
+              megaEvoBtn.innerHTML = 'Mega Evolve! ✨';
             }
             megaEvoBtnToggle = !megaEvoBtnToggle;
-            console.log(megaEvoBtn)
+            console.log(megaEvoBtn);
           };
           document.getElementById('buttons').appendChild(megaEvoBtn);
-
         } else {
           try {
             try {
               let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-            
+
               let stageNumber = 1;
-  
+
               if (evoChain.data.chain.evolves_to.length != 0) {
                 // This check eliminates single-stage mons
-        
+
                 evoData = evoChain.data.chain.evolves_to[0].species.name;
-                
+
                 // This check determines the length of the evolution family
                 if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
                   stageNumber = 2;
                 } else {
                   stageNumber = 3;
-                }      
+                }
                 switch (stageNumber) {
                   case 2:
                     if (nameValue != evoChain.data.chain.species.name) {
@@ -213,9 +339,11 @@ export default function Poke() {
                         randInt = Math.floor(
                           Math.random() * evoChain.data.chain.evolves_to.length
                         );
-                        evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                        evoData =
+                          evoChain.data.chain.evolves_to[randInt].species.name;
                       }
-                      evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                      evoData =
+                        evoChain.data.chain.evolves_to[randInt].species.name;
                     }
                     break;
                   case 3:
@@ -228,37 +356,39 @@ export default function Poke() {
                       console.log('This mon is the final stage of a 3-stager');
                       evoBtnCheck = false;
                       if (
-                        typeof document.getElementById('evoBtn') != 'undefined' &&
+                        typeof document.getElementById('evoBtn') !=
+                          'undefined' &&
                         document.getElementById('evoBtn') != null
                       ) {
                         document.getElementById('evoBtn').remove();
                         break;
                       }
                     } else if (
-                      (nameValue == evoData &&
-                      nameValue != evoChain.data.chain.species.name)
+                      nameValue == evoData &&
+                      nameValue != evoChain.data.chain.species.name
                     ) {
                       console.log('This mon is the middle stage of a 3-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
                       let randInt = 0;
-                      if (evoChain.data.chain.evolves_to[0].evolves_to.length > 1) {
+                      if (
+                        evoChain.data.chain.evolves_to[0].evolves_to.length > 1
+                      ) {
                         randInt = Math.floor(
                           Math.random() *
                             evoChain.data.chain.evolves_to[0].evolves_to.length
                         );
                         evoData =
-                          evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
-                            .name;
+                          evoChain.data.chain.evolves_to[0].evolves_to[randInt]
+                            .species.name;
                       }
                       evoData =
-                        evoChain.data.chain.evolves_to[0].evolves_to[randInt].species
-                          .name;
+                        evoChain.data.chain.evolves_to[0].evolves_to[randInt]
+                          .species.name;
                     } else if (nameValue == 'cascoon') {
                       evoBtnCheck = true;
                       evoData = 'dustox';
-                    }
-                    else {
+                    } else {
                       console.log('This mon is the 1st stage of a 3-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
@@ -269,9 +399,11 @@ export default function Poke() {
                           Math.random() * evoChain.data.chain.evolves_to.length
                         );
                         console.log(randInt);
-                        evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                        evoData =
+                          evoChain.data.chain.evolves_to[randInt].species.name;
                       }
-                      evoData = evoChain.data.chain.evolves_to[randInt].species.name;
+                      evoData =
+                        evoChain.data.chain.evolves_to[randInt].species.name;
                     }
                     break;
                 }
@@ -285,35 +417,39 @@ export default function Poke() {
                   document.getElementById('evoBtn').remove();
                 }
               }
-              } catch(err) {
-                // console.log(err)
-                evoData = await axios.get(evoRes.data.evolves_from_species.name);
-                evoBtnCheck = false;
-              }
-        
-              if (evoBtnCheck && document.getElementById("buttons").children.length < 3) {
-                // Only create evoBtn if all conditions are right
-                let evoBtn = document.createElement('button');
-                evoBtn.innerHTML = 'Evolve!';
-                evoBtn.id = 'evoBtn';
-        
-                evoBtn.onclick = () => {
-                  // Check for branch-evos  
-                  document.getElementById("artCanvas").classList.toggle("shine");
-                  setTimeout(() => {
-                    document.getElementById("artCanvas").classList.toggle("shine");
-                  }, 6000)
-                  
-                  setTimeout(() => {
-                    setStateFind(evoData);
-                  }, 3000)
-                };
-                document.getElementById('buttons').appendChild(evoBtn);
-              }
-          } catch(err) {
-            console.log(err)
+            } catch (err) {
+              // console.log(err)
+              evoData = await axios.get(evoRes.data.evolves_from_species.name);
+              evoBtnCheck = false;
+            }
+
+            if (
+              evoBtnCheck &&
+              document.getElementById('buttons').children.length < 3
+            ) {
+              // Only create evoBtn if all conditions are right
+              let evoBtn = document.createElement('button');
+              evoBtn.innerHTML = 'Evolve!';
+              evoBtn.id = 'evoBtn';
+
+              evoBtn.onclick = () => {
+                // Check for branch-evos
+                document.getElementById('artCanvas').classList.toggle('shine');
+                setTimeout(() => {
+                  document
+                    .getElementById('artCanvas')
+                    .classList.toggle('shine');
+                }, 6000);
+
+                setTimeout(() => {
+                  setStateFind(evoData);
+                }, 3000);
+              };
+              document.getElementById('buttons').appendChild(evoBtn);
+            }
+          } catch (err) {
+            console.log(err);
           }
-    
         }
 
         if (megaEvoBtnToggle) {
@@ -337,9 +473,8 @@ export default function Poke() {
         }
         setStateFind(res.data.name);
         setNumValue(res.data.id);
-
-      } catch(err) {
-        console.log(err)
+      } catch (err) {
+        console.log(err);
       }
     }
 
@@ -467,7 +602,6 @@ export default function Poke() {
       root.style.setProperty('--color4', color4);
 
       root.style.setProperty('--artURL', fullArtURL);
-
     };
   });
 
