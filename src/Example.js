@@ -15,12 +15,12 @@ export default function Example() {
         <section id="section">
           <h1>Your website - inspired by colours</h1>
           <p>
-            [Built with <strong>React</strong>{' '}
-            <FaReact id="faReact" /> and the <strong>PokeAPI</strong> <MdCatchingPokemon />]
-          </p>
-          <p>
             This website allows you to enter a Pokemon's name (or simply its number in the
             Pokedex), and its top 3 colours will be extracted.
+          </p>
+          <p>
+            [Built with <strong>React</strong>{' '}
+            <FaReact id="faReact" /> and the <strong>PokeAPI</strong> <MdCatchingPokemon />]
           </p>
           <div>
             <a id="scrollDown" href='#posts'>Scroll down ⬇</a>

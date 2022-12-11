@@ -330,7 +330,11 @@ export default function Poke() {
           }
         }
         setURL(res.data.sprites.other['official-artwork'].front_default);
-        setType('The ' + evoRes.data.genera[7].genus);
+        try {
+          setType('The ' + evoRes.data.genera[7].genus);
+        } catch {
+          setType('The ' + evoRes.data.genera[4].genus);
+        }
         setStateFind(res.data.name);
         setNumValue(res.data.id);
 
@@ -508,7 +512,7 @@ export default function Poke() {
       <div id="numLine">
         <button class="noSelect" onClick={decrease}>
           <p>
-            <BsArrowDownSquareFill size={25} />
+            <BsArrowDownSquareFill size={30} />
           </p>
         </button>
         <input
@@ -522,7 +526,7 @@ export default function Poke() {
         />
         <button class="noSelect" onClick={increase}>
           <p>
-            <BsArrowUpSquareFill size={25} />
+            <BsArrowUpSquareFill size={30} />
           </p>
         </button>
       </div>

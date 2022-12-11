@@ -74,6 +74,7 @@ body::-webkit-scrollbar {
   align-items: center;
   width: 100%;
   height: 100vh;
+  gap: 2vh;
   font-family: var(--font1);
   border-right: 4px solid var(--color1);
 }
@@ -87,7 +88,7 @@ body::-webkit-scrollbar {
   border: 0 solid #121212;
   background-color: var(--color1);
   color: var(--color5);
-  font-size: 20px;
+  font-size: 1.6vw;
   padding: 5px 20px 5px 20px;
   margin: 5px 0 0px 0;
   border: 1px solid var(--hsp3);
@@ -98,6 +99,7 @@ body::-webkit-scrollbar {
 }
 
 .pokeCard .type {
+  font-size: 1.2vw;
   color: var(--hsp3);
 }
 
@@ -105,6 +107,8 @@ body::-webkit-scrollbar {
   border-radius: 15px;
   padding: 5px;
   margin-bottom: 2px;
+  /* width: 100px;
+  height: 100px; */
 }
 
 .pokeCard #buttons {
@@ -117,7 +121,7 @@ body::-webkit-scrollbar {
 
 .pokeCard #buttons > * {
   padding: 10px;
-  font-size: 18px;
+  font-size: 1.5vw;
   font-family: var(--font1);
   background-color: var(--color1);
   color: var(--color5);
@@ -137,7 +141,7 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  /* align-items: center; */
 }
 
 .pokeCard #numLine input::-webkit-outer-spin-button,
@@ -148,7 +152,7 @@ body::-webkit-scrollbar {
 
 .pokeCard #numLine input {
   border-radius: 5px;
-  width: 50px;
+  width: fit-content;
   -moz-appearance: textfield;
 }
 
@@ -397,10 +401,11 @@ FaSun {
   justify-content: center;
   align-items: center;
   transition: all 200ms ease-in-out;
+  cursor: pointer;
 }
 
 #example #cards > div:active {
-  opacity: 0.8;
+  animation: shine 1s ease-in-out;
 }
 
 #example #cards div p {
@@ -441,6 +446,7 @@ FaSun {
   background-color: var(--color2);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
+  font-size: 1vw;
   /* height: 80px; */
   /* opacity: 0.3; */
 }
@@ -455,12 +461,20 @@ FaSun {
   }
 
   .pokeCard {
-    height: 90vh;
+    height: 80vh;
     border: 0px solid #121212;
+    gap: 0vh;
+    padding: 10vw;
+    width: 80vw;
   }
 
   .pokeCard #buttons {
     margin-top: 20px;
+  }
+
+  .pokeCard input,
+  .pokeCard #buttons button {
+    font-size: 6vw;
   }
 
   #example,
@@ -470,6 +484,10 @@ FaSun {
     margin: 0;
     left: 0;
     border: 0px solid #121212;
+  }
+
+  .pokeCard .type {
+    font-size: 6vw;
   }
 
   #example {
@@ -496,22 +514,28 @@ FaSun {
     justify-content: center;
     text-align: center;
     margin: 0;
-    padding: 50px 0 50px 0;
+    padding: 50px 0 100px 0;
   }
 
   #example main h1 {
     font-size: 10vw;
   }
 
+  #example main p,
+  #example button,
+  #example #scrollDown {
+    font-size: 5vw;
+  }
+
   #example main h1,
   #example main p {
     width: 90%;
-    margin: 0 0 20px 0;
+    margin: 0 0 50px 0;
   }
 
   #example main #backdrop {
     width: 100%;
-    height: 150vh;
+    height: 100vh;
     padding: 0;
     left: 0;
     top: 0;
@@ -523,12 +547,12 @@ FaSun {
     /* display: none; */
     width: 90vw;
 
-    margin: 0px 10% 0px 10%;
+    margin: 40px 10% 0px 10%;
     height: 90vw;
     /* padding: 10%; */
   }
 
-  #example #cards {
+  #example main #example #cards {
     gap: 20px;
   }
 
@@ -543,7 +567,7 @@ FaSun {
 
   footer * {
     text-align: center;
-    font-size: 18px;
-    width: 60%;
+    font-size: 22px;
+    width: 50%;
   }
 }
