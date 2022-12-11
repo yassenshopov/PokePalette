@@ -1,7 +1,7 @@
 import { FaReact, FaMoon, FaSun } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
-import bgDark from "../src/img/bgDark.jpg"
-import bgLight from "../src/img/bgLight.jpg"
+import bgDark from "../src/img/bgDark.webp"
+import bgLight from "../src/img/bgLight.webp"
 // let bg = bgDark;
 
 let darkTheme = true;
