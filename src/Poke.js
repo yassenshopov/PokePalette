@@ -116,6 +116,8 @@ export default function Poke() {
         } catch(err) {
           console.log(err)
         }
+        console.log(evoRes);
+        let evoData;
 
         if (megaEvoList.includes(nameValue)) {
           evoBtnCheck = false;
@@ -179,12 +181,11 @@ export default function Poke() {
           document.getElementById('buttons').appendChild(megaEvoBtn);
 
         } else {
-
           try {
             try {
               let evoChain = await axios.get(evoRes.data.evolution_chain.url);
+            
               let stageNumber = 1;
-              let evoData;
   
               if (evoChain.data.chain.evolves_to.length != 0) {
                 // This check eliminates single-stage mons
@@ -284,6 +285,11 @@ export default function Poke() {
                   document.getElementById('evoBtn').remove();
                 }
               }
+              } catch(err) {
+                // console.log(err)
+                evoData = await axios.get(evoRes.data.evolves_from_species.name);
+                evoBtnCheck = false;
+              }
         
               if (evoBtnCheck && document.getElementById("buttons").children.length < 3) {
                 // Only create evoBtn if all conditions are right
@@ -304,9 +310,6 @@ export default function Poke() {
                 };
                 document.getElementById('buttons').appendChild(evoBtn);
               }
-            } catch(err) {
-              console.log(err)
-            }
           } catch(err) {
             console.log(err)
           }

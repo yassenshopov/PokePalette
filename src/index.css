@@ -110,6 +110,8 @@ body::-webkit-scrollbar {
 .pokeCard #buttons {
   display: flex;
   flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 20px;
 }
 
@@ -191,22 +193,18 @@ body::-webkit-scrollbar {
 }
 
 #example h1 {
-  font-size: 40px;
+  font-size: 3vw;
 }
 
 #example main p {
-  font-size: 16px;
+  font-size: 1.4vw;
   margin-bottom: 30px;
   width: 80%;
 }
 
-#example #faReact {
-  display: inline;
-}
-
 #example button {
   padding: 15px 20px 15px 20px;
-  font-size: 17px;
+  font-size: 1vw;
   margin-top: 50px;
   margin-right: 20px;
   text-transform: uppercase;
@@ -227,7 +225,7 @@ body::-webkit-scrollbar {
   color: var(--hsp4);
   background-color: var(--color4);
   padding: 15px 20px 15px 20px;
-  font-size: 17px;
+  font-size: 1vw;
   margin-top: 50px;
   margin-right: 20px;
   border-radius: 5px;
@@ -256,7 +254,7 @@ FaSun {
   background-color: var(--color2);
   mix-blend-mode: color;
   opacity: 0.7;
-  width: 100%;
+  width: 70vw;
   height: 90vh;
   position: absolute;
   left: 30.2vw;
@@ -278,7 +276,7 @@ FaSun {
 }
 
 #example main section {
-  width: 50%;
+  width: 35vw;
   border-radius: 16px;
   z-index: 1;
   color: var(--color1);
@@ -289,8 +287,8 @@ FaSun {
   background-position: center;
   background-size: 100% auto;
   background-repeat: no-repeat;
-  width: 50%;
-  height: 400px;
+  width: 35vw;
+  height: 35vw;
   filter: drop-shadow(0 0 20px var(--color5));
   z-index: 9;
   /* padding: 0 50px 0 50px; */
@@ -501,6 +499,10 @@ FaSun {
     padding: 50px 0 50px 0;
   }
 
+  #example main h1 {
+    font-size: 10vw;
+  }
+
   #example main h1,
   #example main p {
     width: 90%;
@@ -519,9 +521,10 @@ FaSun {
 
   #example main #artCanvas {
     /* display: none; */
-    width: 80%;
-    margin: 60px 10% 0px 10%;
-    height: 300px;
+    width: 90vw;
+
+    margin: 0px 10% 0px 10%;
+    height: 90vw;
     /* padding: 10%; */
   }
 
