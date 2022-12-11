@@ -53,7 +53,7 @@ body::-webkit-scrollbar {
   flex-direction: row;
   width: 100vw;
   margin: 0px;
-  transition: all 0.3s ease-in-out;
+  /* transition: all 0.3s ease-in-out; */
 }
 
 .example * {
@@ -217,7 +217,7 @@ body::-webkit-scrollbar {
   border: 0px solid #121212;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  transition: all 400ms ease-in-out;
+  /* transition: all 400ms ease-in-out; */
   font-family: var(--font1);
 }
 

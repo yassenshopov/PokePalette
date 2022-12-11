@@ -175,6 +175,20 @@ export default function Poke() {
           document.getElementById('alolaBtn').remove();
         }
 
+        if (
+          typeof document.getElementById('galarBtn') != 'undefined' &&
+          document.getElementById('galarBtn') != null
+        ) {
+          document.getElementById('galarBtn').remove();
+        }
+
+        if (
+          typeof document.getElementById('hisuiBtn') != 'undefined' &&
+          document.getElementById('hisuiBtn') != null
+        ) {
+          document.getElementById('hisuiBtn').remove();
+        }
+
         let evoRes;
         try {
           evoRes = await axios.get(
@@ -240,6 +254,118 @@ export default function Poke() {
             console.log(alolaBtn);
           };
           document.getElementById('buttons').appendChild(alolaBtn);
+        }
+
+        if (galarList.includes(nameValue)) {
+          let galarBtn = document.createElement('button');
+          galarBtn.innerHTML = 'Galar Form 🏙️';
+          galarBtn.id = 'galarBtn';
+
+          let galarBtnToggle = true;
+          galarBtn.onclick = async () => {
+            if (galarBtnToggle) {
+              let galar = nameValue + '-galar';
+              let galarRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${galar}`
+              );
+
+              console.log(galarRes);
+
+              if (shiny === true) {
+                setImg(galarRes.data.sprites.front_shiny);
+              } else {
+                setImg(galarRes.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('shine');
+              setTimeout(() => {
+                document.getElementById('artCanvas').classList.toggle('shine');
+              }, 6000);
+              setTimeout(() => {
+                setURL(
+                  galarRes.data.sprites.other['official-artwork']
+                    .front_default
+                );
+              }, 3000);
+              galarBtn.innerHTML = '↩️';
+            } else {
+              if (shiny === true) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('deshine');
+              setTimeout(() => {
+                document
+                  .getElementById('artCanvas')
+                  .classList.toggle('deshine');
+              }, 2000);
+              setTimeout(() => {
+                setURL(
+                  res.data.sprites.other['official-artwork'].front_default
+                );
+              }, 500);
+              galarBtn.innerHTML = 'Galar Form 🏙️';
+            }
+            galarBtnToggle = !galarBtnToggle;
+            console.log(galarBtn);
+          };
+          document.getElementById('buttons').appendChild(galarBtn);
+        }
+
+        if (hisuiList.includes(nameValue)) {
+          let hisuiBtn = document.createElement('button');
+          hisuiBtn.innerHTML = 'Hisui Form ⛰️';
+          hisuiBtn.id = 'hisuiBtn';
+
+          let hisuiBtnToggle = true;
+          hisuiBtn.onclick = async () => {
+            if (hisuiBtnToggle) {
+              let hisui = nameValue + '-hisui';
+              let hisuiRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${hisui}`
+              );
+
+              console.log(hisuiRes);
+
+              if (shiny === true) {
+                setImg(hisuiRes.data.sprites.front_shiny);
+              } else {
+                setImg(hisuiRes.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('shine');
+              setTimeout(() => {
+                document.getElementById('artCanvas').classList.toggle('shine');
+              }, 6000);
+              setTimeout(() => {
+                setURL(
+                  hisuiRes.data.sprites.other['official-artwork']
+                    .front_default
+                );
+              }, 3000);
+              hisuiBtn.innerHTML = '↩️';
+            } else {
+              if (shiny === true) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('deshine');
+              setTimeout(() => {
+                document
+                  .getElementById('artCanvas')
+                  .classList.toggle('deshine');
+              }, 2000);
+              setTimeout(() => {
+                setURL(
+                  res.data.sprites.other['official-artwork'].front_default
+                );
+              }, 500);
+              hisuiBtn.innerHTML = 'Hisui Form ⛰️';
+            }
+            hisuiBtnToggle = !hisuiBtnToggle;
+            console.log(hisuiBtn);
+          };
+          document.getElementById('buttons').appendChild(hisuiBtn);
         }
 
         if (megaEvoList.includes(nameValue)) {
@@ -423,10 +549,7 @@ export default function Poke() {
               evoBtnCheck = false;
             }
 
-            if (
-              evoBtnCheck &&
-              document.getElementById('buttons').children.length < 3
-            ) {
+            if (evoBtnCheck) {
               // Only create evoBtn if all conditions are right
               let evoBtn = document.createElement('button');
               evoBtn.innerHTML = 'Evolve!';
