@@ -15,6 +15,7 @@
 @font-face {
   font-family: carnacLight;
   src: url(fonts/Carnac-Light.otf);
+  font-display: swap;
 }
 
 html {
@@ -135,13 +136,23 @@ body::-webkit-scrollbar {
   text-align: center;
 }
 
+.labelInput {
+  display: flex;
+  flex-direction: column;
+  padding-top: 0px;
+}
+
+.labelInput label {
+  color: var(--hsp3);
+}
+
 .pokeCard #numLine {
   padding: 0;
   margin: 5px 0 5px 0;
   display: flex;
   flex-direction: row;
-  justify-content: center;
-  /* align-items: center; */
+  align-items: flex-end;
+  /* align-items: left; */
 }
 
 .pokeCard #numLine input::-webkit-outer-spin-button,
@@ -490,6 +501,11 @@ FaSun {
   .pokeCard #buttons button {
     font-size: 6vw;
   }
+
+  .labelInput {
+    padding-top: 20px;
+  }
+  
 
   #example,
   .poke {

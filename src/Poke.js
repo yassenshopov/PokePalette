@@ -197,7 +197,7 @@ export default function Poke() {
         } catch (err) {
           console.log(err);
         }
-        console.log(evoRes);
+
         let evoData;
 
         if (alolaList.includes(nameValue)) {
@@ -212,8 +212,6 @@ export default function Poke() {
               let alolaRes = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${alola}`
               );
-
-              console.log(alolaRes);
 
               if (shiny === true) {
                 setImg(alolaRes.data.sprites.front_shiny);
@@ -251,7 +249,6 @@ export default function Poke() {
               alolaBtn.innerHTML = 'Alola Form ☀️';
             }
             alolaBtnToggle = !alolaBtnToggle;
-            console.log(alolaBtn);
           };
           document.getElementById('buttons').appendChild(alolaBtn);
         }
@@ -268,8 +265,6 @@ export default function Poke() {
               let galarRes = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${galar}`
               );
-
-              console.log(galarRes);
 
               if (shiny === true) {
                 setImg(galarRes.data.sprites.front_shiny);
@@ -307,7 +302,6 @@ export default function Poke() {
               galarBtn.innerHTML = 'Galar Form 🏙️';
             }
             galarBtnToggle = !galarBtnToggle;
-            console.log(galarBtn);
           };
           document.getElementById('buttons').appendChild(galarBtn);
         }
@@ -324,8 +318,6 @@ export default function Poke() {
               let hisuiRes = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${hisui}`
               );
-
-              console.log(hisuiRes);
 
               if (shiny === true) {
                 setImg(hisuiRes.data.sprites.front_shiny);
@@ -363,7 +355,6 @@ export default function Poke() {
               hisuiBtn.innerHTML = 'Hisui Form ⛰️';
             }
             hisuiBtnToggle = !hisuiBtnToggle;
-            console.log(hisuiBtn);
           };
           document.getElementById('buttons').appendChild(hisuiBtn);
         }
@@ -390,8 +381,6 @@ export default function Poke() {
               megaEvoRes = await axios.get(
                 `https://pokeapi.co/api/v2/pokemon/${megaEvo}`
               );
-
-              console.log(megaEvoRes);
 
               if (shiny === true) {
                 setImg(megaEvoRes.data.sprites.front_shiny);
@@ -429,7 +418,6 @@ export default function Poke() {
               megaEvoBtn.innerHTML = 'Mega Evolve! ✨';
             }
             megaEvoBtnToggle = !megaEvoBtnToggle;
-            console.log(megaEvoBtn);
           };
           document.getElementById('buttons').appendChild(megaEvoBtn);
         } else {
@@ -459,7 +447,6 @@ export default function Poke() {
                       console.log('This mon is the 1st stage of a 2-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
-                      console.log(evoChain.data.chain.evolves_to[0]);
                       let randInt = 0;
                       if (evoChain.data.chain.evolves_to.length > 1) {
                         randInt = Math.floor(
@@ -518,7 +505,6 @@ export default function Poke() {
                       console.log('This mon is the 1st stage of a 3-stager');
                       evoBtnCheck = true;
                       // Check for branch-evos
-                      console.log(evoChain.data.chain.evolves_to[0]);
                       let randInt = 0;
                       if (evoChain.data.chain.evolves_to.length > 1) {
                         randInt = Math.floor(
@@ -544,7 +530,6 @@ export default function Poke() {
                 }
               }
             } catch (err) {
-              // console.log(err)
               evoData = await axios.get(evoRes.data.evolves_from_species.name);
               evoBtnCheck = false;
             }
@@ -746,6 +731,16 @@ export default function Poke() {
     return hsp;
   }
 
+  // let body = document.querySelector("body");
+  // body.addEventListener('keydown', (e) => {
+  //   console.log(e)
+  //   if (e.key == "ArrowUp") {
+  //     increase();
+  //   } else if (e.key == "ArrowDown") {
+  //     decrease();
+  //   }
+  // })
+
   return (
     <div className="pokeCard">
       <canvas id="my-canvas" width="100px" height="100px"></canvas>
@@ -760,28 +755,38 @@ export default function Poke() {
 
       <div className="type">{Type}</div>
 
-      <input
-        type="text"
-        id="nameInput"
-        onChange={NameChanger}
-        value={nameValue}
-      />
+      <div className='labelInput'>     
+        <label htmlFor="name">Name:</label>
+        <input
+          type="text"
+          id="nameInput"
+          onChange={NameChanger}
+          value={nameValue}
+          name='name'
+        />
+      </div>
+
       <div id="numLine">
-        <button class="noSelect" onClick={decrease}>
+        <button className="noSelect" onClick={decrease} aria-label="Arrow Down">
           <p>
             <BsArrowDownSquareFill size={30} />
           </p>
         </button>
-        <input
-          type="number"
-          id="numInput"
-          step="1"
-          max="10250"
-          min="1"
-          onChange={NumChanger}
-          value={numValue}
-        />
-        <button class="noSelect" onClick={increase}>
+        <div className='labelInput'>
+          <label htmlFor="number">National Dex No:</label>
+          <input
+            type="number"
+            id="numInput"
+            step="1"
+            max="10250"
+            min="1"
+            onChange={NumChanger}
+            value={numValue}
+            name='number'
+          />
+        </div>
+
+        <button className="noSelect" onClick={increase} aria-label="Arrow Up">
           <p>
             <BsArrowUpSquareFill size={30} />
           </p>
@@ -789,7 +794,7 @@ export default function Poke() {
       </div>
 
       <div id="buttons">
-        <button id="shinyBtn" onClick={ShinyChange}>
+        <button id="shinyBtn" onClick={ShinyChange} aria-label="Shiny toggle Button">
           Shiny
         </button>
         <button id="randomBtn" onClick={Randomize}>

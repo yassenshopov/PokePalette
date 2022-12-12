@@ -24,7 +24,7 @@ export default function Example() {
           </p>
           <div>
             <a id="scrollDown" href='#posts'>Scroll down ⬇</a>
-            <button id="darkMode" onClick={() => {
+            <button id="darkMode" aria-label="Dark or Light Mode" onClick={() => {
 
               let root = document.querySelector(":root");
               let temp_color = getComputedStyle(root).getPropertyValue("--color1");
@@ -84,8 +84,8 @@ export default function Example() {
             copyText.select();
             copyText.setSelectionRange(0, 99999); // For mobile devices
             }}>
-          <div class="color-card"></div>
-          <p class="color4"></p>
+          <div className="color-card"></div>
+          <p className="color4"></p>
         </div>
       </div>
 
