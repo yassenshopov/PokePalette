@@ -158,6 +158,7 @@ export default function Poke() {
           'avalugg',
           'decidueye',
         ];
+        let gmaxList = ["charizard", "butterfree", "pikachu", "meowth", "machamp", "gengar", "kingler", "lapras", "eevee", "snorlax", "garbodor", "melmetal", "corviknight", "orbeetle", "drednaw", "coalossal", "flapple", "appletun", "sandaconda", "toxtricity", "centiskorch", "hatterene", "grimmsnarl", "alcremie", "copperajah", "duraludon"];
 
         // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
 
@@ -187,6 +188,13 @@ export default function Poke() {
           document.getElementById('hisuiBtn') != null
         ) {
           document.getElementById('hisuiBtn').remove();
+        }
+
+        if (
+          typeof document.getElementById('gmaxBtn') != 'undefined' &&
+          document.getElementById('gmaxBtn') != null
+        ) {
+          document.getElementById('gmaxBtn').remove();
         }
 
         let evoRes;
@@ -360,6 +368,60 @@ export default function Poke() {
           };
           hisuiBtn.classList.toggle('noSelect');
           document.getElementById('buttons').appendChild(hisuiBtn);
+        }
+
+        if (gmaxList.includes(nameValue)) {
+          let gmaxBtn = document.createElement('button');
+          gmaxBtn.innerHTML = 'Gigantamax 🚀';
+          gmaxBtn.id = 'gmaxBtn';
+
+          let gmaxBtnToggle = true;
+          gmaxBtn.onclick = async () => {
+            if (gmaxBtnToggle) {
+              let gmax = nameValue + '-gmax';
+              let gmaxRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${gmax}`
+              );
+
+              if (shiny === true) {
+                setImg(gmaxRes.data.sprites.front_shiny);
+              } else {
+                setImg(gmaxRes.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('shine');
+              setTimeout(() => {
+                document.getElementById('artCanvas').classList.toggle('shine');
+              }, 6000);
+              setTimeout(() => {
+                setURL(
+                  gmaxRes.data.sprites.other['official-artwork']
+                    .front_default
+                );
+              }, 3000);
+              gmaxBtn.innerHTML = '↩️';
+            } else {
+              if (shiny === true) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.front_default);
+              }
+              document.getElementById('artCanvas').classList.toggle('deshine');
+              setTimeout(() => {
+                document
+                  .getElementById('artCanvas')
+                  .classList.toggle('deshine');
+              }, 2000);
+              setTimeout(() => {
+                setURL(
+                  res.data.sprites.other['official-artwork'].front_default
+                );
+              }, 500);
+              gmaxBtn.innerHTML = 'Gigantamax 🚀';
+            }
+            gmaxBtnToggle = !gmaxBtnToggle;
+          };
+          gmaxBtn.classList.toggle('noSelect');
+          document.getElementById('buttons').appendChild(gmaxBtn);
         }
 
         if (megaEvoList.includes(nameValue)) {
