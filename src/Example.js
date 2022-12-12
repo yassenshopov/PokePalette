@@ -2,11 +2,11 @@ import { FaReact, FaMoon, FaSun } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import bgDark from "../src/img/bgDark.webp"
 import bgLight from "../src/img/bgLight.webp"
-// let bg = bgDark;
-
-let darkTheme = true;
 
 export default function Example() {
+
+  let darkTheme = true;
+
   return (
     <div id="example">
       <main id="main">
@@ -33,10 +33,6 @@ export default function Example() {
               if (darkTheme) {
                 // document.getElementById("main").style["background-position"] = 'left'
                 root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
-                // bg = bgDark;
-                // document.getElementById("darkModeIcon").remove()
-                // let faMoon = document.createElement("FaMoon");
-                // document.getElementById("container").appendChild(faMoon)
                 document.getElementById("sun").style.display = "none"
                 document.getElementById("moon").style.display = "inline-block"
 
@@ -60,37 +56,6 @@ export default function Example() {
         </section>
         <aside id="artCanvas">
           <div id="colorFilter"></div>
-          {/* <article id="gradientArticle">
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-            <div className="gridItem"></div>
-          </article> */}
         </aside>
       </main>
       
@@ -127,7 +92,7 @@ export default function Example() {
       <div id="posts"></div>
 
       <footer id="footer">
-        <p style={{ padding: '20px' }}>Copyright © PokePalette Studio - by <a href='https://github.com/yassenshopov'>Yassen Shopov</a></p>
+        <p>Copyright © PokePalette 2022<br></br>- by <a href='https://github.com/yassenshopov'>Yassen Shopov</a></p>
       </footer>
     </div>
   );

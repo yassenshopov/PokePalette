@@ -257,9 +257,9 @@ FaSun {
 #example main #backdrop {
   background-color: var(--color2);
   mix-blend-mode: color;
-  opacity: 0.7;
+  opacity: 0.9;
   width: 70vw;
-  height: 90vh;
+  height: 100vh;
   position: absolute;
   left: 30.2vw;
   top: 0;
@@ -326,6 +326,10 @@ FaSun {
   animation: shine 5s ease-in-out;
 }
 
+.spin {
+  animation: spin 4s ease-in-out;
+}
+
 .deshine {
   animation: shine 1.5s ease-in-out;
 }
@@ -377,6 +381,13 @@ FaSun {
   }
   100% {
     filter: brightness(2) contrast(1.2) saturate(1.2);
+  }
+}
+
+@keyframes spin {
+  50% {
+    filter: brightness(20) blur(50px) drop-shadow(0 0 10px #ffffff);
+    transform: rotate(1860deg);
   }
 }
 
@@ -447,6 +458,9 @@ FaSun {
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   font-size: 1vw;
+  padding: 20px 0 20px 0;
+  text-align: center;
+
   /* height: 80px; */
   /* opacity: 0.3; */
 }
@@ -535,7 +549,7 @@ FaSun {
 
   #example main #backdrop {
     width: 100%;
-    height: 100vh;
+    height: 200vh;
     padding: 0;
     left: 0;
     top: 0;
@@ -552,12 +566,17 @@ FaSun {
     /* padding: 10%; */
   }
 
-  #example main #example #cards {
+  #example #cards {
     gap: 20px;
+    flex-direction: column;
+  }
+
+  #example #cards div {
+    width: 90%;
   }
 
   #example #cards div p {
-    font-size: 16px;
+    font-size: 24px;
   }
 
   #example #cards,
@@ -568,6 +587,6 @@ FaSun {
   footer * {
     text-align: center;
     font-size: 22px;
-    width: 50%;
+    width: 80%;
   }
 }

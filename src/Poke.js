@@ -220,9 +220,9 @@ export default function Poke() {
               } else {
                 setImg(alolaRes.data.sprites.front_default);
               }
-              document.getElementById('artCanvas').classList.toggle('shine');
+              document.getElementById('artCanvas').classList.toggle('spin');
               setTimeout(() => {
-                document.getElementById('artCanvas').classList.toggle('shine');
+                document.getElementById('artCanvas').classList.toggle('spin');
               }, 6000);
               setTimeout(() => {
                 setURL(
@@ -276,9 +276,9 @@ export default function Poke() {
               } else {
                 setImg(galarRes.data.sprites.front_default);
               }
-              document.getElementById('artCanvas').classList.toggle('shine');
+              document.getElementById('artCanvas').classList.toggle('spin');
               setTimeout(() => {
-                document.getElementById('artCanvas').classList.toggle('shine');
+                document.getElementById('artCanvas').classList.toggle('spin');
               }, 6000);
               setTimeout(() => {
                 setURL(
