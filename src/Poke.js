@@ -9,8 +9,8 @@ let color2, color3, color4;
 let artURL;
 
 export default function Poke() {
-  let [nameValue, setStateFind] = useState('wooper');
-  let [numValue, setNumValue] = useState(81);
+  let [nameValue, setStateFind] = useState('garchomp');
+  let [numValue, setNumValue] = useState(445);
 
   const NumChanger = (e) => {
     setNumValue(e.target.value);
@@ -22,7 +22,7 @@ export default function Poke() {
   };
 
   let [shiny, setShiny] = useState(false);
-  let [random, setRandom] = useState(81);
+  let [random, setRandom] = useState(45);
 
   const ShinyChange = () => {
     setShiny(!shiny);
@@ -37,7 +37,7 @@ export default function Poke() {
 
   let [Img, setImg] = useState('');
   let [artURL, setURL] = useState(
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/81.png'
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png'
   );
   const [Type, setType] = useState('');
   let megaEvoRes;
@@ -250,6 +250,7 @@ export default function Poke() {
             }
             alolaBtnToggle = !alolaBtnToggle;
           };
+          alolaBtn.classList.toggle('noSelect');
           document.getElementById('buttons').appendChild(alolaBtn);
         }
 
@@ -303,6 +304,7 @@ export default function Poke() {
             }
             galarBtnToggle = !galarBtnToggle;
           };
+          galarBtn.classList.toggle('noSelect');
           document.getElementById('buttons').appendChild(galarBtn);
         }
 
@@ -356,6 +358,7 @@ export default function Poke() {
             }
             hisuiBtnToggle = !hisuiBtnToggle;
           };
+          hisuiBtn.classList.toggle('noSelect');
           document.getElementById('buttons').appendChild(hisuiBtn);
         }
 
@@ -419,6 +422,7 @@ export default function Poke() {
             }
             megaEvoBtnToggle = !megaEvoBtnToggle;
           };
+          megaEvoBtn.classList.toggle('noSelect');
           document.getElementById('buttons').appendChild(megaEvoBtn);
         } else {
           try {
@@ -553,6 +557,7 @@ export default function Poke() {
                   setStateFind(evoData);
                 }, 3000);
               };
+              evoBtn.classList.toggle('noSelect');
               document.getElementById('buttons').appendChild(evoBtn);
             }
           } catch (err) {
@@ -756,7 +761,7 @@ export default function Poke() {
       <div className="type">{Type}</div>
 
       <div className='labelInput'>     
-        <label htmlFor="name">Name:</label>
+        <label htmlFor="name"><em>Name:</em></label>
         <input
           type="text"
           id="nameInput"
@@ -773,7 +778,7 @@ export default function Poke() {
           </p>
         </button>
         <div className='labelInput'>
-          <label htmlFor="number">National Dex No:</label>
+          <label htmlFor="number"><em>National Dex No:</em></label>
           <input
             type="number"
             id="numInput"
@@ -794,10 +799,10 @@ export default function Poke() {
       </div>
 
       <div id="buttons">
-        <button id="shinyBtn" onClick={ShinyChange} aria-label="Shiny toggle Button">
+        <button id="shinyBtn" onClick={ShinyChange} aria-label="Shiny toggle Button" className="noSelect">
           Shiny
         </button>
-        <button id="randomBtn" onClick={Randomize}>
+        <button id="randomBtn" onClick={Randomize} className="noSelect">
           Randomize
         </button>
       </div>

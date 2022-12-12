@@ -1,12 +1,12 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #397bc5;
-  --color3: #73bdff;
-  --color4: #62396a;
-  --color5: #121212;
-  --hsp2: #f1f1f1;
-  --hsp3: #121212;
-  --hsp4: #f1f1f1;
+  --color2: #5A62AC;
+  --color3: #41418B;
+  --color4: #292952;
+  --color5: #18181a;
+  --hsp2: #121212;
+  --hsp3: #f1f1f1;
+  --hsp4: #121212;
   --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/194.png');
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
@@ -54,11 +54,10 @@ body::-webkit-scrollbar {
   flex-direction: row;
   width: 100vw;
   margin: 0px;
-  /* transition: all 0.3s ease-in-out; */
 }
 
-.example * {
-  transition: all 300ms;
+.example > * > * {
+  transition: all 500ms;
 }
 
 .poke {
@@ -77,18 +76,14 @@ body::-webkit-scrollbar {
   height: 100vh;
   gap: 2vh;
   font-family: var(--font1);
-  border-right: 4px solid var(--color1);
-}
-
-.poke * {
-  transition: all 100ms ease-in-out;
+  border-right: 4px solid var(--color5);
 }
 
 .pokeCard input {
   border-radius: 15px;
   border: 0 solid #121212;
-  background-color: var(--color1);
-  color: var(--color5);
+  background-color: #f1f1f1;
+  color: #121212;
   font-size: 1.6vw;
   padding: 5px 20px 5px 20px;
   margin: 5px 0 0px 0;
@@ -124,8 +119,8 @@ body::-webkit-scrollbar {
   padding: 10px;
   font-size: 1.5vw;
   font-family: var(--font1);
-  background-color: var(--color1);
-  color: var(--color5);
+  background-color: #f1f1f1;
+  color: #121212;
   border-radius: 15px;
   border: 1px solid var(--hsp3);
   outline: none;
@@ -168,12 +163,12 @@ body::-webkit-scrollbar {
 }
 
 .pokeCard #numLine button {
-  color: var(--color1);
+  color: #f1f1f1;
   padding: 0 0px 0 0px;
   margin: 0 10px 0 10px;
   background: none;
   border: #00000000;
-  filter: drop-shadow(0 0 1px var(--color5));
+  filter: drop-shadow(0 0 1px #121212);
   cursor: pointer;
 }
 
@@ -204,7 +199,7 @@ body::-webkit-scrollbar {
 }
 
 #example > *:nth-child(2n):not(footer) {
-  background-color: var(--color1);
+  background-color: var(--color5);
 }
 
 #example h1 {
@@ -212,9 +207,13 @@ body::-webkit-scrollbar {
 }
 
 #example main p {
-  font-size: 1.4vw;
+  font-size: 1.2vw;
   margin-bottom: 30px;
   width: 80%;
+}
+
+#example #customButtons {
+  margin-top: 50px;
 }
 
 #example button {
@@ -457,12 +456,14 @@ FaSun {
 
 #example #posts {
   min-height: 100px;
+  z-index: 2;
 }
 
 #example footer {
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   justify-content: center;
+  gap: 10vw;
   align-items: center;
   color: var(--hsp2);
   background-color: var(--color2);
@@ -474,6 +475,17 @@ FaSun {
 
   /* height: 80px; */
   /* opacity: 0.3; */
+}
+
+#example footer *:not(p, a) {
+  font-size: 36px;
+  padding: 10px;
+}
+
+#example footer #faIcons {
+  display: flex;
+  flex-direction: row;
+  gap: 20px;
 }
 
 #example a {
@@ -573,6 +585,10 @@ FaSun {
     /* display: none; */
   }
 
+  #example main section #customButtons {
+    margin: 0;
+  }
+
   #example main #artCanvas {
     /* display: none; */
     width: 90vw;
@@ -600,7 +616,27 @@ FaSun {
     z-index: 9;
   }
 
-  footer * {
+  #example footer {
+    flex-direction: column-reverse;
+    gap: 0;
+  }
+
+  #example footer #faIcons {
+    margin-top: 20px;
+    gap: 0;
+    justify-content: space-evenly;
+    width: 80%;
+  }
+
+  #example footer #faIcons a {
+    padding: 20px;
+  }
+
+  #example footer *:not(p, a) {
+    padding: 0;
+  }
+
+  footer p {
     text-align: center;
     font-size: 22px;
     width: 80%;

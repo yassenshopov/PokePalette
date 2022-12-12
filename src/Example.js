@@ -1,4 +1,4 @@
-import { FaReact, FaMoon, FaSun } from 'react-icons/fa';
+import { FaReact, FaMoon, FaSun, FaTwitter, FaGithub } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
 import bgDark from "../src/img/bgDark.webp"
 import bgLight from "../src/img/bgLight.webp"
@@ -22,7 +22,7 @@ export default function Example() {
             [Built with <strong>React</strong>{' '}
             <FaReact id="faReact" /> and the <strong>PokeAPI</strong> <MdCatchingPokemon />]
           </p>
-          <div>
+          <div id='customButtons'>
             <a id="scrollDown" href='#posts'>Scroll down ⬇</a>
             <button id="darkMode" aria-label="Dark or Light Mode" onClick={() => {
 
@@ -45,12 +45,8 @@ export default function Example() {
               }
               darkTheme = !darkTheme;
             }}>    
-            <div id="sun">
-              <FaSun/>
-            </div>
-
+            <div id="sun"><FaSun/></div>
             <div id="moon"><FaMoon/></div>
-
             </button>
           </div>
         </section>
@@ -93,6 +89,10 @@ export default function Example() {
 
       <footer id="footer">
         <p>Copyright © PokePalette 2022<br></br>- by <a href='https://github.com/yassenshopov'>Yassen Shopov</a></p>
+        <div id='faIcons'>
+          <a href='https://twitter.com/yassenshopov'>< FaTwitter /></a>
+          <a href='https://github.com/yassenshopov'>< FaGithub /></a>
+        </div>
       </footer>
     </div>
   );
