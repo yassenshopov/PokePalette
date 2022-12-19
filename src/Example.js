@@ -56,7 +56,7 @@ export default function Example() {
       </main>
       
       <div id="cards">
-        <div onClick={() => {
+        <div className="noSelect" onClick={() => {
             let copyText = document.getElementsByClassName("color2")[0].innerHTML;
             navigator.clipboard.writeText(copyText);
             copyText.select();
@@ -65,7 +65,7 @@ export default function Example() {
           <div className="color-card"></div>
           <p className="color2"></p>
         </div>
-        <div onClick={() => {
+        <div className="noSelect" onClick={() => {
             let copyText = document.getElementsByClassName("color3")[0].innerHTML;
             navigator.clipboard.writeText(copyText);
             copyText.select();
@@ -74,7 +74,7 @@ export default function Example() {
           <div className="color-card"></div>
           <p className="color3"></p>
         </div>
-        <div onClick={() => {
+        <div className="noSelect" onClick={() => {
             let copyText = document.getElementsByClassName("color4")[0].innerHTML;
             navigator.clipboard.writeText(copyText);
             copyText.select();
