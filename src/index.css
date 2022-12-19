@@ -1,7 +1,7 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #5A62AC;
-  --color3: #41418B;
+  --color2: #5a62ac;
+  --color3: #41418b;
   --color4: #292952;
   --color5: #18181a;
   --hsp2: #121212;
@@ -407,8 +407,10 @@ FaSun {
   justify-content: center;
   align-items: center;
   gap: 2%;
-  min-height: fit-content;
   z-index: 9;
+  width: 100%;
+  min-height: fit-content;
+  padding: 50px 0 50px 0;
 }
 
 #example #cards > div {
@@ -431,6 +433,15 @@ FaSun {
 
 #example #cards div p {
   font-size: 24px;
+  position: relative;
+  top: calc(24px / 2);
+}
+
+#example #cards svg {
+  font-size: 24px;
+  position: relative;
+  top: calc(24px - 80%);
+  left: calc(50% - 24px);
 }
 
 #example #cards div:nth-child(1) {
@@ -446,12 +457,6 @@ FaSun {
 #example #cards div:nth-child(3) {
   background-color: var(--color4);
   color: var(--hsp4);
-}
-
-#example #cards {
-  width: 100%;
-  min-height: fit-content;
-  padding: 50px 0 50px 0;
 }
 
 #example #posts {
@@ -517,7 +522,6 @@ FaSun {
   .labelInput {
     padding-top: 20px;
   }
-  
 
   #example,
   .poke {

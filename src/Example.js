@@ -1,5 +1,6 @@
 import { FaReact, FaMoon, FaSun, FaTwitter, FaGithub } from 'react-icons/fa';
 import { MdCatchingPokemon } from 'react-icons/md';
+import { BiCopy } from 'react-icons/bi';
 import bgDark from "../src/img/bgDark.webp"
 import bgLight from "../src/img/bgLight.webp"
 
@@ -64,6 +65,7 @@ export default function Example() {
             }}>
           <div className="color-card"></div>
           <p className="color2"></p>
+          < BiCopy />
         </div>
         <div onClick={() => {
             let copyText = document.getElementsByClassName("color3")[0].innerHTML;
@@ -73,6 +75,7 @@ export default function Example() {
             }}>
           <div className="color-card"></div>
           <p className="color3"></p>
+          < BiCopy />
         </div>
         <div onClick={() => {
             let copyText = document.getElementsByClassName("color4")[0].innerHTML;
@@ -82,6 +85,7 @@ export default function Example() {
             }}>
           <div className="color-card"></div>
           <p className="color4"></p>
+          < BiCopy />
         </div>
       </div>
 
