@@ -203,6 +203,20 @@ export default function Poke() {
             `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
           );
         } catch (err) {
+          switch (nameValue.toLocaleLowerCase()) {
+            case "basculin-red-striped":
+              evoRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon-species/basculin`
+              );
+            case "basculin-blue-striped":
+              evoRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon-species/basculin`
+              );
+            case "basculin-white-striped":
+              evoRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon-species/basculin`
+              );
+          }
           console.log(err);
         }
 
@@ -504,25 +518,46 @@ export default function Poke() {
                 } else {
                   stageNumber = 3;
                 }
+                let randInt = 0;
                 switch (stageNumber) {
                   case 2:
                     if (nameValue != evoChain.data.chain.species.name) {
-                      console.log('This mon is the final stage of a 2-stager');
-                      evoBtnCheck = false;
+                      if (nameValue == "ursaring") {
+                        evoData = "ursaluna";
+                        evoBtnCheck = true;
+                      } else {
+                          console.log('This mon is the final stage of a 2-stager');
+                          evoBtnCheck = false;
+                        }
                     } else {
-                      console.log('This mon is the 1st stage of a 2-stager');
-                      evoBtnCheck = true;
-                      // Check for branch-evos
-                      let randInt = 0;
-                      if (evoChain.data.chain.evolves_to.length > 1) {
+                      if (nameValue == "sneasel") {
+                        evoData = ["weavile", "sneasler"];
                         randInt = Math.floor(
-                          Math.random() * evoChain.data.chain.evolves_to.length
+                          Math.random() * evoData.length
                         );
+                        evoData = evoData[randInt]
+                        evoBtnCheck = true;
+                      } else if (nameValue == "scyther") {
+                        evoData = ["scizor", "kleavor"];
+                        randInt = Math.floor(
+                          Math.random() * evoData.length
+                        );
+                        evoData = evoData[randInt]
+                        evoBtnCheck = true;
+                      } else {
+                        console.log('This mon is the 1st stage of a 2-stager');
+                        evoBtnCheck = true;
+                        // Check for branch-evos
+                        if (evoChain.data.chain.evolves_to.length > 1) {
+                          randInt = Math.floor(
+                            Math.random() * evoChain.data.chain.evolves_to.length
+                          );
+                          evoData =
+                            evoChain.data.chain.evolves_to[randInt].species.name;
+                        }
                         evoData =
                           evoChain.data.chain.evolves_to[randInt].species.name;
                       }
-                      evoData =
-                        evoChain.data.chain.evolves_to[randInt].species.name;
                     }
                     break;
                   case 3:
@@ -587,7 +622,20 @@ export default function Poke() {
                 }
               } else {
                 // Either remove or simply not put the evoBtn there
-                evoBtnCheck = false;
+                if (nameValue == "qwilfish") {
+                  evoData = "overqwil"
+                  evoBtnCheck = true;
+                } else if (nameValue == "stantler") {
+                  evoData = "wyrdeer"
+                  evoBtnCheck = true;         
+                } else if (nameValue == "basculin-red-striped" || nameValue == "basculin-blue-striped" || nameValue == "basculin-white-striped") {
+                  console.log("!!!")
+                  evoData = "basculegion-male"
+                  evoBtnCheck = true;         
+                }
+                else {
+                  evoBtnCheck = false;
+                }
                 if (
                   typeof document.getElementById('evoBtn') != 'undefined' &&
                   document.getElementById('evoBtn') != null
@@ -596,8 +644,8 @@ export default function Poke() {
                 }
               }
             } catch (err) {
-              evoData = await axios.get(evoRes.data.evolves_from_species.name);
-              evoBtnCheck = false;
+                evoData = await axios.get(evoRes.data.evolves_from_species.name);
+                evoBtnCheck = false;
             }
 
             if (evoBtnCheck) {

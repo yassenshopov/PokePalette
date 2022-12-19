@@ -267,7 +267,7 @@ FaSun {
 #example main #backdrop {
   background-color: var(--color2);
   mix-blend-mode: color;
-  opacity: 0.9;
+  opacity: 0.4;
   width: 70vw;
   height: 100vh;
   position: absolute;
