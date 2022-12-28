@@ -688,7 +688,14 @@ export default function Poke() {
             setImg(res.data.sprites.front_default);
           }
         }
-        setURL(res.data.sprites.other['official-artwork'].front_default);
+
+        if (shiny) {
+          let shinyURL = "src/img/shiny_artwork/" + nameValue + ".png";
+          console.log(shinyURL)
+          setURL(shinyURL);
+        } else {
+          setURL(res.data.sprites.other['official-artwork'].front_default);
+        }
         try {
           setType('The ' + evoRes.data.genera[7].genus);
         } catch {
