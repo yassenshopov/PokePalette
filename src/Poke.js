@@ -690,7 +690,7 @@ export default function Poke() {
         }
 
         if (shiny) {
-          let shinyURL = "src/img/shiny_artwork/" + nameValue + ".png";
+          let shinyURL = "https://raw.githubusercontent.com/yassenshopov/PokePalette/main/src/img/shiny_artwork/" + nameValue + ".webp";
           console.log(shinyURL)
           setURL(shinyURL);
         } else {
