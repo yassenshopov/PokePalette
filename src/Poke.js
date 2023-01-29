@@ -2,11 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsArrowDownSquareFill, BsArrowUpSquareFill } from 'react-icons/bs';
 import axios from 'axios';
 
-let shiny = false;
-let randomSwitch = false;
-
 let color2, color3, color4;
-let artURL;
 
 export default function Poke() {
   let [nameValue, setStateFind] = useState('garchomp');
@@ -29,7 +25,7 @@ export default function Poke() {
   };
 
   const Randomize = () => {
-    let random = 1 + Math.floor(Math.random() * 905);
+    let random = 1 + Math.floor(Math.random() * 1008);
     setRandom(random);
     random = random.toString();
     setStateFind(random);
@@ -644,8 +640,12 @@ export default function Poke() {
                 }
               }
             } catch (err) {
-                evoData = await axios.get(evoRes.data.evolves_from_species.name);
-                evoBtnCheck = false;
+                try {
+                  evoData = await axios.get(evoRes.data.evolves_from_species.name);
+                } catch(err) {
+                  console.log(err)
+                }
+              evoBtnCheck = false;
             }
 
             if (evoBtnCheck) {
@@ -683,14 +683,23 @@ export default function Poke() {
           }
         } else {
           if (shiny === true) {
-            setImg(res.data.sprites.front_shiny);
+            if (res.data.id < 906) {
+              setImg(res.data.sprites.front_shiny);
+            } else {
+              setImg(res.data.sprites.other["official-artwork"].front_shiny);    
+            }
           } else {
-            setImg(res.data.sprites.front_default);
+            if (res.data.id < 906) {
+              setImg(res.data.sprites.front_default);
+            } else {
+              setImg(res.data.sprites.other["official-artwork"].front_default);
+            }
           }
         }
 
         if (shiny) {
-          let shinyURL = "https://raw.githubusercontent.com/yassenshopov/PokePalette/main/src/img/shiny_artwork/" + nameValue + ".webp";
+          console.log(numValue, typeof numValue)
+          let shinyURL = "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" + numValue + ".png";
           console.log(shinyURL)
           setURL(shinyURL);
         } else {
@@ -699,7 +708,12 @@ export default function Poke() {
         try {
           setType('The ' + evoRes.data.genera[7].genus);
         } catch {
-          setType('The ' + evoRes.data.genera[4].genus);
+          try {
+            setType('The ' + evoRes.data.genera[4].genus);
+          } catch {
+            console.log(evoRes.data.genera)
+            setType('The ' + evoRes.data.genera[0].genus + ' Pokemon');
+          }
         }
         setStateFind(res.data.name);
         setNumValue(res.data.id);
@@ -736,7 +750,7 @@ export default function Poke() {
       myContext.beginPath();
       myContext.clearRect(0, 0, 100, 100);
       myContext.stroke();
-      myContext.drawImage(img, 0, 0);
+      myContext.drawImage(img, 0, 0, 100, 100);
       const imageData = myContext.getImageData(
         0,
         0,
@@ -868,7 +882,7 @@ export default function Poke() {
       <canvas id="my-canvas" width="100px" height="100px"></canvas>
 
       <img
-        style={{ display: 'none' }}
+        style={{ display: 'none', width: '100px', height: '100px' }}
         id="imgData"
         crossOrigin="Anonymous"
         src={`${Img}`}

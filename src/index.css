@@ -323,7 +323,7 @@ FaSun {
   mix-blend-mode: hue;
   filter: blur(100px);
   transition: all 1s ease-in-out;
-  opacity: 0.4;
+  opacity: 0.1;
   /* padding: 0 10px 0 10px; */
 }
 
