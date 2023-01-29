@@ -446,7 +446,7 @@ export default function Poke() {
             if (megaEvoBtnToggle) {
               let megaEvo;
               let megaXY = ['x', 'y'];
-              if (nameValue == 'charizard' || nameValue == 'mewtwo') {
+              if (nameValue === 'charizard' || nameValue === 'mewtwo') {
                 let randInt = Math.floor(Math.random() * 2);
                 megaEvo = nameValue + '-mega-' + megaXY[randInt];
               } else {
@@ -503,13 +503,13 @@ export default function Poke() {
 
               let stageNumber = 1;
 
-              if (evoChain.data.chain.evolves_to.length != 0) {
+              if (evoChain.data.chain.evolves_to.length !== 0) {
                 // This check eliminates single-stage mons
 
                 evoData = evoChain.data.chain.evolves_to[0].species.name;
 
                 // This check determines the length of the evolution family
-                if (evoChain.data.chain.evolves_to[0].evolves_to.length == 0) {
+                if (evoChain.data.chain.evolves_to[0].evolves_to.length === 0) {
                   stageNumber = 2;
                 } else {
                   stageNumber = 3;
@@ -517,8 +517,8 @@ export default function Poke() {
                 let randInt = 0;
                 switch (stageNumber) {
                   case 2:
-                    if (nameValue != evoChain.data.chain.species.name) {
-                      if (nameValue == "ursaring") {
+                    if (nameValue !== evoChain.data.chain.species.name) {
+                      if (nameValue === "ursaring") {
                         evoData = "ursaluna";
                         evoBtnCheck = true;
                       } else {
@@ -526,14 +526,14 @@ export default function Poke() {
                           evoBtnCheck = false;
                         }
                     } else {
-                      if (nameValue == "sneasel") {
+                      if (nameValue === "sneasel") {
                         evoData = ["weavile", "sneasler"];
                         randInt = Math.floor(
                           Math.random() * evoData.length
                         );
                         evoData = evoData[randInt]
                         evoBtnCheck = true;
-                      } else if (nameValue == "scyther") {
+                      } else if (nameValue === "scyther") {
                         evoData = ["scizor", "kleavor"];
                         randInt = Math.floor(
                           Math.random() * evoData.length
@@ -558,24 +558,24 @@ export default function Poke() {
                     break;
                   case 3:
                     if (
-                      nameValue != 'cascoon' &&
-                      nameValue != evoData &&
-                      nameValue != evoChain.data.chain.species.name
+                      nameValue !== 'cascoon' &&
+                      nameValue !== evoData &&
+                      nameValue !== evoChain.data.chain.species.name
                     ) {
                       // This check eliminates mons that are final stages
                       console.log('This mon is the final stage of a 3-stager');
                       evoBtnCheck = false;
                       if (
-                        typeof document.getElementById('evoBtn') !=
+                        typeof document.getElementById('evoBtn') !==
                           'undefined' &&
-                        document.getElementById('evoBtn') != null
+                        document.getElementById('evoBtn') !== null
                       ) {
                         document.getElementById('evoBtn').remove();
                         break;
                       }
                     } else if (
-                      nameValue == evoData &&
-                      nameValue != evoChain.data.chain.species.name
+                      nameValue === evoData &&
+                      nameValue !== evoChain.data.chain.species.name
                     ) {
                       console.log('This mon is the middle stage of a 3-stager');
                       evoBtnCheck = true;
@@ -595,7 +595,7 @@ export default function Poke() {
                       evoData =
                         evoChain.data.chain.evolves_to[0].evolves_to[randInt]
                           .species.name;
-                    } else if (nameValue == 'cascoon') {
+                    } else if (nameValue === 'cascoon') {
                       evoBtnCheck = true;
                       evoData = 'dustox';
                     } else {
@@ -618,13 +618,13 @@ export default function Poke() {
                 }
               } else {
                 // Either remove or simply not put the evoBtn there
-                if (nameValue == "qwilfish") {
+                if (nameValue === "qwilfish") {
                   evoData = "overqwil"
                   evoBtnCheck = true;
-                } else if (nameValue == "stantler") {
+                } else if (nameValue === "stantler") {
                   evoData = "wyrdeer"
                   evoBtnCheck = true;         
-                } else if (nameValue == "basculin-red-striped" || nameValue == "basculin-blue-striped" || nameValue == "basculin-white-striped") {
+                } else if (nameValue === "basculin-red-striped" || nameValue === "basculin-blue-striped" || nameValue === "basculin-white-striped") {
                   console.log("!!!")
                   evoData = "basculegion-male"
                   evoBtnCheck = true;         
@@ -633,8 +633,8 @@ export default function Poke() {
                   evoBtnCheck = false;
                 }
                 if (
-                  typeof document.getElementById('evoBtn') != 'undefined' &&
-                  document.getElementById('evoBtn') != null
+                  typeof document.getElementById('evoBtn') !== 'undefined' &&
+                  document.getElementById('evoBtn') !== null
                 ) {
                   document.getElementById('evoBtn').remove();
                 }
