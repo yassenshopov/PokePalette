@@ -937,6 +937,8 @@ export default function Poke() {
           Randomize
         </button>
       </div>
+      <img src={artURL} style={{display: 'none'}}/>
     </div>
+    
   );
 }
