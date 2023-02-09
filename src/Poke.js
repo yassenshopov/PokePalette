@@ -689,11 +689,11 @@ export default function Poke() {
               setImg(res.data.sprites.other["official-artwork"].front_shiny);    
             }
           } else {
-            if (res.data.id < 906) {
+            // if (res.data.id < 906) {
               setImg(res.data.sprites.front_default);
-            } else {
-              setImg(res.data.sprites.other["official-artwork"].front_default);
-            }
+            // } else {
+            //   setImg(res.data.sprites.other["official-artwork"].front_default);
+            // }
           }
         }
 
@@ -794,6 +794,11 @@ export default function Poke() {
       delete counts['#e8e8e8'];
       delete counts['#020501'];
       delete counts['#050505'];
+      delete counts['#060606'];
+      //For Koraidon specifically
+      delete counts['#a39698'];
+      delete counts['#656068'];
+      delete counts['#edebe6'];
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
