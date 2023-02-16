@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { BsArrowDownSquareFill, BsArrowUpSquareFill } from 'react-icons/bs';
 import axios from 'axios';
 
-let color2, color3, color4;
+let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 
 export default function Poke() {
   let [nameValue, setStateFind] = useState('garchomp');
@@ -819,17 +819,26 @@ export default function Poke() {
         ' 100%)';
       container.style.background = bgStr;
 
+      // console.log(sortedScheme)
+
       color2 = sortedScheme[0][0];
       color3 = sortedScheme[1][0];
       color4 = sortedScheme[2][0];
+      color5 = sortedScheme[3][0];
+      color6 = sortedScheme[4][0];
+      color7 = sortedScheme[5][0];
+      color8 = sortedScheme[6][0];
+      color9 = sortedScheme[7][0];
+      color10 = sortedScheme[8][0];
 
-      let color_list = { color2: color2, color3: color3, color4: color4 };
-      let hsp_list = ['--hsp2', '--hsp3', '--hsp4'];
-      let anti_hsp_list = ['--anti_hsp2', '--anti_hsp3', '--anti_hsp4'];
+      let color_list = { color2: color2, color3: color3, color4: color4, color5: color5, color6: color6, color7: color7, color8: color8, color9: color9, color10: color10 };
+      let hsp_list = ['--hsp2', '--hsp3', '--hsp4', '--hsp5', '--hsp6', '--hsp7', '--hsp8', '--hsp9', '--hsp10'];
+      let anti_hsp_list = ['--anti_hsp2', '--anti_hsp3', '--anti_hsp4', '--anti_hsp5', '--anti_hsp6', '--anti_hsp7', '--anti_hsp8', '--anti_hsp9', '--anti_hsp10'];
       let root = document.querySelector(':root');
 
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
+        // console.log(key, value)
         if (hsp(value.toUpperCase()) > 150) {
           root.style.setProperty(hsp_list[i], '#121212');
           root.style.setProperty(anti_hsp_list[i], '#f1f1f1');
@@ -837,6 +846,8 @@ export default function Poke() {
           root.style.setProperty(hsp_list[i], '#f1f1f1');
           root.style.setProperty(anti_hsp_list[i], '#121212');
         }
+        document.getElementsByClassName(key)
+        console.log(document.getElementsByClassName(key))
         for (let j = 0; j < document.getElementsByClassName(key).length; j++) {
           document.getElementsByClassName(key)[j].innerHTML =
             value.toUpperCase();
@@ -849,6 +860,12 @@ export default function Poke() {
       root.style.setProperty('--color2', color2);
       root.style.setProperty('--color3', color3);
       root.style.setProperty('--color4', color4);
+      root.style.setProperty('--color5', color5);
+      root.style.setProperty('--color6', color6);
+      root.style.setProperty('--color7', color7);
+      root.style.setProperty('--color8', color8);
+      root.style.setProperty('--color9', color9);
+      root.style.setProperty('--color10', color10);
 
       root.style.setProperty('--artURL', fullArtURL);
     };

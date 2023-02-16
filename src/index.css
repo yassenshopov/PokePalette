@@ -3,7 +3,7 @@
   --color2: #5a62ac;
   --color3: #41418b;
   --color4: #292952;
-  --color5: #18181a;
+  --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #f1f1f1;
   --hsp4: #121212;
@@ -76,7 +76,7 @@ body::-webkit-scrollbar {
   height: 100vh;
   gap: 2vh;
   font-family: var(--font1);
-  border-right: 4px solid var(--color5);
+  border-right: 4px solid var(--mainDark);
 }
 
 .pokeCard input {
@@ -195,11 +195,11 @@ body::-webkit-scrollbar {
 }
 
 #example > *:nth-child(2n + 1) {
-  background-color: var(--color5);
+  background-color: var(--mainDark);
 }
 
 #example > *:nth-child(2n):not(footer) {
-  background-color: var(--color5);
+  background-color: var(--mainDark);
 }
 
 #example h1 {
@@ -303,7 +303,7 @@ FaSun {
   background-repeat: no-repeat;
   width: 35vw;
   height: 35vw;
-  filter: drop-shadow(0 0 20px var(--color5));
+  filter: drop-shadow(0 0 20px var(--mainDark));
   z-index: 9;
   /* padding: 0 50px 0 50px; */
   /* background-blend-mode: color; */
@@ -402,19 +402,23 @@ FaSun {
 }
 
 #example #cards {
-  display: flex;
+  /* display: flex;
   flex-direction: row;
   justify-content: center;
-  align-items: center;
+  align-items: center; */
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr;
   gap: 2%;
   z-index: 9;
   width: 100%;
   min-height: fit-content;
-  padding: 50px 0 50px 0;
+  padding: 50px 2vw 50px 2vw;
+  box-sizing: border-box;
 }
 
 #example #cards > div {
-  width: 25%;
+  width: 100%;
   height: 150px;
   box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   color: var(--color1);
@@ -457,6 +461,54 @@ FaSun {
 #example #cards div:nth-child(3) {
   background-color: var(--color4);
   color: var(--hsp4);
+}
+
+#example #cards div:nth-child(n + 4) {
+  display: none;
+}
+
+#example #cards div:nth-child(4) {
+  background-color: var(--color5);
+  color: var(--hsp5);
+}
+
+#example #cards div:nth-child(5) {
+  background-color: var(--color6);
+  color: var(--hsp6);
+}
+
+#example #cards div:nth-child(6) {
+  background-color: var(--color7);
+  color: var(--hsp7);
+}
+
+#example #cards div:nth-child(7) {
+  background-color: var(--color8);
+  color: var(--hsp8);
+}
+
+#example #cards div:nth-child(8) {
+  background-color: var(--color9);
+  color: var(--hsp9);
+}
+
+#example #cards div:nth-child(9) {
+  background-color: var(--color10);
+  color: var(--hsp10);
+}
+
+#example #cards #loadMore {
+  line-height: 2;
+  font-size: 2rem;
+  color: var(--color1);
+  /* text-decoration: underline; */
+  padding: 20px 1vw;
+  border: 2px solid var(--color1);
+  border-radius: 12px;
+  /* background-color: var(--color2); */
+  text-align: center;
+  cursor: pointer;
+  grid-column: 2;
 }
 
 #example #posts {
@@ -603,8 +655,16 @@ FaSun {
   }
 
   #example #cards {
+    display: grid;
     gap: 20px;
-    flex-direction: column;
+    grid-template-columns: 1fr;
+    /* flex-direction: column; */
+    justify-items: center;
+  }
+
+  #example #cards #loadMore {
+    grid-column: 1;
+    width: 90%;
   }
 
   #example #cards div {

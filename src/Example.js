@@ -6,6 +6,48 @@ import bgLight from "../src/img/bgLight.webp"
 
 export default function Example() {
 
+  let loadMoreCardsToggle = false;
+  function loadMoreCards() {
+    if (loadMoreCardsToggle === true) {
+      loadMoreCardsToggle = false;
+      let cards = document.getElementsByClassName("colorCard");
+      for (let card in cards) {
+        if (card > 2) {
+          cards[card].style.display = "none"
+        }
+      }
+      document.getElementsByClassName("loadMore")[0].innerHTML = "Load more colors..."
+    } else {
+      loadMoreCardsToggle = true;
+      let cards = document.getElementsByClassName("colorCard");
+      for (let card in cards) {
+        if (card > 2) {
+          cards[card].style.display = "flex"
+        }
+      }
+      console.log(document.getElementsByClassName("loadMore"))
+      document.getElementsByClassName("loadMore")[0].innerHTML = "Show less"
+    }
+  }
+
+  function Card({cardIndex}) {
+    console.log(cardIndex)
+    let colorName = "color" + cardIndex
+
+    return (
+      <div className="noSelect colorCard" onClick={() => {
+        let copyText = document.getElementsByClassName(colorName)[0].innerHTML;
+        navigator.clipboard.writeText(copyText);
+        copyText.select();
+        copyText.setSelectionRange(0, 99999); // For mobile devices
+        }}>
+        <div className="color-card"></div>
+        <p className={"color"+cardIndex}></p>
+        < BiCopy />
+      </div>
+    )
+  }
+
   let darkTheme = true;
 
   return (
@@ -29,8 +71,8 @@ export default function Example() {
 
               let root = document.querySelector(":root");
               let temp_color = getComputedStyle(root).getPropertyValue("--color1");
-              root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--color5"));
-              root.style.setProperty('--color5', temp_color);
+              root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--mainDark"));
+              root.style.setProperty('--mainDark', temp_color);
               if (darkTheme) {
                 // document.getElementById("main").style["background-position"] = 'left'
                 root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
@@ -57,36 +99,16 @@ export default function Example() {
       </main>
       
       <div id="cards">
-        <div className="noSelect" onClick={() => {
-            let copyText = document.getElementsByClassName("color2")[0].innerHTML;
-            navigator.clipboard.writeText(copyText);
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
-            }}>
-          <div className="color-card"></div>
-          <p className="color2"></p>
-          < BiCopy />
-        </div>
-        <div className="noSelect" onClick={() => {
-            let copyText = document.getElementsByClassName("color3")[0].innerHTML;
-            navigator.clipboard.writeText(copyText);
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
-            }}>
-          <div className="color-card"></div>
-          <p className="color3"></p>
-          < BiCopy />
-        </div>
-        <div className="noSelect" onClick={() => {
-            let copyText = document.getElementsByClassName("color4")[0].innerHTML;
-            navigator.clipboard.writeText(copyText);
-            copyText.select();
-            copyText.setSelectionRange(0, 99999); // For mobile devices
-            }}>
-          <div className="color-card"></div>
-          <p className="color4"></p>
-          < BiCopy />
-        </div>
+        < Card cardIndex={2} />
+        < Card cardIndex={3} />
+        < Card cardIndex={4} />
+        < Card cardIndex={5} />
+        < Card cardIndex={6} />
+        < Card cardIndex={7} />
+        < Card cardIndex={8} />
+        < Card cardIndex={9} />
+        < Card cardIndex={10} />
+        <p id='loadMore' className="loadMore noSelect" onClick={loadMoreCards}>Load more colors...</p>
       </div>
 
       <div id="posts"></div>
