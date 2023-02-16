@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import Poke from './Poke';
 import Example from './Example.js';
 
-const App = () => {
+export default function App() {
   return (
     <div className="App">
       <div className='poke'>
@@ -14,5 +13,3 @@ const App = () => {
     </div>
   );
 }
-
-export default App;
