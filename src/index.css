@@ -508,7 +508,8 @@ FaSun {
   /* background-color: var(--color2); */
   text-align: center;
   cursor: pointer;
-  grid-column: 2;
+  grid-column: 1/4;
+  margin: 20px 0;
 }
 
 #example #posts {
