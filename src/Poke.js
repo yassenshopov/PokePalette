@@ -5,8 +5,8 @@ import axios from 'axios';
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 
 export default function Poke() {
-  let [nameValue, setStateFind] = useState('garchomp');
-  let [numValue, setNumValue] = useState(445);
+  let [nameValue, setStateFind] = useState('flygon');
+  let [numValue, setNumValue] = useState(330);
 
   const NumChanger = (e) => {
     setNumValue(e.target.value);
@@ -33,7 +33,7 @@ export default function Poke() {
 
   let [Img, setImg] = useState('');
   let [artURL, setURL] = useState(
-    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png'
+    'https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png'
   );
   const [Type, setType] = useState('');
   let megaEvoRes;

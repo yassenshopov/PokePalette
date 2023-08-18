@@ -1,13 +1,13 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #5a62ac;
-  --color3: #41418b;
-  --color4: #292952;
+  --color2: #B4DE73;
+  --color3: #8BA452;
+  --color4: #94D59C;
   --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #f1f1f1;
   --hsp4: #121212;
-  --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/445.png');
+  --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png');
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
 }
@@ -324,7 +324,6 @@ FaSun {
   filter: blur(100px);
   transition: all 1s ease-in-out;
   opacity: 0.1;
-  /* padding: 0 10px 0 10px; */
 }
 
 #example main #artCanvas #colorFilter:hover {
@@ -337,7 +336,7 @@ FaSun {
 }
 
 .spin {
-  animation: spin 4s ease-in-out;
+  animation: shine 4s ease-in-out;
 }
 
 .deshine {

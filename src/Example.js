@@ -42,6 +42,7 @@ export default function Example() {
         copyText.setSelectionRange(0, 99999); // For mobile devices
         }}>
         <div className="color-card"></div>
+        <p className={"color"+cardIndex+"name"}></p>
         <p className={"color"+cardIndex}></p>
         < BiCopy />
       </div>
@@ -74,14 +75,11 @@ export default function Example() {
               root.style.setProperty('--color1', getComputedStyle(root).getPropertyValue("--mainDark"));
               root.style.setProperty('--mainDark', temp_color);
               if (darkTheme) {
-                // document.getElementById("main").style["background-position"] = 'left'
                 root.style.setProperty('--bgURL', "url('"+ bgLight + "')")
                 document.getElementById("sun").style.display = "none"
                 document.getElementById("moon").style.display = "inline-block"
 
               } else {
-                // bg = bgLight;
-                // document.getElementById("main").style["background-position"] = 'right'
                 root.style.setProperty('--bgURL', "url('"+ bgDark + "')")
                 document.getElementById("moon").style.display = "none"
                 document.getElementById("sun").style.display = "inline-block"
