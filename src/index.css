@@ -1,13 +1,13 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #B4DE73;
-  --color3: #8BA452;
-  --color4: #94D59C;
+  --color2: #b4de73;
+  --color3: #8ba452;
+  --color4: #94d59c;
   --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #f1f1f1;
   --hsp4: #121212;
-  --artURL: url('https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png');
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png");
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
 }
@@ -17,6 +17,8 @@
   src: url(fonts/Carnac-Light.otf);
   font-display: swap;
 }
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
 
 html {
   scroll-behavior: smooth;
@@ -44,10 +46,6 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
-
-/* .App * {
-  border: 1px solid black;
-} */
 
 .App {
   display: flex;
@@ -77,6 +75,31 @@ body::-webkit-scrollbar {
   gap: 2vh;
   font-family: var(--font1);
   border-right: 4px solid var(--mainDark);
+}
+
+.pokeCard #colorBg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
+}
+
+.pokeCard #colorBg div {
+  height: 30%;
+  width: 100%;
+}
+
+.pokeCard #colorBg div:nth-child(1) {
+  background-color: var(--color2);
+}
+
+.pokeCard #colorBg div:nth-child(2) {
+  height: 40%;
+  background-color: var(--color3);
+}
+
+.pokeCard #colorBg div:nth-child(3) {
+  background-color: var(--color4);
 }
 
 .pokeCard input {
@@ -118,7 +141,8 @@ body::-webkit-scrollbar {
 .pokeCard #buttons > * {
   padding: 10px;
   font-size: 1.5vw;
-  font-family: var(--font1);
+  font-family: "Raleway", sans-serif;
+  font-weight: 500;
   background-color: #f1f1f1;
   color: #121212;
   border-radius: 15px;
@@ -159,7 +183,6 @@ body::-webkit-scrollbar {
 .pokeCard #numLine input {
   border-radius: 5px;
   width: fit-content;
-  -moz-appearance: textfield;
 }
 
 .pokeCard #numLine button {
@@ -204,6 +227,7 @@ body::-webkit-scrollbar {
 
 #example h1 {
   font-size: 3vw;
+  font-family: "Raleway", sans-serif;
 }
 
 #example main p {
@@ -221,14 +245,13 @@ body::-webkit-scrollbar {
   font-size: 1vw;
   margin-top: 50px;
   margin-right: 20px;
-  text-transform: uppercase;
-  /* color: var(--color1); */
   border-radius: 5px;
   border: 0px solid #121212;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
   cursor: pointer;
-  /* transition: all 400ms ease-in-out; */
-  font-family: var(--font1);
+  transition: all 200ms ease-in-out;
+  font-weight: 500;
+  font-family: "Raleway", sans-serif;
 }
 
 #example button:hover {
@@ -245,6 +268,8 @@ body::-webkit-scrollbar {
   border-radius: 5px;
   cursor: pointer;
   text-decoration: none;
+  font-family: "Raleway", sans-serif;
+  font-weight: 700;
 }
 
 #example #darkMode {
@@ -500,18 +525,16 @@ FaSun {
   line-height: 2;
   font-size: 2rem;
   color: var(--color1);
-  /* text-decoration: underline; */
   padding: 20px 1vw;
   border: 2px solid var(--color1);
   border-radius: 12px;
-  /* background-color: var(--color2); */
   text-align: center;
   cursor: pointer;
   grid-column: 1/4;
   margin: 20px 0;
 }
 
-#example #posts {
+#example section {
   min-height: 100px;
   z-index: 2;
 }
@@ -549,7 +572,7 @@ FaSun {
   color: var(--hsp2);
 }
 
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 768px) {
   .App {
     flex-direction: column;
   }

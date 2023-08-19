@@ -1,0 +1,70 @@
+.pokeCard {
+  position: relative;
+}
+.pokeCard #hideWhileLoading {
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  z-index: 3;
+}
+.pokeCard .loading svg {
+  animation: loading 600ms ease-in-out infinite;
+  font-size: 2rem;
+}
+@keyframes loading {
+  0% {
+    transform: rotate(0deg);
+  }
+  50% {
+    transform: rotate(180deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+.pokeCard .labelInput {
+  position: relative;
+}
+.pokeCard .labelInput #shinyBtn {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  right: 1%;
+  top: 45%;
+  border: none;
+  border-radius: 0 0.9rem 0.9rem 0;
+  width: 15%;
+  height: 2rem;
+  cursor: pointer;
+  font-size: 1.4rem;
+  overflow: hidden;
+  transition: all 200ms ease-in-out;
+  color: var(--mainDark);
+  background: none;
+}
+.pokeCard .labelInput #shinyBtn:hover,
+.pokeCard .labelInput #shinyBtn.shiny {
+  opacity: 1;
+  color: var(--color2);
+  animation: wiggle 1s ease-in-out infinite;
+}
+@keyframes wiggle {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.1);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+@media screen and (max-width: 768px) {
+  .pokeCard .labelInput #shinyBtn {
+    top: 58%;
+    right: 0;
+    font-size: 1.2rem;
+  }
+}
