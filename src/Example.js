@@ -3,6 +3,7 @@ import { MdCatchingPokemon } from "react-icons/md";
 import { BiCopy } from "react-icons/bi";
 import bgDark from "../src/img/bgDark.webp";
 import bgLight from "../src/img/bgLight.webp";
+import twitterLogo from "../src/img/x.webp";
 
 export default function Example() {
   let loadMoreCardsToggle = false;
@@ -57,8 +58,15 @@ export default function Example() {
   const scrollDown = () => {
     window.scrollBy({
       top: 600,
-      behavior: 'smooth',
+      behavior: "smooth",
     });
+  };
+
+  const tweet = () => {
+    let tweetText = document.getElementsByClassName("tweet-input")[0].value;
+    let tweetURL = "https://twitter.com/intent/tweet?text=" + tweetText;
+
+    window.open(tweetURL);
   };
 
   return (
@@ -135,21 +143,45 @@ export default function Example() {
       </div>
 
       <section id="shareWidgets">
-        {/* <div id="share">
+        <div class="tweet-popup">
+          <img class="tweetLogo" src={twitterLogo} />
+          <textarea
+            class="tweet-input"
+            placeholder="What's happening?"
+            spellCheck="false"
+          ></textarea>
+          <button class="tweet-button" onClick={tweet}>
+            Tweet
+          </button>
+        </div>
+        <div id="share">
           <p>Share this color palette with your friends!</p>
-        </div> */}
+        </div>
+      </section>
+
+      <section id="pkmnInfo">
+        <div className="txtWrapper">
+          <h2></h2>
+          <p></p>
+        </div>
+        <div className="imgWrapper">
+          <div id="hiddenPkmn"></div>
+          <span className="colorFilter"></span>
+        </div>
       </section>
 
       <footer id="footer">
         <p>
           Copyright © PokePalette 2022<br></br>- by{" "}
-          <a href="https://github.com/yassenshopov">Yassen Shopov</a>
+          <a href="https://github.com/yassenshopov" target="_blank">
+            Yassen Shopov
+          </a>
         </p>
         <div id="faIcons">
-          <a href="https://twitter.com/yassenshopov">
+          <a href="https://twitter.com/yassenshopov" target="_blank">
             <FaTwitter />
           </a>
-          <a href="https://github.com/yassenshopov">
+          <a href="https://github.com/yassenshopov" target="_blank">
             <FaGithub />
           </a>
         </div>

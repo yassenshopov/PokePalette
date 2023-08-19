@@ -217,14 +217,6 @@ body::-webkit-scrollbar {
   scroll-behavior: smooth;
 }
 
-#example > *:nth-child(2n + 1) {
-  background-color: var(--mainDark);
-}
-
-#example > *:nth-child(2n):not(footer) {
-  background-color: var(--mainDark);
-}
-
 #example h1 {
   font-size: 3vw;
   font-family: "Raleway", sans-serif;
@@ -234,10 +226,6 @@ body::-webkit-scrollbar {
   font-size: 1.2vw;
   margin-bottom: 30px;
   width: 80%;
-}
-
-#example #customButtons {
-  margin-top: 50px;
 }
 
 #example button {
@@ -444,7 +432,6 @@ FaSun {
 #example #cards > div {
   width: 100%;
   height: 150px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   color: var(--color1);
   border-radius: 7px;
   display: flex;
@@ -519,19 +506,6 @@ FaSun {
 #example #cards div:nth-child(9) {
   background-color: var(--color10);
   color: var(--hsp10);
-}
-
-#example #cards #loadMore {
-  line-height: 2;
-  font-size: 2rem;
-  color: var(--color1);
-  padding: 20px 1vw;
-  border: 2px solid var(--color1);
-  border-radius: 12px;
-  text-align: center;
-  cursor: pointer;
-  grid-column: 1/4;
-  margin: 20px 0;
 }
 
 #example section {

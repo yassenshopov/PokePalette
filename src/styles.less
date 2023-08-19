@@ -1,4 +1,7 @@
-//make mixin for a displat flex with column and centred alignment
+:root {
+  --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
+}
+
 .flexCentered(@flexDirection) {
   display: flex;
   flex-direction: @flexDirection;
@@ -7,7 +10,7 @@
 }
 
 .pokeCard {
-    position: relative;
+  position: relative;
   #hideWhileLoading {
     position: absolute;
     height: 100%;
@@ -16,19 +19,16 @@
   }
   .loading {
     svg {
-        animation: loading 600ms ease-in-out infinite;
-        font-size: 2rem;        
+      animation: loading 600ms ease-in-out infinite;
+      font-size: 2rem;
     }
   }
   @keyframes loading {
     0% {
-        transform: rotate(0deg);
-    }
-    50% {
-        transform: rotate(180deg);
+      transform: rotate(0deg);
     }
     100% {
-        transform: rotate(360deg);
+      transform: rotate(360deg);
     }
   }
   .labelInput {
@@ -70,7 +70,176 @@
 }
 
 .example {
-  main {
+  &:nth-child(2n) {
+    background: var(--color2);
+    color: var(--hsp2);
+  }
+  &:nth-child(2n + 1) {
+    background: var(--mainDark);
+    color: var(--color1);
+  }
+  #cards {
+    .colorCard {
+      box-shadow: 0 0 20px 0 rgba(82, 82, 82, 0.53);
+      border: 1px solid var(--hsp2);
+    }
+    #loadMore {
+      font-family: "Raleway", sans-serif;
+      box-shadow: 0 0 20px 0 rgba(75, 75, 75, 0.3);
+      line-height: 2;
+      font-size: 2rem;
+      padding: 20px 1vw;
+      border-radius: 12px;
+      text-align: center;
+      cursor: pointer;
+      grid-column: 1/4;
+      margin: 20px 0;
+      border: 1px solid var(--hsp2);
+    }
+  }
+  #shareWidgets {
+    padding: 40px 3vw;
+    .flexCentered(row);
+    gap: 6vw;
+    .tweet-popup {
+      top: 50%;
+      left: 50%;
+      width: 400px;
+      box-shadow: 0 2px 10px rgba(132, 132, 132, 0.4);
+      padding: 20px 2vw;
+      border-radius: 16px;
+      box-sizing: border-box;
+      background-color: var(--color4);
+      background: var(--anti_hsp4);
+      .flexCentered(column);
+      .tweetLogo {
+        width: 50px;
+        height: 50px;
+        margin-bottom: 20px;
+        border-radius: 50%;
+      }
+      .tweet-input {
+        width: 100%;
+        border: 1px solid var(--hsp4);
+        color: var(--hsp4);
+        background: var(--anti_hsp4);
+        border-radius: 8px;
+        padding: 10px;
+        font-size: 16px;
+        min-height: 200px;
+        font-family: carnacLight;
+        scrollbar-width: none; /* Firefox */
+        -ms-overflow-style: none; /* Internet Explorer and Microsoft Edge */
+        &::-webkit-scrollbar {
+          display: none; /* Chrome, Safari, and Opera */
+        }
+        resize: vertical;
+      }
+      .tweet-button {
+        background-color: var(--color3);
+        color: var(--hsp3);
+        align-self: flex-end;
+        border: none;
+        border-radius: 4px;
+        font-size: 1.2rem;
+        font-weight: bold;
+        cursor: pointer;
+        font-family: carnacLight;
+        &:hover {
+          filter: brightness(1.2);
+          transform: scale(1.1);
+        }
+      }
+    }
+
+    p {
+      font-size: 1.2rem;
+      font-family: carnacLight;
+      color: var(--hsp2);
+      margin: 20px 0;
+    }
+  }
+  #pkmnInfo {
+    height: 400px;
+    position: relative;
+    box-sizing: border-box;
+    background: var(--color2);
+    .flexCentered(row);
+    padding: 40px 3vw;
+    gap: 2vw;
+    .txtWrapper {
+      color: var(--hsp2);
+      position: relative;
+      font-family: "Raleway", sans-serif;
+      margin: 20px 2vw;
+      max-width: 40%;
+      h2 {
+        font-size: 2.5rem;
+      }
+      p {
+        font-size: 1.2rem;
+        font-family: carnacLight;
+      }
+    }
+    .imgWrapper {
+      height: 100%;
+      width: 50%;
+      background: var(--pkmnInfoBg);
+      background-position: center;
+      background-size: cover;
+      z-index: 3;
+      border-radius: 1rem;
+      border: 1px solid var(--hsp2);
+      position: relative;
+      overflow: hidden;
+      .flexCentered(column);
+      z-index: 0;
+      position: relative;
+      &:hover {
+        #hiddenPkmn {
+          filter: brightness(1) drop-shadow(0 0 20px var(--color1));
+        }
+      }
+      #hiddenPkmn {
+        position: relative;
+        background-image: var(--artURL);
+        background-position: center;
+        background-size: 100% auto;
+        background-repeat: no-repeat;
+        height: 100%;
+        width: 60%;
+        z-index: 1;
+        filter: brightness(0);
+        transition: all 200ms ease-in-out;
+        &:hover {
+          filter: brightness(1) drop-shadow(0 0 20px #fff)
+        }
+      }
+      .colorFilter {
+        background: var(--color2);
+        position: absolute;
+        top: 0;
+        height: 100%;
+        width: 100%;
+        pointer-events: none;
+        opacity: 0.5;
+        z-index: 0;
+        mix-blend-mode: color;
+      }
+    }
+  }
+  footer {
+    #faIcons {
+      svg {
+        cursor: pointer;
+        transition: all 200ms ease-in-out;
+        border-radius: 8px;
+        &:hover {
+          color: var(--color2);
+          background-color: var(--hsp2);
+        }
+      }
+    }
   }
 }
 
