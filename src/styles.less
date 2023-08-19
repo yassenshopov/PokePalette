@@ -197,22 +197,24 @@
       position: relative;
       &:hover {
         #hiddenPkmn {
-          filter: brightness(1) drop-shadow(0 0 20px var(--color1));
+          backdrop-filter: blur(16px);
+          filter: brightness(1) drop-shadow(0 0 20px #fff);
         }
       }
       #hiddenPkmn {
         position: relative;
         background-image: var(--artURL);
         background-position: center;
-        background-size: 100% auto;
+        background-size: 50% auto;
         background-repeat: no-repeat;
         height: 100%;
-        width: 60%;
+        width: 120%;
         z-index: 1;
         filter: brightness(0);
-        transition: all 200ms ease-in-out;
+        transition: all 400ms ease-in-out;
         &:hover {
-          filter: brightness(1) drop-shadow(0 0 20px #fff)
+          backdrop-filter: blur(16px);
+          filter: brightness(1) drop-shadow(0 0 20px #fff);
         }
       }
       .colorFilter {
