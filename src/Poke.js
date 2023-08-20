@@ -1100,7 +1100,7 @@ export default function Poke() {
           onChange={NameChanger}
           value={nameValue}
           name="name"
-          enablespellcheck="false"
+          spellcheck="false"
         />
         <button
           id="shinyBtn"

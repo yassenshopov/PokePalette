@@ -110,7 +110,7 @@
       border-radius: 16px;
       box-sizing: border-box;
       background-color: var(--color4);
-      background: var(--anti_hsp4);
+      background: var(--hsp4);
       .flexCentered(column);
       .tweetLogo {
         width: 50px;
@@ -160,7 +160,7 @@
     }
   }
   #pkmnInfo {
-    height: 400px;
+    min-height: 400px;
     position: relative;
     box-sizing: border-box;
     background: var(--color2);
@@ -252,6 +252,30 @@
         top: 58%;
         right: 0;
         font-size: 1.2rem;
+      }
+    }
+  }
+  .example {
+    #shareWidgets {
+        .flexCentered(column-reverse);
+        gap: 40px;
+        .tweet-popup {
+            width: 100%;
+            padding: 20px 2vw;
+            .tweet-input {
+                width: 90%;
+                // min-height: 100px;
+            }
+        }
+    }
+    #pkmnInfo {
+        flex-direction: column;
+      .txtWrapper {
+        max-width: 100%;
+      }
+      .imgWrapper {
+        height: 400px;
+        width: 100%;
       }
     }
   }

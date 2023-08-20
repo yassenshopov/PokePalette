@@ -150,7 +150,7 @@ export default function Example() {
             placeholder="What's happening?"
             spellCheck="false"
           ></textarea>
-          <button class="tweet-button" onClick={tweet}>
+          <button class="tweet-button noSelect" onClick={tweet}>
             Tweet
           </button>
         </div>

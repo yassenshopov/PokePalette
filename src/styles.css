@@ -103,7 +103,7 @@
   border-radius: 16px;
   box-sizing: border-box;
   background-color: var(--color4);
-  background: var(--anti_hsp4);
+  background: var(--hsp4);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -157,7 +157,7 @@
   margin: 20px 0;
 }
 .example #pkmnInfo {
-  height: 400px;
+  min-height: 400px;
   position: relative;
   box-sizing: border-box;
   background: var(--color2);
@@ -244,5 +244,29 @@
     top: 58%;
     right: 0;
     font-size: 1.2rem;
+  }
+  .example #shareWidgets {
+    display: flex;
+    flex-direction: column-reverse;
+    align-items: center;
+    justify-content: center;
+    gap: 40px;
+  }
+  .example #shareWidgets .tweet-popup {
+    width: 100%;
+    padding: 20px 2vw;
+  }
+  .example #shareWidgets .tweet-popup .tweet-input {
+    width: 90%;
+  }
+  .example #pkmnInfo {
+    flex-direction: column;
+  }
+  .example #pkmnInfo .txtWrapper {
+    max-width: 100%;
+  }
+  .example #pkmnInfo .imgWrapper {
+    height: 400px;
+    width: 100%;
   }
 }
