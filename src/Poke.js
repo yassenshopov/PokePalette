@@ -1011,6 +1011,7 @@ export default function Poke() {
         { color: "gray", emoji: "⬛" },
       ];
 
+      if (!isLoading) {
       document.querySelector(
         "#shareWidgets .tweet-input"
       ).value = `I generated ${
@@ -1028,51 +1029,64 @@ export default function Poke() {
         ${color4.toUpperCase().slice(1)}
         \nhttps://yassenshopov.github.io/PokePalette/`;
 
+        
       document.querySelector("#pkmnInfo h2").innerHTML =
-        nameValue.charAt(0).toUpperCase() +
-        nameValue.slice(1) +
-        ` [#${numValue}]`;
-      document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
-        resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
-        resCopy.data.types[0].type.name.slice(1);
-      if (resCopy.data.types.length > 1) {
-        document
-          .querySelector("#pkmnInfo #types")
-          .classList.remove("singleType");
-        document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
-          resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
-          resCopy.data.types[1].type.name.slice(1);
-      } else {
-        document.querySelector("#pkmnInfo #types").classList.add("singleType");
+      nameValue.charAt(0).toUpperCase() +
+      nameValue.slice(1) +
+      ` [#${numValue}]`;
+    document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
+      resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
+      resCopy.data.types[0].type.name.slice(1);
+    if (resCopy.data.types.length > 1) {
+      document
+        .querySelector("#pkmnInfo #types")
+        .classList.remove("singleType");
+      document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
+        resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
+        resCopy.data.types[1].type.name.slice(1);
+    } else {
+      document.querySelector("#pkmnInfo #types").classList.add("singleType");
+    }
+    try {
+      console.log(evoRes);
+      let habitat = "";
+      if (evoRes.data.habitat !== null) {
+        habitat =
+          "Habitat: " +
+          evoRes.data.habitat.name.charAt(0).toUpperCase() +
+          evoRes.data.habitat.name.slice(1) +
+          "<br><br>";
       }
-      try {
-        console.log(evoRes);
-        let habitat = "";
-        if (evoRes.data.habitat !== null) {
-          habitat =
-            "Habitat: " +
-            evoRes.data.habitat.name.charAt(0).toUpperCase() +
-            evoRes.data.habitat.name.slice(1) +
-            "<br><br>";
-        }
-        let generation = "";
-        generation =
-          evoRes.data.generation.name.replace(
-            /generation-(\w+)/i,
-            (match, p1) => {
-              const romanNumeral = p1.toUpperCase();
-              return `Generation: ${romanNumeral}`;
-            }
-          ) + "<br><br>";
-        document.querySelector("#pkmnInfo .description").innerHTML =
-          generation +
-          habitat +
-          evoRes.data.flavor_text_entries
-            .filter((item) => item.language.name === "en")
-            .slice(-1)
-            .map((item) => item.flavor_text);
-      } catch (err) {
-        console.log(err);
+      let generation = "";
+      generation =
+        evoRes.data.generation.name.replace(
+          /generation-(\w+)/i,
+          (match, p1) => {
+            const romanNumeral = p1.toUpperCase();
+            return `Generation: ${romanNumeral}`;
+          }
+        ) + "<br><br>";
+      document.querySelector("#pkmnInfo .description").innerHTML =
+        generation +
+        habitat +
+        evoRes.data.flavor_text_entries
+          .filter((item) => item.language.name === "en")
+          .slice(-1)
+          .map((item) => item.flavor_text);
+    } catch (err) {
+      console.log(err);
+    }
+      } else {
+        document.querySelector(
+          "#shareWidgets .tweet-input"
+        ).value = `Loading...`;
+
+        document.querySelector("#pkmnInfo h2").innerHTML = `Loading...`;
+        document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
+          ``
+        document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
+          ``
+        document.querySelector("#pkmnInfo .description").innerHTML = `Loading...`;
       }
     };
   });

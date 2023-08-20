@@ -1,5 +1,57 @@
 :root {
+  --color1: #f1f1f1;
+  --color2: #b4de73;
+  --color3: #8ba452;
+  --color4: #94d59c;
+  --mainDark: #18181a;
+  --hsp2: #121212;
+  --hsp3: #f1f1f1;
+  --hsp4: #121212;
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png");
+  --bgURL: url(../public/bgDark.webp);
+  --font1: carnacLight;
   --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
+}
+
+@font-face {
+  font-family: carnacLight;
+  src: url(fonts/Carnac-Light.otf);
+  font-display: swap;
+}
+
+@import url("https://fonts.googleapis.com/css2?family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap");
+
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+.App {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin: 0px;
 }
 
 .flexCentered(@flexDirection) {
@@ -8,9 +60,29 @@
   align-items: center;
   justify-content: center;
 }
-
+.poke {
+  width: 30vw;
+  position: fixed;
+  z-index: 10;
+}
 .pokeCard {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  gap: 2vh;
+  font-family: var(--font1);
+  border-right: 4px solid var(--mainDark);
+  #colorBg {
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: -1;
+  }
   #hideWhileLoading {
     position: absolute;
     height: 100%;
@@ -80,12 +152,46 @@
   }
   #cards {
     .colorCard {
-      box-shadow: 0 0 20px 0 rgba(82, 82, 82, 0.53);
       border: 1px solid var(--hsp2);
+      &:nth-child(1) {
+        background-color: var(--color2);
+        color: var(--hsp2);
+      }
+      &:nth-child(2) {
+        background-color: var(--color3);
+        color: var(--hsp3);
+      }
+      &:nth-child(3) {
+        background-color: var(--color4);
+        color: var(--hsp4);
+      }
+      &:nth-child(4) {
+        background-color: var(--color5);
+        color: var(--hsp5);
+      }
+      &:nth-child(5) {
+        background-color: var(--color6);
+        color: var(--hsp6);
+      }
+      &:nth-child(6) {
+        background-color: var(--color7);
+        color: var(--hsp7);
+      }
+      &:nth-child(7) {
+        background-color: var(--color8);
+        color: var(--hsp8);
+      }
+      &:nth-child(8) {
+        background-color: var(--color9);
+        color: var(--hsp9);
+      }
+      &:nth-child(9) {
+        background-color: var(--color10);
+        color: var(--hsp10);
+      }
     }
     #loadMore {
       font-family: "Raleway", sans-serif;
-      box-shadow: 0 0 20px 0 rgba(75, 75, 75, 0.3);
       line-height: 2;
       font-size: 2rem;
       padding: 20px 1vw;
@@ -182,24 +288,24 @@
         gap: 2vw;
         justify-content: flex-start;
         &.singleType {
-            div:nth-child(2) {
-                display: none;
-            }
+          div:nth-child(2) {
+            display: none;
+          }
         }
         div {
-            .flexCentered(row);
-            gap: 1vw;
-            padding: 0.5rem 1rem;
-            border-radius: 8px;
-            background: var(--color3);
-            color: var(--hsp3);
-            font-size: 1.2rem;
-            font-family: carnacLight;
-            text-transform: capitalize;
-            &:nth-child(2) {
-                background: var(--color4);
-                color: var(--hsp4);
-            }
+          .flexCentered(row);
+          gap: 1vw;
+          padding: 0.5rem 1rem;
+          border-radius: 8px;
+          background: var(--color3);
+          color: var(--hsp3);
+          font-size: 1.2rem;
+          font-family: carnacLight;
+          text-transform: capitalize;
+          &:nth-child(2) {
+            background: var(--color4);
+            color: var(--hsp4);
+          }
         }
       }
       p {
@@ -208,14 +314,14 @@
       }
     }
     .imgWrapper {
-        height: 400px;
+      height: 400px;
       width: 50%;
       background: var(--pkmnInfoBg);
       background-position: center;
       background-size: cover;
       z-index: 3;
       border-radius: 1rem;
-    //   border: 1px solid var(--hsp2);
+      //   border: 1px solid var(--hsp2);
       position: relative;
       overflow: hidden;
       .flexCentered(column);
@@ -237,9 +343,6 @@
         z-index: 1;
         filter: brightness(0);
         transition: all 400ms ease-in-out;
-        &:hover {
-        //   filter: brightness(1) drop-shadow(0 0 20px #fff);
-        }
       }
       .colorFilter {
         background: var(--color2);
@@ -255,6 +358,18 @@
     }
   }
   footer {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 10vw;
+    align-items: center;
+    color: var(--hsp2);
+    background-color: var(--color2);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    width: 100%;
+    font-size: 1vw;
+    padding: 20px 0 20px 0;
+    text-align: center;
     #faIcons {
       svg {
         cursor: pointer;
@@ -281,19 +396,18 @@
   }
   .example {
     #shareWidgets {
-        .flexCentered(column-reverse);
-        gap: 40px;
-        .tweet-popup {
-            width: 100%;
-            padding: 20px 2vw;
-            .tweet-input {
-                width: 90%;
-                // min-height: 100px;
-            }
+      .flexCentered(column-reverse);
+      gap: 40px;
+      .tweet-popup {
+        width: 100%;
+        padding: 20px 2vw;
+        .tweet-input {
+          width: 90%;
         }
+      }
     }
     #pkmnInfo {
-        flex-direction: column;
+      flex-direction: column;
       .txtWrapper {
         max-width: 100%;
       }

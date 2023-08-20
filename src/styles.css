@@ -1,8 +1,138 @@
 :root {
+  --color1: #f1f1f1;
+  --color2: #b4de73;
+  --color3: #8ba452;
+  --color4: #94d59c;
+  --mainDark: #18181a;
+  --hsp2: #121212;
+  --hsp3: #f1f1f1;
+  --hsp4: #121212;
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/330.png");
+  --bgURL: url(../public/bgDark.webp);
+  --font1: carnacLight;
   --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
+}
+@font-face {
+  font-family: carnacLight;
+  src: url(fonts/Carnac-Light.otf);
+  font-display: swap;
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 100;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvao4CP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 200;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVtaooCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVuEooCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvaooCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVvoooCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVsEpYCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVs9pYCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 800;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVtapYCP.ttf) format('truetype');
+}
+@font-face {
+  font-family: 'Raleway';
+  font-style: normal;
+  font-weight: 900;
+  font-display: swap;
+  src: url(https://fonts.gstatic.com/s/raleway/v28/1Ptxg8zYS_SKggPN4iEgvnHyvveLxVtzpYCP.ttf) format('truetype');
+}
+html {
+  scroll-behavior: smooth;
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+}
+body {
+  width: 100%;
+  height: 100%;
+  padding: 0px;
+  margin: 0px;
+  overflow-x: hidden;
+  display: flex;
+  flex-direction: row;
+  font-family: var(--font1);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+body::-webkit-scrollbar {
+  display: none;
+}
+.App {
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  margin: 0px;
+}
+.poke {
+  width: 30vw;
+  position: fixed;
+  z-index: 10;
 }
 .pokeCard {
   position: relative;
+  display: flex;
+  flex-direction: column;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  height: 100vh;
+  gap: 2vh;
+  font-family: var(--font1);
+  border-right: 4px solid var(--mainDark);
+}
+.pokeCard #colorBg {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -1;
 }
 .pokeCard #hideWhileLoading {
   position: absolute;
@@ -70,12 +200,46 @@
   color: var(--color1);
 }
 .example #cards .colorCard {
-  box-shadow: 0 0 20px 0 rgba(82, 82, 82, 0.53);
   border: 1px solid var(--hsp2);
+}
+.example #cards .colorCard:nth-child(1) {
+  background-color: var(--color2);
+  color: var(--hsp2);
+}
+.example #cards .colorCard:nth-child(2) {
+  background-color: var(--color3);
+  color: var(--hsp3);
+}
+.example #cards .colorCard:nth-child(3) {
+  background-color: var(--color4);
+  color: var(--hsp4);
+}
+.example #cards .colorCard:nth-child(4) {
+  background-color: var(--color5);
+  color: var(--hsp5);
+}
+.example #cards .colorCard:nth-child(5) {
+  background-color: var(--color6);
+  color: var(--hsp6);
+}
+.example #cards .colorCard:nth-child(6) {
+  background-color: var(--color7);
+  color: var(--hsp7);
+}
+.example #cards .colorCard:nth-child(7) {
+  background-color: var(--color8);
+  color: var(--hsp8);
+}
+.example #cards .colorCard:nth-child(8) {
+  background-color: var(--color9);
+  color: var(--hsp9);
+}
+.example #cards .colorCard:nth-child(9) {
+  background-color: var(--color10);
+  color: var(--hsp10);
 }
 .example #cards #loadMore {
   font-family: "Raleway", sans-serif;
-  box-shadow: 0 0 20px 0 rgba(75, 75, 75, 0.3);
   line-height: 2;
   font-size: 2rem;
   padding: 20px 1vw;
@@ -253,6 +417,20 @@
   opacity: 0.5;
   z-index: 0;
   mix-blend-mode: color;
+}
+.example footer {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  gap: 10vw;
+  align-items: center;
+  color: var(--hsp2);
+  background-color: var(--color2);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  font-size: 1vw;
+  padding: 20px 0 20px 0;
+  text-align: center;
 }
 .example footer #faIcons svg {
   cursor: pointer;
