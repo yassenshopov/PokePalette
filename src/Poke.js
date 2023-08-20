@@ -43,6 +43,7 @@ export default function Poke() {
   );
   const [Type, setType] = useState("");
   let megaEvoRes;
+  const [resCopy, setResCopy] = useState({});
   const [evoRes, setEvoRes] = useState({});
   let megaEvoBtnToggle;
   const [pkmnInfoBg, setPkmnInfoBg] = useState("");
@@ -53,6 +54,7 @@ export default function Poke() {
         let res = await axios.get(
           `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
         );
+        setResCopy(res);
         console.log(res);
         let evoBtnCheck = true;
         let megaEvoList = [
@@ -235,53 +237,55 @@ export default function Poke() {
             )
           );
           console.log(evoRes);
-          switch (evoRes.data.generation.name) {
-            case "generation-i":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142492638537330748/midjourney__pokemon_kanto_region_kanto_gen_1_pokemon_forest_bla_3aff018d-d597-469d-a78b-5773d1c968a0.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-ii":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142506938962280548/midjourney__pokemon_jotho_region_jotho_gen_2_pokemon_island_bla_99ca1127-c3b1-4c28-afae-bb402b1c63de.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-iii":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142489715178754098/midjourney__pokemon_hoenn_region_hoenn_water_landscape_gen_3_po_29e0175e-3df2-4287-af33-1ca4832f6e1a.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-iv":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142502036009660426/midjourney__pokemon_sinnoh_region_sinnoh_gen_4_pokemon_mountain_04d21178-1bab-4f25-99da-ef42cc9e108a.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-v":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142497295477260498/midjourney__pokemon_unova_region_unova_gen_5_pokemon_cityscape__93fd80a6-27a7-4c0d-876a-05fd5c8a6707.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-vi":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142511128946167858/midjourney__pokemon_kalos_region_kalos_gen_6_pokemon_inspired_b_9c236717-3a0a-4ec4-a610-dab9b972c0ec.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-vii":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142512626543370291/midjourney__pokemon_alola_region_alola_gen_7_pokemon_beach_summ_59a7bf97-3f6f-4099-b1d3-4ee624dee075.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-viii":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142513795370057779/midjourney__pokemon_galar_region_galar_gen_8_pokemon_urban_city_3fcd9e3a-3076-4a25-9c8f-430cd3be28c5.png?width=1147&height=642)"
-              );
-              break;
-            case "generation-ix":
-              setPkmnInfoBg(
-                "url(https://media.discordapp.net/attachments/1059220738718048346/1142515725479710820/midjourney__pokemon_paldea_region_paldea_gen_9_pokemon_safari_g_872d97cb-9da2-4d6a-ad49-43a13def709e.png?width=1147&height=642)"
-              );
-              break;
-          }
+          setPkmnInfoBg("var(--color3)");
+          // switch (evoRes.data.generation.name) {
+          //   case "generation-i":
+          //     setPkmnInfoBg(
+          //       "var(--color3)"
+          //       // "url(https://media.discordapp.net/attachments/1059220738718048346/1142492638537330748/midjourney__pokemon_kanto_region_kanto_gen_1_pokemon_forest_bla_3aff018d-d597-469d-a78b-5773d1c968a0.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-ii":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142506938962280548/midjourney__pokemon_jotho_region_jotho_gen_2_pokemon_island_bla_99ca1127-c3b1-4c28-afae-bb402b1c63de.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-iii":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142489715178754098/midjourney__pokemon_hoenn_region_hoenn_water_landscape_gen_3_po_29e0175e-3df2-4287-af33-1ca4832f6e1a.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-iv":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142502036009660426/midjourney__pokemon_sinnoh_region_sinnoh_gen_4_pokemon_mountain_04d21178-1bab-4f25-99da-ef42cc9e108a.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-v":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142497295477260498/midjourney__pokemon_unova_region_unova_gen_5_pokemon_cityscape__93fd80a6-27a7-4c0d-876a-05fd5c8a6707.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-vi":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142511128946167858/midjourney__pokemon_kalos_region_kalos_gen_6_pokemon_inspired_b_9c236717-3a0a-4ec4-a610-dab9b972c0ec.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-vii":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142512626543370291/midjourney__pokemon_alola_region_alola_gen_7_pokemon_beach_summ_59a7bf97-3f6f-4099-b1d3-4ee624dee075.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-viii":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142513795370057779/midjourney__pokemon_galar_region_galar_gen_8_pokemon_urban_city_3fcd9e3a-3076-4a25-9c8f-430cd3be28c5.png?width=1147&height=642)"
+          //     );
+          //     break;
+          //   case "generation-ix":
+          //     setPkmnInfoBg(
+          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142515725479710820/midjourney__pokemon_paldea_region_paldea_gen_9_pokemon_safari_g_872d97cb-9da2-4d6a-ad49-43a13def709e.png?width=1147&height=642)"
+          //     );
+          //     break;
+          // }
         } catch (err) {
           switch (nameValue.toLocaleLowerCase()) {
             case "basculin-red-striped":
@@ -1011,9 +1015,10 @@ export default function Poke() {
         "#shareWidgets .tweet-input"
       ).value = `I generated ${
         evoRes.data.names
-        .filter((item) => item.language.name === "en")
-        .map((item) => item.name)[0]
-        .charAt(0).toUpperCase() + nameValue.slice(1)
+          .filter((item) => item.language.name === "en")
+          .map((item) => item.name)[0]
+          .charAt(0)
+          .toUpperCase() + nameValue.slice(1)
       }'s color palette using PokePalette! 🎨${colorEmojiArr
         .filter((item) => item.color === evoRes.data.color.name)
         .map((item) => item.emoji)}
@@ -1021,15 +1026,47 @@ export default function Poke() {
         ${color2.toUpperCase().slice(1)}
         ${color3.toUpperCase().slice(1)}
         ${color4.toUpperCase().slice(1)}
-        \nhttps://yassenshopov.github.io/PokePalette/`
+        \nhttps://yassenshopov.github.io/PokePalette/`;
 
       document.querySelector("#pkmnInfo h2").innerHTML =
         nameValue.charAt(0).toUpperCase() +
         nameValue.slice(1) +
         ` [#${numValue}]`;
+      document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
+        resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
+        resCopy.data.types[0].type.name.slice(1);
+      if (resCopy.data.types.length > 1) {
+        document
+          .querySelector("#pkmnInfo #types")
+          .classList.remove("singleType");
+        document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
+          resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
+          resCopy.data.types[1].type.name.slice(1);
+      } else {
+        document.querySelector("#pkmnInfo #types").classList.add("singleType");
+      }
       try {
         console.log(evoRes);
-        document.querySelector("#pkmnInfo p").innerHTML =
+        let habitat = "";
+        if (evoRes.data.habitat !== null) {
+          habitat =
+            "Habitat: " +
+            evoRes.data.habitat.name.charAt(0).toUpperCase() +
+            evoRes.data.habitat.name.slice(1) +
+            "<br><br>";
+        }
+        let generation = "";
+        generation =
+          evoRes.data.generation.name.replace(
+            /generation-(\w+)/i,
+            (match, p1) => {
+              const romanNumeral = p1.toUpperCase();
+              return `Generation: ${romanNumeral}`;
+            }
+          ) + "<br><br>";
+        document.querySelector("#pkmnInfo .description").innerHTML =
+          generation +
+          habitat +
           evoRes.data.flavor_text_entries
             .filter((item) => item.language.name === "en")
             .slice(-1)

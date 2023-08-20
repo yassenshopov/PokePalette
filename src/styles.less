@@ -161,6 +161,7 @@
   }
   #pkmnInfo {
     min-height: 400px;
+    height: fit-content;
     position: relative;
     box-sizing: border-box;
     background: var(--color2);
@@ -176,20 +177,45 @@
       h2 {
         font-size: 2.5rem;
       }
+      #types {
+        .flexCentered(row);
+        gap: 2vw;
+        justify-content: flex-start;
+        &.singleType {
+            div:nth-child(2) {
+                display: none;
+            }
+        }
+        div {
+            .flexCentered(row);
+            gap: 1vw;
+            padding: 0.5rem 1rem;
+            border-radius: 8px;
+            background: var(--color3);
+            color: var(--hsp3);
+            font-size: 1.2rem;
+            font-family: carnacLight;
+            text-transform: capitalize;
+            &:nth-child(2) {
+                background: var(--color4);
+                color: var(--hsp4);
+            }
+        }
+      }
       p {
         font-size: 1.2rem;
         font-family: carnacLight;
       }
     }
     .imgWrapper {
-      height: 100%;
+        height: 400px;
       width: 50%;
       background: var(--pkmnInfoBg);
       background-position: center;
       background-size: cover;
       z-index: 3;
       border-radius: 1rem;
-      border: 1px solid var(--hsp2);
+    //   border: 1px solid var(--hsp2);
       position: relative;
       overflow: hidden;
       .flexCentered(column);
@@ -197,8 +223,7 @@
       position: relative;
       &:hover {
         #hiddenPkmn {
-          backdrop-filter: blur(16px);
-          filter: brightness(1) drop-shadow(0 0 20px #fff);
+          filter: brightness(1) saturate(2) drop-shadow(0 0 30px #fff);
         }
       }
       #hiddenPkmn {
@@ -213,8 +238,7 @@
         filter: brightness(0);
         transition: all 400ms ease-in-out;
         &:hover {
-          backdrop-filter: blur(16px);
-          filter: brightness(1) drop-shadow(0 0 20px #fff);
+        //   filter: brightness(1) drop-shadow(0 0 20px #fff);
         }
       }
       .colorFilter {

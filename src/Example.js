@@ -142,31 +142,36 @@ export default function Example() {
         </p>
       </div>
 
-      <section id="shareWidgets">
-        <div class="tweet-popup">
-          <img class="tweetLogo" src={twitterLogo} />
-          <textarea
-            class="tweet-input"
-            placeholder="What's happening?"
-            spellCheck="false"
-          ></textarea>
-          <button class="tweet-button noSelect" onClick={tweet}>
-            Tweet
-          </button>
-        </div>
-        <div id="share">
-          <p>Share this color palette with your friends!</p>
-        </div>
-      </section>
-
       <section id="pkmnInfo">
         <div className="txtWrapper">
           <h2></h2>
-          <p></p>
+          <div id="types">
+              <div id="primaryType"></div>
+              <div id="secondaryType"></div>
+          </div>
+          <p className="description"></p>
         </div>
         <div className="imgWrapper">
           <div id="hiddenPkmn"></div>
           <span className="colorFilter"></span>
+        </div>
+      </section>
+
+      <section id="shareWidgets">
+        <div className="tweet-popup">
+          <img className="tweetLogo" src={twitterLogo} />
+          <textarea
+            className="tweet-input"
+            placeholder="What's happening?"
+            spellCheck="false"
+          ></textarea>
+          <button className="tweet-button noSelect" onClick={tweet}>
+            Tweet
+          </button>
+        </div>
+        <div id="share">
+          <h2>Share with your friends!</h2>
+          <p>Share this color palette on Twitter with a single click</p>
         </div>
       </section>
 
