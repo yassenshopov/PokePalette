@@ -210,10 +210,6 @@ body::-webkit-scrollbar {
   filter: brightness(1.2);
 }
 
-#example #scrollDown {
-
-}
-
 #example #darkMode {
   color: var(--hsp3);
   background-color: var(--color3);
@@ -381,19 +377,6 @@ FaSun {
   min-height: fit-content;
   padding: 50px 2vw 50px 2vw;
   box-sizing: border-box;
-}
-
-#example #cards > div {
-  width: 100%;
-  height: 150px;
-  color: var(--color1);
-  border-radius: 7px;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  transition: all 200ms ease-in-out;
-  cursor: pointer;
 }
 
 #example #cards > div:active {
