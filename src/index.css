@@ -211,17 +211,7 @@ body::-webkit-scrollbar {
 }
 
 #example #scrollDown {
-  color: var(--hsp4);
-  background-color: var(--color4);
-  padding: 15px 20px 15px 20px;
-  font-size: 1vw;
-  margin-top: 50px;
-  margin-right: 20px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-decoration: none;
-  font-family: "Raleway", sans-serif;
-  font-weight: 700;
+
 }
 
 #example #darkMode {
@@ -444,17 +434,6 @@ FaSun {
 }
 
 @media screen and (max-width: 768px) {
-  .App {
-    flex-direction: column;
-  }
-
-  .pokeCard {
-    height: 80vh;
-    border: 0px solid #121212;
-    gap: 0vh;
-    padding: 10vw;
-    width: 80vw;
-  }
 
   .pokeCard #buttons {
     margin-top: 20px;

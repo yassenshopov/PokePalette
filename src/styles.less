@@ -150,6 +150,20 @@ body {
     background: var(--mainDark);
     color: var(--color1);
   }
+  main {
+    #scrollDown {
+      color: var(--hsp4);
+      background-color: var(--color4);
+      padding: 15px 20px 15px 20px;
+      font-size: 1vw;
+      margin-top: 0px;
+      border-radius: 5px;
+      cursor: pointer;
+      text-decoration: none;
+      font-family: "Raleway", sans-serif;
+      font-weight: 700;
+    }
+  }
   #cards {
     .colorCard {
       border: 1px solid var(--hsp2);
@@ -385,7 +399,22 @@ body {
 }
 
 @media screen and (max-width: 768px) {
+  .App {
+    flex-direction: column;
+  }
+
+  .example,
+  .poke {
+    width: 100vw;
+    position: relative;
+  }
+
   .pokeCard {
+    height: 80vh;
+    border: 0px solid #121212;
+    gap: 0vh;
+    padding: 10vw;
+    width: 80vw;
     .labelInput {
       #shinyBtn {
         top: 58%;

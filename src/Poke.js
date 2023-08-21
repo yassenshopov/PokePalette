@@ -289,17 +289,14 @@ export default function Poke() {
         } catch (err) {
           switch (nameValue.toLocaleLowerCase()) {
             case "basculin-red-striped":
-              evoRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon-species/basculin`
-              );
             case "basculin-blue-striped":
-              evoRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon-species/basculin`
-              );
             case "basculin-white-striped":
-              evoRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon-species/basculin`
+              setEvoRes(
+                await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon-species/basculin`
+                )
               );
+              console.log(evoRes);
           }
           console.log(err);
         }
@@ -611,7 +608,7 @@ export default function Poke() {
           try {
             try {
               let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-
+              console.log(evoChain);
               let stageNumber = 1;
 
               if (evoChain.data.chain.evolves_to.length !== 0) {
@@ -726,6 +723,9 @@ export default function Poke() {
                         evoChain.data.chain.evolves_to[randInt].species.name;
                     }
                     break;
+                  default:
+                    console.log("This mon is a single-stager");
+                    evoBtnCheck = false;
                 }
               } else {
                 // Either remove or simply not put the evoBtn there
@@ -854,7 +854,6 @@ export default function Poke() {
   };
 
   useEffect(() => {
-    const container = document.querySelector(".pokeCard");
     const myCanvas = document.getElementById("my-canvas");
     const imgData = document.getElementById("imgData");
     const myContext = myCanvas.getContext("2d");
@@ -1012,81 +1011,84 @@ export default function Poke() {
       ];
 
       if (!isLoading) {
-      document.querySelector(
-        "#shareWidgets .tweet-input"
-      ).value = `I generated ${
-        evoRes.data.names
-          .filter((item) => item.language.name === "en")
-          .map((item) => item.name)[0]
-          .charAt(0)
-          .toUpperCase() + nameValue.slice(1)
-      }'s color palette using PokePalette! 🎨${colorEmojiArr
-        .filter((item) => item.color === evoRes.data.color.name)
-        .map((item) => item.emoji)}
+        document.querySelector(
+          "#shareWidgets .tweet-input"
+        ).value = `I generated ${
+          evoRes.data.names
+            .filter((item) => item.language.name === "en")
+            .map((item) => item.name)[0]
+            .charAt(0)
+            .toUpperCase() + nameValue.slice(1)
+        }'s color palette using PokePalette! 🎨${colorEmojiArr
+          .filter((item) => item.color === evoRes.data.color.name)
+          .map((item) => item.emoji)}
 
         ${color2.toUpperCase().slice(1)}
         ${color3.toUpperCase().slice(1)}
         ${color4.toUpperCase().slice(1)}
         \nhttps://yassenshopov.github.io/PokePalette/`;
 
-        
-      document.querySelector("#pkmnInfo h2").innerHTML =
-      nameValue.charAt(0).toUpperCase() +
-      nameValue.slice(1) +
-      ` [#${numValue}]`;
-    document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
-      resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
-      resCopy.data.types[0].type.name.slice(1);
-    if (resCopy.data.types.length > 1) {
-      document
-        .querySelector("#pkmnInfo #types")
-        .classList.remove("singleType");
-      document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
-        resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
-        resCopy.data.types[1].type.name.slice(1);
-    } else {
-      document.querySelector("#pkmnInfo #types").classList.add("singleType");
-    }
-    try {
-      console.log(evoRes);
-      let habitat = "";
-      if (evoRes.data.habitat !== null) {
-        habitat =
-          "Habitat: " +
-          evoRes.data.habitat.name.charAt(0).toUpperCase() +
-          evoRes.data.habitat.name.slice(1) +
-          "<br><br>";
-      }
-      let generation = "";
-      generation =
-        evoRes.data.generation.name.replace(
-          /generation-(\w+)/i,
-          (match, p1) => {
-            const romanNumeral = p1.toUpperCase();
-            return `Generation: ${romanNumeral}`;
+        document.querySelector("#pkmnInfo h2").innerHTML =
+          nameValue.charAt(0).toUpperCase() +
+          nameValue.slice(1) +
+          ` [#${numValue}]`;
+        document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
+          resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
+          resCopy.data.types[0].type.name.slice(1);
+        if (resCopy.data.types.length > 1) {
+          document
+            .querySelector("#pkmnInfo #types")
+            .classList.remove("singleType");
+          document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
+            resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
+            resCopy.data.types[1].type.name.slice(1);
+        } else {
+          document
+            .querySelector("#pkmnInfo #types")
+            .classList.add("singleType");
+        }
+        try {
+          console.log(evoRes);
+          let habitat = "";
+          if (evoRes.data.habitat !== null) {
+            habitat =
+              "Habitat: " +
+              evoRes.data.habitat.name.charAt(0).toUpperCase() +
+              evoRes.data.habitat.name.slice(1) +
+              "<br><br>";
           }
-        ) + "<br><br>";
-      document.querySelector("#pkmnInfo .description").innerHTML =
-        generation +
-        habitat +
-        evoRes.data.flavor_text_entries
-          .filter((item) => item.language.name === "en")
-          .slice(-1)
-          .map((item) => item.flavor_text);
-    } catch (err) {
-      console.log(err);
-    }
+          let generation = "";
+          generation =
+            evoRes.data.generation.name.replace(
+              /generation-(\w+)/i,
+              (match, p1) => {
+                const romanNumeral = p1.toUpperCase();
+                return `Generation: ${romanNumeral}`;
+              }
+            ) + "<br><br>";
+          document.querySelector("#pkmnInfo .description").innerHTML =
+            generation +
+            habitat +
+            evoRes.data.flavor_text_entries
+              .filter((item) => item.language.name === "en")
+              .slice(-1)
+              .map((item) => item.flavor_text);
+        } catch (err) {
+          console.log(err);
+        }
       } else {
         document.querySelector(
           "#shareWidgets .tweet-input"
         ).value = `Loading...`;
 
         document.querySelector("#pkmnInfo h2").innerHTML = `Loading...`;
-        document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
-          ``
-        document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
-          ``
-        document.querySelector("#pkmnInfo .description").innerHTML = `Loading...`;
+        document.querySelector("#pkmnInfo #types #primaryType").innerHTML = ``;
+        document.querySelector(
+          "#pkmnInfo #types #secondaryType"
+        ).innerHTML = ``;
+        document.querySelector(
+          "#pkmnInfo .description"
+        ).innerHTML = `Loading...`;
       }
     };
   });
@@ -1210,7 +1212,7 @@ export default function Poke() {
           Randomize
         </button>
       </div>
-      <img src={artURL} style={{ display: "none" }} />
+      <img src={artURL} style={{ display: "none" }} alt="hiddenPokemon" />
     </div>
   );
 }
