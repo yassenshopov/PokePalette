@@ -192,6 +192,7 @@ export default function Poke() {
           "copperajah",
           "duraludon",
         ];
+        let paldeaList = ["wooper", "tauros"];
 
         // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
 
@@ -228,6 +229,13 @@ export default function Poke() {
           document.getElementById("gmaxBtn") != null
         ) {
           document.getElementById("gmaxBtn").remove();
+        }
+
+        if (
+          typeof document.getElementById("paldeaBtn") != "undefined" &&
+          document.getElementById("paldeaBtn") != null
+        ) {
+          document.getElementById("paldeaBtn").remove();
         }
 
         try {
@@ -533,6 +541,65 @@ export default function Poke() {
           };
           gmaxBtn.classList.toggle("noSelect");
           document.getElementById("buttons").appendChild(gmaxBtn);
+        }
+
+        if (paldeaList.includes(nameValue)) {
+          let paldeaBtn = document.createElement("button");
+          paldeaBtn.innerHTML = "Paldea Form 🌊";
+          paldeaBtn.id = "paldeaBtn";
+          let paldeaBtnToggle = true;
+          paldeaBtn.onclick = async () => {
+            if (paldeaBtnToggle) {
+              let paldea = nameValue + "-paldea";
+              let paldeaRes;
+              if (nameValue === "tauros") {
+                paldeaRes = await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon/${paldea}-combat-breed`
+                );
+              } else {
+                paldeaRes = await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon/${paldea}`
+                );
+              }
+
+              if (shiny === true) {
+                setImg(paldeaRes.data.sprites.front_shiny);
+              } else {
+                setImg(paldeaRes.data.sprites.front_default);
+              }
+              document.getElementById("artCanvas").classList.toggle("shine");
+              setTimeout(() => {
+                document.getElementById("artCanvas").classList.toggle("shine");
+              }, 6000);
+              setTimeout(() => {
+                setURL(
+                  paldeaRes.data.sprites.other["official-artwork"].front_default
+                );
+              }, 3000);
+              paldeaBtn.innerHTML = "↩️";
+            } else {
+              if (shiny === true) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.front_default);
+              }
+              document.getElementById("artCanvas").classList.toggle("deshine");
+              setTimeout(() => {
+                document
+                  .getElementById("artCanvas")
+                  .classList.toggle("deshine");
+              }, 2000);
+              setTimeout(() => {
+                setURL(
+                  res.data.sprites.other["official-artwork"].front_default
+                );
+              }, 500);
+              paldeaBtn.innerHTML = "Paldea Form 🌊";
+            }
+            paldeaBtnToggle = !paldeaBtnToggle;
+          };
+          paldeaBtn.classList.toggle("noSelect");
+          document.getElementById("buttons").appendChild(paldeaBtn);
         }
 
         if (megaEvoList.includes(nameValue)) {
