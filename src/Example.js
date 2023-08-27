@@ -3,6 +3,7 @@ import { BiCopy } from "react-icons/bi";
 import bgDark from "../src/img/bgDark.webp";
 import bgLight from "../src/img/bgLight.webp";
 import twitterLogo from "../src/img/x.webp";
+import { useState } from "react";
 
 export default function Example() {
   let loadMoreCardsToggle = false;
@@ -68,6 +69,8 @@ export default function Example() {
     window.open(tweetURL);
   };
 
+  const [darkMode, setDarkMode] = useState(false);
+
   return (
     <div id="example">
       <main id="main">
@@ -79,10 +82,6 @@ export default function Example() {
             This website allows you to enter a Pokemon's name (or simply its
             number in the Pokedex), and its top 3 colours will be extracted.
           </p>
-          {/* <p>
-            [Built with <strong>React</strong> <FaReact id="faReact" /> and the{" "}
-            <strong>PokeAPI</strong> <MdCatchingPokemon />]
-          </p> */}
           <div id="customButtons">
             <button id="scrollDown" onClick={scrollDown}>
               Scroll down ⬇
@@ -90,7 +89,9 @@ export default function Example() {
             <button
               id="darkMode"
               aria-label="Dark or Light Mode"
+              className={'noSelect ' + (darkMode ? "clicked" : "")}
               onClick={() => {
+                setDarkMode(!darkMode);
                 let root = document.querySelector(":root");
                 let temp_color =
                   getComputedStyle(root).getPropertyValue("--color1");
@@ -112,12 +113,9 @@ export default function Example() {
                 darkTheme = !darkTheme;
               }}
             >
-              <div id="sun">
-                <FaSun />
-              </div>
-              <div id="moon">
-                <FaMoon />
-              </div>
+              <FaSun />
+              <FaMoon />
+              <div></div>
             </button>
           </div>
         </section>
@@ -193,8 +191,7 @@ export default function Example() {
               <span>functional</span>
               <span>customisable</span>
             </div>
-            website with <strong>Inkmorphism</strong> - the AI website
-            builder
+            website with <strong>Inkmorphism</strong> - the AI website builder
           </p>
           <button
             onClick={() => {

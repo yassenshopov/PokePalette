@@ -104,7 +104,6 @@ export default function Poke() {
             optionsMenu.onchange = async () => {
               setIsLoading(true);
               let optionsMenu = document.getElementById("optionsMenu");
-              let selectedOption = optionsMenu.value;
               let selectedOptionIndex = optionsMenu.selectedIndex;
               let selectedOptionText =
                 optionsMenu.options[selectedOptionIndex].text;
@@ -324,6 +323,7 @@ export default function Poke() {
 
             evoBtn.onclick = () => {
               // Check for branch-evos
+              setIsLoading(true);
               document.getElementById("artCanvas").classList.toggle("shine");
               setTimeout(() => {
                 document.getElementById("artCanvas").classList.toggle("shine");
@@ -477,6 +477,14 @@ export default function Poke() {
       color9 = sortedScheme[7][0];
       color10 = sortedScheme[8][0];
 
+      //convert hex to rgb:
+      function hexToRgb(hex) {
+        const r = parseInt(hex.slice(1, 3), 16);
+        const g = parseInt(hex.slice(3, 5), 16);
+        const b = parseInt(hex.slice(5, 7), 16);
+        return [r, g, b];
+      }
+
       let color_list = {
         color2: color2,
         color3: color3,
@@ -514,18 +522,12 @@ export default function Poke() {
 
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
-        // console.log(key, value)
         if (hsp(value.toUpperCase()) > 150) {
           root.style.setProperty(hsp_list[i], "#121212");
           root.style.setProperty(anti_hsp_list[i], "#f1f1f1");
         } else {
           root.style.setProperty(hsp_list[i], "#f1f1f1");
           root.style.setProperty(anti_hsp_list[i], "#121212");
-        }
-        document.getElementsByClassName(key);
-        for (let j = 0; j < document.getElementsByClassName(key).length; j++) {
-          document.getElementsByClassName(key)[j].innerHTML =
-            value.toUpperCase();
         }
         i++;
       }
@@ -541,6 +543,16 @@ export default function Poke() {
       root.style.setProperty("--color8", color8);
       root.style.setProperty("--color9", color9);
       root.style.setProperty("--color10", color10);
+
+      root.style.setProperty("--color2word", `"${color2.toUpperCase()}"`);
+      root.style.setProperty("--color3word", `"${color3.toUpperCase()}"`);
+      root.style.setProperty("--color4word", `"${color4.toUpperCase()}"`);
+      root.style.setProperty("--color5word", `"${color5.toUpperCase()}"`);
+      root.style.setProperty("--color6word", `"${color6.toUpperCase()}"`);
+      root.style.setProperty("--color7word", `"${color7.toUpperCase()}"`);
+      root.style.setProperty("--color8word", `"${color8.toUpperCase()}"`);
+      root.style.setProperty("--color9word", `"${color9.toUpperCase()}"`);
+      root.style.setProperty("--color10word", `"${color10.toUpperCase()}"`);
 
       root.style.setProperty("--artURL", fullArtURL);
       root.style.setProperty("--pkmnInfoBg", pkmnInfoBg);
@@ -670,16 +682,6 @@ export default function Poke() {
     );
     return hsp;
   }
-
-  // let body = document.querySelector("body");
-  // body.addEventListener('keydown', (e) => {
-  //   console.log(e)
-  //   if (e.key == "ArrowUp") {
-  //     increase();
-  //   } else if (e.key == "ArrowDown") {
-  //     decrease();
-  //   }
-  // })
 
   const [isLoading, setIsLoading] = useState(false);
 

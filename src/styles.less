@@ -140,7 +140,7 @@ body {
     }
   }
   select {
-    font-size: 1.2rem !important;
+    font-size: 1.4rem !important;
   }
 }
 
@@ -154,6 +154,10 @@ body {
     color: var(--color1);
   }
   main {
+    #customButtons {
+      .flexCentered(row);
+      width: fit-content;
+    }
     #scrollDown {
       color: var(--hsp4);
       background-color: var(--color4);
@@ -166,10 +170,37 @@ body {
       font-family: "Raleway", sans-serif;
       font-weight: 700;
     }
+    #darkMode {
+      color: var(--hsp3);
+      background-color: var(--color3);
+      border-radius: 50px;
+      padding: 13px 14px 13px 14px;
+      margin: 0;
+      font-size: 1.4rem;
+      width: 6vw;
+      .flexCentered(row);
+      justify-content: space-between;
+      position: relative;
+      transition: all 200ms ease-in-out;
+      div {
+        position: absolute;
+        right: 10%;
+        border-radius: 50%;
+        height: 65%;
+        width: 2.1vw;
+        background-color: var(--hsp3);
+        transition: all 200ms ease-in-out;
+      }
+      &.clicked {
+        div {
+          right: auto;
+          left: 10%;
+        }
+      }
+    }
   }
   #cards {
     background-color: var(--mainDark) !important;
-
     .colorCard {
       width: 100%;
       height: 150px;
@@ -181,7 +212,33 @@ body {
       align-items: center;
       transition: all 200ms ease-in-out;
       cursor: pointer;
-      // border: 1px solid var(--hsp2);
+      .color2::after {
+        content: var(--color2word);
+      }
+      .color3::after {
+        content: var(--color3word);
+      }
+      .color4::after {
+        content: var(--color4word);
+      }
+      .color5::after {
+        content: var(--color5word);
+      }
+      .color6::after {
+        content: var(--color6word);
+      }
+      .color7::after {
+        content: var(--color7word);
+      }
+      .color8::after {
+        content: var(--color8word);
+      }
+      .color9::after {
+        content: var(--color9word);
+      }
+      .color10::after {
+        content: var(--color10word);
+      }
       &:nth-child(1) {
         background-color: var(--color2);
         color: var(--hsp2);

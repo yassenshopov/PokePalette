@@ -192,7 +192,7 @@ body::-webkit-scrollbar {
   }
 }
 .pokeCard select {
-  font-size: 1.2rem !important;
+  font-size: 1.4rem !important;
 }
 .example:nth-child(2n) {
   background: var(--color2);
@@ -201,6 +201,13 @@ body::-webkit-scrollbar {
 .example:nth-child(2n + 1) {
   background: var(--mainDark);
   color: var(--color1);
+}
+.example main #customButtons {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
 }
 .example main #scrollDown {
   color: var(--hsp4);
@@ -213,6 +220,35 @@ body::-webkit-scrollbar {
   text-decoration: none;
   font-family: "Raleway", sans-serif;
   font-weight: 700;
+}
+.example main #darkMode {
+  color: var(--hsp3);
+  background-color: var(--color3);
+  border-radius: 50px;
+  padding: 13px 14px 13px 14px;
+  margin: 0;
+  font-size: 1.4rem;
+  width: 6vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+  position: relative;
+  transition: all 200ms ease-in-out;
+}
+.example main #darkMode div {
+  position: absolute;
+  right: 10%;
+  border-radius: 50%;
+  height: 65%;
+  width: 2.1vw;
+  background-color: var(--hsp3);
+  transition: all 200ms ease-in-out;
+}
+.example main #darkMode.clicked div {
+  right: auto;
+  left: 10%;
 }
 .example #cards {
   background-color: var(--mainDark) !important;
@@ -228,6 +264,33 @@ body::-webkit-scrollbar {
   align-items: center;
   transition: all 200ms ease-in-out;
   cursor: pointer;
+}
+.example #cards .colorCard .color2::after {
+  content: var(--color2word);
+}
+.example #cards .colorCard .color3::after {
+  content: var(--color3word);
+}
+.example #cards .colorCard .color4::after {
+  content: var(--color4word);
+}
+.example #cards .colorCard .color5::after {
+  content: var(--color5word);
+}
+.example #cards .colorCard .color6::after {
+  content: var(--color6word);
+}
+.example #cards .colorCard .color7::after {
+  content: var(--color7word);
+}
+.example #cards .colorCard .color8::after {
+  content: var(--color8word);
+}
+.example #cards .colorCard .color9::after {
+  content: var(--color9word);
+}
+.example #cards .colorCard .color10::after {
+  content: var(--color10word);
 }
 .example #cards .colorCard:nth-child(1) {
   background-color: var(--color2);

@@ -178,7 +178,7 @@ body::-webkit-scrollbar {
   margin-right: 20px;
   border-radius: 5px;
   border: 0px solid #121212;
-  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2);
+  /* box-shadow: 0 4px 30px rgba(0, 0, 0, 0.2); */
   cursor: pointer;
   transition: all 200ms ease-in-out;
   font-weight: 500;
@@ -189,26 +189,13 @@ body::-webkit-scrollbar {
   filter: brightness(1.2);
 }
 
-#example #darkMode {
-  color: var(--hsp3);
-  background-color: var(--color3);
-  border-radius: 50%;
-  padding: 13px 14px 13px 14px;
-  margin: 0;
-}
-
-FaMoon,
-FaSun {
-  color: var(--hsp3);
-}
-
 #moon {
   display: none;
 }
 
 #example main #backdrop {
-  background-color: var(--color2);
-  mix-blend-mode: color;
+  background-color: var(--mainDark);
+  /* mix-blend-mode: color; */
   opacity: 0.4;
   width: 70vw;
   height: 100vh;
@@ -219,7 +206,7 @@ FaSun {
 }
 
 #example main {
-  background-image: var(--bgURL);
+  background-image: var(--color2);
   background-size: 300vh auto;
   background-position: left;
   padding: 0px 10% 20px 10%;
@@ -235,7 +222,7 @@ FaSun {
   width: 35vw;
   border-radius: 16px;
   z-index: 1;
-  color: var(--color1);
+  color: var(--hsp2);
 }
 
 #example main #artCanvas {
@@ -245,7 +232,7 @@ FaSun {
   background-repeat: no-repeat;
   width: 35vw;
   height: 35vw;
-  filter: drop-shadow(0 0 20px var(--mainDark));
+  /* filter: drop-shadow(0 0 40px var(--mainDark)); */
   z-index: 9;
   /* padding: 0 50px 0 50px; */
   /* background-blend-mode: color; */
@@ -259,10 +246,10 @@ FaSun {
 #example main #artCanvas #colorFilter {
   width: 100%;
   height: 100%;
-  background-color: var(--color2);
+  background-color: var(--mainDark);
   opacity: 0.85;
   border-radius: 100px;
-  mix-blend-mode: hue;
+  mix-blend-mode: darken;
   filter: blur(100px);
   transition: all 1s ease-in-out;
   opacity: 0.1;
@@ -335,18 +322,7 @@ FaSun {
   }
 }
 
-@keyframes spin {
-  50% {
-    filter: brightness(20) blur(50px) drop-shadow(0 0 10px #ffffff);
-    transform: rotate(1860deg);
-  }
-}
-
 #example #cards {
-  /* display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center; */
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: 1fr;
