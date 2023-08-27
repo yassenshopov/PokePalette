@@ -211,6 +211,9 @@ body::-webkit-scrollbar {
   font-family: "Raleway", sans-serif;
   font-weight: 700;
 }
+.example #cards {
+  background-color: var(--mainDark) !important;
+}
 .example #cards .colorCard {
   width: 100%;
   height: 150px;
@@ -222,7 +225,6 @@ body::-webkit-scrollbar {
   align-items: center;
   transition: all 200ms ease-in-out;
   cursor: pointer;
-  border: 1px solid var(--hsp2);
 }
 .example #cards .colorCard:nth-child(1) {
   background-color: var(--color2);
@@ -270,7 +272,8 @@ body::-webkit-scrollbar {
   cursor: pointer;
   grid-column: 1/4;
   margin: 20px 0;
-  border: 1px solid var(--hsp2);
+  background-color: var(--color3);
+  color: var(--hsp3);
 }
 .example #shareWidgets {
   padding: 40px 3vw;
@@ -415,7 +418,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 .example #pkmnInfo .imgWrapper:hover #hiddenPkmn {
-  filter: brightness(1) saturate(2) drop-shadow(0 0 30px #fff);
+  filter: brightness(1) saturate(2);
 }
 .example #pkmnInfo .imgWrapper #hiddenPkmn {
   position: relative;
@@ -430,7 +433,6 @@ body::-webkit-scrollbar {
   transition: all 400ms ease-in-out;
 }
 .example #pkmnInfo .imgWrapper .colorFilter {
-  background: var(--color2);
   position: absolute;
   top: 0;
   height: 100%;
@@ -440,28 +442,227 @@ body::-webkit-scrollbar {
   z-index: 0;
   mix-blend-mode: color;
 }
+.example .imAd {
+  background-color: var(--mainDark);
+  color: var(--color1);
+  padding: 40px 4vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-evenly;
+  gap: 5vw;
+  font-family: "Raleway", sans-serif;
+}
+.example .imAd > * {
+  width: 50%;
+  text-align: right;
+}
+.example .imAd #info {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 60%;
+  gap: 0;
+}
+.example .imAd #info button {
+  width: 100%;
+}
+.example .imAd h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.5;
+  margin: 0;
+}
+.example .imAd #title {
+  line-height: 2;
+  font-weight: 400;
+  font-size: 1.2rem;
+  flex-wrap: wrap;
+  word-wrap: wrap;
+  display: inline;
+}
+.example .imAd #title #titleWords > span {
+  font-size: 1.2rem;
+  font-family: "Raleway", sans-serif;
+  padding: 0.5rem 1rem;
+  line-height: 2.5;
+  border-radius: 8px;
+  font-weight: 700;
+  margin-left: 1vw;
+}
+.example .imAd #title #titleWords > span:nth-child(1) {
+  background: var(--color2);
+  color: var(--hsp2);
+}
+.example .imAd #title #titleWords > span:nth-child(2) {
+  background: var(--color3);
+  color: var(--hsp3);
+}
+.example .imAd #title #titleWords > span:nth-child(3) {
+  background: var(--color4);
+  color: var(--hsp4);
+}
+.example .imAd button {
+  font-family: "Raleway", sans-serif;
+  color: var(--color1);
+  background-color: var(--mainDark);
+  display: block;
+  font-size: 1.2rem;
+  border: none;
+  padding: 1.5rem 4vw;
+  width: fit-content;
+  margin: 1.4rem 0;
+  text-decoration: none;
+  transition: all 0.2s ease-in-out;
+  width: max-content;
+  border-radius: 2rem;
+  animation: buttonAnimation 1s infinite;
+  font-weight: 500;
+  background-color: var(--color3);
+  color: var(--hsp3);
+}
+.example .imAd button:hover {
+  background-color: var(--color1);
+  color: var(--mainDark);
+}
+.example .imAd #palette {
+  border: 5px solid var(--mainDark);
+  border-bottom: none;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.example .imAd #palette > div {
+  width: 100%;
+  height: 20px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+  padding: 0.5rem 1rem;
+}
+.example .imAd #palette > div:nth-child(1) {
+  background: var(--color2);
+  color: var(--hsp2);
+}
+.example .imAd #palette > div:nth-child(2) {
+  background: var(--color3);
+  color: var(--hsp3);
+}
+.example .imAd #palette > div:nth-child(3) {
+  background: var(--color4);
+  color: var(--hsp4);
+}
+.example .imAd #site {
+  height: 380px;
+  overflow: hidden;
+  border: 5px solid var(--mainDark);
+}
+.example .imAd #site nav {
+  background: var(--color3);
+  height: 15%;
+  box-sizing: border-box;
+  padding: 10px 1vw;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: space-between;
+}
+.example .imAd #site nav #logo {
+  height: 90%;
+  width: 8%;
+  background: var(--color2);
+}
+.example .imAd #site nav #links {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1vw;
+}
+.example .imAd #site nav #links > div {
+  padding: 0.5rem 1rem;
+  background: var(--color2);
+}
+.example .imAd #site nav #links > div:last-child {
+  background: var(--color4);
+}
+.example .imAd #site main {
+  background: var(--color2);
+  height: 70%;
+  padding: 5% 2vw;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+}
+.example .imAd #site main > * {
+  box-sizing: border-box;
+  width: 50%;
+}
+.example .imAd #site main #img {
+  height: 100%;
+  width: 50%;
+  background: var(--color3);
+}
+.example .imAd #site main #text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.example .imAd #site main #text #h1 {
+  width: 100%;
+  height: 20px;
+  background-color: var(--color3);
+}
+.example .imAd #site main #text p {
+  width: 50%;
+  height: 20px;
+  background-color: var(--color3);
+}
+.example .imAd #site footer {
+  background: var(--color3);
+  height: 15%;
+  box-sizing: border-box;
+  padding: 10px 1vw;
+}
 .example footer {
   display: flex;
   flex-direction: row;
   justify-content: center;
   gap: 10vw;
   align-items: center;
-  color: var(--hsp2);
-  background-color: var(--color2);
+  background-color: var(--mainDark);
+  font-family: "Raleway", sans-serif;
+  color: var(--color1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   font-size: 1vw;
   padding: 20px 0 20px 0;
   text-align: center;
 }
-.example footer #faIcons svg {
+.example footer a {
+  color: var(--color1) !important;
+}
+.example footer #faIcons a {
   cursor: pointer;
   transition: all 200ms ease-in-out;
   border-radius: 8px;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
 }
-.example footer #faIcons svg:hover {
-  color: var(--color2);
-  background-color: var(--hsp2);
+.example footer #faIcons a:hover {
+  color: var(--hsp2) !important;
+  background-color: var(--color2);
 }
 @media screen and (max-width: 768px) {
   .App {
@@ -507,5 +708,47 @@ body::-webkit-scrollbar {
   .example #pkmnInfo .imgWrapper {
     height: 400px;
     width: 100%;
+  }
+  .example .imAd {
+    flex-direction: column-reverse;
+    text-align: center;
+  }
+  .example .imAd > * {
+    width: 100%;
+  }
+  .example .imAd #info {
+    text-align: center;
+    width: 100%;
+  }
+  .example .imAd #info #titleWords {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: 20px 0;
+    gap: 20px;
+  }
+  .example .imAd #info #titleWords span {
+    margin: 0;
+    padding: 0 5vw;
+  }
+  .example .imAd #palette {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+  }
+  .example .imAd #palette > div {
+    width: 100%;
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    gap: 1vw;
+    padding: 0.5rem 1rem;
+  }
+  .example .imAd #site main {
+    gap: 5vw;
   }
 }

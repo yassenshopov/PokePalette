@@ -192,7 +192,7 @@ body::-webkit-scrollbar {
   width: 80%;
 }
 
-#example button {
+.example button {
   padding: 15px 20px 15px 20px;
   font-size: 1vw;
   margin-top: 50px;

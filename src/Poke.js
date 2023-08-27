@@ -1028,6 +1028,17 @@ export default function Poke() {
         ${color4.toUpperCase().slice(1)}
         \nhttps://yassenshopov.github.io/PokePalette/`;
 
+        document.querySelector(".pokeName").innerHTML =
+          (nameValue.charAt(0) === "a" ||
+          nameValue.charAt(0) === "e" ||
+          nameValue.charAt(0) === "o" ||
+          nameValue.charAt(0) === "i" ||
+          nameValue.charAt(0) === "u"
+            ? "an "
+            : "a ") +
+          nameValue.charAt(0).toUpperCase() +
+          nameValue.slice(1);
+
         document.querySelector("#pkmnInfo h2").innerHTML =
           nameValue.charAt(0).toUpperCase() +
           nameValue.slice(1) +

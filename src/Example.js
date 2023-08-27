@@ -1,5 +1,4 @@
-import { FaReact, FaMoon, FaSun, FaTwitter, FaGithub } from "react-icons/fa";
-import { MdCatchingPokemon } from "react-icons/md";
+import { FaMoon, FaSun, FaTwitter, FaGithub } from "react-icons/fa";
 import { BiCopy } from "react-icons/bi";
 import bgDark from "../src/img/bgDark.webp";
 import bgLight from "../src/img/bgLight.webp";
@@ -57,7 +56,7 @@ export default function Example() {
 
   const scrollDown = () => {
     window.scrollBy({
-      top: 600,
+      top: 900,
       behavior: "smooth",
     });
   };
@@ -80,10 +79,10 @@ export default function Example() {
             This website allows you to enter a Pokemon's name (or simply its
             number in the Pokedex), and its top 3 colours will be extracted.
           </p>
-          <p>
+          {/* <p>
             [Built with <strong>React</strong> <FaReact id="faReact" /> and the{" "}
             <strong>PokeAPI</strong> <MdCatchingPokemon />]
-          </p>
+          </p> */}
           <div id="customButtons">
             <button id="scrollDown" onClick={scrollDown}>
               Scroll down ⬇
@@ -144,10 +143,10 @@ export default function Example() {
 
       <section id="pkmnInfo">
         <div className="txtWrapper">
-          <h2></h2>
+          <h2>Pokemon name</h2>
           <div id="types">
-              <div id="primaryType"></div>
-              <div id="secondaryType"></div>
+            <div id="primaryType"></div>
+            <div id="secondaryType"></div>
           </div>
           <p className="description"></p>
         </div>
@@ -157,9 +156,60 @@ export default function Example() {
         </div>
       </section>
 
+      <section className="imAd">
+        <div className="sampleSite">
+          <div id="palette">
+            <div></div>
+            <div></div>
+            <div></div>
+          </div>
+          <div id="site">
+            <nav>
+              <div id="logo"></div>
+              <div id="links">
+                <div></div>
+                <div></div>
+                <div></div>
+              </div>
+            </nav>
+            <main>
+              <div id="text">
+                <p id="h1"></p>
+                <p></p>
+              </div>
+              <div id="img"></div>
+            </main>
+            <footer></footer>
+          </div>
+        </div>
+        <div id="info">
+          <h2>
+            Create <span className="pokeName">a Pokemon</span>-inspired website
+          </h2>
+          <p id="title">
+            Use this color palette to create a<br></br>
+            <div id="titleWords">
+              <span>beautiful</span>
+              <span>functional</span>
+              <span>customisable</span>
+            </div>
+            website with <strong>Inkmorphism</strong> - the AI website
+            builder
+          </p>
+          <button
+            onClick={() => {
+              window.open("https://inkmorphism.com");
+            }}
+            className="noSelect"
+          >
+            Get started for free
+          </button>
+        </div>
+      </section>
+
       <section id="shareWidgets">
         <div className="tweet-popup">
-          <img className="tweetLogo" src={twitterLogo} />
+          <img className="tweetLogo" src={twitterLogo} alt="Twitter Logo" />
           <textarea
             className="tweet-input"
             placeholder="What's happening?"
@@ -178,15 +228,29 @@ export default function Example() {
       <footer id="footer">
         <p>
           Copyright © PokePalette 2022<br></br>- by{" "}
-          <a href="https://github.com/yassenshopov" target="_blank">
+          <a
+            href="https://github.com/yassenshopov"
+            target="_blank"
+            rel="noreferrer"
+          >
             Yassen Shopov
           </a>
         </p>
         <div id="faIcons">
-          <a href="https://twitter.com/yassenshopov" target="_blank">
+          <a
+            href="https://twitter.com/yassenshopov"
+            target="_blank"
+            rel="noreferrer"
+            className="noSelect"
+          >
             <FaTwitter />
           </a>
-          <a href="https://github.com/yassenshopov" target="_blank">
+          <a
+            href="https://github.com/yassenshopov"
+            target="_blank"
+            rel="noreferrer"
+            className="noSelect"
+          >
             <FaGithub />
           </a>
         </div>
