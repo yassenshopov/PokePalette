@@ -57,142 +57,6 @@ export default function Poke() {
         setResCopy(res);
         console.log(res);
         let evoBtnCheck = true;
-        let megaEvoList = [
-          "venusaur",
-          "charizard",
-          "blastoise",
-          "alakazam",
-          "gengar",
-          "kangaskhan",
-          "pinsir",
-          "gyarados",
-          "aerodactyl",
-          "mewtwo",
-          "ampharos",
-          "scizor",
-          "heracross",
-          "houndoom",
-          "tyranitar",
-          "blaziken",
-          "gardevoir",
-          "mawile",
-          "aggron",
-          "medicham",
-          "manectric",
-          "banette",
-          "absol",
-          "latias",
-          "latios",
-          "garchomp",
-          "lucario",
-          "abomasnow",
-          "beedrill",
-          "pidgeot",
-          "slowbro",
-          "steelix",
-          "sceptile",
-          "swampert",
-          "sableye",
-          "sharpedo",
-          "camerupt",
-          "altaria",
-          "glalie",
-          "salamence",
-          "metagross",
-          "rayquaza",
-          "lopunny",
-          "gallade",
-          "audino",
-          "diancie",
-        ];
-        let alolaList = [
-          "rattata",
-          "raticate",
-          "raichu",
-          "sandshrew",
-          "sandslash",
-          "vulpix",
-          "ninetales",
-          "diglett",
-          "dugtrio",
-          "meowth",
-          "persian",
-          "geodude",
-          "graveler",
-          "golem",
-          "grimer",
-          "muk",
-          "exeggutor",
-          "marowak",
-        ];
-        let galarList = [
-          "meowth",
-          "ponyta",
-          "rapidash",
-          "slowpoke",
-          "slowbro",
-          "farfetchd",
-          "weezing",
-          "mr-mime",
-          "articuno",
-          "zapdos",
-          "moltres",
-          "slowking",
-          "corsola",
-          "zigzagoon",
-          "linoone",
-          "darumaka",
-          "darmanitan",
-          "yamask",
-          "stunfisk",
-        ];
-        let hisuiList = [
-          "growlithe",
-          "arcanine",
-          "voltorb",
-          "electrode",
-          "typhlosion",
-          "qwilfish",
-          "sneasel",
-          "samurott",
-          "lilligant",
-          "zorua",
-          "zoroark",
-          "braviary",
-          "sliggoo",
-          "goodra",
-          "avalugg",
-          "decidueye",
-        ];
-        let gmaxList = [
-          "charizard",
-          "butterfree",
-          "pikachu",
-          "meowth",
-          "machamp",
-          "gengar",
-          "kingler",
-          "lapras",
-          "eevee",
-          "snorlax",
-          "garbodor",
-          "melmetal",
-          "corviknight",
-          "orbeetle",
-          "drednaw",
-          "coalossal",
-          "flapple",
-          "appletun",
-          "sandaconda",
-          "toxtricity",
-          "centiskorch",
-          "hatterene",
-          "grimmsnarl",
-          "alcremie",
-          "copperajah",
-          "duraludon",
-        ];
-        let paldeaList = ["wooper", "tauros"];
 
         // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
 
@@ -204,38 +68,10 @@ export default function Poke() {
         }
 
         if (
-          typeof document.getElementById("alolaBtn") != "undefined" &&
-          document.getElementById("alolaBtn") != null
+          typeof document.getElementById("optionsMenu") != "undefined" &&
+          document.getElementById("optionsMenu") != null
         ) {
-          document.getElementById("alolaBtn").remove();
-        }
-
-        if (
-          typeof document.getElementById("galarBtn") != "undefined" &&
-          document.getElementById("galarBtn") != null
-        ) {
-          document.getElementById("galarBtn").remove();
-        }
-
-        if (
-          typeof document.getElementById("hisuiBtn") != "undefined" &&
-          document.getElementById("hisuiBtn") != null
-        ) {
-          document.getElementById("hisuiBtn").remove();
-        }
-
-        if (
-          typeof document.getElementById("gmaxBtn") != "undefined" &&
-          document.getElementById("gmaxBtn") != null
-        ) {
-          document.getElementById("gmaxBtn").remove();
-        }
-
-        if (
-          typeof document.getElementById("paldeaBtn") != "undefined" &&
-          document.getElementById("paldeaBtn") != null
-        ) {
-          document.getElementById("paldeaBtn").remove();
+          document.getElementById("optionsMenu").remove();
         }
 
         try {
@@ -246,54 +82,6 @@ export default function Poke() {
           );
           console.log(evoRes);
           setPkmnInfoBg("var(--color3)");
-          // switch (evoRes.data.generation.name) {
-          //   case "generation-i":
-          //     setPkmnInfoBg(
-          //       "var(--color3)"
-          //       // "url(https://media.discordapp.net/attachments/1059220738718048346/1142492638537330748/midjourney__pokemon_kanto_region_kanto_gen_1_pokemon_forest_bla_3aff018d-d597-469d-a78b-5773d1c968a0.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-ii":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142506938962280548/midjourney__pokemon_jotho_region_jotho_gen_2_pokemon_island_bla_99ca1127-c3b1-4c28-afae-bb402b1c63de.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-iii":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142489715178754098/midjourney__pokemon_hoenn_region_hoenn_water_landscape_gen_3_po_29e0175e-3df2-4287-af33-1ca4832f6e1a.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-iv":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142502036009660426/midjourney__pokemon_sinnoh_region_sinnoh_gen_4_pokemon_mountain_04d21178-1bab-4f25-99da-ef42cc9e108a.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-v":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142497295477260498/midjourney__pokemon_unova_region_unova_gen_5_pokemon_cityscape__93fd80a6-27a7-4c0d-876a-05fd5c8a6707.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-vi":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142511128946167858/midjourney__pokemon_kalos_region_kalos_gen_6_pokemon_inspired_b_9c236717-3a0a-4ec4-a610-dab9b972c0ec.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-vii":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142512626543370291/midjourney__pokemon_alola_region_alola_gen_7_pokemon_beach_summ_59a7bf97-3f6f-4099-b1d3-4ee624dee075.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-viii":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142513795370057779/midjourney__pokemon_galar_region_galar_gen_8_pokemon_urban_city_3fcd9e3a-3076-4a25-9c8f-430cd3be28c5.png?width=1147&height=642)"
-          //     );
-          //     break;
-          //   case "generation-ix":
-          //     setPkmnInfoBg(
-          //       "url(https://media.discordapp.net/attachments/1059220738718048346/1142515725479710820/midjourney__pokemon_paldea_region_paldea_gen_9_pokemon_safari_g_872d97cb-9da2-4d6a-ad49-43a13def709e.png?width=1147&height=642)"
-          //     );
-          //     break;
-          // }
         } catch (err) {
           switch (nameValue.toLocaleLowerCase()) {
             case "basculin-red-striped":
@@ -308,554 +96,248 @@ export default function Poke() {
           }
           console.log(err);
         }
+        try {
+          if (evoRes.data.varieties.length > 1) {
+            console.log(evoRes.data.varieties);
+            let optionsMenu = document.createElement("select");
+            optionsMenu.id = "optionsMenu";
+            optionsMenu.onchange = async () => {
+              setIsLoading(true);
+              let optionsMenu = document.getElementById("optionsMenu");
+              let selectedOption = optionsMenu.value;
+              let selectedOptionIndex = optionsMenu.selectedIndex;
+              let selectedOptionText =
+                optionsMenu.options[selectedOptionIndex].text;
+              let selectedOptionValue =
+                optionsMenu.options[selectedOptionIndex].value;
+              optionsMenu.remove(selectedOptionIndex);
+              let newOption = document.createElement("option");
+              newOption.innerHTML = selectedOptionText;
+              newOption.value = selectedOptionValue;
+              optionsMenu.insertBefore(newOption, optionsMenu.firstChild);
+              optionsMenu.value = selectedOptionValue;
+
+              let newName = selectedOptionValue;
+              let newNameRes = await axios.get(
+                `https://pokeapi.co/api/v2/pokemon/${newName}`
+              );
+              document.getElementById("artCanvas").classList.toggle("shine");
+              setTimeout(() => {
+                document.getElementById("artCanvas").classList.toggle("shine");
+              }, 6000);
+              setTimeout(() => {
+                if (shiny === true) {
+                  setImg(newNameRes.data.sprites.front_shiny);
+                } else {
+                  setImg(newNameRes.data.sprites.front_default);
+                }
+                setURL(
+                  newNameRes.data.sprites.other["official-artwork"]
+                    .front_default
+                );
+                setIsLoading(false);
+              }, 3000);
+            };
+            for (let i = 0; i < evoRes.data.varieties.length; i++) {
+              let option = document.createElement("option");
+              if (evoRes.data.varieties[i].is_default) {
+                option.innerHTML = "Default form";
+                option.value = evoRes.data.varieties[i].pokemon.name;
+              } else {
+                let optionName = evoRes.data.varieties[i].pokemon.name;
+                optionName = optionName.replace(nameValue, "");
+                optionName = optionName.replace("-", "");
+                optionName =
+                  optionName.charAt(0).toUpperCase() + optionName.slice(1);
+                optionName = optionName + " Form";
+                option.innerHTML = optionName;
+                option.value = evoRes.data.varieties[i].pokemon.name;
+              }
+              optionsMenu.appendChild(option);
+            }
+            document.getElementById("buttons").appendChild(optionsMenu);
+          }
+        } catch (err) {
+          console.log(err);
+        }
 
         let evoData;
 
-        if (alolaList.includes(nameValue)) {
-          let alolaBtn = document.createElement("button");
-          alolaBtn.innerHTML = "Alola Form ☀️";
-          alolaBtn.id = "alolaBtn";
-
-          let alolaBtnToggle = true;
-          alolaBtn.onclick = async () => {
-            if (alolaBtnToggle) {
-              let alola = nameValue + "-alola";
-              let alolaRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${alola}`
-              );
-
-              if (shiny === true) {
-                setImg(alolaRes.data.sprites.front_shiny);
-              } else {
-                setImg(alolaRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("spin");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("spin");
-              }, 6000);
-              setTimeout(() => {
-                setURL(
-                  alolaRes.data.sprites.other["official-artwork"].front_default
-                );
-              }, 3000);
-              alolaBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                setURL(
-                  res.data.sprites.other["official-artwork"].front_default
-                );
-              }, 500);
-              alolaBtn.innerHTML = "Alola Form ☀️";
-            }
-            alolaBtnToggle = !alolaBtnToggle;
-          };
-          alolaBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(alolaBtn);
-        }
-
-        if (galarList.includes(nameValue)) {
-          let galarBtn = document.createElement("button");
-          galarBtn.innerHTML = "Galar Form 🏙️";
-          galarBtn.id = "galarBtn";
-
-          let galarBtnToggle = true;
-          galarBtn.onclick = async () => {
-            if (galarBtnToggle) {
-              let galar = nameValue + "-galar";
-              let galarRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${galar}`
-              );
-
-              if (shiny === true) {
-                setImg(galarRes.data.sprites.front_shiny);
-              } else {
-                setImg(galarRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("spin");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("spin");
-              }, 6000);
-              setTimeout(() => {
-                if (!shiny) {
-                  setURL(
-                    galarRes.data.sprites.other["official-artwork"]
-                      .front_default
-                  );
-                } else {
-                  setURL(
-                    galarRes.data.sprites.other["official-artwork"].front_shiny
-                  );
-                }
-              }, 3000);
-              galarBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                if (!shiny) {
-                  setURL(
-                    res.data.sprites.other["official-artwork"].front_default
-                  );
-                } else {
-                  setURL(
-                    res.data.sprites.other["official-artwork"].front_shiny
-                  );
-                }
-              }, 500);
-              galarBtn.innerHTML = "Galar Form 🏙️";
-            }
-            galarBtnToggle = !galarBtnToggle;
-          };
-          galarBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(galarBtn);
-        }
-
-        if (hisuiList.includes(nameValue)) {
-          let hisuiBtn = document.createElement("button");
-          hisuiBtn.innerHTML = "Hisui Form ⛰️";
-          hisuiBtn.id = "hisuiBtn";
-
-          let hisuiBtnToggle = true;
-          hisuiBtn.onclick = async () => {
-            if (hisuiBtnToggle) {
-              let hisui = nameValue + "-hisui";
-              let hisuiRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${hisui}`
-              );
-
-              if (shiny === true) {
-                setImg(hisuiRes.data.sprites.front_shiny);
-              } else {
-                setImg(hisuiRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("shine");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("shine");
-              }, 6000);
-              setTimeout(() => {
-                if (!shiny) {
-                  setURL(
-                    hisuiRes.data.sprites.other["official-artwork"]
-                      .front_default
-                  );
-                } else {
-                  setURL(
-                    hisuiRes.data.sprites.other["official-artwork"].front_shiny
-                  );
-                }
-              }, 3000);
-              hisuiBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                setURL(
-                  res.data.sprites.other["official-artwork"].front_default
-                );
-              }, 500);
-              hisuiBtn.innerHTML = "Hisui Form ⛰️";
-            }
-            hisuiBtnToggle = !hisuiBtnToggle;
-          };
-          hisuiBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(hisuiBtn);
-        }
-
-        if (gmaxList.includes(nameValue)) {
-          let gmaxBtn = document.createElement("button");
-          gmaxBtn.innerHTML = "Gigantamax 🚀";
-          gmaxBtn.id = "gmaxBtn";
-
-          let gmaxBtnToggle = true;
-          gmaxBtn.onclick = async () => {
-            if (gmaxBtnToggle) {
-              let gmax = nameValue + "-gmax";
-              let gmaxRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${gmax}`
-              );
-
-              if (shiny === true) {
-                setImg(gmaxRes.data.sprites.front_shiny);
-              } else {
-                setImg(gmaxRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("shine");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("shine");
-              }, 6000);
-              setTimeout(() => {
-                setURL(
-                  gmaxRes.data.sprites.other["official-artwork"].front_default
-                );
-              }, 3000);
-              gmaxBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                setURL(
-                  res.data.sprites.other["official-artwork"].front_default
-                );
-              }, 500);
-              gmaxBtn.innerHTML = "Gigantamax 🚀";
-            }
-            gmaxBtnToggle = !gmaxBtnToggle;
-          };
-          gmaxBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(gmaxBtn);
-        }
-
-        if (paldeaList.includes(nameValue)) {
-          let paldeaBtn = document.createElement("button");
-          paldeaBtn.innerHTML = "Paldea Form 🌊";
-          paldeaBtn.id = "paldeaBtn";
-          let paldeaBtnToggle = true;
-          paldeaBtn.onclick = async () => {
-            if (paldeaBtnToggle) {
-              let paldea = nameValue + "-paldea";
-              let paldeaRes;
-              if (nameValue === "tauros") {
-                paldeaRes = await axios.get(
-                  `https://pokeapi.co/api/v2/pokemon/${paldea}-combat-breed`
-                );
-              } else {
-                paldeaRes = await axios.get(
-                  `https://pokeapi.co/api/v2/pokemon/${paldea}`
-                );
-              }
-
-              if (shiny === true) {
-                setImg(paldeaRes.data.sprites.front_shiny);
-              } else {
-                setImg(paldeaRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("shine");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("shine");
-              }, 6000);
-              setTimeout(() => {
-                setURL(
-                  paldeaRes.data.sprites.other["official-artwork"].front_default
-                );
-              }, 3000);
-              paldeaBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                setURL(
-                  res.data.sprites.other["official-artwork"].front_default
-                );
-              }, 500);
-              paldeaBtn.innerHTML = "Paldea Form 🌊";
-            }
-            paldeaBtnToggle = !paldeaBtnToggle;
-          };
-          paldeaBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(paldeaBtn);
-        }
-
-        if (megaEvoList.includes(nameValue)) {
-          evoBtnCheck = false;
-
-          let megaEvoBtn = document.createElement("button");
-          megaEvoBtn.innerHTML = "Mega Evolve! ✨";
-          megaEvoBtn.id = "evoBtn";
-
-          let megaEvoBtnToggle = true;
-          megaEvoBtn.onclick = async () => {
-            if (megaEvoBtnToggle) {
-              let megaEvo;
-              let megaXY = ["x", "y"];
-              if (nameValue === "charizard" || nameValue === "mewtwo") {
-                let randInt = Math.floor(Math.random() * 2);
-                megaEvo = nameValue + "-mega-" + megaXY[randInt];
-              } else {
-                megaEvo = nameValue + "-mega";
-              }
-
-              megaEvoRes = await axios.get(
-                `https://pokeapi.co/api/v2/pokemon/${megaEvo}`
-              );
-
-              if (shiny === true) {
-                setImg(megaEvoRes.data.sprites.front_shiny);
-              } else {
-                setImg(megaEvoRes.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("shine");
-              setTimeout(() => {
-                document.getElementById("artCanvas").classList.toggle("shine");
-              }, 6000);
-              setTimeout(() => {
-                if (!shiny) {
-                  setURL(
-                    megaEvoRes.data.sprites.other["official-artwork"]
-                      .front_default
-                  );
-                } else {
-                  setURL(
-                    megaEvoRes.data.sprites.other["official-artwork"]
-                      .front_shiny
-                  );
-                }
-              }, 3000);
-              megaEvoBtn.innerHTML = "↩️";
-            } else {
-              if (shiny === true) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.front_default);
-              }
-              document.getElementById("artCanvas").classList.toggle("deshine");
-              setTimeout(() => {
-                document
-                  .getElementById("artCanvas")
-                  .classList.toggle("deshine");
-              }, 2000);
-              setTimeout(() => {
-                setURL(
-                  res.data.sprites.other["official-artwork"].front_default
-                );
-              }, 500);
-              megaEvoBtn.innerHTML = "Mega Evolve! ✨";
-            }
-            megaEvoBtnToggle = !megaEvoBtnToggle;
-          };
-          megaEvoBtn.classList.toggle("noSelect");
-          document.getElementById("buttons").appendChild(megaEvoBtn);
-        } else {
+        try {
           try {
-            try {
-              let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-              console.log(evoChain);
-              let stageNumber = 1;
+            let evoChain = await axios.get(evoRes.data.evolution_chain.url);
+            console.log(evoChain);
+            let stageNumber = 1;
 
-              if (evoChain.data.chain.evolves_to.length !== 0) {
-                // This check eliminates single-stage mons
+            if (evoChain.data.chain.evolves_to.length !== 0) {
+              // This check eliminates single-stage mons
 
-                evoData = evoChain.data.chain.evolves_to[0].species.name;
+              evoData = evoChain.data.chain.evolves_to[0].species.name;
 
-                // This check determines the length of the evolution family
-                if (evoChain.data.chain.evolves_to[0].evolves_to.length === 0) {
-                  stageNumber = 2;
-                } else {
-                  stageNumber = 3;
-                }
-                let randInt = 0;
-                switch (stageNumber) {
-                  case 2:
-                    if (nameValue !== evoChain.data.chain.species.name) {
-                      if (nameValue === "ursaring") {
-                        evoData = "ursaluna";
-                        evoBtnCheck = true;
-                      } else {
-                        console.log(
-                          "This mon is the final stage of a 2-stager"
-                        );
-                        evoBtnCheck = false;
-                      }
+              // This check determines the length of the evolution family
+              if (evoChain.data.chain.evolves_to[0].evolves_to.length === 0) {
+                stageNumber = 2;
+              } else {
+                stageNumber = 3;
+              }
+              let randInt = 0;
+              switch (stageNumber) {
+                case 2:
+                  if (nameValue !== evoChain.data.chain.species.name) {
+                    if (nameValue === "ursaring") {
+                      evoData = "ursaluna";
+                      evoBtnCheck = true;
                     } else {
-                      if (nameValue === "sneasel") {
-                        evoData = ["weavile", "sneasler"];
-                        randInt = Math.floor(Math.random() * evoData.length);
-                        evoData = evoData[randInt];
-                        evoBtnCheck = true;
-                      } else if (nameValue === "scyther") {
-                        evoData = ["scizor", "kleavor"];
-                        randInt = Math.floor(Math.random() * evoData.length);
-                        evoData = evoData[randInt];
-                        evoBtnCheck = true;
-                      } else {
-                        console.log("This mon is the 1st stage of a 2-stager");
-                        evoBtnCheck = true;
-                        // Check for branch-evos
-                        if (evoChain.data.chain.evolves_to.length > 1) {
-                          randInt = Math.floor(
-                            Math.random() *
-                              evoChain.data.chain.evolves_to.length
-                          );
-                          evoData =
-                            evoChain.data.chain.evolves_to[randInt].species
-                              .name;
-                        }
-                        evoData =
-                          evoChain.data.chain.evolves_to[randInt].species.name;
-                      }
-                    }
-                    break;
-                  case 3:
-                    if (
-                      nameValue !== "cascoon" &&
-                      nameValue !== evoData &&
-                      nameValue !== evoChain.data.chain.species.name
-                    ) {
-                      // This check eliminates mons that are final stages
-                      console.log("This mon is the final stage of a 3-stager");
+                      console.log("This mon is the final stage of a 2-stager");
                       evoBtnCheck = false;
-                      if (
-                        typeof document.getElementById("evoBtn") !==
-                          "undefined" &&
-                        document.getElementById("evoBtn") !== null
-                      ) {
-                        document.getElementById("evoBtn").remove();
-                        break;
-                      }
-                    } else if (
-                      nameValue === evoData &&
-                      nameValue !== evoChain.data.chain.species.name
-                    ) {
-                      console.log("This mon is the middle stage of a 3-stager");
+                    }
+                  } else {
+                    if (nameValue === "sneasel") {
+                      evoData = ["weavile", "sneasler"];
+                      randInt = Math.floor(Math.random() * evoData.length);
+                      evoData = evoData[randInt];
                       evoBtnCheck = true;
-                      // Check for branch-evos
-                      let randInt = 0;
-                      if (
-                        evoChain.data.chain.evolves_to[0].evolves_to.length > 1
-                      ) {
-                        randInt = Math.floor(
-                          Math.random() *
-                            evoChain.data.chain.evolves_to[0].evolves_to.length
-                        );
-                        evoData =
-                          evoChain.data.chain.evolves_to[0].evolves_to[randInt]
-                            .species.name;
-                      }
-                      evoData =
-                        evoChain.data.chain.evolves_to[0].evolves_to[randInt]
-                          .species.name;
-                    } else if (nameValue === "cascoon") {
+                    } else if (nameValue === "scyther") {
+                      evoData = ["scizor", "kleavor"];
+                      randInt = Math.floor(Math.random() * evoData.length);
+                      evoData = evoData[randInt];
                       evoBtnCheck = true;
-                      evoData = "dustox";
                     } else {
-                      console.log("This mon is the 1st stage of a 3-stager");
+                      console.log("This mon is the 1st stage of a 2-stager");
                       evoBtnCheck = true;
                       // Check for branch-evos
-                      let randInt = 0;
                       if (evoChain.data.chain.evolves_to.length > 1) {
                         randInt = Math.floor(
                           Math.random() * evoChain.data.chain.evolves_to.length
                         );
-                        console.log(randInt);
                         evoData =
                           evoChain.data.chain.evolves_to[randInt].species.name;
                       }
                       evoData =
                         evoChain.data.chain.evolves_to[randInt].species.name;
                     }
-                    break;
-                  default:
-                    console.log("This mon is a single-stager");
+                  }
+                  break;
+                case 3:
+                  if (
+                    nameValue !== "cascoon" &&
+                    nameValue !== evoData &&
+                    nameValue !== evoChain.data.chain.species.name
+                  ) {
+                    // This check eliminates mons that are final stages
+                    console.log("This mon is the final stage of a 3-stager");
                     evoBtnCheck = false;
-                }
-              } else {
-                // Either remove or simply not put the evoBtn there
-                if (nameValue === "qwilfish") {
-                  evoData = "overqwil";
-                  evoBtnCheck = true;
-                } else if (nameValue === "stantler") {
-                  evoData = "wyrdeer";
-                  evoBtnCheck = true;
-                } else if (
-                  nameValue === "basculin-red-striped" ||
-                  nameValue === "basculin-blue-striped" ||
-                  nameValue === "basculin-white-striped"
-                ) {
-                  console.log("!!!");
-                  evoData = "basculegion-male";
-                  evoBtnCheck = true;
-                } else {
+                    if (
+                      typeof document.getElementById("evoBtn") !==
+                        "undefined" &&
+                      document.getElementById("evoBtn") !== null
+                    ) {
+                      document.getElementById("evoBtn").remove();
+                      break;
+                    }
+                  } else if (
+                    nameValue === evoData &&
+                    nameValue !== evoChain.data.chain.species.name
+                  ) {
+                    console.log("This mon is the middle stage of a 3-stager");
+                    evoBtnCheck = true;
+                    // Check for branch-evos
+                    let randInt = 0;
+                    if (
+                      evoChain.data.chain.evolves_to[0].evolves_to.length > 1
+                    ) {
+                      randInt = Math.floor(
+                        Math.random() *
+                          evoChain.data.chain.evolves_to[0].evolves_to.length
+                      );
+                      evoData =
+                        evoChain.data.chain.evolves_to[0].evolves_to[randInt]
+                          .species.name;
+                    }
+                    evoData =
+                      evoChain.data.chain.evolves_to[0].evolves_to[randInt]
+                        .species.name;
+                  } else if (nameValue === "cascoon") {
+                    evoBtnCheck = true;
+                    evoData = "dustox";
+                  } else {
+                    console.log("This mon is the 1st stage of a 3-stager");
+                    evoBtnCheck = true;
+                    // Check for branch-evos
+                    let randInt = 0;
+                    if (evoChain.data.chain.evolves_to.length > 1) {
+                      randInt = Math.floor(
+                        Math.random() * evoChain.data.chain.evolves_to.length
+                      );
+                      console.log(randInt);
+                      evoData =
+                        evoChain.data.chain.evolves_to[randInt].species.name;
+                    }
+                    evoData =
+                      evoChain.data.chain.evolves_to[randInt].species.name;
+                  }
+                  break;
+                default:
+                  console.log("This mon is a single-stager");
                   evoBtnCheck = false;
-                }
-                if (
-                  typeof document.getElementById("evoBtn") !== "undefined" &&
-                  document.getElementById("evoBtn") !== null
-                ) {
-                  document.getElementById("evoBtn").remove();
-                }
               }
-            } catch (err) {
-              try {
-                evoData = await axios.get(
-                  evoRes.data.evolves_from_species.name
-                );
-              } catch (err) {
-                console.log(err);
+            } else {
+              // Either remove or simply not put the evoBtn there
+              if (nameValue === "qwilfish") {
+                evoData = "overqwil";
+                evoBtnCheck = true;
+              } else if (nameValue === "stantler") {
+                evoData = "wyrdeer";
+                evoBtnCheck = true;
+              } else if (
+                nameValue === "basculin-red-striped" ||
+                nameValue === "basculin-blue-striped" ||
+                nameValue === "basculin-white-striped"
+              ) {
+                console.log("!!!");
+                evoData = "basculegion-male";
+                evoBtnCheck = true;
+              } else {
+                evoBtnCheck = false;
               }
-              evoBtnCheck = false;
-            }
-
-            if (evoBtnCheck) {
-              // Only create evoBtn if all conditions are right
-              let evoBtn = document.createElement("button");
-              evoBtn.innerHTML = "Evolve!";
-              evoBtn.id = "evoBtn";
-
-              evoBtn.onclick = () => {
-                // Check for branch-evos
-                document.getElementById("artCanvas").classList.toggle("shine");
-                setTimeout(() => {
-                  document
-                    .getElementById("artCanvas")
-                    .classList.toggle("shine");
-                }, 6000);
-
-                setTimeout(() => {
-                  setStateFind(evoData);
-                }, 3000);
-              };
-              evoBtn.classList.toggle("noSelect");
-              document.getElementById("buttons").appendChild(evoBtn);
+              if (
+                typeof document.getElementById("evoBtn") !== "undefined" &&
+                document.getElementById("evoBtn") !== null
+              ) {
+                document.getElementById("evoBtn").remove();
+              }
             }
           } catch (err) {
-            console.log(err);
+            try {
+              evoData = await axios.get(evoRes.data.evolves_from_species.name);
+            } catch (err) {
+              console.log(err);
+            }
+            evoBtnCheck = false;
           }
+
+          if (evoBtnCheck) {
+            // Only create evoBtn if all conditions are right
+            let evoBtn = document.createElement("button");
+            evoBtn.innerHTML = "Evolve!";
+            evoBtn.id = "evoBtn";
+
+            evoBtn.onclick = () => {
+              // Check for branch-evos
+              document.getElementById("artCanvas").classList.toggle("shine");
+              setTimeout(() => {
+                document.getElementById("artCanvas").classList.toggle("shine");
+              }, 6000);
+
+              setTimeout(() => {
+                setStateFind(evoData);
+              }, 3000);
+            };
+            evoBtn.classList.toggle("noSelect");
+            document.getElementById("buttons").appendChild(evoBtn);
+          }
+        } catch (err) {
+          console.log(err);
         }
 
         if (megaEvoBtnToggle) {

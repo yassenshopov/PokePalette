@@ -191,6 +191,9 @@ body::-webkit-scrollbar {
     transform: scale(1);
   }
 }
+.pokeCard select {
+  font-size: 1.2rem !important;
+}
 .example:nth-child(2n) {
   background: var(--color2);
   color: var(--hsp2);
