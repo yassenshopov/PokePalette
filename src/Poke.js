@@ -127,13 +127,17 @@ export default function Poke() {
               setTimeout(() => {
                 if (shiny === true) {
                   setImg(newNameRes.data.sprites.front_shiny);
+                  setURL(
+                    newNameRes.data.sprites.other["official-artwork"]
+                      .front_shiny
+                  );
                 } else {
                   setImg(newNameRes.data.sprites.front_default);
+                  setURL(
+                    newNameRes.data.sprites.other["official-artwork"]
+                      .front_default
+                  );
                 }
-                setURL(
-                  newNameRes.data.sprites.other["official-artwork"]
-                    .front_default
-                );
                 setIsLoading(false);
               }, 3000);
             };

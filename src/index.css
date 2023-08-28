@@ -83,7 +83,7 @@ body::-webkit-scrollbar {
 
 .pokeCard #buttons > * {
   padding: 10px;
-  font-size: 1.5vw;
+  font-size: 1.4rem;
   font-family: "Raleway", sans-serif;
   font-weight: 500;
   background-color: #f1f1f1;
@@ -196,7 +196,7 @@ body::-webkit-scrollbar {
 #example main #backdrop {
   background-color: var(--mainDark);
   /* mix-blend-mode: color; */
-  opacity: 0.4;
+  opacity: 0.0;
   width: 70vw;
   height: 100vh;
   position: absolute;

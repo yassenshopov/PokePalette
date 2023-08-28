@@ -191,9 +191,6 @@ body::-webkit-scrollbar {
     transform: scale(1);
   }
 }
-.pokeCard select {
-  font-size: 1.4rem !important;
-}
 .example:nth-child(2n) {
   background: var(--color2);
   color: var(--hsp2);
@@ -750,6 +747,15 @@ body::-webkit-scrollbar {
     top: 58%;
     right: 0;
     font-size: 1.2rem;
+  }
+  .pokeCard select {
+    font-size: 2rem !important;
+  }
+  .example main #darkMode {
+    width: 50%;
+  }
+  .example main #darkMode div {
+    width: 35%;
   }
   .example #shareWidgets {
     display: flex;
