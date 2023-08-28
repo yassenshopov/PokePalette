@@ -171,7 +171,7 @@ body::-webkit-scrollbar {
   font-size: 1.4rem;
   overflow: hidden;
   transition: all 200ms ease-in-out;
-  color: var(--mainDark);
+  color: #121212;
   background: none;
 }
 .pokeCard .labelInput #shinyBtn:hover,
