@@ -43,7 +43,7 @@ export default function Example() {
             document.getElementsByClassName(colorName)[0].innerHTML;
           navigator.clipboard.writeText(copyText);
           copyText.select();
-          copyText.setSelectionRange(0, 99999); // For mobile devices
+          copyText.setSelectionRange(0, 99989); // For mobile devices
         }}
       >
         <div className="color-card"></div>
