@@ -41,7 +41,7 @@ body::-webkit-scrollbar {
   background-color: var(--color3);
 }
 
-.pokeCard #colorBg div:nth-child(3) {
+.pokeCard #colorBg div:nth-child(3) { 
   background-color: var(--color4);
 }
 
