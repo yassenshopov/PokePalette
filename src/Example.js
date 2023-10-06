@@ -6,47 +6,27 @@ import twitterLogo from "../src/img/x.webp";
 import { useState } from "react";
 
 export default function Example() {
-  let loadMoreCardsToggle = false;
-  function loadMoreCards() {
-    if (loadMoreCardsToggle === true) {
-      loadMoreCardsToggle = false;
-      let cards = document.getElementsByClassName("colorCard");
-      for (let card in cards) {
-        if (card > 2) {
-          cards[card].style.display = "none";
-        }
-      }
-      document.getElementsByClassName("loadMore")[0].innerHTML =
-        "Load more colors...";
-    } else {
-      loadMoreCardsToggle = true;
-      let cards = document.getElementsByClassName("colorCard");
-      for (let card in cards) {
-        if (card > 2) {
-          cards[card].style.display = "flex";
-        }
-      }
-      console.log(document.getElementsByClassName("loadMore"));
-      document.getElementsByClassName("loadMore")[0].innerHTML = "Show less";
-    }
-  }
+  const [loadMoreCardsToggle, setLoadMoreCardsToggle] = useState(true);
 
   function Card({ cardIndex }) {
-    console.log(cardIndex);
     let colorName = "color" + cardIndex;
 
     return (
       <div
-        className="noSelect colorCard"
+        className={"noSelect colorCard" + (loadMoreCardsToggle && cardIndex > 4 ? " hidden" : "")} 
         onClick={() => {
-          let copyText =
-            document.getElementsByClassName(colorName)[0].innerHTML;
+          let copyText = window
+            .getComputedStyle(
+              document.getElementsByClassName(colorName)[0],
+              ":after"
+            )
+            .content.replace(/"/g, "")
+            .replace(/'/g, "");
           navigator.clipboard.writeText(copyText);
           copyText.select();
           copyText.setSelectionRange(0, 99989); // For mobile devices
         }}
       >
-        <div className="color-card"></div>
         <p className={"color" + cardIndex}></p>
         <BiCopy />
       </div>
@@ -89,7 +69,7 @@ export default function Example() {
             <button
               id="darkMode"
               aria-label="Dark or Light Mode"
-              className={'noSelect ' + (darkMode ? "clicked" : "")}
+              className={"noSelect " + (darkMode ? "clicked" : "")}
               onClick={() => {
                 setDarkMode(!darkMode);
                 let root = document.querySelector(":root");
@@ -134,8 +114,14 @@ export default function Example() {
         <Card cardIndex={8} />
         <Card cardIndex={9} />
         <Card cardIndex={10} />
-        <p id="loadMore" className="loadMore noSelect" onClick={loadMoreCards}>
-          Load more colors...
+        <p
+          id="loadMore"
+          className="loadMore noSelect"
+          onClick={() => {
+            setLoadMoreCardsToggle(!loadMoreCardsToggle);
+          }}
+        >
+          {loadMoreCardsToggle ? "Load more colors..." : "Show less"}
         </p>
       </div>
 

@@ -187,38 +187,21 @@ export default function Poke() {
               switch (stageNumber) {
                 case 2:
                   if (nameValue !== evoChain.data.chain.species.name) {
-                    if (nameValue === "ursaring") {
-                      evoData = "ursaluna";
-                      evoBtnCheck = true;
-                    } else {
-                      console.log("This mon is the final stage of a 2-stager");
-                      evoBtnCheck = false;
-                    }
+                    console.log("This mon is the final stage of a 2-stager");
+                    evoBtnCheck = false;
                   } else {
-                    if (nameValue === "sneasel") {
-                      evoData = ["weavile", "sneasler"];
-                      randInt = Math.floor(Math.random() * evoData.length);
-                      evoData = evoData[randInt];
-                      evoBtnCheck = true;
-                    } else if (nameValue === "scyther") {
-                      evoData = ["scizor", "kleavor"];
-                      randInt = Math.floor(Math.random() * evoData.length);
-                      evoData = evoData[randInt];
-                      evoBtnCheck = true;
-                    } else {
-                      console.log("This mon is the 1st stage of a 2-stager");
-                      evoBtnCheck = true;
-                      // Check for branch-evos
-                      if (evoChain.data.chain.evolves_to.length > 1) {
-                        randInt = Math.floor(
-                          Math.random() * evoChain.data.chain.evolves_to.length
-                        );
-                        evoData =
-                          evoChain.data.chain.evolves_to[randInt].species.name;
-                      }
+                    console.log("This mon is the 1st stage of a 2-stager");
+                    evoBtnCheck = true;
+                    // Check for branch-evos
+                    if (evoChain.data.chain.evolves_to.length > 1) {
+                      randInt = Math.floor(
+                        Math.random() * evoChain.data.chain.evolves_to.length
+                      );
                       evoData =
                         evoChain.data.chain.evolves_to[randInt].species.name;
                     }
+                    evoData =
+                      evoChain.data.chain.evolves_to[randInt].species.name;
                   }
                   break;
                 case 3:
@@ -352,7 +335,7 @@ export default function Poke() {
           }
         } else {
           if (shiny === true) {
-            if (res.data.id < 906) {
+            if (res.data.sprites.front_shiny) {
               setImg(res.data.sprites.front_shiny);
             } else {
               setImg(res.data.sprites.other["official-artwork"].front_shiny);
@@ -373,14 +356,20 @@ export default function Poke() {
             numValue +
             ".png";
           console.log(shinyURL);
-          setURL(shinyURL);
+          if (res.data.sprites.other["official-artwork"].front_shiny) {
+            setURL(shinyURL);
+          } else {
+            setURL(res.data.sprites.other["official-artwork"].front_default);
+          }
         } else {
           setURL(res.data.sprites.other["official-artwork"].front_default);
         }
         const filteredGenera = evoRes.data.genera
           .filter((item) => item.language.name === "en")
           .map((item) => item.genus);
-        setType("The " + filteredGenera[0]);
+        setType(
+          filteredGenera[0] ? "The " + filteredGenera[0] : "The Unknown Pokemon"
+        );
         setStateFind(res.data.name);
         setNumValue(res.data.id);
       } catch (err) {

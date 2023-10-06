@@ -210,6 +210,9 @@ body {
       align-items: center;
       transition: all 200ms ease-in-out;
       cursor: pointer;
+      &.hidden {
+        display: none;
+      }
       .color2::after {
         content: var(--color2word);
       }
@@ -678,6 +681,10 @@ body {
     gap: 0vh;
     padding: 10vw;
     width: 80vw;
+    canvas {
+      width: 50%;
+      image-rendering: pixelated;
+    }
     .labelInput {
       #shinyBtn {
         top: 58%;
@@ -686,7 +693,7 @@ body {
       }
     }
     select {
-      font-size: 2rem !important;
+      font-size: 1.2rem !important;
     }
   }
   .example {
@@ -699,6 +706,11 @@ body {
           width: 35%;
           // height: 0%;
         }
+      }
+    }
+    #cards {
+      #loadMore {
+        font-size: 1.2rem;
       }
     }
     #shareWidgets {
