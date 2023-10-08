@@ -134,6 +134,9 @@ body::-webkit-scrollbar {
   position: absolute;
   z-index: -1;
 }
+.pokeCard #colorBg > * {
+  transition: all 200ms ease-in-out;
+}
 .pokeCard #hideWhileLoading {
   position: absolute;
   height: 100%;

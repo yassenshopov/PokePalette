@@ -580,7 +580,7 @@ export default function Poke() {
         ${color2.toUpperCase().slice(1)}
         ${color3.toUpperCase().slice(1)}
         ${color4.toUpperCase().slice(1)}
-        \nhttps://yassenshopov.github.io/PokePalette/`;
+        \npokemonpalette.com`;
 
         document.querySelector(".pokeName").innerHTML =
           (nameValue.charAt(0) === "a" ||

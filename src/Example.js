@@ -82,19 +82,19 @@ export default function Example() {
                 root.style.setProperty("--mainDark", temp_color);
                 if (darkTheme) {
                   root.style.setProperty("--bgURL", "url('" + bgLight + "')");
-                  document.getElementById("sun").style.display = "none";
-                  document.getElementById("moon").style.display =
-                    "inline-block";
+                  // document.getElementById("sun").style.display = "none";
+                  // document.getElementById("moon").style.display =
+                    // "inline-block";
                 } else {
                   root.style.setProperty("--bgURL", "url('" + bgDark + "')");
-                  document.getElementById("moon").style.display = "none";
-                  document.getElementById("sun").style.display = "inline-block";
+                  // document.getElementById("moon").style.display = "none";
+                  // document.getElementById("sun").style.display = "inline-block";
                 }
                 darkTheme = !darkTheme;
               }}
             >
-              <FaSun />
               <FaMoon />
+              <FaSun />
               <div></div>
             </button>
           </div>
