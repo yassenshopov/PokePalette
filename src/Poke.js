@@ -7,8 +7,8 @@ import axios from "axios";
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 
 export default function Poke() {
-  let [nameValue, setStateFind] = useState("flygon");
-  let [numValue, setNumValue] = useState(330);
+  let [nameValue, setStateFind] = useState("butterfree");
+  let [numValue, setNumValue] = useState(12);
 
   const NumChanger = (e) => {
     setIsLoading(true);
@@ -22,7 +22,7 @@ export default function Poke() {
   };
 
   let [shiny, setShiny] = useState(false);
-  let [random, setRandom] = useState(45);
+  let [random, setRandom] = useState(0);
 
   const ShinyChange = () => {
     setIsLoading(true);
