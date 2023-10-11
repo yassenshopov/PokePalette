@@ -104,6 +104,43 @@ body {
 body::-webkit-scrollbar {
   display: none;
 }
+.bmc-btn-container {
+  position: fixed;
+  right: 3%;
+  top: 3%;
+  z-index: 1000;
+}
+.bmc-btn-container .bmc-btn {
+  font-size: 1rem;
+  height: fit-content;
+  padding: 10px 2vw;
+  justify-content: center;
+  background-color: var(--color3) !important;
+  color: var(--hsp3);
+  transition: all 200ms ease-in-out;
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  font-family: carnacLight !important;
+  animation: wiggleBMC 1s ease-in-out infinite;
+}
+@keyframes wiggleBMC {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+.bmc-btn-container .bmc-btn:hover {
+  background-color: var(--mainDark) !important;
+  color: var(--color1);
+}
+.bmc-btn-container .bmc-btn span {
+  line-height: 1;
+  width: fit-content;
+}
 .App {
   display: flex;
   flex-direction: row;
@@ -734,6 +771,10 @@ body::-webkit-scrollbar {
   background-color: var(--color2);
 }
 @media screen and (max-width: 768px) {
+  .bmc-btn-container {
+    right: 50%;
+    transform: translateX(50%);
+  }
   .App {
     flex-direction: column;
   }

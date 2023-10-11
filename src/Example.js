@@ -13,7 +13,10 @@ export default function Example() {
 
     return (
       <div
-        className={"noSelect colorCard" + (loadMoreCardsToggle && cardIndex > 4 ? " hidden" : "")} 
+        className={
+          "noSelect colorCard" +
+          (loadMoreCardsToggle && cardIndex > 4 ? " hidden" : "")
+        }
         onClick={() => {
           let copyText = window
             .getComputedStyle(
@@ -84,7 +87,7 @@ export default function Example() {
                   root.style.setProperty("--bgURL", "url('" + bgLight + "')");
                   // document.getElementById("sun").style.display = "none";
                   // document.getElementById("moon").style.display =
-                    // "inline-block";
+                  // "inline-block";
                 } else {
                   root.style.setProperty("--bgURL", "url('" + bgDark + "')");
                   // document.getElementById("moon").style.display = "none";
