@@ -147,6 +147,13 @@ body {
         min-height: 60px;
         cursor: pointer;
         .flexCentered(row);
+        transition: all 200ms ease-in-out;
+        &:hover {
+          // background-color: var(--color4);
+          // color: var(--hsp4);
+          border-radius: 1rem;
+          transform: scale(0.9);
+        }
         &:first-child {
           margin-top: 0;
         }
@@ -830,6 +837,9 @@ body {
       .imgWrapper {
         height: 400px;
         width: 100%;
+        #hiddenPkmn {
+          background-size: 100% auto;
+        }
       }
     }
     .imAd {
@@ -839,11 +849,11 @@ body {
         width: 100%;
       }
       #info {
-        text-align: center;
+        text-align: left;
         width: 100%;
         #titleWords {
           .flexCentered(column);
-          // align-items: flex-end;
+          align-items: flex-start;
           margin: 20px 0;
           gap: 20px;
           span {

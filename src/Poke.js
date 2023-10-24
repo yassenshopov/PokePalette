@@ -783,7 +783,10 @@ export default function Poke() {
         >
           {shiny ? <IoSparkles /> : <IoSparklesOutline />}
         </button>
-        <div id="suggestionsWrapper" className={suggestions.length > 0 ? "" : "empty"}>
+        <div
+          id="suggestionsWrapper"
+          className={suggestions.length > 0 ? "" : "empty"}
+        >
           <div id="suggestions">
             {suggestions.map((item, index) => {
               return (
@@ -822,10 +825,19 @@ export default function Poke() {
                     {" "}
                     <img
                       src={
-                        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                          speciesData[item] +
-                          ".png" 
-                          || ""
+                        shiny
+                          ? 
+                            speciesData[item] < 908 ?
+                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
+                              speciesData[item] +
+                              ".png" :
+                              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
+                              speciesData[item] +
+                              ".png" ||
+                            ""
+                          : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+                              speciesData[item] +
+                              ".png" || ""
                       }
                       alt="sprite"
                     />

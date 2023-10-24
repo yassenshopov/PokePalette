@@ -85,13 +85,8 @@ export default function Example() {
                 root.style.setProperty("--mainDark", temp_color);
                 if (darkTheme) {
                   root.style.setProperty("--bgURL", "url('" + bgLight + "')");
-                  // document.getElementById("sun").style.display = "none";
-                  // document.getElementById("moon").style.display =
-                  // "inline-block";
                 } else {
                   root.style.setProperty("--bgURL", "url('" + bgDark + "')");
-                  // document.getElementById("moon").style.display = "none";
-                  // document.getElementById("sun").style.display = "inline-block";
                 }
                 darkTheme = !darkTheme;
               }}
@@ -213,7 +208,7 @@ export default function Example() {
 
       <footer id="footer">
         <p>
-          Copyright © PokePalette 2022<br></br>- by{" "}
+          Copyright © Pokemon Palette 2023<br></br>- by{" "}
           <a
             href="https://github.com/yassenshopov"
             target="_blank"

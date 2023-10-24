@@ -202,6 +202,11 @@ body::-webkit-scrollbar {
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  transition: all 200ms ease-in-out;
+}
+.pokeCard #suggestionsWrapper #suggestions .suggestion:hover {
+  border-radius: 1rem;
+  transform: scale(0.9);
 }
 .pokeCard #suggestionsWrapper #suggestions .suggestion:first-child {
   margin-top: 0;
@@ -883,6 +888,9 @@ body::-webkit-scrollbar {
     height: 400px;
     width: 100%;
   }
+  .example #pkmnInfo .imgWrapper #hiddenPkmn {
+    background-size: 100% auto;
+  }
   .example .imAd {
     flex-direction: column-reverse;
     text-align: center;
@@ -891,7 +899,7 @@ body::-webkit-scrollbar {
     width: 100%;
   }
   .example .imAd #info {
-    text-align: center;
+    text-align: left;
     width: 100%;
   }
   .example .imAd #info #titleWords {
@@ -899,6 +907,7 @@ body::-webkit-scrollbar {
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    align-items: flex-start;
     margin: 20px 0;
     gap: 20px;
   }
