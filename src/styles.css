@@ -165,6 +165,56 @@ body::-webkit-scrollbar {
   font-family: var(--font1);
   border-right: 4px solid var(--mainDark);
 }
+.pokeCard #logo #pokeball {
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  top: 2rem;
+  left: 43%;
+  background: radial-gradient(circle, #000000 0%, #000000 70%, #00000000 70%, #00000000 100%);
+  transform: rotate(45deg);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  box-shadow: 0 0px 10px rgba(0, 0, 0, 0.1);
+}
+.pokeCard #logo #pokeball.animated {
+  animation: pokeball 2s ease-in-out 1;
+}
+@keyframes pokeball {
+  0% {
+    transform: rotate(45deg);
+  }
+  100% {
+    transform: rotate(calc(45deg + 4*360deg));
+  }
+}
+.pokeCard #logo #pokeball #pokeballMiddle {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background-color: #ffffff;
+  position: absolute;
+  border: 3px solid #000000;
+  z-index: 2;
+}
+.pokeCard #logo #pokeball #pokeballTop {
+  background: linear-gradient(90deg, var(--color2) 0%, var(--color2) 33%, var(--color3) 33%, var(--color3) 66%, var(--color4) 66%, var(--color4) 100%);
+  height: 100%;
+  width: 100%;
+  transform: translateY(-5%);
+  z-index: 1;
+}
+.pokeCard #logo #pokeball #pokeballBottom {
+  background: linear-gradient(90deg, #ffffff 0%, #ffffff 33%, #e7e7e7 33%, #e7e7e7 66%, #c7c7c7 66%, #c7c7c7 100%);
+  height: 100%;
+  width: 100%;
+  z-index: 0;
+  transform: translateY(5%);
+}
 .pokeCard #suggestionsWrapper {
   position: absolute;
   top: 105%;
@@ -864,6 +914,19 @@ body::-webkit-scrollbar {
   .example #cards #loadMore {
     font-size: 1.2rem;
   }
+  .example #pkmnInfo {
+    flex-direction: column;
+  }
+  .example #pkmnInfo .txtWrapper {
+    max-width: 100%;
+  }
+  .example #pkmnInfo .imgWrapper {
+    height: 400px;
+    width: 100%;
+  }
+  .example #pkmnInfo .imgWrapper #hiddenPkmn {
+    background-size: 100% auto;
+  }
   .example #shareWidgets {
     display: flex;
     flex-direction: column-reverse;
@@ -877,19 +940,6 @@ body::-webkit-scrollbar {
   }
   .example #shareWidgets .tweet-popup .tweet-input {
     width: 90%;
-  }
-  .example #pkmnInfo {
-    flex-direction: column;
-  }
-  .example #pkmnInfo .txtWrapper {
-    max-width: 100%;
-  }
-  .example #pkmnInfo .imgWrapper {
-    height: 400px;
-    width: 100%;
-  }
-  .example #pkmnInfo .imgWrapper #hiddenPkmn {
-    background-size: 100% auto;
   }
   .example .imAd {
     flex-direction: column-reverse;
@@ -934,4 +984,101 @@ body::-webkit-scrollbar {
   .example .imAd #site main {
     gap: 5vw;
   }
+}
+#figma {
+  background-color: #ffffff;
+  width: 60%;
+  height: calc((3.6 * 0.6 / 3) * 70vw);
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1vw;
+  align-self: center;
+  border: 1px solid #000000;
+}
+#figma > * {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+#figma > *::after {
+  margin-bottom: 15rem;
+}
+#figma .gridSection1 {
+  background-color: var(--color2);
+}
+#figma .gridSection1::after {
+  font-size: 1.6rem;
+  font-weight: 1000;
+  content: var(--color2word);
+  color: var(--hsp2);
+}
+#figma .gridSection2 {
+  background-color: var(--color3);
+  position: relative;
+}
+#figma .gridSection2 .figmaLogo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5vw;
+  position: absolute;
+  top: 0;
+}
+#figma .gridSection2 .figmaLogo img {
+  height: 20px;
+}
+#figma .gridSection2 .figmaLogo p {
+  font-family: "Oswald", sans-serif;
+  color: var(--hsp3);
+  font-size: 1.2rem;
+}
+#figma .gridSection2 .pkmn {
+  background: var(--artURL);
+  background-size: cover;
+  background-position: center;
+  background-size: 100% auto;
+  background-repeat: no-repeat;
+  width: 220%;
+  height: 60%;
+  overflow-x: visible;
+  position: absolute;
+  bottom: 0rem;
+}
+#figma .gridSection2 .sfl {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #000000;
+  background-color: #ffffff;
+  border-radius: 2rem;
+  padding: 0rem 1rem;
+  position: absolute;
+  bottom: 3rem;
+  font-size: 1.4rem;
+  height: 3rem;
+  font-weight: 1000;
+}
+#figma .gridSection2 .sfl svg {
+  margin-left: 0.5vw;
+  vertical-align: middle;
+}
+#figma .gridSection2::after {
+  font-size: 1.6rem;
+  font-weight: 1000;
+  content: var(--color3word);
+  color: var(--hsp3);
+}
+#figma .gridSection3 {
+  background-color: var(--color4);
+}
+#figma .gridSection3::after {
+  font-size: 1.6rem;
+  font-weight: 1000;
+  content: var(--color4word);
+  color: var(--hsp4);
+}
+#figma,
+#screenshotBtn {
+  display: none;
 }

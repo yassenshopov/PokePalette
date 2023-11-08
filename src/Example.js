@@ -4,9 +4,41 @@ import bgDark from "../src/img/bgDark.webp";
 import bgLight from "../src/img/bgLight.webp";
 import twitterLogo from "../src/img/x.webp";
 import { useState } from "react";
+import { BsFillBookmarkFill } from "react-icons/bs";
+import html2canvas from "html2canvas";
 
 export default function Example() {
   const [loadMoreCardsToggle, setLoadMoreCardsToggle] = useState(true);
+
+  const ScreenshotComponent = () => {
+    const captureScreenshot = () => {
+      const element = document.getElementById("figma");
+      if (element) {
+        html2canvas(element, {
+          useCORS: true, // Enable use of cross-origin images
+          allowTaint: true, // Allow cross-origin images to taint the canvas
+        }).then((canvas) => {
+          const screenshot = canvas.toDataURL("image/png");
+          // openScreenshotWindow(screenshot);
+          // Create a link element to trigger the download
+          const downloadLink = document.createElement("a");
+          downloadLink.href = screenshot;
+          downloadLink.download = "screenshot.png";
+          downloadLink.click();
+        });
+      }
+    };
+
+    const openScreenshotWindow = (screenshot) => {
+      const newWindow = window.open();
+      if (newWindow) {
+        newWindow.document.write('<img src="' + screenshot + '" />');
+      }
+    };
+
+    return <button id="screenshotBtn"
+     onClick={captureScreenshot}>Capture</button>;
+  };
 
   function Card({ cardIndex }) {
     let colorName = "color" + cardIndex;
@@ -204,6 +236,26 @@ export default function Example() {
           <h2>Share with your friends!</h2>
           <p>Share this color palette on Twitter with a single click</p>
         </div>
+      </section>
+
+      <ScreenshotComponent />
+
+      <section id="figma">
+        <div className="gridSection1"></div>
+        <div className="gridSection2">
+          <div className="figmaLogo">
+            <img src="https://inkmorphism.com/logoWh.webp" alt="Figma Logo" />
+            <p>Inkmorphism</p>
+          </div>
+          <div className="pkmn"></div>
+          <div className="sfl">
+            <p>
+              Save for later
+              <BsFillBookmarkFill />
+            </p>
+          </div>
+        </div>
+        <div className="gridSection3"></div>
       </section>
 
       <footer id="footer">

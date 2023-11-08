@@ -70,6 +70,7 @@ export default function Poke() {
           let res = await axios.get(
             `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
           );
+          setLogoAnimation(true);
           setResCopy(res);
           console.log(res);
           let evoBtnCheck = true;
@@ -423,6 +424,9 @@ export default function Poke() {
         }
       }
       setIsLoading(false);
+      setTimeout(() => {
+        setLogoAnimation(false);
+      }, 2000);
     }
 
     getData();
@@ -441,6 +445,8 @@ export default function Poke() {
     setNumValue(numValue);
     setStateFind(numValue.toString());
   };
+
+  const [logoAnimation, setLogoAnimation] = useState(false);
 
   useEffect(() => {
     const myCanvas = document.getElementById("my-canvas");
@@ -729,6 +735,13 @@ export default function Poke() {
   return (
     <div className="pokeCard">
       {isLoading ? <div id="hideWhileLoading"></div> : null}
+      <div id="logo">
+        <div id="pokeball" className={logoAnimation ? "animated" : ""}>
+          <div id="pokeballTop"></div>
+          <div id="pokeballMiddle"></div>
+          <div id="pokeballBottom"></div>
+        </div>
+      </div>
       <div id="colorBg">
         <div></div>
         <div></div>
@@ -826,15 +839,13 @@ export default function Poke() {
                     <img
                       src={
                         shiny
-                          ? 
-                            speciesData[item] < 908 ?
-                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
+                          ? speciesData[item] < 908
+                            ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
                               speciesData[item] +
-                              ".png" :
-                              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
-                              speciesData[item] +
-                              ".png" ||
-                            ""
+                              ".png"
+                            : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
+                                speciesData[item] +
+                                ".png" || ""
                           : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
                               speciesData[item] +
                               ".png" || ""
