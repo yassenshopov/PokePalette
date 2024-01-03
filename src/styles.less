@@ -1,11 +1,11 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #eeeeff;
-  --color3: #313152;
-  --color4: #bdbde6;
+  --color2: #d5e6f6;
+  --color3: #ffffff;
+  --color4: #9cace6;
   --mainDark: #18181a;
   --hsp2: #121212;
-  --hsp3: #f1f1f1;
+  --hsp3: #121212;
   --hsp4: #121212;
   --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png");
   --bgURL: url(../public/bgDark.webp);
@@ -148,7 +148,7 @@ body {
           transform: rotate(45deg);
         }
         100% {
-          transform: rotate(calc(45deg + 4*360deg));
+          transform: rotate(calc(45deg + 4 * 360deg));
         }
       }
       #pokeballMiddle {
@@ -309,15 +309,18 @@ body {
   }
 }
 
-.example {
-  &:nth-child(2n) {
+#example {
+  &:nth-child(2n+1) {
     background: var(--color2);
     color: var(--hsp2);
   }
-  &:nth-child(2n + 1) {
+  &:nth-child(2n) {
     background: var(--mainDark);
     color: var(--color1);
   }
+}
+
+.example {
   main {
     #customButtons {
       .flexCentered(row);
@@ -463,6 +466,8 @@ body {
     padding: 40px 3vw;
     .flexCentered(row-reverse);
     gap: 6vw;
+    background-color: var(--mainDark);
+    color: var(--color1);
     .tweet-popup {
       top: 50%;
       left: 50%;
@@ -470,8 +475,7 @@ body {
       padding: 20px 2vw;
       border-radius: 16px;
       box-sizing: border-box;
-      background-color: var(--color4);
-      background: var(--hsp4);
+      background: var(--color1);
       .flexCentered(column);
       .tweetLogo {
         width: 50px;
@@ -516,7 +520,6 @@ body {
     p {
       font-size: 1.2rem;
       font-family: carnacLight;
-      color: var(--hsp2);
       margin: 20px 0;
     }
   }
@@ -802,11 +805,7 @@ body {
     justify-content: center;
     gap: 10vw;
     align-items: center;
-    // color: var(--hsp2);
-    // background-color: var(--color2);
-    background-color: var(--mainDark);
     font-family: "Raleway", sans-serif;
-    color: var(--color1);
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
     width: 100%;
     font-size: 1vw;
@@ -901,7 +900,32 @@ body {
         height: 400px;
         width: 100%;
         #hiddenPkmn {
-          background-size: 100% auto;
+          background-size: 80% auto;
+        }
+      }
+    }
+    #ballType {
+      padding: 20px 6vw 20px;
+      h2 {
+        font-size: 2rem;
+      }
+      #ballTypesWrapper {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        .ballMiniSection {
+          width: 80%;
+          padding: 20px 10vw;
+          p {
+            font-size: 1.4rem;
+          }
+          .ball {
+            gap: 2vw;
+            & > * {
+              width: 50%;
+              height: 100px;
+            }
+          }
         }
       }
     }
@@ -955,12 +979,12 @@ body {
   }
 }
 
-#figma {
+.figma {
   background-color: #ffffff;
   width: 60%;
   height: calc((3.6 * 0.6 / 3) * 70vw);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1.8fr 1fr;
   gap: 1vw;
   align-self: center;
   border: 1px solid #000000;
@@ -971,13 +995,13 @@ body {
     align-items: center;
     &::after {
       margin-bottom: 15rem;
+      font-size: 1.4rem;
+      font-weight: 1000;
     }
   }
   .gridSection1 {
     background-color: var(--color2);
     &::after {
-      font-size: 1.6rem;
-      font-weight: 1000;
       content: var(--color2word);
       color: var(--hsp2);
     }
@@ -1007,7 +1031,7 @@ body {
       background-position: center;
       background-size: 100% auto;
       background-repeat: no-repeat;
-      width: 220%;
+      width: 150%;
       height: 60%;
       overflow-x: visible;
       position: absolute;
@@ -1032,8 +1056,6 @@ body {
       }
     }
     &::after {
-      font-size: 1.6rem;
-      font-weight: 1000;
       content: var(--color3word);
       color: var(--hsp3);
     }
@@ -1041,10 +1063,100 @@ body {
   .gridSection3 {
     background-color: var(--color4);
     &::after {
-      font-size: 1.6rem;
-      font-weight: 1000;
       content: var(--color4word);
       color: var(--hsp4);
+    }
+  }
+}
+
+#ballType {
+  padding: 20px 6vw 60px;
+  box-sizing: border-box;
+  h2 {
+    font-size: 2.5rem;
+    font-weight: 800;
+    line-height: 1.2;
+    font-family: "Raleway", sans-serif;
+    margin: 2rem 0 0 0;
+  }
+  #ballTypesWrapper {
+    display: flex;
+    gap: 2vw;
+    box-sizing: border-box;
+    width: 100%;
+    margin: 2rem 0;
+    .ballMiniSection {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      width: 33%;
+      background-color: var(--hsp2);
+      color: var(--anti_hsp2);
+      padding: 20px 2vw;
+      border-radius: 12px;
+      box-sizing: border-box;
+      p {
+        font-size: 1.2rem;
+        margin: 0;
+        text-align: center;
+      }
+      img {
+        width: 50%;
+        height: auto;
+        min-height: 100px;
+        image-rendering: pixelated;
+      }
+      .ball {
+        display: flex;
+        width: 100%;
+        border-radius: 12px;
+        overflow: hidden;
+        gap: 0.2vw;
+        & > * {
+          width: 33%;
+          height: 100px;
+        }
+      }
+    }
+  }
+}
+
+#mainSlide,
+#lastSlide {
+  & > * {
+    &::after {
+      display: none;
+    }
+  }
+  .gridSection2 {
+    overflow: visible;
+    &::after {
+      display: flex;
+      content: "Steal these palettes";
+      text-align: center;
+      font-size: 3.6rem;
+      margin-bottom: 22rem;
+    }
+    .pkmn {
+      width: 170%;
+    }
+  }
+  .edition {
+    color: #ffffff;
+    background-color: #000000;
+    border-radius: 12rem;
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    font-size: 1.2rem;
+    font-weight: 1000;
+    padding: 0.5rem 1rem;
+    z-index: 9;
+    transform: translate(80%, -200%) rotate(-5deg);
+    &.visible {
+      display: flex;
     }
   }
 }
@@ -1053,6 +1165,8 @@ body {
 //   display: none;
 // }
 
-#figma, #screenshotBtn {
+.figma,
+#screenshotBtn,
+#toggleSpecialEdition {
   display: none;
 }

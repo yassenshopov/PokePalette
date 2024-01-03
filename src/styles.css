@@ -1,11 +1,11 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #eeeeff;
-  --color3: #313152;
-  --color4: #bdbde6;
+  --color2: #d5e6f6;
+  --color3: #ffffff;
+  --color4: #9cace6;
   --mainDark: #18181a;
   --hsp2: #121212;
-  --hsp3: #f1f1f1;
+  --hsp3: #121212;
   --hsp4: #121212;
   --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png");
   --bgURL: url(../public/bgDark.webp);
@@ -189,7 +189,7 @@ body::-webkit-scrollbar {
     transform: rotate(45deg);
   }
   100% {
-    transform: rotate(calc(45deg + 4*360deg));
+    transform: rotate(calc(45deg + 4 * 360deg));
   }
 }
 .pokeCard #logo #pokeball #pokeballMiddle {
@@ -332,11 +332,11 @@ body::-webkit-scrollbar {
     transform: scale(1);
   }
 }
-.example:nth-child(2n) {
+#example:nth-child(2n+1) {
   background: var(--color2);
   color: var(--hsp2);
 }
-.example:nth-child(2n + 1) {
+#example:nth-child(2n) {
   background: var(--mainDark);
   color: var(--color1);
 }
@@ -489,6 +489,8 @@ body::-webkit-scrollbar {
   align-items: center;
   justify-content: center;
   gap: 6vw;
+  background-color: var(--mainDark);
+  color: var(--color1);
 }
 .example #shareWidgets .tweet-popup {
   top: 50%;
@@ -497,8 +499,7 @@ body::-webkit-scrollbar {
   padding: 20px 2vw;
   border-radius: 16px;
   box-sizing: border-box;
-  background-color: var(--color4);
-  background: var(--hsp4);
+  background: var(--color1);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -548,7 +549,6 @@ body::-webkit-scrollbar {
 .example #shareWidgets p {
   font-size: 1.2rem;
   font-family: carnacLight;
-  color: var(--hsp2);
   margin: 20px 0;
 }
 .example #pkmnInfo {
@@ -845,9 +845,7 @@ body::-webkit-scrollbar {
   justify-content: center;
   gap: 10vw;
   align-items: center;
-  background-color: var(--mainDark);
   font-family: "Raleway", sans-serif;
-  color: var(--color1);
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
   width: 100%;
   font-size: 1vw;
@@ -925,7 +923,32 @@ body::-webkit-scrollbar {
     width: 100%;
   }
   .example #pkmnInfo .imgWrapper #hiddenPkmn {
-    background-size: 100% auto;
+    background-size: 80% auto;
+  }
+  .example #ballType {
+    padding: 20px 6vw 20px;
+  }
+  .example #ballType h2 {
+    font-size: 2rem;
+  }
+  .example #ballType #ballTypesWrapper {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+  .example #ballType #ballTypesWrapper .ballMiniSection {
+    width: 80%;
+    padding: 20px 10vw;
+  }
+  .example #ballType #ballTypesWrapper .ballMiniSection p {
+    font-size: 1.4rem;
+  }
+  .example #ballType #ballTypesWrapper .ballMiniSection .ball {
+    gap: 2vw;
+  }
+  .example #ballType #ballTypesWrapper .ballMiniSection .ball > * {
+    width: 50%;
+    height: 100px;
   }
   .example #shareWidgets {
     display: flex;
@@ -985,39 +1008,39 @@ body::-webkit-scrollbar {
     gap: 5vw;
   }
 }
-#figma {
+.figma {
   background-color: #ffffff;
   width: 60%;
   height: calc((3.6 * 0.6 / 3) * 70vw);
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: 1fr 1.8fr 1fr;
   gap: 1vw;
   align-self: center;
   border: 1px solid #000000;
 }
-#figma > * {
+.figma > * {
   display: flex;
   flex-direction: column;
   justify-content: center;
   align-items: center;
 }
-#figma > *::after {
+.figma > *::after {
   margin-bottom: 15rem;
+  font-size: 1.4rem;
+  font-weight: 1000;
 }
-#figma .gridSection1 {
+.figma .gridSection1 {
   background-color: var(--color2);
 }
-#figma .gridSection1::after {
-  font-size: 1.6rem;
-  font-weight: 1000;
+.figma .gridSection1::after {
   content: var(--color2word);
   color: var(--hsp2);
 }
-#figma .gridSection2 {
+.figma .gridSection2 {
   background-color: var(--color3);
   position: relative;
 }
-#figma .gridSection2 .figmaLogo {
+.figma .gridSection2 .figmaLogo {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1025,27 +1048,27 @@ body::-webkit-scrollbar {
   position: absolute;
   top: 0;
 }
-#figma .gridSection2 .figmaLogo img {
+.figma .gridSection2 .figmaLogo img {
   height: 20px;
 }
-#figma .gridSection2 .figmaLogo p {
+.figma .gridSection2 .figmaLogo p {
   font-family: "Oswald", sans-serif;
   color: var(--hsp3);
   font-size: 1.2rem;
 }
-#figma .gridSection2 .pkmn {
+.figma .gridSection2 .pkmn {
   background: var(--artURL);
   background-size: cover;
   background-position: center;
   background-size: 100% auto;
   background-repeat: no-repeat;
-  width: 220%;
+  width: 150%;
   height: 60%;
   overflow-x: visible;
   position: absolute;
   bottom: 0rem;
 }
-#figma .gridSection2 .sfl {
+.figma .gridSection2 .sfl {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -1059,26 +1082,114 @@ body::-webkit-scrollbar {
   height: 3rem;
   font-weight: 1000;
 }
-#figma .gridSection2 .sfl svg {
+.figma .gridSection2 .sfl svg {
   margin-left: 0.5vw;
   vertical-align: middle;
 }
-#figma .gridSection2::after {
-  font-size: 1.6rem;
-  font-weight: 1000;
+.figma .gridSection2::after {
   content: var(--color3word);
   color: var(--hsp3);
 }
-#figma .gridSection3 {
+.figma .gridSection3 {
   background-color: var(--color4);
 }
-#figma .gridSection3::after {
-  font-size: 1.6rem;
-  font-weight: 1000;
+.figma .gridSection3::after {
   content: var(--color4word);
   color: var(--hsp4);
 }
-#figma,
-#screenshotBtn {
+#ballType {
+  padding: 20px 6vw 60px;
+  box-sizing: border-box;
+}
+#ballType h2 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  line-height: 1.2;
+  font-family: "Raleway", sans-serif;
+  margin: 2rem 0 0 0;
+}
+#ballType #ballTypesWrapper {
+  display: flex;
+  gap: 2vw;
+  box-sizing: border-box;
+  width: 100%;
+  margin: 2rem 0;
+}
+#ballType #ballTypesWrapper .ballMiniSection {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 33%;
+  background-color: var(--hsp2);
+  color: var(--anti_hsp2);
+  padding: 20px 2vw;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+#ballType #ballTypesWrapper .ballMiniSection p {
+  font-size: 1.2rem;
+  margin: 0;
+  text-align: center;
+}
+#ballType #ballTypesWrapper .ballMiniSection img {
+  width: 50%;
+  height: auto;
+  min-height: 100px;
+  image-rendering: pixelated;
+}
+#ballType #ballTypesWrapper .ballMiniSection .ball {
+  display: flex;
+  width: 100%;
+  border-radius: 12px;
+  overflow: hidden;
+  gap: 0.2vw;
+}
+#ballType #ballTypesWrapper .ballMiniSection .ball > * {
+  width: 33%;
+  height: 100px;
+}
+#mainSlide > *::after,
+#lastSlide > *::after {
+  display: none;
+}
+#mainSlide .gridSection2,
+#lastSlide .gridSection2 {
+  overflow: visible;
+}
+#mainSlide .gridSection2::after,
+#lastSlide .gridSection2::after {
+  display: flex;
+  content: "Steal these palettes";
+  text-align: center;
+  font-size: 3.6rem;
+  margin-bottom: 22rem;
+}
+#mainSlide .gridSection2 .pkmn,
+#lastSlide .gridSection2 .pkmn {
+  width: 170%;
+}
+#mainSlide .edition,
+#lastSlide .edition {
+  color: #ffffff;
+  background-color: #000000;
+  border-radius: 12rem;
+  display: none;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  font-size: 1.2rem;
+  font-weight: 1000;
+  padding: 0.5rem 1rem;
+  z-index: 9;
+  transform: translate(80%, -200%) rotate(-5deg);
+}
+#mainSlide .edition.visible,
+#lastSlide .edition.visible {
+  display: flex;
+}
+.figma,
+#screenshotBtn,
+#toggleSpecialEdition {
   display: none;
 }

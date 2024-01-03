@@ -7,9 +7,9 @@ import speciesData from "./json/species.json";
 
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 
-export default function Poke() {
-  let [nameValue, setStateFind] = useState("butterfree");
-  let [numValue, setNumValue] = useState(12);
+export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
+  let [nameValue, setStateFind] = useState("lugia");
+  let [numValue, setNumValue] = useState(249);
   const [suggestions, setSuggestions] = useState([]);
 
   const NumChanger = (e) => {
@@ -513,6 +513,204 @@ export default function Poke() {
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
+      let root = document.querySelector(":root");
+
+      const colorList = [
+        {
+          pokeball: {
+            color1: "#f18e38",
+            // coeff1: 1/50,
+            color2: "#f06d57",
+            // coeff2: 1/25,
+            color3: "#f5f4f5",
+            // coeff3: 1/25,
+          },
+        },
+        {
+          greatball: {
+            color1: "#268ab7",
+            color2: "#ed533a",
+            color3: "#f5f4f5",
+          },
+        },
+        {
+          ultraball: {
+            color1: "#515151",
+            color2: "#515151",
+            color3: "#f6d044",
+          },
+        },
+        {
+          masterball: {
+            color1: "#7E2E8E",
+            // coeff1: 1/50,
+            color2: "#5E308F",
+            // coeff2: 1/40,
+            color3: "#CA2E8C",
+            // coeff3: 1/10,
+          },
+        },
+        {
+          premierball: {
+            color1: "#ffffff",
+            color2: "#ffffff",
+            color3: "#ffffff",
+          },
+        },
+        {
+          healball: {
+            color1: "#eebdd6",
+            // coeff1: 1/60,
+            color2: "#fbf2ea",
+            // coeff2: 1/30,
+            color3: "#65aadd",
+            // coeff3: 1/10,
+          },
+        },
+        {
+          netball: {
+            color1: "#46acad",
+            color2: "#333333",
+            color3: "#f5f4f5",
+          },
+        },
+        {
+          nestball: {
+            color1: "#7fa174",
+            color2: "#d0ab78",
+            color3: "#f5f4f5",
+          },
+        },
+        {
+          diveball: {
+            color1: "#75bde6",
+            color2: "#0f4a81",
+            color3: "#dfebf0",
+          },
+        },
+        {
+          duskball: {
+            color1: "#232626",
+            color2: "#50A04A",
+            color3: "#e0610d",
+          },
+        },
+        {
+          timerball: {
+            color1: "#f2f2f2",
+            color2: "#f2f2f2",
+            color3: "#f18e38",
+          },
+        },
+        {
+          quickball: {
+            color1: "#73b5e4",
+            color2: "#efea2e",
+            color3: "#3b82c4",
+          },
+        },
+        {
+          repeatball: {
+            color1: "#f28f38",
+            color2: "#fff338",
+            color3: "#a1a2a7",
+          },
+        },
+        {
+          luxuryball: {
+            color1: "#626871",
+            color2: "#626871",
+            color3: "#D35237",
+          },
+        },
+        {
+          safariball: {
+            color1: "#307D54",
+            color2: "#AAA54C",
+            color3: "#779752",
+          },
+        },
+        {
+          fastball: {
+            color1: "#E98D44",
+            color2: "#E9C241",
+            color3: "#ffffff",
+          },
+        },
+        {
+          friendball: {
+            color1: "#80BA41",
+            color2: "#6EA848",
+            color3: "#E15B4D",
+          },
+        },
+        {
+          lureball: {
+            color1: "#3589BE",
+            color2: "#D45E69",
+            color3: "#F3AF5B",
+          },
+        },
+        {
+          levelball: {
+            color1: "#DA925C",
+            // coeff1: 1 / 50,
+            color2: "#796961",
+            // coeff2: 1 / 40,
+            color3: "#D3463B",
+            // coeff3: 1 / 10,
+          },
+        },
+        // {
+        //   heavyball: {
+        //     color1: "#8DA2B0",
+        //     color2: "#8DA2B0",
+        //     color3: "#4876BB",
+        //   },
+        // },
+        {
+          loveball: {
+            color1: "#D580AC",
+            color2: "#F8CADE",
+            color3: "#ffffff",
+          },
+        },
+        {
+          moonball: {
+            color1: "#5E7090",
+            color2: "#3FB8DB",
+            color3: "#E9C241",
+          },
+        },
+        {
+          dreamball: {
+            color1: "#F4B4D0",
+            color2: "#EA6099",
+            color3: "#8F70AF",
+          },
+        },
+        {
+          beastball: {
+            color1: "#3962AD",
+            color2: "#E4D044",
+            color3: "#92D6F7",
+          },
+        },
+        {
+          sportball: {
+            color1: "#F18E38",
+            color2: "#D35337",
+            color3: "#FEFAF6",
+          },
+        },
+        {
+          cherishball: {
+            color1: "#E84535",
+            color2: "#E84535",
+            color3: "#4E5452",
+          },
+        }
+      ];
 
       color2 = sortedScheme[0][0];
       color3 = sortedScheme[1][0];
@@ -524,12 +722,134 @@ export default function Poke() {
       color9 = sortedScheme[7][0];
       color10 = sortedScheme[8][0];
 
+      findClosestColor([color2, color3, color4], colorList);
+
       //convert hex to rgb:
       function hexToRgb(hex) {
-        const r = parseInt(hex.slice(1, 3), 16);
-        const g = parseInt(hex.slice(3, 5), 16);
-        const b = parseInt(hex.slice(5, 7), 16);
+        const bigint = parseInt(hex.slice(1), 16);
+        const r = (bigint >> 16) & 255
+        const g = ((bigint >> 8) & 255);
+        const b = (bigint & 255);
         return [r, g, b];
+      }
+
+      function colorDistance(color1, color2) {
+        // Calculate Euclidean distance between two colors in RGB space
+        const [r1, g1, b1] = color1;
+        const [r2, g2, b2] = color2;
+        const distance = Math.sqrt(
+          (r2 - r1) ** 2 + (g2 - g1) ** 2 + (b2 - b1) ** 2
+        );
+        return distance;
+      }
+
+      function findClosestColor(inputColorArr, colorList) {
+        // Convert input color to RGB
+        const inputRgb1 = hexToRgb(inputColorArr[0]);
+        const inputRgb2 = hexToRgb(inputColorArr[1]);
+        const inputRgb3 = hexToRgb(inputColorArr[2]);
+        // Calculate distance to each color in the list
+        const distances = colorList.map((color) => {
+          console.log(Object.values(color)[0].coeff1);
+          const coeff1 = Object.values(color)[0].coeff1 || 1;
+          const coeff2 = Object.values(color)[0].coeff2 || 1;
+          const coeff3 = Object.values(color)[0].coeff3 || 1;
+          return {
+            distance11:
+              colorDistance(
+                inputRgb1,
+                hexToRgb(Object.values(color)[0].color1)
+              ) * coeff1,
+            distance21:
+              colorDistance(
+                inputRgb2,
+                hexToRgb(Object.values(color)[0].color1)
+              ) * coeff1,
+            distance31:
+              colorDistance(
+                inputRgb3,
+                hexToRgb(Object.values(color)[0].color1)
+              ) * coeff1,
+            distance12:
+              colorDistance(
+                inputRgb1,
+                hexToRgb(Object.values(color)[0].color2)
+              ) * coeff2,
+            distance22:
+              colorDistance(
+                inputRgb2,
+                hexToRgb(Object.values(color)[0].color2)
+              ) * coeff2,
+            distance32:
+              colorDistance(
+                inputRgb3,
+                hexToRgb(Object.values(color)[0].color2)
+              ) * coeff2,
+            distance13:
+              colorDistance(
+                inputRgb1,
+                hexToRgb(Object.values(color)[0].color3)
+              ) * coeff3,
+            distance23:
+              colorDistance(
+                inputRgb2,
+                hexToRgb(Object.values(color)[0].color3)
+              ) * coeff3,
+            distance33:
+              colorDistance(
+                inputRgb3,
+                hexToRgb(Object.values(color)[0].color3)
+              ) * coeff3,
+            ballType: Object.keys(color)[0],
+          };
+        });
+        //add a property to each color object with the total distance
+        distances.forEach((color) => {
+          return (color.totalDistance =
+            color.distance11 +
+            color.distance12 +
+            color.distance13 +
+            color.distance21 +
+            color.distance22 +
+            color.distance23 +
+            color.distance31 +
+            color.distance32 +
+            color.distance33);
+        });
+        const closestColors = distances.sort((a, b) => {
+          return (
+            a.distance11 +
+            a.distance12 +
+            a.distance13 +
+            a.distance21 +
+            a.distance22 +
+            a.distance23 +
+            a.distance31 +
+            a.distance32 +
+            a.distance33 -
+            (b.distance11 +
+              b.distance12 +
+              b.distance13 +
+              b.distance21 +
+              b.distance22 +
+              b.distance23 +
+              b.distance31 +
+              b.distance32 +
+              b.distance33)
+          );
+        });
+        console.log(closestColors);
+        console.log(
+          `Input color ${inputColorArr} is most similar to \n
+          1.(${closestColors[0].ballType})\n
+          2.(${closestColors[1].ballType})\n
+          3.(${closestColors[2].ballType})
+          `
+        );
+
+        updateColor2(closestColors[0].ballType);
+        updateColor3(closestColors[1].ballType);
+        updateColor4(closestColors[2].ballType);
       }
 
       let color_list = {
@@ -565,7 +885,6 @@ export default function Poke() {
         "--anti_hsp9",
         "--anti_hsp10",
       ];
-      let root = document.querySelector(":root");
 
       let i = 0;
       for (const [key, value] of Object.entries(color_list)) {
@@ -775,7 +1094,7 @@ export default function Poke() {
           value={nameValue}
           name="name"
           spellcheck="false"
-          autocomplete="off"
+          autoComplete="off"
           //override down arrow action so you can choose from suggestions with keyboard
           onKeyDown={(e) => {
             if (e.keyCode === 40 && suggestions.length > 0) {
