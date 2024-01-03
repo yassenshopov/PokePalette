@@ -1,17 +1,18 @@
 {
   "files": {
-    "main.css": "/static/css/main.ef45b048.css",
-    "main.js": "/static/js/main.fa1c9c0a.js",
+    "main.css": "/static/css/main.ad0a3ebf.css",
+    "main.js": "/static/js/main.ba732684.js",
     "static/media/bgLight.webp": "/static/media/bgLight.93d7348012e0e7270c51.webp",
     "static/media/Carnac-Light.otf": "/static/media/Carnac-Light.8fa7584e8b1431e1665a.otf",
     "static/media/bgDark.webp": "/static/media/bgDark.3e9fed29ceecf9fc67ef.webp",
+    "static/media/imLogo.webp": "/static/media/imLogo.69cb98874b0292dec89f.webp",
     "static/media/x.webp": "/static/media/x.00434fb3562ebcb1cd21.webp",
     "index.html": "/index.html",
-    "main.ef45b048.css.map": "/static/css/main.ef45b048.css.map",
-    "main.fa1c9c0a.js.map": "/static/js/main.fa1c9c0a.js.map"
+    "main.ad0a3ebf.css.map": "/static/css/main.ad0a3ebf.css.map",
+    "main.ba732684.js.map": "/static/js/main.ba732684.js.map"
   },
   "entrypoints": [
-    "static/css/main.ef45b048.css",
-    "static/js/main.fa1c9c0a.js"
+    "static/css/main.ad0a3ebf.css",
+    "static/js/main.ba732684.js"
   ]
 }
