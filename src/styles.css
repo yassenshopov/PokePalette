@@ -1,13 +1,13 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #d5e6f6;
-  --color3: #ffffff;
-  --color4: #9cace6;
+  --color2: #FFFFFF;
+  --color3: #9CACE6;
+  --color4: #5A73FF;
   --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #121212;
   --hsp4: #121212;
-  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png");
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png");
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
   --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
@@ -164,6 +164,9 @@ body::-webkit-scrollbar {
   gap: 2vh;
   font-family: var(--font1);
   border-right: 4px solid var(--mainDark);
+}
+.pokeCard canvas {
+  image-rendering: pixelated;
 }
 .pokeCard #logo #pokeball {
   border-radius: 50%;
@@ -332,6 +335,21 @@ body::-webkit-scrollbar {
     transform: scale(1);
   }
 }
+.pokeCard .tag {
+  padding: 0.5rem 1rem;
+  border-radius: 1rem;
+  --colorTag: color-mix(in oklab, var(--color3), var(--mainDark));
+  background-color: var(--colorTag);
+  color: #f1f1f1;
+  font-family: var(--font1);
+  z-index: 1;
+  margin: 0;
+  min-height: 1.2rem;
+  font-weight: 600;
+}
+.pokeCard .tag.empty {
+  visibility: hidden;
+}
 #example:nth-child(2n+1) {
   background: var(--color2);
   color: var(--hsp2);
@@ -347,6 +365,12 @@ body::-webkit-scrollbar {
   justify-content: center;
   width: fit-content;
 }
+.example main #customButtons button:hover {
+  transform: scale(1.05);
+}
+.example main h1 {
+  font-weight: 1000;
+}
 .example main #scrollDown {
   color: var(--hsp4);
   background-color: var(--color4);
@@ -360,33 +384,23 @@ body::-webkit-scrollbar {
   font-weight: 700;
 }
 .example main #darkMode {
-  color: var(--hsp3);
-  background-color: var(--color3);
+  color: var(--color1);
+  background-color: var(--mainDark);
   border-radius: 50px;
   padding: 13px 14px 13px 14px;
   margin: 0;
-  font-size: 1.4rem;
-  width: 6vw;
+  font-size: 1rem;
+  width: fit-content;
+  border: 2px solid var(--hsp2);
+  font-weight: 1000;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  gap: 1vw;
   justify-content: space-between;
   position: relative;
   transition: all 200ms ease-in-out;
-}
-.example main #darkMode div {
-  position: absolute;
-  right: 10%;
-  border-radius: 50%;
-  height: 65%;
-  width: 2.1vw;
-  background-color: var(--hsp3);
-  transition: all 200ms ease-in-out;
-}
-.example main #darkMode.clicked div {
-  right: auto;
-  left: 10%;
 }
 .example #cards {
   background-color: var(--mainDark) !important;
@@ -506,8 +520,8 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 .example #shareWidgets .tweet-popup .tweetLogo {
-  width: 50px;
-  height: 50px;
+  width: 2rem;
+  height: auto;
   margin-bottom: 20px;
   border-radius: 50%;
 }
@@ -834,7 +848,6 @@ body::-webkit-scrollbar {
   background-color: var(--color3);
 }
 .example .imAd #site footer {
-  background: var(--color3);
   height: 15%;
   box-sizing: border-box;
   padding: 10px 1vw;
@@ -852,9 +865,6 @@ body::-webkit-scrollbar {
   padding: 20px 0 20px 0;
   text-align: center;
 }
-.example footer a {
-  color: var(--color1) !important;
-}
 .example footer #faIcons a {
   cursor: pointer;
   transition: all 200ms ease-in-out;
@@ -865,8 +875,8 @@ body::-webkit-scrollbar {
   justify-content: center;
 }
 .example footer #faIcons a:hover {
-  color: var(--hsp2) !important;
-  background-color: var(--color2);
+  color: var(--color2) !important;
+  background-color: var(--hsp2);
 }
 @media screen and (max-width: 768px) {
   .bmc-btn-container {
@@ -931,22 +941,22 @@ body::-webkit-scrollbar {
   .example #ballType h2 {
     font-size: 2rem;
   }
-  .example #ballType #ballTypesWrapper {
+  .example #ballType .ballTypesWrapper {
     flex-direction: column;
     align-items: center;
     gap: 20px;
   }
-  .example #ballType #ballTypesWrapper .ballMiniSection {
+  .example #ballType .ballTypesWrapper .ballMiniSection {
     width: 80%;
     padding: 20px 10vw;
   }
-  .example #ballType #ballTypesWrapper .ballMiniSection p {
+  .example #ballType .ballTypesWrapper .ballMiniSection p {
     font-size: 1.4rem;
   }
-  .example #ballType #ballTypesWrapper .ballMiniSection .ball {
+  .example #ballType .ballTypesWrapper .ballMiniSection .ball {
     gap: 2vw;
   }
-  .example #ballType #ballTypesWrapper .ballMiniSection .ball > * {
+  .example #ballType .ballTypesWrapper .ballMiniSection .ball > * {
     width: 50%;
     height: 100px;
   }
@@ -1108,14 +1118,14 @@ body::-webkit-scrollbar {
   font-family: "Raleway", sans-serif;
   margin: 2rem 0 0 0;
 }
-#ballType #ballTypesWrapper {
+#ballType .ballTypesWrapper {
   display: flex;
   gap: 2vw;
   box-sizing: border-box;
   width: 100%;
   margin: 2rem 0;
 }
-#ballType #ballTypesWrapper .ballMiniSection {
+#ballType .ballTypesWrapper .ballMiniSection {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -1127,25 +1137,31 @@ body::-webkit-scrollbar {
   border-radius: 12px;
   box-sizing: border-box;
 }
-#ballType #ballTypesWrapper .ballMiniSection p {
+#ballType .ballTypesWrapper .ballMiniSection p {
   font-size: 1.2rem;
   margin: 0;
   text-align: center;
+  font-weight: 1000;
 }
-#ballType #ballTypesWrapper .ballMiniSection img {
-  width: 50%;
+#ballType .ballTypesWrapper .ballMiniSection img {
   height: auto;
   min-height: 100px;
   image-rendering: pixelated;
 }
-#ballType #ballTypesWrapper .ballMiniSection .ball {
+#ballType .ballTypesWrapper .ballMiniSection .typeImg {
+  min-height: auto;
+  margin-top: 1rem;
+  width: auto;
+  height: 50px;
+}
+#ballType .ballTypesWrapper .ballMiniSection .ball {
   display: flex;
   width: 100%;
   border-radius: 12px;
   overflow: hidden;
   gap: 0.2vw;
 }
-#ballType #ballTypesWrapper .ballMiniSection .ball > * {
+#ballType .ballTypesWrapper .ballMiniSection .ball > * {
   width: 33%;
   height: 100px;
 }

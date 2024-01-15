@@ -15,6 +15,15 @@ export default function App() {
   const updateColor4 = (newValue) => {
     setColor4(newValue);
   };
+
+  const [typeBall1, setTypeBall1] = useState("healball");
+  const [typeBall2, setTypeBall2] = useState("fastball");
+  const updateTypeBall1 = (newValue) => {
+    setTypeBall1(newValue);
+  }
+  const updateTypeBall2 = (newValue) => {
+    setTypeBall2(newValue);
+  }
   return (
     <div className="App">
       <div className="poke">
@@ -22,10 +31,12 @@ export default function App() {
           updateColor2={updateColor2}
           updateColor3={updateColor3}
           updateColor4={updateColor4}
+          updateTypeBall1={updateTypeBall1}
+          updateTypeBall2={updateTypeBall2}
         />
       </div>
       <div className="example">
-        <Example dynamicContent={[color2, color3, color4]} />
+        <Example dynamicContent={[color2, color3, color4, typeBall1, typeBall2]} />
       </div>
     </div>
   );

@@ -22,6 +22,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       greatball: {
+        type: "dragon",
         color1: "#268ab7",
         color2: "#ed533a",
         color3: "#f5f4f5",
@@ -46,13 +47,15 @@ export default function Example({ dynamicContent }) {
     },
     {
       premierball: {
+        type: "normal",
         color1: "#ffffff",
         color2: "#ffffff",
-        color3: "#ee533a",
+        color3: "#ffffff",
       },
     },
     {
       healball: {
+        type: "psychic",
         color1: "#eebdd6",
         // coeff1: 1/60,
         color2: "#fbf2ea",
@@ -63,6 +66,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       netball: {
+        type: "bug",
         color1: "#46acad",
         color2: "#333333",
         color3: "#f5f4f5",
@@ -70,6 +74,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       nestball: {
+        type: "ground",
         color1: "#7fa174",
         color2: "#d0ab78",
         color3: "#f5f4f5",
@@ -77,6 +82,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       diveball: {
+        type: "ice",
         color1: "#75bde6",
         color2: "#0f4a81",
         color3: "#dfebf0",
@@ -84,6 +90,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       duskball: {
+        type: "ghost",
         color1: "#232626",
         color2: "#50A04A",
         color3: "#e0610d",
@@ -91,6 +98,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       timerball: {
+        type: "poison",
         color1: "#f2f2f2",
         color2: "#f2f2f2",
         color3: "#f18e38",
@@ -98,6 +106,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       quickball: {
+        type: "electric",
         color1: "#73b5e4",
         color2: "#efea2e",
         color3: "#3b82c4",
@@ -105,6 +114,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       repeatball: {
+        type: "fire",
         color1: "#f28f38",
         color2: "#fff338",
         color3: "#a1a2a7",
@@ -112,6 +122,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       luxuryball: {
+        type: "fighting",
         color1: "#626871",
         color2: "#626871",
         color3: "#D35237",
@@ -126,6 +137,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       fastball: {
+        type: "flying",
         color1: "#E98D44",
         color2: "#E9C241",
         color3: "#ffffff",
@@ -133,6 +145,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       friendball: {
+        type: "grass",
         color1: "#80BA41",
         color2: "#6EA848",
         color3: "#E15B4D",
@@ -140,6 +153,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       lureball: {
+        type: "water",
         color1: "#3589BE",
         color2: "#D45E69",
         color3: "#F3AF5B",
@@ -147,6 +161,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       levelball: {
+        type: "rock",
         color1: "#DA925C",
         // coeff1: 1 / 50,
         color2: "#796961",
@@ -155,15 +170,17 @@ export default function Example({ dynamicContent }) {
         // coeff3: 1 / 10,
       },
     },
-    // {
-    //   heavyball: {
-    //     color1: "#8DA2B0",
-    //     color2: "#8DA2B0",
-    //     color3: "#4876BB",
-    //   },
-    // },
+    {
+      heavyball: {
+        type: "steel",
+        color1: "#8DA2B0",
+        color2: "#8DA2B0",
+        color3: "#4876BB",
+      },
+    },
     {
       loveball: {
+        type: "fairy",
         color1: "#D580AC",
         color2: "#F8CADE",
         color3: "#ffffff",
@@ -171,6 +188,7 @@ export default function Example({ dynamicContent }) {
     },
     {
       moonball: {
+        type: "dark",
         color1: "#5E7090",
         color2: "#3FB8DB",
         color3: "#E9C241",
@@ -243,10 +261,26 @@ export default function Example({ dynamicContent }) {
     );
   };
 
-  function Ball({ ballType, index }) {
+  function Ball({ ballType, index, type }) {
     return (
       <div className="ballMiniSection">
-        <p>#{index}: {ballType.charAt(0).toUpperCase() + ballType.slice(1)}</p>
+        {type ? (
+          <p>
+            {ballType.charAt(0).toUpperCase() + ballType.slice(1)}
+            <br></br>
+            {index === 5 ? "Secondary type" : "Primary type"}:<br></br>
+            {/* {type.toUpperCase()} */}
+            <img
+              src={"https://www.serebii.net/pokedex-bw/type/" + type + ".gif"}
+              alt={type}
+              className="typeImg"
+            />
+          </p>
+        ) : (
+          <p>
+            #{index}: {ballType.charAt(0).toUpperCase() + ballType.slice(1)}
+          </p>
+        )}
         <img
           src={
             "https://www.serebii.net/itemdex/sprites/pgl/" + ballType + ".png"
@@ -367,9 +401,8 @@ export default function Example({ dynamicContent }) {
                 darkTheme = !darkTheme;
               }}
             >
-              <FaMoon />
-              <FaSun />
-              <div></div>
+              {darkMode ? <FaSun /> : <FaMoon />}
+              {darkMode ? "Light mode" : "Dark mode"}
             </button>
           </div>
         </section>
@@ -462,16 +495,44 @@ export default function Example({ dynamicContent }) {
       </section>
       <section id="ballType">
         <h2>Pokeballs based on palette:</h2>
-        <p>The following Pokeballs are chosen algorithmically based on the palette</p>
-        <div id="ballTypesWrapper">
-          {dynamicContent.map((ballType) => (
-            <Ball ballType={ballType} index={dynamicContent.indexOf(ballType) + 1} />
-          ))}
+        <p>
+          The following Pokeballs are chosen algorithmically based on the
+          palette
+        </p>
+        <div className="ballTypesWrapper">
+          {dynamicContent
+            .filter((x, i) => i < 3)
+            .map((ballType) => (
+              <Ball
+                ballType={ballType}
+                index={dynamicContent.indexOf(ballType) + 1}
+              />
+            ))}
+        </div>
+        <p>The following Pokeballs are chosen based on the type</p>
+        <div className="ballTypesWrapper">
+          {dynamicContent
+            .filter((x, i) => i >= 3)
+            .filter((x) => x !== "none")
+            .map((ballType) => (
+              <Ball
+                ballType={ballType}
+                index={dynamicContent.indexOf(ballType) + 1}
+                type={
+                  colorList[colorList.findIndex((x) => x[ballType])][ballType]
+                    .type
+                }
+              />
+            ))}
         </div>
       </section>
       <section id="shareWidgets">
         <div className="tweet-popup">
-          <img className="tweetLogo" src={twitterLogo} alt="Twitter Logo" />
+          <img
+            className="tweetLogo"
+            src={twitterLogo}
+            alt="Twitter Logo"
+          />
           <textarea
             className="tweet-input"
             placeholder="What's happening?"

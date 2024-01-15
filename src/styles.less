@@ -1,13 +1,13 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #d5e6f6;
-  --color3: #ffffff;
-  --color4: #9cace6;
+  --color2: #FFFFFF;
+  --color3: #9CACE6;
+  --color4: #5A73FF;
   --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #121212;
   --hsp4: #121212;
-  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png");
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png");
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
   --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
@@ -118,6 +118,9 @@ body {
   gap: 2vh;
   font-family: var(--font1);
   border-right: 4px solid var(--mainDark);
+  canvas {
+    image-rendering: pixelated;
+  }
   #logo {
     #pokeball {
       border-radius: 50%;
@@ -283,7 +286,6 @@ body {
       height: 2rem;
       cursor: pointer;
       font-size: 1.4rem;
-
       overflow: hidden;
       transition: all 200ms ease-in-out;
       color: #121212;
@@ -307,6 +309,21 @@ body {
       }
     }
   }
+  .tag {
+    padding: 0.5rem 1rem;
+    border-radius: 1rem;
+    --colorTag: color-mix(in oklab, var(--color3), var(--mainDark));
+    background-color: var(--colorTag);
+    color: #f1f1f1;
+    font-family: var(--font1);
+    z-index: 1;
+    margin: 0;
+    min-height: 1.2rem;
+    font-weight: 600;
+    &.empty {
+      visibility: hidden;
+    }
+  }
 }
 
 #example {
@@ -325,6 +342,14 @@ body {
     #customButtons {
       .flexCentered(row);
       width: fit-content;
+      button {
+        &:hover {
+          transform: scale(1.05);
+        }
+      }
+    }
+    h1 {
+      font-weight: 1000;
     }
     #scrollDown {
       color: var(--hsp4);
@@ -339,32 +364,21 @@ body {
       font-weight: 700;
     }
     #darkMode {
-      color: var(--hsp3);
-      background-color: var(--color3);
+      color: var(--color1);
+      background-color: var(--mainDark);
       border-radius: 50px;
       padding: 13px 14px 13px 14px;
       margin: 0;
-      font-size: 1.4rem;
-      width: 6vw;
+      font-size: 1rem;
+      width: fit-content;
+      border: 2px solid var(--hsp2);
+      font-weight: 1000;
       .flexCentered(row);
+      gap: 1vw;
       justify-content: space-between;
       position: relative;
       transition: all 200ms ease-in-out;
-      div {
-        position: absolute;
-        right: 10%;
-        border-radius: 50%;
-        height: 65%;
-        width: 2.1vw;
-        background-color: var(--hsp3);
-        transition: all 200ms ease-in-out;
-      }
-      &.clicked {
-        div {
-          right: auto;
-          left: 10%;
-        }
-      }
+
     }
   }
   #cards {
@@ -478,8 +492,8 @@ body {
       background: var(--color1);
       .flexCentered(column);
       .tweetLogo {
-        width: 50px;
-        height: 50px;
+        width: 2rem;
+        height: auto;
         margin-bottom: 20px;
         border-radius: 50%;
       }
@@ -792,7 +806,7 @@ body {
         }
       }
       footer {
-        background: var(--color3);
+        // background: var(--color3);
         height: 15%;
         box-sizing: border-box;
         padding: 10px 1vw;
@@ -812,7 +826,7 @@ body {
     padding: 20px 0 20px 0;
     text-align: center;
     a {
-      color: var(--color1) !important;
+      // color: var(--color1) !important;
     }
     #faIcons {
       a {
@@ -821,8 +835,8 @@ body {
         border-radius: 8px;
         .flexCentered(row);
         &:hover {
-          color: var(--hsp2) !important;
-          background-color: var(--color2);
+          color: var(--color2) !important;
+          background-color: var(--hsp2);
         }
       }
     }
@@ -909,7 +923,7 @@ body {
       h2 {
         font-size: 2rem;
       }
-      #ballTypesWrapper {
+      .ballTypesWrapper {
         flex-direction: column;
         align-items: center;
         gap: 20px;
@@ -1079,7 +1093,7 @@ body {
     font-family: "Raleway", sans-serif;
     margin: 2rem 0 0 0;
   }
-  #ballTypesWrapper {
+  .ballTypesWrapper {
     display: flex;
     gap: 2vw;
     box-sizing: border-box;
@@ -1100,12 +1114,19 @@ body {
         font-size: 1.2rem;
         margin: 0;
         text-align: center;
+        font-weight: 1000;
       }
       img {
-        width: 50%;
+        // width: 50%;
         height: auto;
         min-height: 100px;
         image-rendering: pixelated;
+      }
+      .typeImg {
+        min-height:auto;
+        margin-top: 1rem;
+        width: auto;
+        height: 50px;
       }
       .ball {
         display: flex;

@@ -185,10 +185,6 @@ body::-webkit-scrollbar {
   font-family: "Raleway", sans-serif;
 }
 
-#example button:hover {
-  filter: brightness(1.2);
-}
-
 #moon {
   display: none;
 }

@@ -7,7 +7,13 @@ import speciesData from "./json/species.json";
 
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 
-export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
+export default function Poke({
+  updateColor2,
+  updateColor3,
+  updateColor4,
+  updateTypeBall1,
+  updateTypeBall2,
+}) {
   let [nameValue, setStateFind] = useState("lugia");
   let [numValue, setNumValue] = useState(249);
   const [suggestions, setSuggestions] = useState([]);
@@ -27,7 +33,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           e.target.value !== "" &&
           e.target.value !== pokemon
       );
-      console.log(suggestionArray);
       setSuggestions(suggestionArray);
     } else {
       setSuggestions([]);
@@ -54,7 +59,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
 
   let [Img, setImg] = useState("");
   let [artURL, setURL] = useState(
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/12.png"
+    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png"
   );
   const [Type, setType] = useState("");
   let megaEvoRes;
@@ -72,7 +77,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           );
           setLogoAnimation(true);
           setResCopy(res);
-          console.log(res);
           let evoBtnCheck = true;
 
           // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
@@ -97,7 +101,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                 `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
               )
             );
-            console.log(evoRes);
             setPkmnInfoBg("var(--color3)");
           } catch (err) {
             switch (nameValue.toLocaleLowerCase()) {
@@ -109,14 +112,11 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                     `https://pokeapi.co/api/v2/pokemon-species/basculin`
                   )
                 );
-                console.log(evoRes);
             }
             console.log(err);
           }
           try {
-            console.log(evoRes.data);
             if (evoRes.data.varieties.length > 1) {
-              console.log(evoRes.data.varieties);
               let optionsMenu = document.createElement("select");
               optionsMenu.id = "optionsMenu";
               optionsMenu.onchange = async () => {
@@ -210,7 +210,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           try {
             try {
               let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-              console.log(evoChain);
               let stageNumber = 1;
 
               if (evoChain.data.chain.evolves_to.length !== 0) {
@@ -296,7 +295,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                         randInt = Math.floor(
                           Math.random() * evoChain.data.chain.evolves_to.length
                         );
-                        console.log(randInt);
                         evoData =
                           evoChain.data.chain.evolves_to[randInt].species.name;
                       }
@@ -321,7 +319,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                   nameValue === "basculin-blue-striped" ||
                   nameValue === "basculin-white-striped"
                 ) {
-                  console.log("!!!");
                   evoData = "basculegion-male";
                   evoBtnCheck = true;
                 } else {
@@ -383,31 +380,35 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
             if (res.data.sprites.front_shiny) {
               setImg(res.data.sprites.front_shiny);
             } else {
-              setImg(res.data.sprites.other["official-artwork"].front_shiny);
+              setImg(res.data.sprites.other["home"].front_shiny);
             }
           } else {
-            // if (res.data.id < 906) {
-            setImg(res.data.sprites.front_default);
-            // } else {
-            //   setImg(res.data.sprites.other["official-artwork"].front_default);
-            // }
+            if (res.data.sprites.front_default) {
+              setImg(res.data.sprites.front_default);
+            } else {
+              setImg(res.data.sprites.other["home"].front_default);
+            }
           }
           // }
 
           if (shiny) {
-            console.log(numValue, typeof numValue);
             let shinyURL =
               "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
               numValue +
               ".png";
-            console.log(shinyURL);
             if (res.data.sprites.other["official-artwork"].front_shiny) {
               setURL(shinyURL);
             } else {
-              setURL(res.data.sprites.other["official-artwork"].front_default);
+              console.log("No official artwork");
+              setURL(res.data.sprites.other["home"].front_shiny);
             }
           } else {
-            setURL(res.data.sprites.other["official-artwork"].front_default);
+            if (res.data.sprites.other["official-artwork"].front_default) {
+              setURL(res.data.sprites.other["official-artwork"].front_default);
+            } else {
+              console.log("No official artwork");
+              setURL(res.data.sprites.other["home"].front_default);
+            }
           }
           const filteredGenera = evoRes.data.genera
             .filter((item) => item.language.name === "en")
@@ -433,17 +434,21 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
   }, [nameValue, shiny, numValue]);
 
   const increase = () => {
-    setIsLoading(true);
-    numValue = numValue + 1;
-    setNumValue(numValue);
-    setStateFind(numValue.toString());
+    if (numValue < 1025) {
+      setIsLoading(true);
+      numValue = numValue + 1;
+      setNumValue(numValue);
+      setStateFind(numValue.toString());
+    }
   };
 
   const decrease = () => {
-    setIsLoading(true);
-    numValue = numValue - 1;
-    setNumValue(numValue);
-    setStateFind(numValue.toString());
+    if (numValue > 1) {
+      setIsLoading(true);
+      numValue = numValue - 1;
+      setNumValue(numValue);
+      setStateFind(numValue.toString());
+    }
   };
 
   const [logoAnimation, setLogoAnimation] = useState(false);
@@ -506,10 +511,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
       delete counts["#050505"];
       delete counts["#060606"];
       delete counts["#070707"];
-      //For Koraidon specifically
-      delete counts["#a39698"];
-      delete counts["#656068"];
-      delete counts["#edebe6"];
 
       let colorScheme = Object.entries(counts);
       let sortedScheme = colorScheme.sort((a, b) => a[1] - b[1]).reverse();
@@ -528,6 +529,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           greatball: {
+            type: "dragon",
             color1: "#268ab7",
             color2: "#ed533a",
             color3: "#f5f4f5",
@@ -552,6 +554,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           premierball: {
+            type: "normal",
             color1: "#ffffff",
             color2: "#ffffff",
             color3: "#ffffff",
@@ -559,6 +562,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           healball: {
+            type: "psychic",
             color1: "#eebdd6",
             // coeff1: 1/60,
             color2: "#fbf2ea",
@@ -569,6 +573,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           netball: {
+            type: "bug",
             color1: "#46acad",
             color2: "#333333",
             color3: "#f5f4f5",
@@ -576,6 +581,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           nestball: {
+            type: "ground",
             color1: "#7fa174",
             color2: "#d0ab78",
             color3: "#f5f4f5",
@@ -583,6 +589,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           diveball: {
+            type: "ice",
             color1: "#75bde6",
             color2: "#0f4a81",
             color3: "#dfebf0",
@@ -590,6 +597,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           duskball: {
+            type: "ghost",
             color1: "#232626",
             color2: "#50A04A",
             color3: "#e0610d",
@@ -597,6 +605,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           timerball: {
+            type: "poison",
             color1: "#f2f2f2",
             color2: "#f2f2f2",
             color3: "#f18e38",
@@ -604,6 +613,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           quickball: {
+            type: "electric",
             color1: "#73b5e4",
             color2: "#efea2e",
             color3: "#3b82c4",
@@ -611,6 +621,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           repeatball: {
+            type: "fire",
             color1: "#f28f38",
             color2: "#fff338",
             color3: "#a1a2a7",
@@ -618,6 +629,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           luxuryball: {
+            type: "fighting",
             color1: "#626871",
             color2: "#626871",
             color3: "#D35237",
@@ -632,6 +644,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           fastball: {
+            type: "flying",
             color1: "#E98D44",
             color2: "#E9C241",
             color3: "#ffffff",
@@ -639,6 +652,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           friendball: {
+            type: "grass",
             color1: "#80BA41",
             color2: "#6EA848",
             color3: "#E15B4D",
@@ -646,6 +660,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           lureball: {
+            type: "water",
             color1: "#3589BE",
             color2: "#D45E69",
             color3: "#F3AF5B",
@@ -653,6 +668,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           levelball: {
+            type: "rock",
             color1: "#DA925C",
             // coeff1: 1 / 50,
             color2: "#796961",
@@ -661,15 +677,17 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
             // coeff3: 1 / 10,
           },
         },
-        // {
-        //   heavyball: {
-        //     color1: "#8DA2B0",
-        //     color2: "#8DA2B0",
-        //     color3: "#4876BB",
-        //   },
-        // },
+        {
+          heavyball: {
+            type: "steel",
+            color1: "#8DA2B0",
+            color2: "#8DA2B0",
+            color3: "#4876BB",
+          },
+        },
         {
           loveball: {
+            type: "fairy",
             color1: "#D580AC",
             color2: "#F8CADE",
             color3: "#ffffff",
@@ -677,6 +695,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         },
         {
           moonball: {
+            type: "dark",
             color1: "#5E7090",
             color2: "#3FB8DB",
             color3: "#E9C241",
@@ -709,8 +728,32 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
             color2: "#E84535",
             color3: "#4E5452",
           },
-        }
+        },
       ];
+
+      //check sortedScheme's top 3 colors against each color 2 by 2 with areThoseColorsSimilar
+
+      function testTop9Colors() {
+        //test each two colors against each other from the top 9 colors
+        for (let i = 0; i < 9; i++) {
+          for (let j = i + 1; j < 9; j++) {
+            if (
+              areThoseColorsSimilar(
+                hexToRgb(sortedScheme[i][0]),
+                hexToRgb(sortedScheme[j][0])
+              )
+            ) {
+              //if they are similar, remove the one with the lowest count
+              if (sortedScheme[i][1] > sortedScheme[j][1]) {
+                sortedScheme.splice(i, 1);
+              } else {
+                sortedScheme.splice(j, 1);
+              }
+            }
+          }
+        }
+      }
+      // testTop9Colors();
 
       color2 = sortedScheme[0][0];
       color3 = sortedScheme[1][0];
@@ -727,9 +770,9 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
       //convert hex to rgb:
       function hexToRgb(hex) {
         const bigint = parseInt(hex.slice(1), 16);
-        const r = (bigint >> 16) & 255
-        const g = ((bigint >> 8) & 255);
-        const b = (bigint & 255);
+        const r = (bigint >> 16) & 255;
+        const g = (bigint >> 8) & 255;
+        const b = bigint & 255;
         return [r, g, b];
       }
 
@@ -743,6 +786,12 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         return distance;
       }
 
+      function areThoseColorsSimilar(color1, color2) {
+        // Check if two colors are similar
+        const distance = colorDistance(color1, color2);
+        return distance < 45;
+      }
+
       function findClosestColor(inputColorArr, colorList) {
         // Convert input color to RGB
         const inputRgb1 = hexToRgb(inputColorArr[0]);
@@ -750,7 +799,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         const inputRgb3 = hexToRgb(inputColorArr[2]);
         // Calculate distance to each color in the list
         const distances = colorList.map((color) => {
-          console.log(Object.values(color)[0].coeff1);
           const coeff1 = Object.values(color)[0].coeff1 || 1;
           const coeff2 = Object.values(color)[0].coeff2 || 1;
           const coeff3 = Object.values(color)[0].coeff3 || 1;
@@ -838,15 +886,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
               b.distance33)
           );
         });
-        console.log(closestColors);
-        console.log(
-          `Input color ${inputColorArr} is most similar to \n
-          1.(${closestColors[0].ballType})\n
-          2.(${closestColors[1].ballType})\n
-          3.(${closestColors[2].ballType})
-          `
-        );
-
         updateColor2(closestColors[0].ballType);
         updateColor3(closestColors[1].ballType);
         updateColor4(closestColors[2].ballType);
@@ -973,6 +1012,17 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
         document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
           resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
           resCopy.data.types[0].type.name.slice(1);
+        //find the ball with property "type" equal to resCopy.data.types[0].type.name by filtering through colorList
+        console.log(resCopy.data.types[0].type.name);
+        colorList
+          .filter(
+            (item) =>
+              Object.values(item)[0].type === resCopy.data.types[0].type.name
+          )
+          .map((item) => {
+            updateTypeBall1(Object.keys(item)[0]);
+            updateTypeBall2("none");
+          });
         if (resCopy.data.types.length > 1) {
           document
             .querySelector("#pkmnInfo #types")
@@ -980,13 +1030,22 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
             resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
             resCopy.data.types[1].type.name.slice(1);
+          //find the ball with property "type" equal to resCopy.data.types[1].type.name by filtering through colorList
+          colorList
+            .filter(
+              (item) =>
+                Object.values(item)[0].type === resCopy.data.types[1].type.name
+            )
+            .map((item) => {
+              updateTypeBall2(Object.keys(item)[0]);
+            });
         } else {
           document
             .querySelector("#pkmnInfo #types")
             .classList.add("singleType");
+          console.log("Just primary type");
         }
         try {
-          console.log(evoRes);
           let habitat = "";
           if (evoRes.data.habitat !== null) {
             habitat =
@@ -1099,7 +1158,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           onKeyDown={(e) => {
             if (e.keyCode === 40 && suggestions.length > 0) {
               e.preventDefault();
-              console.log("down");
               document.querySelector("#suggestions button").focus();
             }
           }}
@@ -1133,7 +1191,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                   onKeyDown={(e) => {
                     if (e.keyCode === 40) {
                       e.preventDefault();
-                      console.log("down");
                       // select the next one
                       if (index < suggestions.length - 1) {
                         document
@@ -1142,7 +1199,6 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                       }
                     } else if (e.keyCode === 38) {
                       e.preventDefault();
-                      console.log("up");
                       // select the previous one
                       if (index > 0) {
                         document
@@ -1157,14 +1213,18 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
                     {" "}
                     <img
                       src={
-                        shiny
-                          ? speciesData[item] < 908
-                            ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
+                        speciesData[item] === 1025
+                          ? shiny
+                            ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
                               speciesData[item] +
                               ".png"
-                            : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
-                                speciesData[item] +
-                                ".png" || ""
+                            : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
+                              speciesData[item] +
+                              ".png"
+                          : shiny
+                          ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
+                              speciesData[item] +
+                              ".png" || ""
                           : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
                               speciesData[item] +
                               ".png" || ""
@@ -1187,13 +1247,22 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           <RiLoader4Fill />
         </div>
       ) : (
-        <em style={{ margin: 0, color: "var(--hsp3)", minHeight: "1.2rem" }}>
+        <p className={"tag" + (shiny ? "" : " empty")}>
           {shiny ? "Shiny mode" : ""}
-        </em>
+        </p>
       )}
 
       <div id="numLine">
-        <button className="noSelect" onClick={decrease} aria-label="Arrow Down">
+        <button
+          className="noSelect"
+          onClick={decrease}
+          aria-label="Arrow Down"
+          style={{
+            disabled: numValue === 1 ? "0" : "1",
+            opacity: numValue === 1 ? "0.2" : "1",
+            cursor: numValue === 1 ? "default" : "pointer",
+          }}
+        >
           <p>
             <BsArrowDownSquareFill size={30} />
           </p>
@@ -1206,7 +1275,7 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
             type="number"
             id="numInput"
             step="1"
-            max="10250"
+            max="1025"
             min="1"
             onChange={NumChanger}
             value={numValue}
@@ -1214,7 +1283,16 @@ export default function Poke({ updateColor2, updateColor3, updateColor4 }) {
           />
         </div>
 
-        <button className="noSelect" onClick={increase} aria-label="Arrow Up">
+        <button
+          className="noSelect"
+          onClick={increase}
+          aria-label="Arrow Up"
+          style={{
+            disabled: numValue === 1025 ? "0" : "1",
+            opacity: numValue === 1025 ? "0.2" : "1",
+            cursor: numValue === 1025 ? "default" : "pointer",
+          }}
+        >
           <p>
             <BsArrowUpSquareFill size={30} />
           </p>
