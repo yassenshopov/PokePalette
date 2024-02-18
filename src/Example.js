@@ -8,7 +8,9 @@ import { useState } from "react";
 import { BsFillBookmarkFill } from "react-icons/bs";
 import html2canvas from "html2canvas";
 
-export default function Example({ dynamicContent }) {
+export default function Example({ dynamicContent, pokemon }) {
+  console.log(pokemon);
+
   const colorList = [
     {
       pokeball: {
@@ -365,13 +367,91 @@ export default function Example({ dynamicContent }) {
 
   const [isSpecialEdition, setIsSpecialEdition] = useState(false);
 
+  const versionMap = {
+    red: "Red",
+    blue: "Blue",
+    yellow: "Yellow",
+    gold: "Gold",
+    silver: "Silver",
+    crystal: "Crystal",
+    ruby: "Ruby",
+    sapphire: "Sapphire",
+    emerald: "Emerald",
+    firered: "FireRed",
+    leafgreen: "LeafGreen",
+    diamond: "Diamond",
+    pearl: "Pearl",
+    platinum: "Platinum",
+    heartgold: "HeartGold",
+    soulsilver: "SoulSilver",
+    black: "Black",
+    white: "White",
+    "black-2": "Black 2",
+    "white-2": "White 2",
+    x: "X",
+    y: "Y",
+    "omega-ruby": "Omega Ruby",
+    "alpha-sapphire": "Alpha Sapphire",
+    sun: "Sun",
+    moon: "Moon",
+    "ultra-sun": "Ultra Sun",
+    "ultra-moon": "Ultra Moon",
+    "lets-go-pikachu": "Let's Go Pikachu",
+    "lets-go-eevee": "Let's Go Eevee",
+    sword: "Sword",
+    shield: "Shield",
+    "brilliant-diamond": "Brilliant Diamond",
+    "shining-pearl": "Shining Pearl",
+    "legends-arceus": "Legends Arceus",
+    scarlet: "Scarlet",
+    violet: "Violet",
+  };
+
+  const FlavorTxtComponent = ({ entries }) => {
+    const [entryIndex, setEntryIndex] = useState(0);
+    return (
+      <div>
+        <p id="descriptionTxt">
+          {entries[entryIndex].flavor_text
+            .replace(//g, " ")
+            .replace(/\n/g, " ")}
+        </p>
+        <div id="flavorTxtNav">
+          <p className={"version " + entries[entryIndex].version.name}>
+            Pokemon {versionMap[entries[entryIndex].version.name] || "Version"}{" "}
+          </p>
+          <button
+            onClick={() => {
+              setEntryIndex(entryIndex - 1);
+            }}
+            className="noSelect"
+            disabled={entryIndex === 0}
+          >
+            Previous
+          </button>
+          <button
+            onClick={() => {
+              setEntryIndex(entryIndex + 1);
+            }}
+            className="noSelect"
+            disabled={entryIndex === entries.length - 1}
+          >
+            Next
+          </button>
+        </div>
+      </div>
+    );
+  };
+
   return (
     <div id="example">
       <main id="main">
-        <div id="backdrop"></div>
-
         <section id="section">
-          <h1>Your website - inspired by colours</h1>
+          {/* <h1>Your website - inspired by colours</h1> */}
+          <h1>
+            Your website - inspired by{" "}
+            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+          </h1>
           <p>
             This website allows you to enter a Pokemon's name (or simply its
             number in the Pokedex), and its top 3 colours will be extracted.
@@ -406,8 +486,23 @@ export default function Example({ dynamicContent }) {
             </button>
           </div>
         </section>
-        <aside id="artCanvas">
-          <div id="colorFilter"></div>
+        <aside>
+          <img
+            id="artCanvas"
+            src={
+              pokemon.sprites.other["official-artwork"].front_default ?
+              ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+              (pokemon.isShiny ? "/shiny/" : "/") +
+              pokemon.id +
+              ".png") : 
+              //use the Home sprite if the official artwork is not available
+              ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+              (pokemon.isShiny ? "/shiny/" : "/") +
+              pokemon.id +
+              ".png")
+            }
+            alt="Pokemon Artwork"
+          />
         </aside>
       </main>
       <div id="cards">
@@ -432,15 +527,68 @@ export default function Example({ dynamicContent }) {
       </div>
       <section id="pkmnInfo">
         <div className="txtWrapper">
-          <h2>Pokemon name</h2>
-          <div id="types">
-            <div id="primaryType"></div>
-            <div id="secondaryType"></div>
+          <h2>
+            {pokemon.name.charAt(0).toUpperCase() +
+              pokemon.name.slice(1) +
+              " [#" +
+              (pokemon.national_id ?pokemon.national_id : pokemon.id) +
+              "]"}
+          </h2>
+          <div
+            id="types"
+            className={pokemon.types.length === 1 ? "singleType" : ""}
+          >
+            <div id="primaryType">
+              {pokemon.types
+                ? pokemon.types[0].type.name.charAt(0).toUpperCase() +
+                  pokemon.types[0].type.name.slice(1)
+                : ""}
+            </div>
+            <div id="secondaryType">
+              {pokemon.types
+                ? pokemon.types[1]
+                  ? pokemon.types[1].type.name.charAt(0).toUpperCase() +
+                    pokemon.types[1].type.name.slice(1)
+                  : ""
+                : ""}
+            </div>
           </div>
-          <p className="description"></p>
+          {pokemon.habitat && pokemon.habitat !== "rare" && (
+            <p className="habitat">
+              Habitat:{" "}
+              {pokemon.habitat
+                ? pokemon.habitat.charAt(0).toUpperCase() +
+                  pokemon.habitat.slice(1)
+                : ""}
+            </p>
+          )}
+          <p className="description">
+            {pokemon.flavor_text_entries && pokemon.flavor_text_entries.length ? (
+              <FlavorTxtComponent entries={pokemon.flavor_text_entries} />
+            ) : (
+              ""
+            )}
+          </p>
         </div>
         <div className="imgWrapper">
-          <div id="hiddenPkmn"></div>
+          <div
+            id="hiddenPkmn"
+            style={{
+              backgroundImage:
+                "url('" +
+                (pokemon.sprites.other["official-artwork"].front_default ?
+                ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                (pokemon.isShiny ? "/shiny/" : "/") +
+                pokemon.id +
+                ".png") : 
+                //use the Home sprite if the official artwork is not available
+                ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+                (pokemon.isShiny ? "/shiny/" : "/") +
+                pokemon.id +
+                ".png")) +
+                "')",
+            }}
+          ></div>
           <span className="colorFilter"></span>
         </div>
       </section>
@@ -472,7 +620,19 @@ export default function Example({ dynamicContent }) {
         </div>
         <div id="info">
           <h2>
-            Create <span className="pokeName">a Pokemon</span>-inspired website
+            Create
+            <span className="pokeName">
+              {(pokemon.name.charAt(0) === "a" ||
+              pokemon.name.charAt(0) === "e" ||
+              pokemon.name.charAt(0) === "o" ||
+              pokemon.name.charAt(0) === "i" ||
+              pokemon.name.charAt(0) === "u"
+                ? " an "
+                : " a ") +
+                pokemon.name.charAt(0).toUpperCase() +
+                pokemon.name.slice(1)}
+            </span>
+            -inspired website
           </h2>
           <p id="title">
             Use this color palette to create a<br></br>
@@ -528,11 +688,7 @@ export default function Example({ dynamicContent }) {
       </section>
       <section id="shareWidgets">
         <div className="tweet-popup">
-          <img
-            className="tweetLogo"
-            src={twitterLogo}
-            alt="Twitter Logo"
-          />
+          <img className="tweetLogo" src={twitterLogo} alt="Twitter Logo" />
           <textarea
             className="tweet-input"
             placeholder="What's happening?"

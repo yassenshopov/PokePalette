@@ -1,17 +1,21 @@
 :root {
   --color1: #f1f1f1;
-  --color2: #FFFFFF;
-  --color3: #9CACE6;
-  --color4: #5A73FF;
+  --color2: #f1f1f1;
+  --color3: #f1f1f1;
+  --color4: #f1f1f1;
   --mainDark: #18181a;
   --hsp2: #121212;
   --hsp3: #121212;
   --hsp4: #121212;
-  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png");
+  --artURL: url("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/937.png");
   --bgURL: url(../public/bgDark.webp);
   --font1: carnacLight;
   --pkmnInfoBg: "rgba(255, 255, 255, 0.8)";
 }
+
+@color2: var(--color2);
+@color3: var(--color3);
+@color4: var(--color4);
 
 @font-face {
   font-family: carnacLight;
@@ -52,6 +56,13 @@ body {
   right: 3%;
   top: 3%;
   z-index: 1000;
+  &.game {
+    position: absolute;
+    height: 100px;
+    width: 100px;
+    .bmc-btn {
+    }
+  }
   .bmc-btn {
     font-size: 1rem;
     height: fit-content;
@@ -308,6 +319,14 @@ body {
         }
       }
     }
+    input {
+      &::placeholder {
+        text-transform: none;
+        opacity: 0.5;
+        font-size: 1.1rem;
+        transform: translateY(-0.2rem);
+      }
+    }
   }
   .tag {
     padding: 0.5rem 1rem;
@@ -327,7 +346,7 @@ body {
 }
 
 #example {
-  &:nth-child(2n+1) {
+  &:nth-child(2n + 1) {
     background: var(--color2);
     color: var(--hsp2);
   }
@@ -378,7 +397,6 @@ body {
       justify-content: space-between;
       position: relative;
       transition: all 200ms ease-in-out;
-
     }
   }
   #cards {
@@ -540,6 +558,7 @@ body {
   #pkmnInfo {
     min-height: 400px;
     height: fit-content;
+    min-height: 11rem;
     position: relative;
     box-sizing: border-box;
     background: var(--color2);
@@ -551,7 +570,7 @@ body {
       position: relative;
       font-family: "Raleway", sans-serif;
       margin: 20px 2vw;
-      max-width: 40%;
+      width: 40%;
       h2 {
         font-size: 2.5rem;
       }
@@ -580,15 +599,171 @@ body {
           }
         }
       }
+      #descriptionTxt {
+        min-height: 9rem;
+        .flexCentered(column);
+      }
       p {
         font-size: 1.2rem;
         font-family: carnacLight;
+      }
+      #flavorTxtNav {
+        p {
+          padding: 1rem 2rem;
+          border-radius: 1rem;
+          background-color: @color3;
+          color: var(--hsp3);
+          width: fit-content;
+          font-weight: 1000;
+          border: 2px solid var(--hsp2);
+          &.red {
+            background-color: #ff1111;
+            color: #121212;
+          }
+          &.blue {
+            background-color: #1111ff;
+            color: #ffffff;
+          }
+          &.yellow {
+            background-color: #ffd733;
+            color: #121212;
+          }
+          &.gold {
+            background-color: #daa520;
+            color: #121212;
+          }
+          &.silver {
+            background-color: #c0c0c0;
+            color: #121212;
+          }
+          &.crystal {
+            background-color: #4fd9ef;
+            color: #121212;
+          }
+          &.ruby {
+            background-color: #a00000;
+            color: #ffffff;
+          }
+          &.sapphire {
+            background-color: #0000a0;
+            color: #ffffff;
+          }
+          &.emerald {
+            background-color: #00a000;
+            color: #ffffff;
+          }
+          &.firered {
+            background-color: #ff7327;
+            color: #121212;
+          }
+          &.leafgreen {
+            background-color: #73ff27;
+            color: #121212;
+          }
+          &.diamond {
+            background-color: #aaaaff;
+            color: #121212;
+          }
+          &.pearl {
+            background-color: #ffaaaa;
+            color: #121212;
+          }
+          &.platinum {
+            background-color: #999999;
+            color: #121212;
+          }
+          &.heartgold {
+            background-color: #eda72e;
+            color: #121212;
+          }
+          &.soulsilver {
+            background-color: #aeb7c2;
+            color: #121212;
+          }
+          &.black,
+          &.black-2 {
+            background-color: #151515;
+            color: #ffffff;
+          }
+          &.white,
+          &.white-2 {
+            background-color: #f1f1f1;
+            color: #121212;
+          }
+          &.x {
+            background-color: #025da6;
+            color: #ffffff;
+          }
+          &.y {
+            background-color: #ea1a3e;
+            color: #ffffff;
+          }
+          &.omega-ruby {
+            background-color: #ab2813;
+            color: #ffffff;
+          }
+          &.alpha-sapphire {
+            background-color: #26649c;
+            color: #ffffff;
+          }
+          &.sun {
+            background-color: #f1912b;
+            color: #121212;
+          }
+          &.moon {
+            background-color: #5599ca;
+            color: #121212;
+          }
+          &.ultra-sun {
+            background-color: #e95b2b;
+            color: #121212;
+          }
+          &.ultra-moon {
+            background-color: #226db5;
+            color: #121212;
+          }
+          &.lets-go-pikachu {
+            background-color: #f5da26;
+            color: #121212;
+          }
+          &.lets-go-eevee {
+            background-color: #d4924b;
+            color: #121212;
+          }
+          &.sword {
+            background-color: #00a1e9;
+            color: #121212;
+          }
+          &.shield {
+            background-color: #bf004f;
+            color: #121212;
+          }
+          &.legends-arceus {
+            background-color: #36597b;
+            color: #ffffff;
+          }
+          &.scarlet {
+            background-color: #f34134;
+            color: #ffffff;
+          }
+          &.violet {
+            background-color: #8334b7;
+            color: #ffffff;
+          }
+        }
+        button {
+          margin-top: 0;
+          &[disabled] {
+            opacity: 0.5;
+            cursor: auto;
+          }
+        }
       }
     }
     .imgWrapper {
       height: 400px;
       width: 50%;
-      background: var(--pkmnInfoBg);
+      background: var(--color3);
       background-position: center;
       background-size: cover;
       z-index: 3;
@@ -606,7 +781,7 @@ body {
       }
       #hiddenPkmn {
         position: relative;
-        background-image: var(--artURL);
+        // background-image: var(--artURL);
         background-position: center;
         background-size: 50% auto;
         background-repeat: no-repeat;
@@ -843,6 +1018,319 @@ body {
   }
 }
 
+.Game {
+  background-color: var(--mainDark);
+  color: var(--color1);
+  height: 100vh;
+  box-sizing: border-box;
+  padding: 20px 6vw;
+  .flexCentered(column);
+  align-items: flex-start;
+  justify-content: flex-start;
+  position: relative;
+  .palette {
+    // .flexCentered(column);
+    display: flex;
+    flex-direction: column;
+    box-sizing: content-box;
+    width: 100%;
+    // height: 100px;
+    border-radius: 1rem;
+    overflow: hidden;
+    .color {
+      width: 100%;
+      height: 120px;
+      .flexCentered(row);
+      &#color3 {
+        // display: ;
+      }
+      .gen {
+        font-size: 1.2rem;
+        font-family: "Raleway", sans-serif;
+        padding: 0.5rem 1rem;
+        font-weight: 700;
+        margin: 0;
+        width: fit-content;
+        border-radius: 8px 0;
+        border: 2px solid var(--mainDark);
+        background-color: var(--mainDark);
+        color: var(--color1);
+        .flexCentered(column);
+        align-self: flex-start;
+        margin-right: auto;
+        gap: 0;
+        p {
+          margin: 0;
+        }
+      }
+      img {
+        width: 50%;
+        image-rendering: pixelated;
+        z-index: 2;
+        &.sillhouette {
+          filter: brightness(0);
+        }
+        &.gameover {
+          width: 100%;
+        }
+        &.type {
+          align-self: flex-end;
+          width: 50%;
+          max-width: 30%;
+          bottom: 0;
+          margin-bottom: 20px;
+        }
+      }
+    }
+  }
+  .inputWrapper {
+    .flexCentered(row);
+    gap: 1vw;
+    width: 100%;
+    padding: 1rem 2vw;
+    box-sizing: border-box;
+    position: relative;
+    input {
+      width: 100%;
+      padding: 1rem 2vw;
+      border-radius: 8px;
+      border: 2px solid var(--hsp2);
+      font-size: 1.2rem;
+      font-family: "Raleway", sans-serif;
+      color: var(--hsp2);
+      &::placeholder {
+        color: var(--hsp2);
+        opacity: 0.5;
+      }
+    }
+    #suggestionsWrapper {
+      position: absolute;
+      top: 100%;
+      width: 90%;
+      overflow-y: scroll;
+      border-radius: 1rem;
+      .flexCentered(column);
+      z-index: 2;
+      border: 1px solid var(--hsp3);
+      box-sizing: border-box;
+      &.empty {
+        display: none;
+      }
+      #suggestions {
+        max-height: 200px;
+        width: 100%;
+        .suggestion {
+          margin-top: 1px;
+          top: 0;
+          position: relative;
+          width: 100%;
+          border: none;
+          padding: 10px 0;
+          font-family: var(--font1);
+          font-size: 1.2rem;
+          min-height: 60px;
+          cursor: pointer;
+          .flexCentered(row);
+          transition: all 200ms ease-in-out;
+          &:hover {
+            border-radius: 1rem;
+            transform: scale(0.9);
+          }
+          &:first-child {
+            margin-top: 0;
+          }
+          span {
+            img {
+              width: 40px;
+              vertical-align: bottom;
+              margin-left: 10px;
+            }
+          }
+        }
+      }
+    }
+  }
+  .gameModes {
+    .flexCentered(row);
+    border: 2px solid var(--color1);
+    justify-content: space-between;
+    box-sizing: border-box;
+    background-color: var(--color1);
+    border-radius: 2rem;
+    overflow: hidden;
+    width: 100%;
+    button {
+      padding: 1rem 2vw;
+      font-size: 1.2rem;
+      border: none;
+      font-family: "Raleway", sans-serif;
+      // color: var(--color1);
+      // background-color: var(--mainDark);
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      width: 50%;
+      box-sizing: border-box;
+      height: 100%;
+      &:hover {
+        background-color: var(--color3);
+        color: var(--hsp3);
+      }
+    }
+    &.normal {
+      button:nth-child(1) {
+        background-color: #055c1c;
+        color: var(--hsp3);
+      }
+    }
+    &.shiny {
+      button:nth-child(2) {
+        background-color: #055c1c;
+        color: var(--hsp3);
+      }
+    }
+    &.hard {
+      button:nth-child(3) {
+        background-color: var(--color3);
+        color: var(--hsp3);
+      }
+    }
+  }
+  .giveUp {
+    .flexCentered(row);
+    gap: 1vw;
+    padding: 1rem 2vw;
+    margin: 2rem auto;
+    box-sizing: border-box;
+    align-self: center;
+    font-family: "Raleway", sans-serif;
+    font-size: 1.2rem;
+    color: #c13333;
+    border: 2px solid #c13333;
+    border-radius: 8px;
+    background: transparent;
+    transition: all 200ms ease-in-out;
+    cursor: pointer;
+    &:hover {
+      background-color: #c13333;
+      color: var(--color1);
+      border: none;
+    }
+  }
+  .popupWrapper {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    box-sizing: border-box;
+    top: 0;
+    left: 0;
+    background-color: rgba(0, 0, 0, 0.7);
+    &.hidden {
+      display: none;
+    }
+    .backdrop {
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0;
+      left: 0;
+      z-index: 1;
+      pointer-events: none;
+    }
+  }
+  dialog[open] {
+    .flexCentered(column);
+    gap: 4vw;
+    top: 50%;
+    transform: translateY(-60%);
+    width: 80%;
+    box-sizing: border-box;
+    padding: 2rem 4vw;
+    border-radius: 2rem;
+    z-index: 2;
+    border: none;
+    box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+    .confetti {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+      z-index: 0;
+      opacity: 0.2;
+    }
+    h2 {
+      text-align: center
+    };
+    .buttons {
+      .flexCentered(row);
+      gap: 2vw;
+      width: 100%;
+      button {
+        width: 100%;
+        &.yes {
+        }
+        &.no {
+          background-color: #ffffff;
+          color: #c13333;
+          border: 1px solid #c13333;
+        }
+      }
+    }
+    a {
+      width: 90%;
+      text-align: center;
+      padding: 1rem 2vw;
+      border-radius: 8px;
+      font-size: 1.2rem;
+      font-family: "Raleway", sans-serif;
+      color: var(--mainDark);
+      background-color: #fff;
+      // border: 1px solid var(--mainDark);
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      animation: buttonAnimation 1s infinite;
+      display: flex;
+      z-index: 2;
+      @keyframes buttonAnimation {
+        0% {
+          box-shadow: 0 0 0 0 hsla(0,0%,100%,0);
+      }
+      50% {
+          box-shadow: 0 0 0 10px rgba(0,0,0,.8);
+      }
+      100% {
+          box-shadow: 0 0 0 0 hsla(0,0%,100%,0);
+      }
+      }
+      &:hover {
+        background-color: var(--color2);
+        color: var(--hsp2);
+      }
+    }
+    button {
+      z-index: 2;
+      padding: 1rem 2vw;
+      font-size: 1.2rem;
+      border: none;
+      font-family: "Raleway", sans-serif;
+      color: var(--color1);
+      background-color: var(--color3);
+      cursor: pointer;
+      transition: all 200ms ease-in-out;
+      width: 50%;
+      box-sizing: border-box;
+      border-radius: 8px;
+    }
+    .pokemon {
+      width: 50%;
+      z-index: 2;
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+    }
+  }
+}
+
 @media screen and (max-width: 768px) {
   .bmc-btn-container {
     right: 50%;
@@ -914,7 +1402,7 @@ body {
         height: 400px;
         width: 100%;
         #hiddenPkmn {
-          background-size: 80% auto;
+          background-size: 60% auto;
         }
       }
     }
@@ -1123,7 +1611,7 @@ body {
         image-rendering: pixelated;
       }
       .typeImg {
-        min-height:auto;
+        min-height: auto;
         margin-top: 1rem;
         width: auto;
         height: 50px;

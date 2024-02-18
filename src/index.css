@@ -222,16 +222,9 @@ body::-webkit-scrollbar {
 }
 
 #example main #artCanvas {
-  background-image: var(--artURL);
-  background-position: center;
-  background-size: 100% auto;
-  background-repeat: no-repeat;
-  width: 35vw;
-  height: 35vw;
-  /* filter: drop-shadow(0 0 40px var(--mainDark)); */
+  width: 28vw;
+  height: auto;
   z-index: 9;
-  /* padding: 0 50px 0 50px; */
-  /* background-blend-mode: color; */
   transition: all 0.2s ease-in-out;
 }
 
@@ -239,9 +232,11 @@ body::-webkit-scrollbar {
   filter: drop-shadow(0 0 15px var(--color1)) contrast(1.3) saturate(1.5);
 }
 
-#example main #artCanvas #colorFilter {
-  width: 100%;
-  height: 100%;
+#example main #colorFilter {
+  position: absolute;
+  top: 0;
+  width: 28vw;
+  height: 28vw;
   background-color: var(--mainDark);
   opacity: 0.85;
   border-radius: 100px;
@@ -254,68 +249,6 @@ body::-webkit-scrollbar {
 #example main #artCanvas #colorFilter:hover {
   z-index: 8;
   opacity: 0.2;
-}
-
-.shine {
-  animation: shine 5s ease-in-out;
-}
-
-.spin {
-  animation: shine 4s ease-in-out;
-}
-
-.deshine {
-  animation: shine 1.5s ease-in-out;
-}
-
-@keyframes shine {
-  0% {
-    filter: brightness(1) contrast(1.2) saturate(1.2)
-      drop-shadow(0 0 0px var(--color1)) blur(0px);
-  }
-  10% {
-    filter: brightness(1) contrast(1.2) saturate(1.2)
-      drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform: rotate(5deg);
-    transform-origin: 0% 20%;
-  }
-  20% {
-    filter: brightness(1.3) contrast(1.2) saturate(1.2)
-      drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform: rotate(-5deg);
-    transform-origin: 0% 0%;
-  }
-  30% {
-    filter: brightness(1.8) contrast(1.2) saturate(1.2)
-      drop-shadow(0 0 0px var(--color1)) blur(0px);
-    transform-origin: 0% 20%;
-    transform: rotate(5deg);
-  }
-  40% {
-    filter: brightness(2) drop-shadow(0 0 100px var(--color1)) blur(15px);
-    transform: rotate(-5deg);
-    transform-origin: 0% 0%;
-  }
-  50% {
-    filter: brightness(30) drop-shadow(0 0 100px var(--color1)) blur(15px);
-    transform-origin: 0% 20%;
-    transform: rotate(5deg);
-  }
-  60% {
-    filter: brightness(100) drop-shadow(0 0 10px var(--color1)) blur(50px);
-  }
-  70% {
-    filter: brightness(100) drop-shadow(0 0 10px var(--color1)) blur(15px);
-  }
-  80% {
-    filter: brightness(100) drop-shadow(0 0 10px var(--color1)) blur(50px);
-  }
-  90% {
-    filter: brightness(100) drop-shadow(0 0 100px var(--color1)) blur(15px);
-  }
-  100% {
-    filter: brightness(2) contrast(1.2) saturate(1.2);
-  }
 }
 
 #example #cards {
@@ -454,10 +387,11 @@ body::-webkit-scrollbar {
 
   #example main #artCanvas {
     /* display: none; */
-    width: 90vw;
-
-    margin: 40px 10% 0px 10%;
+    width: 100%;
+    height: auto;
+    padding: 40px 10% 0px 10%;
     height: 90vw;
+    box-sizing: border-box;
     /* padding: 10%; */
   }
 

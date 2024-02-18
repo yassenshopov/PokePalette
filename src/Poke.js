@@ -6,6 +6,128 @@ import axios from "axios";
 import speciesData from "./json/species.json";
 
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
+const urlParams = new URLSearchParams(window.location.search);
+const paramRaw = urlParams.get("pokemon");
+let paramPokemon;
+let param;
+if (paramRaw && speciesData[paramRaw.toLowerCase()]) {
+  param = paramRaw;
+  paramPokemon = {
+    base_experience: null,
+    forms: [
+      {
+        name: param,
+        url: `https://pokeapi.co/api/v2/pokemon-form/${speciesData[param]}/`,
+      },
+    ],
+    game_indices: [],
+    height: 16,
+    held_items: [],
+    id: speciesData[param],
+    is_default: true,
+    location_area_encounters: `https://pokeapi.co/api/v2/pokemon/${speciesData[param]}/encounters`,
+    name: param,
+    order: 1005,
+    past_abilities: [],
+    past_types: [],
+    species: {
+      name: "ceruledge",
+      url:
+        "https://pokeapi.co/api/v2/pokemon-species/" +
+        speciesData[param] +
+        "/",
+    },
+    sprites: {
+      back_default: null,
+      back_female: null,
+      back_shiny: null,
+      back_shiny_female: null,
+      front_default:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+        speciesData[param] +
+        ".png",
+      front_female: null,
+      front_shiny:
+        "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
+        speciesData[param] +
+        ".png",
+      front_shiny_female: null,
+      other: {
+        dream_world: {
+          front_default: null,
+          front_female: null,
+        },
+        home: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
+            speciesData[param] +
+            ".png",
+          front_female: null,
+          front_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
+            speciesData[param] +
+            ".png",
+          front_shiny_female: null,
+        },
+        "official-artwork": {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
+            speciesData[param] +
+            ".png",
+          front_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
+            speciesData[param] +
+            ".png",
+        },
+      },
+    },
+    types: [
+      {
+        slot: 1,
+        type: {
+          name: "fire",
+          url: "https://pokeapi.co/api/v2/type/10/",
+        },
+      },
+      {
+        slot: 2,
+        type: {
+          name: "ghost",
+          url: "https://pokeapi.co/api/v2/type/8/",
+        },
+      },
+    ],
+    isShiny: false,
+    national_id: speciesData[param],
+    flavor_text_entries: [
+      {
+        flavor_text:
+          "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
+        language: {
+          name: "en",
+          url: "https://pokeapi.co/api/v2/language/9/",
+        },
+        version: {
+          name: "scarlet",
+          url: "https://pokeapi.co/api/v2/version/40/",
+        },
+      },
+      {
+        flavor_text:
+          "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
+        language: {
+          name: "en",
+          url: "https://pokeapi.co/api/v2/language/9/",
+        },
+        version: {
+          name: "violet",
+          url: "https://pokeapi.co/api/v2/version/41/",
+        },
+      },
+    ],
+  };
+}
+
 
 export default function Poke({
   updateColor2,
@@ -13,15 +135,288 @@ export default function Poke({
   updateColor4,
   updateTypeBall1,
   updateTypeBall2,
+  updatePokemon,
 }) {
-  let [nameValue, setStateFind] = useState("lugia");
-  let [numValue, setNumValue] = useState(249);
+
+  const [isShinyState, setIsShinyState] = useState(false);
+  const [genera, setGenera] = useState("Fire Blades Pokémon");
+  const [pokemon, setPokemon] = useState(
+    paramPokemon || {
+      current_form: "ceruledge",
+      base_experience: null,
+      forms: [
+        {
+          name: "ceruledge",
+          url: "https://pokeapi.co/api/v2/pokemon-form/937/",
+        },
+      ],
+      game_indices: [],
+      height: 16,
+      held_items: [],
+      id: 937,
+      is_default: true,
+      location_area_encounters:
+        "https://pokeapi.co/api/v2/pokemon/937/encounters",
+      name: "ceruledge",
+      order: 1005,
+      past_abilities: [],
+      past_types: [],
+      species: {
+        name: "ceruledge",
+        url: "https://pokeapi.co/api/v2/pokemon-species/937/",
+      },
+      sprites: {
+        back_default: null,
+        back_female: null,
+        back_shiny: null,
+        back_shiny_female: null,
+        front_default:
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/937.png",
+        front_female: null,
+        front_shiny:
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/937.png",
+        front_shiny_female: null,
+        other: {
+          dream_world: {
+            front_default: null,
+            front_female: null,
+          },
+          home: {
+            front_default:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/937.png",
+            front_female: null,
+            front_shiny:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/937.png",
+            front_shiny_female: null,
+          },
+          "official-artwork": {
+            front_default:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/937.png",
+            front_shiny:
+              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/937.png",
+          },
+          showdown: {
+            back_default: null,
+            back_female: null,
+            back_shiny: null,
+            back_shiny_female: null,
+            front_default: null,
+            front_female: null,
+            front_shiny: null,
+            front_shiny_female: null,
+          },
+        },
+        versions: {
+          "generation-i": {
+            "red-blue": {
+              back_default: null,
+              back_gray: null,
+              back_transparent: null,
+              front_default: null,
+              front_gray: null,
+              front_transparent: null,
+            },
+            yellow: {
+              back_default: null,
+              back_gray: null,
+              back_transparent: null,
+              front_default: null,
+              front_gray: null,
+              front_transparent: null,
+            },
+          },
+          "generation-ii": {
+            crystal: {
+              back_default: null,
+              back_shiny: null,
+              back_shiny_transparent: null,
+              back_transparent: null,
+              front_default: null,
+              front_shiny: null,
+              front_shiny_transparent: null,
+              front_transparent: null,
+            },
+            gold: {
+              back_default: null,
+              back_shiny: null,
+              front_default: null,
+              front_shiny: null,
+              front_transparent: null,
+            },
+            silver: {
+              back_default: null,
+              back_shiny: null,
+              front_default: null,
+              front_shiny: null,
+              front_transparent: null,
+            },
+          },
+          "generation-iii": {
+            emerald: {
+              front_default: null,
+              front_shiny: null,
+            },
+            "firered-leafgreen": {
+              back_default: null,
+              back_shiny: null,
+              front_default: null,
+              front_shiny: null,
+            },
+            "ruby-sapphire": {
+              back_default: null,
+              back_shiny: null,
+              front_default: null,
+              front_shiny: null,
+            },
+          },
+          "generation-iv": {
+            "diamond-pearl": {
+              back_default: null,
+              back_female: null,
+              back_shiny: null,
+              back_shiny_female: null,
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+            "heartgold-soulsilver": {
+              back_default: null,
+              back_female: null,
+              back_shiny: null,
+              back_shiny_female: null,
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+            platinum: {
+              back_default: null,
+              back_female: null,
+              back_shiny: null,
+              back_shiny_female: null,
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+          },
+          "generation-v": {
+            "black-white": {
+              animated: {
+                back_default: null,
+                back_female: null,
+                back_shiny: null,
+                back_shiny_female: null,
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
+              back_default: null,
+              back_female: null,
+              back_shiny: null,
+              back_shiny_female: null,
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+          },
+          "generation-vi": {
+            "omegaruby-alphasapphire": {
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+            "x-y": {
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+          },
+          "generation-vii": {
+            icons: {
+              front_default: null,
+              front_female: null,
+            },
+            "ultra-sun-ultra-moon": {
+              front_default: null,
+              front_female: null,
+              front_shiny: null,
+              front_shiny_female: null,
+            },
+          },
+          "generation-viii": {
+            icons: {
+              front_default: null,
+              front_female: null,
+            },
+          },
+        },
+      },
+      types: [
+        {
+          slot: 1,
+          type: {
+            name: "fire",
+            url: "https://pokeapi.co/api/v2/type/10/",
+          },
+        },
+        {
+          slot: 2,
+          type: {
+            name: "ghost",
+            url: "https://pokeapi.co/api/v2/type/8/",
+          },
+        },
+      ],
+      weight: 620,
+      isShiny: false,
+      national_id: 937,
+      flavor_text_entries: [
+        {
+          flavor_text:
+            "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
+          language: {
+            name: "en",
+            url: "https://pokeapi.co/api/v2/language/9/",
+          },
+          version: {
+            name: "scarlet",
+            url: "https://pokeapi.co/api/v2/version/40/",
+          },
+        },
+        {
+          flavor_text:
+            "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
+          language: {
+            name: "en",
+            url: "https://pokeapi.co/api/v2/language/9/",
+          },
+          version: {
+            name: "violet",
+            url: "https://pokeapi.co/api/v2/version/41/",
+          },
+        },
+      ],
+    }
+  );
+
+  useEffect(() => {
+    updatePokemon(pokemon);
+  }, [pokemon]);
+
+  let [nameValue, setStateFind] = useState(pokemon.name);
+  let [numValue, setNumValue] = useState(pokemon.id);
   const [suggestions, setSuggestions] = useState([]);
 
   const NumChanger = (e) => {
     setIsLoading(true);
-    setNumValue(e.target.value);
-    setStateFind(e.target.value);
+    // setNumValue(e.target.value);
+    setStateFind(Object.keys(speciesData)[e.target.value - 1]);
   };
 
   const NameChanger = (e) => {
@@ -38,34 +433,37 @@ export default function Poke({
       setSuggestions([]);
     }
     setIsLoading(true);
-    setStateFind(e.target.value);
+    if (e.target.value !== "") {
+      setStateFind(e.target.value);
+    } else {
+      setStateFind("");
+    }
   };
 
   let [shiny, setShiny] = useState(false);
-  let [random, setRandom] = useState(0);
 
   const ShinyChange = () => {
-    setIsLoading(true);
-    setShiny(!shiny);
+    // setIsLoading(true);
+    // setShiny((prevShiny) => !prevShiny);
+    setIsShinyState((prevShiny) => !prevShiny);
+    setPokemon((prevPokemon) => ({
+      ...prevPokemon,
+      isShiny: !prevPokemon.isShiny,
+    }));
   };
 
   const Randomize = () => {
     setIsLoading(true);
     let random = 1 + Math.floor(Math.random() * 1008);
-    setRandom(random);
-    random = random.toString();
-    setStateFind(random);
+    setStateFind(Object.keys(speciesData)[random]);
   };
 
   let [Img, setImg] = useState("");
   let [artURL, setURL] = useState(
     "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png"
   );
-  const [Type, setType] = useState("");
-  let megaEvoRes;
   const [resCopy, setResCopy] = useState({});
   const [evoRes, setEvoRes] = useState({});
-  let megaEvoBtnToggle;
   const [pkmnInfoBg, setPkmnInfoBg] = useState("");
 
   useEffect(() => {
@@ -77,6 +475,9 @@ export default function Poke({
           );
           setLogoAnimation(true);
           setResCopy(res);
+          res.data.isShiny = isShinyState;
+          res.data.national_id = res.data.id;
+          // setPokemon(res.data);
           let evoBtnCheck = true;
 
           // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
@@ -101,6 +502,17 @@ export default function Poke({
                 `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
               )
             );
+            console.log(evoRes.data);
+            let filteredFlavorText = evoRes.data.flavor_text_entries.filter(
+              (item) => item.language.name === "en"
+            );
+
+            // setPokemon((prevPokemon) => ({
+            //   ...prevPokemon,
+            //   flavor_text_entries: filteredFlavorText,
+            // }));
+            res.data.flavor_text_entries = filteredFlavorText;
+            setPokemon(res.data);
             setPkmnInfoBg("var(--color3)");
           } catch (err) {
             switch (nameValue.toLocaleLowerCase()) {
@@ -131,19 +543,20 @@ export default function Poke({
                 let newOption = document.createElement("option");
                 newOption.innerHTML = selectedOptionText;
                 newOption.value = selectedOptionValue;
+                console.log(selectedOptionValue);
                 optionsMenu.insertBefore(newOption, optionsMenu.firstChild);
                 optionsMenu.value = selectedOptionValue;
-
                 let newName = selectedOptionValue;
                 let newNameRes = await axios.get(
                   `https://pokeapi.co/api/v2/pokemon/${newName}`
                 );
-                document.getElementById("artCanvas").classList.toggle("shine");
-                setTimeout(() => {
-                  document
-                    .getElementById("artCanvas")
-                    .classList.toggle("shine");
-                }, 6000);
+                setPokemon((prevPokemon) => ({
+                  ...prevPokemon,
+                  current_form: selectedOptionValue,
+                  national_id: prevPokemon.national_id,
+                  id: newNameRes.data.id,
+                }));
+
                 setTimeout(() => {
                   if (shiny === true) {
                     setImg(newNameRes.data.sprites.front_shiny);
@@ -157,27 +570,6 @@ export default function Poke({
                       newNameRes.data.sprites.other["official-artwork"]
                         .front_default
                     );
-                  }
-                  document.querySelector(
-                    "#pkmnInfo #types #primaryType"
-                  ).innerHTML =
-                    newNameRes.data.types[0].type.name.charAt(0).toUpperCase() +
-                    newNameRes.data.types[0].type.name.slice(1);
-                  if (newNameRes.data.types.length > 1) {
-                    document
-                      .querySelector("#pkmnInfo #types")
-                      .classList.remove("singleType");
-                    document.querySelector(
-                      "#pkmnInfo #types #secondaryType"
-                    ).innerHTML =
-                      newNameRes.data.types[1].type.name
-                        .charAt(0)
-                        .toUpperCase() +
-                      newNameRes.data.types[1].type.name.slice(1);
-                  } else {
-                    document
-                      .querySelector("#pkmnInfo #types")
-                      .classList.add("singleType");
                   }
                   setIsLoading(false);
                 }, 4000);
@@ -196,6 +588,9 @@ export default function Poke({
                   optionName = optionName + " Form";
                   option.innerHTML = optionName;
                   option.value = evoRes.data.varieties[i].pokemon.name;
+                  if (optionName === "Totem Form") {
+                    option.disabled = true;
+                  }
                 }
                 optionsMenu.appendChild(option);
               }
@@ -307,23 +702,6 @@ export default function Poke({
                     evoBtnCheck = false;
                 }
               } else {
-                // Either remove or simply not put the evoBtn there
-                if (nameValue === "qwilfish") {
-                  evoData = "overqwil";
-                  evoBtnCheck = true;
-                } else if (nameValue === "stantler") {
-                  evoData = "wyrdeer";
-                  evoBtnCheck = true;
-                } else if (
-                  nameValue === "basculin-red-striped" ||
-                  nameValue === "basculin-blue-striped" ||
-                  nameValue === "basculin-white-striped"
-                ) {
-                  evoData = "basculegion-male";
-                  evoBtnCheck = true;
-                } else {
-                  evoBtnCheck = false;
-                }
                 if (
                   typeof document.getElementById("evoBtn") !== "undefined" &&
                   document.getElementById("evoBtn") !== null
@@ -351,16 +729,10 @@ export default function Poke({
               evoBtn.onclick = () => {
                 // Check for branch-evos
                 setIsLoading(true);
-                document.getElementById("artCanvas").classList.toggle("shine");
-                setTimeout(() => {
-                  document
-                    .getElementById("artCanvas")
-                    .classList.toggle("shine");
-                }, 6000);
 
                 setTimeout(() => {
                   setStateFind(evoData);
-                }, 3000);
+                }, 1000);
               };
               evoBtn.classList.toggle("noSelect");
               document.getElementById("buttons").appendChild(evoBtn);
@@ -368,14 +740,6 @@ export default function Poke({
           } catch (err) {
             console.log(err);
           }
-
-          // if (megaEvoBtnToggle) {
-          //   if (shiny === true) {
-          //     setImg(megaEvoRes.data.sprites.front_shiny);
-          //   } else {
-          //     setImg(megaEvoRes.data.sprites.front_default);
-          //   }
-          // } else {
           if (shiny === true) {
             if (res.data.sprites.front_shiny) {
               setImg(res.data.sprites.front_shiny);
@@ -389,65 +753,48 @@ export default function Poke({
               setImg(res.data.sprites.other["home"].front_default);
             }
           }
-          // }
 
-          if (shiny) {
-            let shinyURL =
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
-              numValue +
-              ".png";
-            if (res.data.sprites.other["official-artwork"].front_shiny) {
-              setURL(shinyURL);
-            } else {
-              console.log("No official artwork");
-              setURL(res.data.sprites.other["home"].front_shiny);
-            }
-          } else {
-            if (res.data.sprites.other["official-artwork"].front_default) {
-              setURL(res.data.sprites.other["official-artwork"].front_default);
-            } else {
-              console.log("No official artwork");
-              setURL(res.data.sprites.other["home"].front_default);
-            }
-          }
           const filteredGenera = evoRes.data.genera
             .filter((item) => item.language.name === "en")
             .map((item) => item.genus);
-          setType(
-            filteredGenera[0]
-              ? "The " + filteredGenera[0]
-              : "The Unknown Pokemon"
-          );
+          setGenera(filteredGenera);
           setStateFind(res.data.name);
-          setNumValue(res.data.id);
+          setNumValue(res.data.national_id);
         } catch (err) {
           console.log(err);
         }
       }
-      setIsLoading(false);
       setTimeout(() => {
+        setIsLoading(false);
         setLogoAnimation(false);
-      }, 2000);
+      }, 1000);
     }
 
-    getData();
+    if (param) {
+      setStateFind(param);
+      setTimeout(() => {
+        getData();
+
+        paramPokemon = null;
+        param = null;
+      }, 1000);
+    } else {
+      getData();
+    }
   }, [nameValue, shiny, numValue]);
 
   const increase = () => {
     if (numValue < 1025) {
       setIsLoading(true);
-      numValue = numValue + 1;
-      setNumValue(numValue);
-      setStateFind(numValue.toString());
+      setStateFind(Object.keys(speciesData)[pokemon.id]);
     }
   };
 
   const decrease = () => {
     if (numValue > 1) {
       setIsLoading(true);
-      numValue = numValue - 1;
-      setNumValue(numValue);
-      setStateFind(numValue.toString());
+      // setNumValue((prevNum) => prevNum - 1);
+      setStateFind(Object.keys(speciesData)[pokemon.id - 2]);
     }
   };
 
@@ -980,11 +1327,7 @@ export default function Poke({
         document.querySelector(
           "#shareWidgets .tweet-input"
         ).value = `I generated ${
-          evoRes.data.names
-            .filter((item) => item.language.name === "en")
-            .map((item) => item.name)[0]
-            .charAt(0)
-            .toUpperCase() + nameValue.slice(1)
+          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
         }'s color palette using PokePalette! 🎨${colorEmojiArr
           .filter((item) => item.color === evoRes.data.color.name)
           .map((item) => item.emoji)}
@@ -993,25 +1336,6 @@ export default function Poke({
         ${color3.toUpperCase().slice(1)}
         ${color4.toUpperCase().slice(1)}
         \npokemonpalette.com`;
-
-        document.querySelector(".pokeName").innerHTML =
-          (nameValue.charAt(0) === "a" ||
-          nameValue.charAt(0) === "e" ||
-          nameValue.charAt(0) === "o" ||
-          nameValue.charAt(0) === "i" ||
-          nameValue.charAt(0) === "u"
-            ? "an "
-            : "a ") +
-          nameValue.charAt(0).toUpperCase() +
-          nameValue.slice(1);
-
-        document.querySelector("#pkmnInfo h2").innerHTML =
-          nameValue.charAt(0).toUpperCase() +
-          nameValue.slice(1) +
-          ` [#${numValue}]`;
-        document.querySelector("#pkmnInfo #types #primaryType").innerHTML =
-          resCopy.data.types[0].type.name.charAt(0).toUpperCase() +
-          resCopy.data.types[0].type.name.slice(1);
         //find the ball with property "type" equal to resCopy.data.types[0].type.name by filtering through colorList
         console.log(resCopy.data.types[0].type.name);
         colorList
@@ -1024,12 +1348,6 @@ export default function Poke({
             updateTypeBall2("none");
           });
         if (resCopy.data.types.length > 1) {
-          document
-            .querySelector("#pkmnInfo #types")
-            .classList.remove("singleType");
-          document.querySelector("#pkmnInfo #types #secondaryType").innerHTML =
-            resCopy.data.types[1].type.name.charAt(0).toUpperCase() +
-            resCopy.data.types[1].type.name.slice(1);
           //find the ball with property "type" equal to resCopy.data.types[1].type.name by filtering through colorList
           colorList
             .filter(
@@ -1040,9 +1358,6 @@ export default function Poke({
               updateTypeBall2(Object.keys(item)[0]);
             });
         } else {
-          document
-            .querySelector("#pkmnInfo #types")
-            .classList.add("singleType");
           console.log("Just primary type");
         }
         try {
@@ -1063,29 +1378,10 @@ export default function Poke({
                 return `Generation: ${romanNumeral}`;
               }
             ) + "<br><br>";
-          document.querySelector("#pkmnInfo .description").innerHTML =
-            generation +
-            habitat +
-            evoRes.data.flavor_text_entries
-              .filter((item) => item.language.name === "en")
-              .slice(-1)
-              .map((item) => item.flavor_text);
         } catch (err) {
           console.log(err);
         }
       } else {
-        document.querySelector(
-          "#shareWidgets .tweet-input"
-        ).value = `Loading...`;
-
-        document.querySelector("#pkmnInfo h2").innerHTML = `Loading...`;
-        document.querySelector("#pkmnInfo #types #primaryType").innerHTML = ``;
-        document.querySelector(
-          "#pkmnInfo #types #secondaryType"
-        ).innerHTML = ``;
-        document.querySelector(
-          "#pkmnInfo .description"
-        ).innerHTML = `Loading...`;
       }
     };
   });
@@ -1136,11 +1432,29 @@ export default function Poke({
         style={{ display: "none", width: "100px", height: "100px" }}
         id="imgData"
         crossOrigin="Anonymous"
-        src={`${Img}`}
+        src={
+          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+          (isShinyState ? "shiny/" : "") +
+          pokemon.id +
+          ".png"
+        }
         alt=""
       />
 
-      <div className="type">{Type}</div>
+      <div className="type">
+      {isLoading ? (
+        <div
+          style={{ margin: 0, color: "var(--hsp3)", minHeight: "1.2rem" }}
+          className="loading"
+        >
+          <RiLoader4Fill />
+        </div>
+      ) : 
+        genera
+          ? "The " + genera
+          : pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+        }
+      </div>
 
       <div className="labelInput">
         <label htmlFor="name">
@@ -1149,21 +1463,18 @@ export default function Poke({
         <input
           type="text"
           id="nameInput"
+          placeholder="Enter a Pokemon name..."
           onChange={NameChanger}
           value={nameValue}
           name="name"
           spellcheck="false"
           autoComplete="off"
-          //override down arrow action so you can choose from suggestions with keyboard
           onKeyDown={(e) => {
             if (e.keyCode === 40 && suggestions.length > 0) {
               e.preventDefault();
               document.querySelector("#suggestions button").focus();
             }
           }}
-          // onBlur={() => {
-          //     setSuggestions([]);
-          // }}
         />
         <button
           id="shinyBtn"
@@ -1171,7 +1482,7 @@ export default function Poke({
           aria-label="Shiny toggle Button"
           className={"noSelect" + (shiny ? " shiny" : "")}
         >
-          {shiny ? <IoSparkles /> : <IoSparklesOutline />}
+          {isShinyState ? <IoSparkles /> : <IoSparklesOutline />}
         </button>
         <div
           id="suggestionsWrapper"
@@ -1185,7 +1496,19 @@ export default function Poke({
                   key={index}
                   onClick={() => {
                     setIsLoading(true);
-                    setStateFind(speciesData[item].toString());
+                    // //switch case for special cases
+                    // switch (item) {
+                    //   case "basculin":
+                    //     item = item + "-red-striped";
+                    //     setStateFind(item);
+                    //     break;
+                    //   case "burmy":
+                    //     item = item + "-plant";
+                    //     break;
+                    //   default:
+                    //     break;
+                    // }
+                    setStateFind(item);
                     setSuggestions([]);
                   }}
                   onKeyDown={(e) => {
@@ -1213,15 +1536,15 @@ export default function Poke({
                     {" "}
                     <img
                       src={
-                        speciesData[item] === 1025
-                          ? shiny
+                        speciesData[item] === 1026
+                          ? isShinyState
                             ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
                               speciesData[item] +
                               ".png"
                             : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
                               speciesData[item] +
                               ".png"
-                          : shiny
+                          : isShinyState
                           ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
                               speciesData[item] +
                               ".png" || ""
@@ -1239,16 +1562,9 @@ export default function Poke({
         </div>
       </div>
 
-      {isLoading ? (
-        <div
-          style={{ margin: 0, color: "var(--hsp3)", minHeight: "1.2rem" }}
-          className="loading"
-        >
-          <RiLoader4Fill />
-        </div>
-      ) : (
-        <p className={"tag" + (shiny ? "" : " empty")}>
-          {shiny ? "Shiny mode" : ""}
+      {(
+        <p className={"tag" + (isShinyState ? "" : " empty")}>
+          {isShinyState ? "Shiny mode" : ""}
         </p>
       )}
 
@@ -1278,7 +1594,7 @@ export default function Poke({
             max="1025"
             min="1"
             onChange={NumChanger}
-            value={numValue}
+            value={pokemon.national_id ? pokemon.national_id : pokemon.id}
             name="number"
           />
         </div>
