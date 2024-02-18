@@ -33,9 +33,7 @@ if (paramRaw && speciesData[paramRaw.toLowerCase()]) {
     species: {
       name: "ceruledge",
       url:
-        "https://pokeapi.co/api/v2/pokemon-species/" +
-        speciesData[param] +
-        "/",
+        "https://pokeapi.co/api/v2/pokemon-species/" + speciesData[param] + "/",
     },
     sprites: {
       back_default: null,
@@ -128,7 +126,6 @@ if (paramRaw && speciesData[paramRaw.toLowerCase()]) {
   };
 }
 
-
 export default function Poke({
   updateColor2,
   updateColor3,
@@ -137,7 +134,6 @@ export default function Poke({
   updateTypeBall2,
   updatePokemon,
 }) {
-
   const [isShinyState, setIsShinyState] = useState(false);
   const [genera, setGenera] = useState("Fire Blades Pokémon");
   const [pokemon, setPokemon] = useState(
@@ -415,7 +411,6 @@ export default function Poke({
 
   const NumChanger = (e) => {
     setIsLoading(true);
-    // setNumValue(e.target.value);
     setStateFind(Object.keys(speciesData)[e.target.value - 1]);
   };
 
@@ -443,8 +438,6 @@ export default function Poke({
   let [shiny, setShiny] = useState(false);
 
   const ShinyChange = () => {
-    // setIsLoading(true);
-    // setShiny((prevShiny) => !prevShiny);
     setIsShinyState((prevShiny) => !prevShiny);
     setPokemon((prevPokemon) => ({
       ...prevPokemon,
@@ -468,300 +461,346 @@ export default function Poke({
 
   useEffect(() => {
     async function getData() {
-      if (speciesData[nameValue.toLowerCase()] || !isNaN(nameValue)) {
-        try {
-          let res = await axios.get(
-            `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
-          );
-          setLogoAnimation(true);
-          setResCopy(res);
-          res.data.isShiny = isShinyState;
-          res.data.national_id = res.data.id;
-          // setPokemon(res.data);
-          let evoBtnCheck = true;
-
-          // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
-
-          if (
-            typeof document.getElementById("evoBtn") != "undefined" &&
-            document.getElementById("evoBtn") != null
-          ) {
-            document.getElementById("evoBtn").remove();
-          }
-
-          if (
-            typeof document.getElementById("optionsMenu") != "undefined" &&
-            document.getElementById("optionsMenu") != null
-          ) {
-            document.getElementById("optionsMenu").remove();
-          }
-
+      console.log(nameValue);
+      if (nameValue !== "") {
+        if (
+          speciesData[nameValue.toLowerCase()] ||
+          !isNaN(nameValue) ||
+          nameValue !== ""
+        ) {
           try {
-            setEvoRes(
-              await axios.get(
-                `https://pokeapi.co/api/v2/pokemon-species/${nameValue.toLowerCase()}`
-              )
-            );
-            console.log(evoRes.data);
-            let filteredFlavorText = evoRes.data.flavor_text_entries.filter(
-              (item) => item.language.name === "en"
-            );
-
-            // setPokemon((prevPokemon) => ({
-            //   ...prevPokemon,
-            //   flavor_text_entries: filteredFlavorText,
-            // }));
-            res.data.flavor_text_entries = filteredFlavorText;
-            setPokemon(res.data);
-            setPkmnInfoBg("var(--color3)");
-          } catch (err) {
-            switch (nameValue.toLocaleLowerCase()) {
-              case "basculin-red-striped":
-              case "basculin-blue-striped":
-              case "basculin-white-striped":
-                setEvoRes(
-                  await axios.get(
-                    `https://pokeapi.co/api/v2/pokemon-species/basculin`
-                  )
-                );
+            //special cases for odd defaults
+            switch (nameValue) {
+              case "morpeko":
+                nameValue = "morpeko-full-belly";
+                break;
+              default:
+                break;
             }
-            console.log(err);
-          }
-          try {
-            if (evoRes.data.varieties.length > 1) {
-              let optionsMenu = document.createElement("select");
-              optionsMenu.id = "optionsMenu";
-              optionsMenu.onchange = async () => {
-                setIsLoading(true);
-                let optionsMenu = document.getElementById("optionsMenu");
-                let selectedOptionIndex = optionsMenu.selectedIndex;
-                let selectedOptionText =
-                  optionsMenu.options[selectedOptionIndex].text;
-                let selectedOptionValue =
-                  optionsMenu.options[selectedOptionIndex].value;
-                optionsMenu.remove(selectedOptionIndex);
-                let newOption = document.createElement("option");
-                newOption.innerHTML = selectedOptionText;
-                newOption.value = selectedOptionValue;
-                console.log(selectedOptionValue);
-                optionsMenu.insertBefore(newOption, optionsMenu.firstChild);
-                optionsMenu.value = selectedOptionValue;
-                let newName = selectedOptionValue;
-                let newNameRes = await axios.get(
-                  `https://pokeapi.co/api/v2/pokemon/${newName}`
-                );
-                setPokemon((prevPokemon) => ({
-                  ...prevPokemon,
-                  current_form: selectedOptionValue,
-                  national_id: prevPokemon.national_id,
-                  id: newNameRes.data.id,
-                }));
+            let res = await axios.get(
+              `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
+            );
+            console.log(res.data);
+            setLogoAnimation(true);
+            setResCopy(res);
+            res.data.isShiny = isShinyState;
+            res.data.national_id = res.data.id;
+            let evoBtnCheck = true;
 
-                setTimeout(() => {
-                  if (shiny === true) {
-                    setImg(newNameRes.data.sprites.front_shiny);
-                    setURL(
-                      newNameRes.data.sprites.other["official-artwork"]
-                        .front_shiny
-                    );
-                  } else {
-                    setImg(newNameRes.data.sprites.front_default);
-                    setURL(
-                      newNameRes.data.sprites.other["official-artwork"]
-                        .front_default
-                    );
-                  }
-                  setIsLoading(false);
-                }, 4000);
-              };
-              for (let i = 0; i < evoRes.data.varieties.length; i++) {
-                let option = document.createElement("option");
-                if (evoRes.data.varieties[i].is_default) {
-                  option.innerHTML = "Default form";
-                  option.value = evoRes.data.varieties[i].pokemon.name;
-                } else {
-                  let optionName = evoRes.data.varieties[i].pokemon.name;
-                  optionName = optionName.replace(nameValue, "");
-                  optionName = optionName.replace("-", "");
-                  optionName =
-                    optionName.charAt(0).toUpperCase() + optionName.slice(1);
-                  optionName = optionName + " Form";
-                  option.innerHTML = optionName;
-                  option.value = evoRes.data.varieties[i].pokemon.name;
-                  if (optionName === "Totem Form") {
-                    option.disabled = true;
-                  }
-                }
-                optionsMenu.appendChild(option);
-              }
-              document.getElementById("buttons").appendChild(optionsMenu);
+            // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
+
+            if (
+              typeof document.getElementById("evoBtn") != "undefined" &&
+              document.getElementById("evoBtn") != null
+            ) {
+              document.getElementById("evoBtn").remove();
             }
-          } catch (err) {
-            console.log(err);
-          }
 
-          let evoData;
+            if (
+              typeof document.getElementById("optionsMenu") != "undefined" &&
+              document.getElementById("optionsMenu") != null
+            ) {
+              document.getElementById("optionsMenu").remove();
+            }
 
-          try {
             try {
-              let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-              let stageNumber = 1;
+              setEvoRes(
+                await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon-species/${res.data.species.name}`
+                )
+              );
+              console.log(evoRes.data);
+              let filteredFlavorText = evoRes.data.flavor_text_entries.filter(
+                (item) => item.language.name === "en"
+              );
 
-              if (evoChain.data.chain.evolves_to.length !== 0) {
-                // This check eliminates single-stage mons
+              // setPokemon((prevPokemon) => ({
+              //   ...prevPokemon,
+              //   flavor_text_entries: filteredFlavorText,
+              // }));
+              res.data.flavor_text_entries = filteredFlavorText;
+              setPokemon(res.data);
+              setPkmnInfoBg("var(--color3)");
+            } catch (err) {
+              switch (nameValue.toLocaleLowerCase()) {
+                case "basculin-red-striped":
+                case "basculin-blue-striped":
+                case "basculin-white-striped":
+                  setEvoRes(
+                    await axios.get(
+                      `https://pokeapi.co/api/v2/pokemon-species/basculin`
+                    )
+                  );
+              }
+              console.log(err);
+            }
+            try {
+              //special cases for varieties
+              switch (nameValue) {
+                case "cramorant":
+                case "koraidon":
+                case "miraidon":
+                  evoRes.data.varieties = [
+                    {
+                      is_default: true,
+                    },
+                  ];
+                  break;
+                default:
+                  break;
+              }
+              if (evoRes.data.varieties.length > 1) {
+                let optionsMenu = document.createElement("select");
+                optionsMenu.id = "optionsMenu";
+                optionsMenu.onchange = async () => {
+                  setIsLoading(true);
+                  let optionsMenu = document.getElementById("optionsMenu");
+                  let selectedOptionIndex = optionsMenu.selectedIndex;
+                  let selectedOptionText =
+                    optionsMenu.options[selectedOptionIndex].text;
+                  let selectedOptionValue =
+                    optionsMenu.options[selectedOptionIndex].value;
+                  optionsMenu.remove(selectedOptionIndex);
+                  let newOption = document.createElement("option");
+                  newOption.innerHTML = selectedOptionText;
+                  newOption.value = selectedOptionValue;
+                  console.log(selectedOptionValue);
+                  optionsMenu.insertBefore(newOption, optionsMenu.firstChild);
+                  optionsMenu.value = selectedOptionValue;
+                  let newName = selectedOptionValue;
+                  let newNameRes = await axios.get(
+                    `https://pokeapi.co/api/v2/pokemon/${newName}`
+                  );
+                  setPokemon((prevPokemon) => ({
+                    ...prevPokemon,
+                    current_form: selectedOptionValue,
+                    national_id: prevPokemon.national_id,
+                    id: newNameRes.data.id,
+                  }));
 
-                evoData = evoChain.data.chain.evolves_to[0].species.name;
-
-                // This check determines the length of the evolution family
-                if (evoChain.data.chain.evolves_to[0].evolves_to.length === 0) {
-                  stageNumber = 2;
-                } else {
-                  stageNumber = 3;
-                }
-                let randInt = 0;
-                switch (stageNumber) {
-                  case 2:
-                    if (nameValue !== evoChain.data.chain.species.name) {
-                      console.log("This mon is the final stage of a 2-stager");
-                      evoBtnCheck = false;
+                  setTimeout(() => {
+                    if (shiny === true) {
+                      setImg(newNameRes.data.sprites.front_shiny);
+                      setURL(
+                        newNameRes.data.sprites.other["official-artwork"]
+                          .front_shiny
+                      );
                     } else {
-                      console.log("This mon is the 1st stage of a 2-stager");
-                      evoBtnCheck = true;
-                      // Check for branch-evos
-                      if (evoChain.data.chain.evolves_to.length > 1) {
-                        randInt = Math.floor(
-                          Math.random() * evoChain.data.chain.evolves_to.length
+                      setImg(newNameRes.data.sprites.front_default);
+                      setURL(
+                        newNameRes.data.sprites.other["official-artwork"]
+                          .front_default
+                      );
+                    }
+                    setIsLoading(false);
+                  }, 4000);
+                };
+                for (let i = 0; i < evoRes.data.varieties.length; i++) {
+                  let option = document.createElement("option");
+                  if (evoRes.data.varieties[i].is_default) {
+                    option.innerHTML = "Default form";
+                    option.value = evoRes.data.varieties[i].pokemon.name;
+                  } else {
+                    let optionName = evoRes.data.varieties[i].pokemon.name;
+                    optionName = optionName.replace(nameValue, "");
+                    optionName = optionName.replace("-", "");
+                    optionName =
+                      optionName.charAt(0).toUpperCase() + optionName.slice(1);
+                    optionName = optionName + " Form";
+                    option.innerHTML = optionName;
+                    option.value = evoRes.data.varieties[i].pokemon.name;
+                    if (optionName === "Totem Form") {
+                      option.disabled = true;
+                    }
+                  }
+                  optionsMenu.appendChild(option);
+                }
+                document.getElementById("buttons").appendChild(optionsMenu);
+              }
+            } catch (err) {
+              console.log(err);
+            }
+
+            let evoData;
+
+            try {
+              try {
+                let evoChain = await axios.get(evoRes.data.evolution_chain.url);
+                let stageNumber = 1;
+
+                if (evoChain.data.chain.evolves_to.length !== 0) {
+                  // This check eliminates single-stage mons
+
+                  evoData = evoChain.data.chain.evolves_to[0].species.name;
+
+                  // This check determines the length of the evolution family
+                  if (
+                    evoChain.data.chain.evolves_to[0].evolves_to.length === 0
+                  ) {
+                    stageNumber = 2;
+                  } else {
+                    stageNumber = 3;
+                  }
+                  let randInt = 0;
+                  switch (stageNumber) {
+                    case 2:
+                      if (nameValue !== evoChain.data.chain.species.name) {
+                        console.log(
+                          "This mon is the final stage of a 2-stager"
                         );
+                        evoBtnCheck = false;
+                      } else {
+                        console.log("This mon is the 1st stage of a 2-stager");
+                        evoBtnCheck = true;
+                        // Check for branch-evos
+                        if (evoChain.data.chain.evolves_to.length > 1) {
+                          randInt = Math.floor(
+                            Math.random() *
+                              evoChain.data.chain.evolves_to.length
+                          );
+                          evoData =
+                            evoChain.data.chain.evolves_to[randInt].species
+                              .name;
+                        }
                         evoData =
                           evoChain.data.chain.evolves_to[randInt].species.name;
                       }
-                      evoData =
-                        evoChain.data.chain.evolves_to[randInt].species.name;
-                    }
-                    break;
-                  case 3:
-                    if (
-                      nameValue !== "cascoon" &&
-                      nameValue !== evoData &&
-                      nameValue !== evoChain.data.chain.species.name
-                    ) {
-                      // This check eliminates mons that are final stages
-                      console.log("This mon is the final stage of a 3-stager");
-                      evoBtnCheck = false;
+                      break;
+                    case 3:
                       if (
-                        typeof document.getElementById("evoBtn") !==
-                          "undefined" &&
-                        document.getElementById("evoBtn") !== null
+                        nameValue !== "cascoon" &&
+                        nameValue !== evoData &&
+                        nameValue !== evoChain.data.chain.species.name
                       ) {
-                        document.getElementById("evoBtn").remove();
-                        break;
-                      }
-                    } else if (
-                      nameValue === evoData &&
-                      nameValue !== evoChain.data.chain.species.name
-                    ) {
-                      console.log("This mon is the middle stage of a 3-stager");
-                      evoBtnCheck = true;
-                      // Check for branch-evos
-                      let randInt = 0;
-                      if (
-                        evoChain.data.chain.evolves_to[0].evolves_to.length > 1
-                      ) {
-                        randInt = Math.floor(
-                          Math.random() *
-                            evoChain.data.chain.evolves_to[0].evolves_to.length
+                        // This check eliminates mons that are final stages
+                        console.log(
+                          "This mon is the final stage of a 3-stager"
                         );
+                        evoBtnCheck = false;
+                        if (
+                          typeof document.getElementById("evoBtn") !==
+                            "undefined" &&
+                          document.getElementById("evoBtn") !== null
+                        ) {
+                          document.getElementById("evoBtn").remove();
+                          break;
+                        }
+                      } else if (
+                        nameValue === evoData &&
+                        nameValue !== evoChain.data.chain.species.name
+                      ) {
+                        console.log(
+                          "This mon is the middle stage of a 3-stager"
+                        );
+                        evoBtnCheck = true;
+                        // Check for branch-evos
+                        let randInt = 0;
+                        if (
+                          evoChain.data.chain.evolves_to[0].evolves_to.length >
+                          1
+                        ) {
+                          randInt = Math.floor(
+                            Math.random() *
+                              evoChain.data.chain.evolves_to[0].evolves_to
+                                .length
+                          );
+                          evoData =
+                            evoChain.data.chain.evolves_to[0].evolves_to[
+                              randInt
+                            ].species.name;
+                        }
                         evoData =
                           evoChain.data.chain.evolves_to[0].evolves_to[randInt]
                             .species.name;
-                      }
-                      evoData =
-                        evoChain.data.chain.evolves_to[0].evolves_to[randInt]
-                          .species.name;
-                    } else if (nameValue === "cascoon") {
-                      evoBtnCheck = true;
-                      evoData = "dustox";
-                    } else {
-                      console.log("This mon is the 1st stage of a 3-stager");
-                      evoBtnCheck = true;
-                      // Check for branch-evos
-                      let randInt = 0;
-                      if (evoChain.data.chain.evolves_to.length > 1) {
-                        randInt = Math.floor(
-                          Math.random() * evoChain.data.chain.evolves_to.length
-                        );
+                      } else if (nameValue === "cascoon") {
+                        evoBtnCheck = true;
+                        evoData = "dustox";
+                      } else {
+                        console.log("This mon is the 1st stage of a 3-stager");
+                        evoBtnCheck = true;
+                        // Check for branch-evos
+                        let randInt = 0;
+                        if (evoChain.data.chain.evolves_to.length > 1) {
+                          randInt = Math.floor(
+                            Math.random() *
+                              evoChain.data.chain.evolves_to.length
+                          );
+                          evoData =
+                            evoChain.data.chain.evolves_to[randInt].species
+                              .name;
+                        }
                         evoData =
                           evoChain.data.chain.evolves_to[randInt].species.name;
                       }
-                      evoData =
-                        evoChain.data.chain.evolves_to[randInt].species.name;
-                    }
-                    break;
-                  default:
-                    console.log("This mon is a single-stager");
-                    evoBtnCheck = false;
+                      break;
+                    default:
+                      console.log("This mon is a single-stager");
+                      evoBtnCheck = false;
+                  }
+                } else {
+                  if (
+                    typeof document.getElementById("evoBtn") !== "undefined" &&
+                    document.getElementById("evoBtn") !== null
+                  ) {
+                    document.getElementById("evoBtn").remove();
+                  }
                 }
-              } else {
-                if (
-                  typeof document.getElementById("evoBtn") !== "undefined" &&
-                  document.getElementById("evoBtn") !== null
-                ) {
-                  document.getElementById("evoBtn").remove();
+              } catch (err) {
+                try {
+                  evoData = await axios.get(
+                    evoRes.data.evolves_from_species.name
+                  );
+                } catch (err) {
+                  console.log(err);
                 }
+                evoBtnCheck = false;
+              }
+
+              if (evoBtnCheck) {
+                // Only create evoBtn if all conditions are right
+                let evoBtn = document.createElement("button");
+                evoBtn.innerHTML = "Evolve!";
+                evoBtn.id = "evoBtn";
+
+                evoBtn.onclick = () => {
+                  // Check for branch-evos
+                  setIsLoading(true);
+
+                  setTimeout(() => {
+                    setStateFind(evoData);
+                  }, 1000);
+                };
+                evoBtn.classList.toggle("noSelect");
+                document.getElementById("buttons").appendChild(evoBtn);
               }
             } catch (err) {
-              try {
-                evoData = await axios.get(
-                  evoRes.data.evolves_from_species.name
-                );
-              } catch (err) {
-                console.log(err);
+              console.log(err);
+            }
+            if (shiny === true) {
+              if (res.data.sprites.front_shiny) {
+                setImg(res.data.sprites.front_shiny);
+              } else {
+                setImg(res.data.sprites.other["home"].front_shiny);
               }
-              evoBtnCheck = false;
+            } else {
+              if (res.data.sprites.front_default) {
+                setImg(res.data.sprites.front_default);
+              } else {
+                setImg(res.data.sprites.other["home"].front_default);
+              }
             }
 
-            if (evoBtnCheck) {
-              // Only create evoBtn if all conditions are right
-              let evoBtn = document.createElement("button");
-              evoBtn.innerHTML = "Evolve!";
-              evoBtn.id = "evoBtn";
-
-              evoBtn.onclick = () => {
-                // Check for branch-evos
-                setIsLoading(true);
-
-                setTimeout(() => {
-                  setStateFind(evoData);
-                }, 1000);
-              };
-              evoBtn.classList.toggle("noSelect");
-              document.getElementById("buttons").appendChild(evoBtn);
-            }
+            const filteredGenera = evoRes.data.genera
+              .filter((item) => item.language.name === "en")
+              .map((item) => item.genus);
+            setGenera(filteredGenera);
+            setStateFind(res.data.name);
+            setNumValue(res.data.national_id);
           } catch (err) {
             console.log(err);
           }
-          if (shiny === true) {
-            if (res.data.sprites.front_shiny) {
-              setImg(res.data.sprites.front_shiny);
-            } else {
-              setImg(res.data.sprites.other["home"].front_shiny);
-            }
-          } else {
-            if (res.data.sprites.front_default) {
-              setImg(res.data.sprites.front_default);
-            } else {
-              setImg(res.data.sprites.other["home"].front_default);
-            }
-          }
-
-          const filteredGenera = evoRes.data.genera
-            .filter((item) => item.language.name === "en")
-            .map((item) => item.genus);
-          setGenera(filteredGenera);
-          setStateFind(res.data.name);
-          setNumValue(res.data.national_id);
-        } catch (err) {
-          console.log(err);
+        } else {
+          console.log("No such Pokémon");
         }
       }
       setTimeout(() => {
@@ -1441,18 +1480,18 @@ export default function Poke({
       />
 
       <div className="type">
-      {isLoading ? (
-        <div
-          style={{ margin: 0, color: "var(--hsp3)", minHeight: "1.2rem" }}
-          className="loading"
-        >
-          <RiLoader4Fill />
-        </div>
-      ) : 
-        genera
-          ? "The " + genera
-          : pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
-        }
+        {isLoading ? (
+          <div
+            style={{ margin: 0, color: "var(--hsp3)", minHeight: "1.2rem" }}
+            className="loading"
+          >
+            <RiLoader4Fill />
+          </div>
+        ) : genera ? (
+          "The " + genera
+        ) : (
+          pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
+        )}
       </div>
 
       <div className="labelInput">
@@ -1561,11 +1600,11 @@ export default function Poke({
         </div>
       </div>
 
-      {(
+      {
         <p className={"tag" + (isShinyState ? "" : " empty")}>
           {isShinyState ? "Shiny mode" : ""}
         </p>
-      )}
+      }
 
       <div id="numLine">
         <button

@@ -450,7 +450,8 @@ export default function Example({ dynamicContent, pokemon }) {
           {/* <h1>Your website - inspired by colours</h1> */}
           <h1>
             Your website - inspired by{" "}
-            {pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            {pokemon.name &&
+              pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
           </h1>
           <p>
             This website allows you to enter a Pokemon's name (or simply its
@@ -490,16 +491,17 @@ export default function Example({ dynamicContent, pokemon }) {
           <img
             id="artCanvas"
             src={
-              pokemon.sprites.other["official-artwork"].front_default ?
-              ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
-              (pokemon.isShiny ? "/shiny/" : "/") +
-              pokemon.id +
-              ".png") : 
-              //use the Home sprite if the official artwork is not available
-              ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
-              (pokemon.isShiny ? "/shiny/" : "/") +
-              pokemon.id +
-              ".png")
+              pokemon.sprites &&
+              pokemon.sprites.other["official-artwork"].front_default
+                ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                  (pokemon.isShiny ? "/shiny/" : "/") +
+                  pokemon.id +
+                  ".png"
+                : //use the Home sprite if the official artwork is not available
+                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+                  (pokemon.isShiny ? "/shiny/" : "/") +
+                  pokemon.id +
+                  ".png"
             }
             alt="Pokemon Artwork"
           />
@@ -528,24 +530,27 @@ export default function Example({ dynamicContent, pokemon }) {
       <section id="pkmnInfo">
         <div className="txtWrapper">
           <h2>
-            {pokemon.name.charAt(0).toUpperCase() +
-              pokemon.name.slice(1) +
-              " [#" +
-              (pokemon.national_id ?pokemon.national_id : pokemon.id) +
-              "]"}
+            {pokemon.name &&
+              pokemon.name.charAt(0).toUpperCase() +
+                pokemon.name.slice(1) +
+                " [#" +
+                (pokemon.national_id ? pokemon.national_id : pokemon.id) +
+                "]"}
           </h2>
           <div
             id="types"
-            className={pokemon.types.length === 1 ? "singleType" : ""}
+            className={
+              pokemon.types && pokemon.types.length === 1 ? "singleType" : ""
+            }
           >
             <div id="primaryType">
-              {pokemon.types
+              {pokemon.types && pokemon.types
                 ? pokemon.types[0].type.name.charAt(0).toUpperCase() +
                   pokemon.types[0].type.name.slice(1)
                 : ""}
             </div>
             <div id="secondaryType">
-              {pokemon.types
+              {pokemon.types && pokemon.types
                 ? pokemon.types[1]
                   ? pokemon.types[1].type.name.charAt(0).toUpperCase() +
                     pokemon.types[1].type.name.slice(1)
@@ -553,7 +558,7 @@ export default function Example({ dynamicContent, pokemon }) {
                 : ""}
             </div>
           </div>
-          {pokemon.habitat && pokemon.habitat !== "rare" && (
+          {pokemon.habitat && pokemon.habitat && pokemon.habitat !== "rare" && (
             <p className="habitat">
               Habitat:{" "}
               {pokemon.habitat
@@ -563,7 +568,8 @@ export default function Example({ dynamicContent, pokemon }) {
             </p>
           )}
           <p className="description">
-            {pokemon.flavor_text_entries && pokemon.flavor_text_entries.length ? (
+            {pokemon.flavor_text_entries &&
+            pokemon.flavor_text_entries.length ? (
               <FlavorTxtComponent entries={pokemon.flavor_text_entries} />
             ) : (
               ""
@@ -576,19 +582,24 @@ export default function Example({ dynamicContent, pokemon }) {
             style={{
               backgroundImage:
                 "url('" +
-                (pokemon.sprites.other["official-artwork"].front_default ?
-                ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
-                (pokemon.isShiny ? "/shiny/" : "/") +
-                pokemon.id +
-                ".png") : 
-                //use the Home sprite if the official artwork is not available
-                ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
-                (pokemon.isShiny ? "/shiny/" : "/") +
-                pokemon.id +
-                ".png")) +
+                (pokemon.sprites.other["official-artwork"].front_default
+                  ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                    (pokemon.isShiny ? "/shiny/" : "/") +
+                    pokemon.id +
+                    ".png"
+                  : //use the Home sprite if the official artwork is not available
+                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+                    (pokemon.isShiny ? "/shiny/" : "/") +
+                    pokemon.id +
+                    ".png") +
                 "')",
             }}
           ></div>
+          {/* Audio element to play the Pokémon's cry */}
+          <audio controls id="pkmnCry" key={pokemon.national_id}>
+            <source src={"https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/" + pokemon.national_id + ".ogg"} type="audio/ogg" />
+            Your browser does not support the audio element.
+          </audio>
           <span className="colorFilter"></span>
         </div>
       </section>

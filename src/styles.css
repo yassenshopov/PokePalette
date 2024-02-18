@@ -830,6 +830,10 @@ body::-webkit-scrollbar {
   z-index: 0;
   mix-blend-mode: color;
 }
+.example #pkmnInfo .imgWrapper #pkmnCry {
+  width: 100%;
+  background-color: #f1f3f4;
+}
 .example .imAd {
   background-color: var(--mainDark);
   color: var(--color1);
@@ -1418,7 +1422,9 @@ body::-webkit-scrollbar {
     flex-direction: column;
   }
   .example #pkmnInfo .txtWrapper {
-    max-width: 100%;
+    width: 100%;
+    padding: 0px 2vw;
+    box-sizing: border-box;
   }
   .example #pkmnInfo .imgWrapper {
     height: 400px;
