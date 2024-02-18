@@ -786,15 +786,14 @@ export default function Poke({
   const increase = () => {
     if (numValue < 1025) {
       setIsLoading(true);
-      setStateFind(Object.keys(speciesData)[pokemon.id]);
+      setStateFind(Object.keys(speciesData)[pokemon.national_id]);
     }
   };
 
   const decrease = () => {
     if (numValue > 1) {
       setIsLoading(true);
-      // setNumValue((prevNum) => prevNum - 1);
-      setStateFind(Object.keys(speciesData)[pokemon.id - 2]);
+      setStateFind(Object.keys(speciesData)[pokemon.national_id - 2]);
     }
   };
 
