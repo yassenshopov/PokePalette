@@ -130,6 +130,12 @@ body {
   font-family: var(--font1);
   border-right: 4px solid var(--mainDark);
   canvas {
+    display: none;
+    image-rendering: pixelated;
+  }
+  #imgData {
+    display: block;
+    width: 10vw;
     image-rendering: pixelated;
   }
   #logo {
@@ -329,6 +335,7 @@ body {
     }
   }
   .tag {
+    display: none;
     padding: 0.5rem 1rem;
     border-radius: 1rem;
     --colorTag: color-mix(in oklab, var(--color3), var(--mainDark));
@@ -339,6 +346,9 @@ body {
     margin: 0;
     min-height: 1.2rem;
     font-weight: 600;
+    position: absolute;
+    // font-size: 0.8rem;
+    bottom: 0;
     &.empty {
       visibility: hidden;
     }
@@ -1337,8 +1347,17 @@ body {
 
 @media screen and (max-width: 768px) {
   .bmc-btn-container {
-    right: 50%;
-    transform: translateX(50%);
+    width: 50%;
+    right: 5%;
+    // transform: translateX(50%);
+    .bmc-btn {
+      width: 100%;
+      min-width: 50%;
+      font-size: .8rem;
+      svg {
+        height: 1.6rem !important;
+      }
+    }
   }
 
   .App {
@@ -1357,9 +1376,14 @@ body {
     gap: 0vh;
     padding: 10vw;
     width: 80vw;
-    canvas {
-      width: 50%;
-      image-rendering: pixelated;
+    #logo {
+      #pokeball {
+        left: 10%;
+        top: 1.2rem;
+      }
+    }
+    #imgData {
+      width: 60%;
     }
     #suggestionsWrapper {
       &::-webkit-scrollbar {

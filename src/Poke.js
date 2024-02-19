@@ -79,50 +79,50 @@ if (paramRaw && speciesData[paramRaw.toLowerCase()]) {
         },
       },
     },
-    types: [
-      {
-        slot: 1,
-        type: {
-          name: "fire",
-          url: "https://pokeapi.co/api/v2/type/10/",
-        },
-      },
-      {
-        slot: 2,
-        type: {
-          name: "ghost",
-          url: "https://pokeapi.co/api/v2/type/8/",
-        },
-      },
-    ],
+    // types: [
+    //   {
+    //     slot: 1,
+    //     type: {
+    //       name: "fire",
+    //       url: "https://pokeapi.co/api/v2/type/10/",
+    //     },
+    //   },
+    //   {
+    //     slot: 2,
+    //     type: {
+    //       name: "ghost",
+    //       url: "https://pokeapi.co/api/v2/type/8/",
+    //     },
+    //   },
+    // ],
     isShiny: false,
     national_id: speciesData[param],
-    flavor_text_entries: [
-      {
-        flavor_text:
-          "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
-        language: {
-          name: "en",
-          url: "https://pokeapi.co/api/v2/language/9/",
-        },
-        version: {
-          name: "scarlet",
-          url: "https://pokeapi.co/api/v2/version/40/",
-        },
-      },
-      {
-        flavor_text:
-          "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
-        language: {
-          name: "en",
-          url: "https://pokeapi.co/api/v2/language/9/",
-        },
-        version: {
-          name: "violet",
-          url: "https://pokeapi.co/api/v2/version/41/",
-        },
-      },
-    ],
+    // flavor_text_entries: [
+    //   {
+    //     flavor_text:
+    //       "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
+    //     language: {
+    //       name: "en",
+    //       url: "https://pokeapi.co/api/v2/language/9/",
+    //     },
+    //     version: {
+    //       name: "scarlet",
+    //       url: "https://pokeapi.co/api/v2/version/40/",
+    //     },
+    //   },
+    //   {
+    //     flavor_text:
+    //       "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
+    //     language: {
+    //       name: "en",
+    //       url: "https://pokeapi.co/api/v2/language/9/",
+    //     },
+    //     version: {
+    //       name: "violet",
+    //       url: "https://pokeapi.co/api/v2/version/41/",
+    //     },
+    //   },
+    // ],
   };
 }
 
@@ -480,6 +480,7 @@ export default function Poke({
             let res = await axios.get(
               `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
             );
+            setPokemon(res.data);
             console.log(res.data);
             setLogoAnimation(true);
             setResCopy(res);
@@ -813,7 +814,6 @@ export default function Poke({
       setStateFind(param);
       setTimeout(() => {
         getData();
-
         paramPokemon = null;
         param = null;
       }, 1000);
@@ -1467,7 +1467,6 @@ export default function Poke({
       ></canvas>
 
       <img
-        style={{ display: "none", width: "100px", height: "100px" }}
         id="imgData"
         crossOrigin="Anonymous"
         src={
@@ -1602,7 +1601,7 @@ export default function Poke({
 
       {
         <p className={"tag" + (isShinyState ? "" : " empty")}>
-          {isShinyState ? "Shiny mode" : ""}
+          {isShinyState ? "Shiny" : ""}
         </p>
       }
 

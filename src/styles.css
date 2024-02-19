@@ -171,6 +171,12 @@ body::-webkit-scrollbar {
   border-right: 4px solid var(--mainDark);
 }
 .pokeCard canvas {
+  display: none;
+  image-rendering: pixelated;
+}
+.pokeCard #imgData {
+  display: block;
+  width: 10vw;
   image-rendering: pixelated;
 }
 .pokeCard #logo #pokeball {
@@ -347,6 +353,7 @@ body::-webkit-scrollbar {
   transform: translateY(-0.2rem);
 }
 .pokeCard .tag {
+  display: none;
   padding: 0.5rem 1rem;
   border-radius: 1rem;
   --colorTag: color-mix(in oklab, var(--color3), var(--mainDark));
@@ -357,6 +364,8 @@ body::-webkit-scrollbar {
   margin: 0;
   min-height: 1.2rem;
   font-weight: 600;
+  position: absolute;
+  bottom: 0;
 }
 .pokeCard .tag.empty {
   visibility: hidden;
@@ -1376,8 +1385,16 @@ body::-webkit-scrollbar {
 }
 @media screen and (max-width: 768px) {
   .bmc-btn-container {
-    right: 50%;
-    transform: translateX(50%);
+    width: 50%;
+    right: 5%;
+  }
+  .bmc-btn-container .bmc-btn {
+    width: 100%;
+    min-width: 50%;
+    font-size: 0.8rem;
+  }
+  .bmc-btn-container .bmc-btn svg {
+    height: 1.6rem !important;
   }
   .App {
     flex-direction: column;
@@ -1394,9 +1411,12 @@ body::-webkit-scrollbar {
     padding: 10vw;
     width: 80vw;
   }
-  .pokeCard canvas {
-    width: 50%;
-    image-rendering: pixelated;
+  .pokeCard #logo #pokeball {
+    left: 10%;
+    top: 1.2rem;
+  }
+  .pokeCard #imgData {
+    width: 60%;
   }
   .pokeCard #suggestionsWrapper #suggestions {
     max-height: 30vh;
