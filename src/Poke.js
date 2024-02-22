@@ -1621,7 +1621,7 @@ export default function Poke({
           </p>
         </button>
         <div className="labelInput">
-          <label htmlFor="number">
+          <label htmlFor="numInput">
             <em>National Dex No:</em>
           </label>
           <input

@@ -2,6 +2,7 @@ import Poke from "./Poke";
 import Example from "./Example.js";
 import { useEffect, useState } from "react";
 import Game from "./Game.js";
+import { Helmet } from "react-helmet";
 
 export default function App() {
   const [color2, setColor2] = useState("pokeball");
@@ -364,8 +365,29 @@ export default function App() {
       setIsGame(true);
     }
   }, []);
+
+  const title = "Pokemon Palette - Color Schemes for your Website!";
+  const author = "Yassen Shopov";
+  const description =
+    "Generate color schemes for your website based on your favorite Pokemon! Web-friendly color palettes for your next project.";
+  const img = "https://pokemonpalette.com/img/thumbnail.webp";
+
   return (
     <div className="App">
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <title>{title}</title>
+        <meta name="author" content={author}></meta>
+        <meta name="description" content={description} />
+        <link rel="icon" href="/faviconWh.ico" />
+        <meta property="og:image" content={img}></meta>
+        <meta property="og:type" content="website"></meta>
+        <meta property="og:title" content={title}></meta>
+        <meta property="og:description" content={description}></meta>
+        <meta property="twitter:card" content="summary_large_image"></meta>
+        <meta property="twitter:title" content={title}></meta>
+        <meta property="twitter:description" content={description}></meta>
+      </Helmet>
       {isGame ? (
         <Game />
       ) : (

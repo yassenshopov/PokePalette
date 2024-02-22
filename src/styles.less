@@ -353,6 +353,14 @@ body {
       visibility: hidden;
     }
   }
+  #buttons {
+    & > * {
+      transition: all 200ms ease-in-out;
+      &:hover {
+        transform: scale(1.05);
+      }
+    }
+  }
 }
 
 #example {
@@ -390,7 +398,7 @@ body {
       cursor: pointer;
       text-decoration: none;
       font-family: "Raleway", sans-serif;
-      font-weight: 700;
+      font-weight: 1000;
     }
     #darkMode {
       color: var(--color1);
@@ -1006,23 +1014,27 @@ body {
     display: flex;
     flex-direction: row;
     justify-content: center;
-    gap: 10vw;
+    gap: 2vw;
     align-items: center;
-    font-family: "Raleway", sans-serif;
     box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+    font-family: "Raleway", sans-serif;
     width: 100%;
-    font-size: 1vw;
-    padding: 20px 0 20px 0;
-    text-align: center;
-    a {
-      // color: var(--color1) !important;
+    font-size: 0.8rem;
+    padding: 40px 4vw;
+    box-sizing: border-box;
+    p {
+      width: 50%;
+      line-height: 1.5;
     }
     #faIcons {
+      padding: 0 2vw;
       a {
         cursor: pointer;
         transition: all 200ms ease-in-out;
         border-radius: 8px;
+        padding: 0.5rem 1rem;
         .flexCentered(row);
+        font-size: 2rem;
         &:hover {
           color: var(--color2) !important;
           background-color: var(--hsp2);
@@ -1253,7 +1265,7 @@ body {
   }
   dialog[open] {
     .flexCentered(column);
-    gap: 4vw;
+    gap: 2vh;
     top: 50%;
     transform: translateY(-60%);
     width: 80%;
@@ -1263,6 +1275,7 @@ body {
     z-index: 2;
     border: none;
     box-shadow: 0 0 100px rgba(0, 0, 0, 1);
+    max-height: 80%;
     .confetti {
       position: absolute;
       top: 0;
@@ -1292,7 +1305,6 @@ body {
       }
     }
     a {
-      width: 90%;
       text-align: center;
       padding: 1rem 2vw;
       border-radius: 8px;
@@ -1304,23 +1316,19 @@ body {
       text-decoration: none;
       cursor: pointer;
       transition: all 200ms ease-in-out;
-      animation: buttonAnimation 1s infinite;
+      animation: buttonAnimation 2s infinite;
       display: flex;
       z-index: 2;
       @keyframes buttonAnimation {
         0% {
-          box-shadow: 0 0 0 0 hsla(0,0%,100%,0);
+          box-shadow: 0 0 0 2px hsla(0,0%,100%,.1);
       }
       50% {
           box-shadow: 0 0 0 10px rgba(0,0,0,.8);
       }
       100% {
-          box-shadow: 0 0 0 0 hsla(0,0%,100%,0);
+          box-shadow: 0 0 0 2px hsla(0,0%,100%,.1);
       }
-      }
-      &:hover {
-        background-color: var(--color2);
-        color: var(--hsp2);
       }
     }
     button {
@@ -1333,7 +1341,6 @@ body {
       background-color: var(--color3);
       cursor: pointer;
       transition: all 200ms ease-in-out;
-      width: 50%;
       box-sizing: border-box;
       border-radius: 8px;
     }
@@ -1341,6 +1348,7 @@ body {
       width: 50%;
       z-index: 2;
       filter: drop-shadow(0 0 10px rgba(255, 255, 255, 1));
+      image-rendering: pixelated;
     }
   }
 }
@@ -1507,6 +1515,19 @@ body {
           gap: 5vw;
         }
       }
+    }
+    footer {
+      flex-direction: column;
+      padding: 20px 4vw;
+      p {
+        width: 100%;
+      }
+      #faIcons {
+        a {
+          font-size: 2rem;
+        }
+      }
+    
     }
   }
 }

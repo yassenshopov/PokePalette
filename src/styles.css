@@ -370,6 +370,12 @@ body::-webkit-scrollbar {
 .pokeCard .tag.empty {
   visibility: hidden;
 }
+.pokeCard #buttons > * {
+  transition: all 200ms ease-in-out;
+}
+.pokeCard #buttons > *:hover {
+  transform: scale(1.05);
+}
 #example:nth-child(2n + 1) {
   background: var(--color2);
   color: var(--hsp2);
@@ -401,7 +407,7 @@ body::-webkit-scrollbar {
   cursor: pointer;
   text-decoration: none;
   font-family: "Raleway", sans-serif;
-  font-weight: 700;
+  font-weight: 1000;
 }
 .example main #darkMode {
   color: var(--color1);
@@ -1037,23 +1043,32 @@ body::-webkit-scrollbar {
   display: flex;
   flex-direction: row;
   justify-content: center;
-  gap: 10vw;
+  gap: 2vw;
   align-items: center;
-  font-family: "Raleway", sans-serif;
   box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+  font-family: "Raleway", sans-serif;
   width: 100%;
-  font-size: 1vw;
-  padding: 20px 0 20px 0;
-  text-align: center;
+  font-size: 0.8rem;
+  padding: 40px 4vw;
+  box-sizing: border-box;
+}
+.example footer p {
+  width: 50%;
+  line-height: 1.5;
+}
+.example footer #faIcons {
+  padding: 0 2vw;
 }
 .example footer #faIcons a {
   cursor: pointer;
   transition: all 200ms ease-in-out;
   border-radius: 8px;
+  padding: 0.5rem 1rem;
   display: flex;
   flex-direction: row;
   align-items: center;
   justify-content: center;
+  font-size: 2rem;
 }
 .example footer #faIcons a:hover {
   color: var(--color2) !important;
@@ -1293,7 +1308,7 @@ body::-webkit-scrollbar {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  gap: 4vw;
+  gap: 2vh;
   top: 50%;
   transform: translateY(-60%);
   width: 80%;
@@ -1303,6 +1318,7 @@ body::-webkit-scrollbar {
   z-index: 2;
   border: none;
   box-shadow: 0 0 100px #000000;
+  max-height: 80%;
 }
 .Game dialog[open] .confetti {
   position: absolute;
@@ -1334,7 +1350,6 @@ body::-webkit-scrollbar {
   border: 1px solid #c13333;
 }
 .Game dialog[open] a {
-  width: 90%;
   text-align: center;
   padding: 1rem 2vw;
   border-radius: 8px;
@@ -1345,24 +1360,20 @@ body::-webkit-scrollbar {
   text-decoration: none;
   cursor: pointer;
   transition: all 200ms ease-in-out;
-  animation: buttonAnimation 1s infinite;
+  animation: buttonAnimation 2s infinite;
   display: flex;
   z-index: 2;
 }
 @keyframes buttonAnimation {
   0% {
-    box-shadow: 0 0 0 0 hsla(0, 0%, 100%, 0);
+    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
   }
   50% {
     box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.8);
   }
   100% {
-    box-shadow: 0 0 0 0 hsla(0, 0%, 100%, 0);
+    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
   }
-}
-.Game dialog[open] a:hover {
-  background-color: var(--color2);
-  color: var(--hsp2);
 }
 .Game dialog[open] button {
   z-index: 2;
@@ -1374,7 +1385,6 @@ body::-webkit-scrollbar {
   background-color: var(--color3);
   cursor: pointer;
   transition: all 200ms ease-in-out;
-  width: 50%;
   box-sizing: border-box;
   border-radius: 8px;
 }
@@ -1382,6 +1392,7 @@ body::-webkit-scrollbar {
   width: 50%;
   z-index: 2;
   filter: drop-shadow(0 0 10px #ffffff);
+  image-rendering: pixelated;
 }
 @media screen and (max-width: 768px) {
   .bmc-btn-container {
@@ -1534,6 +1545,16 @@ body::-webkit-scrollbar {
   }
   .example .imAd #site main {
     gap: 5vw;
+  }
+  .example footer {
+    flex-direction: column;
+    padding: 20px 4vw;
+  }
+  .example footer p {
+    width: 100%;
+  }
+  .example footer #faIcons a {
+    font-size: 2rem;
   }
 }
 .figma {

@@ -285,11 +285,6 @@ body::-webkit-scrollbar {
   z-index: 2;
 }
 
-#example footer *:not(p, a) {
-  font-size: 36px;
-  padding: 10px;
-}
-
 #example footer #faIcons {
   display: flex;
   flex-direction: row;
@@ -390,7 +385,6 @@ body::-webkit-scrollbar {
     width: 100%;
     height: auto;
     padding: 40px 10% 0px 10%;
-    height: 90vw;
     box-sizing: border-box;
     /* padding: 10%; */
   }
@@ -419,31 +413,5 @@ body::-webkit-scrollbar {
   #example #cards,
   footer {
     z-index: 9;
-  }
-
-  #example footer {
-    flex-direction: column-reverse;
-    gap: 0;
-  }
-
-  #example footer #faIcons {
-    margin-top: 20px;
-    gap: 0;
-    justify-content: space-evenly;
-    width: 80%;
-  }
-
-  #example footer #faIcons a {
-    padding: 20px;
-  }
-
-  #example footer *:not(p, a) {
-    padding: 0;
-  }
-
-  footer p {
-    text-align: center;
-    font-size: 22px;
-    width: 80%;
   }
 }

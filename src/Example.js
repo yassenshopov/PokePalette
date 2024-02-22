@@ -276,6 +276,7 @@ export default function Example({ dynamicContent, pokemon }) {
               src={"https://www.serebii.net/pokedex-bw/type/" + type + ".gif"}
               alt={type}
               className="typeImg"
+              loading="lazy"
             />
           </p>
         ) : (
@@ -490,6 +491,8 @@ export default function Example({ dynamicContent, pokemon }) {
         <aside>
           <img
             id="artCanvas"
+            loading="lazy"
+            fetchpriority="high"
             src={
               pokemon.sprites &&
               pokemon.sprites.other["official-artwork"].front_default
@@ -579,6 +582,7 @@ export default function Example({ dynamicContent, pokemon }) {
         <div className="imgWrapper">
           <div
             id="hiddenPkmn"
+            loading="lazy"
             style={{
               backgroundImage:
                 "url('" +
@@ -597,7 +601,14 @@ export default function Example({ dynamicContent, pokemon }) {
           ></div>
           {/* Audio element to play the Pokémon's cry */}
           <audio controls id="pkmnCry" key={pokemon.national_id}>
-            <source src={"https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/" + pokemon.national_id + ".ogg"} type="audio/ogg" />
+            <source
+              src={
+                "https://raw.githubusercontent.com/PokeAPI/cries/main/cries/pokemon/latest/" +
+                pokemon.national_id +
+                ".ogg"
+              }
+              type="audio/ogg"
+            />
             Your browser does not support the audio element.
           </audio>
           <span className="colorFilter"></span>
@@ -764,14 +775,22 @@ export default function Example({ dynamicContent, pokemon }) {
       </section>
       <footer id="footer">
         <p>
-          Copyright © Pokemon Palette 2023<br></br>- by{" "}
+          Pokemon Palette by{" "}
           <a
             href="https://github.com/yassenshopov"
             target="_blank"
             rel="noreferrer"
+            alt="Yassen Shopov's GitHub Profile"
           >
             Yassen Shopov
-          </a>
+          </a>{" "}
+          is not affiliated with "The Pokémon Company" and does not own or claim
+          any rights to any Nintendo trademark or the Pokémon trademark, and all
+          references to such are used for commentary and informational purposes
+          only.
+          <br></br>
+          <br></br>
+          Copyright <em>Pokemon Palette</em> © {new Date().getFullYear()}
         </p>
         <div id="faIcons">
           <a
@@ -779,6 +798,7 @@ export default function Example({ dynamicContent, pokemon }) {
             target="_blank"
             rel="noreferrer"
             className="noSelect"
+            alt="Yassen Shopov's Twitter Profile"
           >
             <FaTwitter />
           </a>
@@ -787,6 +807,7 @@ export default function Example({ dynamicContent, pokemon }) {
             target="_blank"
             rel="noreferrer"
             className="noSelect"
+            alt="Yassen Shopov's GitHub Profile"
           >
             <FaGithub />
           </a>
