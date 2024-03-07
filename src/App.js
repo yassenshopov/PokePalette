@@ -370,11 +370,12 @@ export default function App() {
   const author = "Yassen Shopov";
   const description =
     "Generate color schemes for your website based on your favorite Pokemon! Web-friendly color palettes for your next project.";
-  const img = "https://pokemonpalette.com/img/thumbnail.webp";
+  const img = "https://pokemonpalette.com/thumbnail.webp";
 
   return (
+    
     <div className="App">
-      <Helmet>
+      {/* <Helmet>
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <title>{title}</title>
         <meta name="author" content={author}></meta>
@@ -387,7 +388,7 @@ export default function App() {
         <meta property="twitter:card" content="summary_large_image"></meta>
         <meta property="twitter:title" content={title}></meta>
         <meta property="twitter:description" content={description}></meta>
-      </Helmet>
+      </Helmet> */}
       {isGame ? (
         <Game />
       ) : (
