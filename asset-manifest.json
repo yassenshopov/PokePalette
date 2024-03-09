@@ -1,6 +1,6 @@
 {
   "files": {
-    "main.css": "/static/css/main.db29d630.css",
+    "main.css": "/static/css/main.702b93b9.css",
     "main.js": "/static/js/main.1003288d.js",
     "static/media/bgLight.webp": "/static/media/bgLight.93d7348012e0e7270c51.webp",
     "static/media/Carnac-Light.otf": "/static/media/Carnac-Light.8fa7584e8b1431e1665a.otf",
@@ -8,11 +8,11 @@
     "static/media/imLogo.webp": "/static/media/imLogo.69cb98874b0292dec89f.webp",
     "static/media/x.webp": "/static/media/x.00434fb3562ebcb1cd21.webp",
     "index.html": "/index.html",
-    "main.db29d630.css.map": "/static/css/main.db29d630.css.map",
+    "main.702b93b9.css.map": "/static/css/main.702b93b9.css.map",
     "main.1003288d.js.map": "/static/js/main.1003288d.js.map"
   },
   "entrypoints": [
-    "static/css/main.db29d630.css",
+    "static/css/main.702b93b9.css",
     "static/js/main.1003288d.js"
   ]
 }
