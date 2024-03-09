@@ -176,6 +176,7 @@ body::-webkit-scrollbar {
 }
 .pokeCard #imgData {
   display: block;
+  height: 10vw;
   width: 10vw;
   image-rendering: pixelated;
 }
@@ -822,7 +823,7 @@ body::-webkit-scrollbar {
   position: relative;
 }
 .example #pkmnInfo .imgWrapper:hover #hiddenPkmn {
-  filter: brightness(1) saturate(2);
+  filter: brightness(1);
 }
 .example #pkmnInfo .imgWrapper #hiddenPkmn {
   position: relative;

@@ -5,9 +5,9 @@ import Game from "./Game.js";
 import { Helmet } from "react-helmet";
 
 export default function App() {
-  const [color2, setColor2] = useState("pokeball");
-  const [color3, setColor3] = useState("greatball");
-  const [color4, setColor4] = useState("ultraball");
+  const [color2, setColor2] = useState("heavyball");
+  const [color3, setColor3] = useState("masterball");
+  const [color4, setColor4] = useState("luxuryball");
   const updateColor2 = (newValue) => {
     setColor2(newValue);
   };
@@ -18,8 +18,8 @@ export default function App() {
     setColor4(newValue);
   };
 
-  const [typeBall1, setTypeBall1] = useState("healball");
-  const [typeBall2, setTypeBall2] = useState("fastball");
+  const [typeBall1, setTypeBall1] = useState("repeatball");
+  const [typeBall2, setTypeBall2] = useState("duskball");
   const updateTypeBall1 = (newValue) => {
     setTypeBall1(newValue);
   };

@@ -9,8 +9,6 @@ import { BsFillBookmarkFill } from "react-icons/bs";
 import html2canvas from "html2canvas";
 
 export default function Example({ dynamicContent, pokemon }) {
-  console.log(pokemon);
-
   const colorList = [
     {
       pokeball: {
@@ -265,7 +263,7 @@ export default function Example({ dynamicContent, pokemon }) {
 
   function Ball({ ballType, index, type }) {
     return (
-      <div className="ballMiniSection">
+      <div className="ballMiniSection" key={index}>
         {type ? (
           <p>
             {ballType.charAt(0).toUpperCase() + ballType.slice(1)}
@@ -451,8 +449,9 @@ export default function Example({ dynamicContent, pokemon }) {
           {/* <h1>Your website - inspired by colours</h1> */}
           <h1>
             Your website - inspired by{" "}
-            {pokemon.name &&
-              pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)}
+            {pokemon.species.name &&
+              pokemon.species.name.charAt(0).toUpperCase() +
+                pokemon.species.name.slice(1)}
           </h1>
           <p>
             This website allows you to enter a Pokemon's name (or simply its
@@ -494,17 +493,20 @@ export default function Example({ dynamicContent, pokemon }) {
             loading="lazy"
             fetchpriority="high"
             src={
-              pokemon.sprites &&
-              pokemon.sprites.other["official-artwork"].front_default
-                ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
-                  (pokemon.isShiny ? "/shiny/" : "/") +
-                  pokemon.id +
-                  ".png"
-                : //use the Home sprite if the official artwork is not available
-                  "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
-                  (pokemon.isShiny ? "/shiny/" : "/") +
-                  pokemon.id +
-                  ".png"
+              pokemon.isForm
+                ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" + (pokemon.isShiny ? "shiny/" : "") + pokemon.formId + ".png"
+                :
+                  (pokemon.sprites &&
+                  pokemon.sprites.other["official-artwork"].front_default
+                    ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                      (pokemon.isShiny ? "/shiny/" : "/") +
+                      pokemon.id +
+                      ".png"
+                    : //use the Home sprite if the official artwork is not available
+                      "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+                      (pokemon.isShiny ? "/shiny/" : "/") +
+                      pokemon.id +
+                      ".png")
             }
             alt="Pokemon Artwork"
           />
@@ -533,9 +535,9 @@ export default function Example({ dynamicContent, pokemon }) {
       <section id="pkmnInfo">
         <div className="txtWrapper">
           <h2>
-            {pokemon.name &&
-              pokemon.name.charAt(0).toUpperCase() +
-                pokemon.name.slice(1) +
+            {pokemon.species.name &&
+              pokemon.species.name.charAt(0).toUpperCase() +
+                pokemon.species.name.slice(1) +
                 " [#" +
                 (pokemon.national_id ? pokemon.national_id : pokemon.id) +
                 "]"}
@@ -570,14 +572,14 @@ export default function Example({ dynamicContent, pokemon }) {
                 : ""}
             </p>
           )}
-          <p className="description">
+          <div className="description">
             {pokemon.flavor_text_entries &&
             pokemon.flavor_text_entries.length ? (
               <FlavorTxtComponent entries={pokemon.flavor_text_entries} />
             ) : (
               ""
             )}
-          </p>
+          </div>
         </div>
         <div className="imgWrapper">
           <div
@@ -586,16 +588,22 @@ export default function Example({ dynamicContent, pokemon }) {
             style={{
               backgroundImage:
                 "url('" +
-                (pokemon.sprites.other["official-artwork"].front_default
-                  ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
-                    (pokemon.isShiny ? "/shiny/" : "/") +
-                    pokemon.id +
-                    ".png"
-                  : //use the Home sprite if the official artwork is not available
-                    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
-                    (pokemon.isShiny ? "/shiny/" : "/") +
-                    pokemon.id +
-                    ".png") +
+                (
+                    pokemon.isForm
+                      ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" + (pokemon.isShiny ? "shiny/" : "") + pokemon.formId + ".png"
+                      :
+                        (pokemon.sprites &&
+                        pokemon.sprites.other["official-artwork"].front_default
+                          ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                            (pokemon.isShiny ? "/shiny/" : "/") +
+                            pokemon.id +
+                            ".png"
+                          : //use the Home sprite if the official artwork is not available
+                            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
+                            (pokemon.isShiny ? "/shiny/" : "/") +
+                            pokemon.id +
+                            ".png")
+                ) +
                 "')",
             }}
           ></div>
@@ -644,19 +652,19 @@ export default function Example({ dynamicContent, pokemon }) {
           <h2>
             Create
             <span className="pokeName">
-              {(pokemon.name.charAt(0) === "a" ||
-              pokemon.name.charAt(0) === "e" ||
-              pokemon.name.charAt(0) === "o" ||
-              pokemon.name.charAt(0) === "i" ||
-              pokemon.name.charAt(0) === "u"
+              {(pokemon.species.name.charAt(0) === "a" ||
+              pokemon.species.name.charAt(0) === "e" ||
+              pokemon.species.name.charAt(0) === "o" ||
+              pokemon.species.name.charAt(0) === "i" ||
+              pokemon.species.name.charAt(0) === "u"
                 ? " an "
                 : " a ") +
-                pokemon.name.charAt(0).toUpperCase() +
-                pokemon.name.slice(1)}
+                pokemon.species.name.charAt(0).toUpperCase() +
+                pokemon.species.name.slice(1)}
             </span>
             -inspired website
           </h2>
-          <p id="title">
+          <div id="title">
             Use this color palette to create a<br></br>
             <div id="titleWords">
               <span>beautiful</span>
@@ -664,7 +672,7 @@ export default function Example({ dynamicContent, pokemon }) {
               <span>customisable</span>
             </div>
             website with <strong>Inkmorphism</strong> - the AI website builder
-          </p>
+          </div>
           <button
             onClick={() => {
               window.open("https://inkmorphism.com");

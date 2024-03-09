@@ -134,6 +134,8 @@ export default function Poke({
   updateTypeBall2,
   updatePokemon,
 }) {
+  const [colorRefresher, colorRefresh] = useState(false);
+  const [formId, setFormId] = useState(0);
   const [isShinyState, setIsShinyState] = useState(false);
   const [genera, setGenera] = useState("Fire Blades Pokémon");
   const [pokemon, setPokemon] = useState(
@@ -449,6 +451,7 @@ export default function Poke({
     setIsLoading(true);
     let random = 1 + Math.floor(Math.random() * 1008);
     setStateFind(Object.keys(speciesData)[random]);
+    setSuggestions([]);
   };
 
   let [Img, setImg] = useState("");
@@ -459,20 +462,126 @@ export default function Poke({
   const [evoRes, setEvoRes] = useState({});
   const [pkmnInfoBg, setPkmnInfoBg] = useState("");
 
+  const [forms, setForms] = useState([]);
+  const [varieties, setVarieties] = useState([]);
+  const [isForm, setIsForm] = useState(false);
+
+  useEffect(() => {
+    async function getEvoData() {
+      try {
+        if (evoRes.data.varieties && evoRes.data.varieties.length > 1) {
+          setVarieties(evoRes.data.varieties);
+        } else {
+          setVarieties([]);
+        }
+        let filteredFlavorText = evoRes.data.flavor_text_entries.filter(
+          (item) => item.language.name === "en"
+        );
+
+        // setPokemon((prevPokemon) => ({
+        //   ...prevPokemon,
+        //   flavor_text_entries: filteredFlavorText,
+        // }));
+        pokemon.flavor_text_entries = filteredFlavorText;
+        setPkmnInfoBg("var(--color3)");
+      } catch (err) {
+        console.log(err);
+      }
+    }
+
+    getEvoData();
+  }, [evoRes]);
+
   useEffect(() => {
     async function getData() {
-      console.log(nameValue);
       if (nameValue !== "") {
-        if (
-          speciesData[nameValue.toLowerCase()] ||
-          !isNaN(nameValue) ||
-          nameValue !== ""
-        ) {
+        if (speciesData[nameValue.toLowerCase()] && nameValue !== "") {
           try {
             //special cases for odd defaults
             switch (nameValue) {
+              case "deoxys":
+                nameValue = "deoxys-normal";
+                break;
+              case "wormadam":
+                nameValue = "wormadam-plant";
+                break;
+              case "giratina":
+                nameValue = "giratina-altered";
+                break;
+              case "shaymin":
+                nameValue = "shaymin-land";
+                break;
+              case "basculin":
+                nameValue = "basculin-red-striped";
+                break;
+              case "darmanitan":
+                nameValue = "darmanitan-standard";
+                break;
+              case "tornadus":
+                nameValue = "tornadus-incarnate";
+                break;
+              case "thundurus":
+                nameValue = "thundurus-incarnate";
+                break;
+              case "landorus":
+                nameValue = "landorus-incarnate";
+                break;
+              case "enamorus":
+                nameValue = "enamorus-incarnate";
+                break;
+              case "keldeo":
+                nameValue = "keldeo-ordinary";
+                break;
+              case "meloetta":
+                nameValue = "meloetta-aria";
+                break;
+              case "meowstic":
+                nameValue = "meowstic-male";
+                break;
               case "morpeko":
                 nameValue = "morpeko-full-belly";
+                break;
+              case "aegislash":
+                nameValue = "aegislash-shield";
+                break;
+              case "pumpkaboo":
+                nameValue = "pumpkaboo-average";
+                break;
+              case "gourgeist":
+                nameValue = "gourgeist-average";
+                break;
+              case "zygarde":
+                nameValue = "zygarde-50";
+                break;
+              case "oricorio":
+                nameValue = "oricorio-baile";
+                break;
+              case "lycanroc":
+                nameValue = "lycanroc-midday";
+                break;
+              case "wishiwashi":
+                nameValue = "wishiwashi-solo";
+                break;
+              case "minior":
+                nameValue = "minior-red-meteor";
+                break;
+              case "mimikyu":
+                nameValue = "mimikyu-disguised";
+                break;
+              case "toxtricity":
+                nameValue = "toxtricity-amped";
+                break;
+              case "eiscue":
+                nameValue = "eiscue-ice";
+                break;
+              case "indeedee":
+                nameValue = "indeedee-male";
+                break;
+              case "urshifu":
+                nameValue = "urshifu-single-strike";
+                break;
+              case "basculegion":
+                nameValue = "basculegion-male";
                 break;
               default:
                 break;
@@ -480,13 +589,20 @@ export default function Poke({
             let res = await axios.get(
               `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
             );
-            setPokemon(res.data);
             console.log(res.data);
+            setPokemon(res.data);
             setLogoAnimation(true);
             setResCopy(res);
             res.data.isShiny = isShinyState;
             res.data.national_id = res.data.id;
             let evoBtnCheck = true;
+
+            if (pokemon.forms && pokemon.forms.length > 1) {
+              setForms(pokemon.forms);
+              console.log(pokemon.forms);
+            } else {
+              setForms([]);
+            }
 
             // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
 
@@ -497,44 +613,12 @@ export default function Poke({
               document.getElementById("evoBtn").remove();
             }
 
-            if (
-              typeof document.getElementById("optionsMenu") != "undefined" &&
-              document.getElementById("optionsMenu") != null
-            ) {
-              document.getElementById("optionsMenu").remove();
-            }
+            setEvoRes(
+              await axios.get(
+                `https://pokeapi.co/api/v2/pokemon-species/${res.data.species.name}`
+              )
+            );
 
-            try {
-              setEvoRes(
-                await axios.get(
-                  `https://pokeapi.co/api/v2/pokemon-species/${res.data.species.name}`
-                )
-              );
-              console.log(evoRes.data);
-              let filteredFlavorText = evoRes.data.flavor_text_entries.filter(
-                (item) => item.language.name === "en"
-              );
-
-              // setPokemon((prevPokemon) => ({
-              //   ...prevPokemon,
-              //   flavor_text_entries: filteredFlavorText,
-              // }));
-              res.data.flavor_text_entries = filteredFlavorText;
-              setPokemon(res.data);
-              setPkmnInfoBg("var(--color3)");
-            } catch (err) {
-              switch (nameValue.toLocaleLowerCase()) {
-                case "basculin-red-striped":
-                case "basculin-blue-striped":
-                case "basculin-white-striped":
-                  setEvoRes(
-                    await axios.get(
-                      `https://pokeapi.co/api/v2/pokemon-species/basculin`
-                    )
-                  );
-              }
-              console.log(err);
-            }
             try {
               //special cases for varieties
               switch (nameValue) {
@@ -547,76 +631,15 @@ export default function Poke({
                     },
                   ];
                   break;
+                case "meloetta-aria":
+                  evoRes.data.varieties = [
+                    {
+                      is_default: true,
+                    },
+                  ];
+                  break;
                 default:
                   break;
-              }
-              if (evoRes.data.varieties.length > 1) {
-                let optionsMenu = document.createElement("select");
-                optionsMenu.id = "optionsMenu";
-                optionsMenu.onchange = async () => {
-                  setIsLoading(true);
-                  let optionsMenu = document.getElementById("optionsMenu");
-                  let selectedOptionIndex = optionsMenu.selectedIndex;
-                  let selectedOptionText =
-                    optionsMenu.options[selectedOptionIndex].text;
-                  let selectedOptionValue =
-                    optionsMenu.options[selectedOptionIndex].value;
-                  optionsMenu.remove(selectedOptionIndex);
-                  let newOption = document.createElement("option");
-                  newOption.innerHTML = selectedOptionText;
-                  newOption.value = selectedOptionValue;
-                  console.log(selectedOptionValue);
-                  optionsMenu.insertBefore(newOption, optionsMenu.firstChild);
-                  optionsMenu.value = selectedOptionValue;
-                  let newName = selectedOptionValue;
-                  let newNameRes = await axios.get(
-                    `https://pokeapi.co/api/v2/pokemon/${newName}`
-                  );
-                  setPokemon((prevPokemon) => ({
-                    ...prevPokemon,
-                    current_form: selectedOptionValue,
-                    national_id: prevPokemon.national_id,
-                    id: newNameRes.data.id,
-                  }));
-
-                  setTimeout(() => {
-                    if (shiny === true) {
-                      setImg(newNameRes.data.sprites.front_shiny);
-                      setURL(
-                        newNameRes.data.sprites.other["official-artwork"]
-                          .front_shiny
-                      );
-                    } else {
-                      setImg(newNameRes.data.sprites.front_default);
-                      setURL(
-                        newNameRes.data.sprites.other["official-artwork"]
-                          .front_default
-                      );
-                    }
-                    setIsLoading(false);
-                  }, 4000);
-                };
-                for (let i = 0; i < evoRes.data.varieties.length; i++) {
-                  let option = document.createElement("option");
-                  if (evoRes.data.varieties[i].is_default) {
-                    option.innerHTML = "Default form";
-                    option.value = evoRes.data.varieties[i].pokemon.name;
-                  } else {
-                    let optionName = evoRes.data.varieties[i].pokemon.name;
-                    optionName = optionName.replace(nameValue, "");
-                    optionName = optionName.replace("-", "");
-                    optionName =
-                      optionName.charAt(0).toUpperCase() + optionName.slice(1);
-                    optionName = optionName + " Form";
-                    option.innerHTML = optionName;
-                    option.value = evoRes.data.varieties[i].pokemon.name;
-                    if (optionName === "Totem Form") {
-                      option.disabled = true;
-                    }
-                  }
-                  optionsMenu.appendChild(option);
-                }
-                document.getElementById("buttons").appendChild(optionsMenu);
               }
             } catch (err) {
               console.log(err);
@@ -646,12 +669,8 @@ export default function Poke({
                   switch (stageNumber) {
                     case 2:
                       if (nameValue !== evoChain.data.chain.species.name) {
-                        console.log(
-                          "This mon is the final stage of a 2-stager"
-                        );
                         evoBtnCheck = false;
                       } else {
-                        console.log("This mon is the 1st stage of a 2-stager");
                         evoBtnCheck = true;
                         // Check for branch-evos
                         if (evoChain.data.chain.evolves_to.length > 1) {
@@ -674,9 +693,6 @@ export default function Poke({
                         nameValue !== evoChain.data.chain.species.name
                       ) {
                         // This check eliminates mons that are final stages
-                        console.log(
-                          "This mon is the final stage of a 3-stager"
-                        );
                         evoBtnCheck = false;
                         if (
                           typeof document.getElementById("evoBtn") !==
@@ -690,9 +706,6 @@ export default function Poke({
                         nameValue === evoData &&
                         nameValue !== evoChain.data.chain.species.name
                       ) {
-                        console.log(
-                          "This mon is the middle stage of a 3-stager"
-                        );
                         evoBtnCheck = true;
                         // Check for branch-evos
                         let randInt = 0;
@@ -717,7 +730,6 @@ export default function Poke({
                         evoBtnCheck = true;
                         evoData = "dustox";
                       } else {
-                        console.log("This mon is the 1st stage of a 3-stager");
                         evoBtnCheck = true;
                         // Check for branch-evos
                         let randInt = 0;
@@ -735,7 +747,6 @@ export default function Poke({
                       }
                       break;
                     default:
-                      console.log("This mon is a single-stager");
                       evoBtnCheck = false;
                   }
                 } else {
@@ -772,7 +783,7 @@ export default function Poke({
                   }, 1000);
                 };
                 evoBtn.classList.toggle("noSelect");
-                document.getElementById("buttons").appendChild(evoBtn);
+                // document.getElementById("buttons").appendChild(evoBtn);
               }
             } catch (err) {
               console.log(err);
@@ -804,10 +815,8 @@ export default function Poke({
           console.log("No such Pokémon");
         }
       }
-      setTimeout(() => {
-        setIsLoading(false);
-        setLogoAnimation(false);
-      }, 1000);
+      setIsLoading(false);
+      setLogoAnimation(false);
     }
 
     if (param) {
@@ -820,7 +829,7 @@ export default function Poke({
     } else {
       getData();
     }
-  }, [nameValue, shiny, numValue]);
+  }, [nameValue, shiny, numValue, colorRefresher]);
 
   const increase = () => {
     if (numValue < 1025) {
@@ -843,7 +852,6 @@ export default function Poke({
     const imgData = document.getElementById("imgData");
     const myContext = myCanvas.getContext("2d");
     const img = new Image();
-    myCanvas.willReadFrequently = true;
     img.crossOrigin = "Anonymous";
     img.src = imgData.src;
     img.onload = () => {
@@ -1375,7 +1383,6 @@ export default function Poke({
         ${color4.toUpperCase().slice(1)}
         \npokemonpalette.com`;
         //find the ball with property "type" equal to resCopy.data.types[0].type.name by filtering through colorList
-        console.log(resCopy.data.types[0].type.name);
         colorList
           .filter(
             (item) =>
@@ -1395,8 +1402,6 @@ export default function Poke({
             .map((item) => {
               updateTypeBall2(Object.keys(item)[0]);
             });
-        } else {
-          console.log("Just primary type");
         }
         try {
           let habitat = "";
@@ -1459,23 +1464,28 @@ export default function Poke({
         <div></div>
         <div></div>
       </div>
-      <canvas
-        id="my-canvas"
-        width="100px"
-        height="100px"
-        willReadFrequently="true"
-      ></canvas>
+      <canvas id="my-canvas" willreadfrequently="true"></canvas>
 
       <img
         id="imgData"
         crossOrigin="Anonymous"
         src={
+          // "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/" +
+          //^this is the animated version
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
           (isShinyState ? "shiny/" : "") +
-          pokemon.id +
+          (pokemon.formId ? pokemon.formId : pokemon.id) +
           ".png"
         }
         alt=""
+        onError={(e) => {
+          e.target.src =
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+            (isShinyState ? "shiny/" : "") +
+            formId +
+            ".png";
+          colorRefresh((prev) => !prev);
+        }}
       />
 
       <div className="type">
@@ -1504,7 +1514,7 @@ export default function Poke({
           onChange={NameChanger}
           value={nameValue}
           name="name"
-          spellcheck="false"
+          spellCheck="false"
           autoComplete="off"
           onKeyDown={(e) => {
             if (e.keyCode === 40 && suggestions.length > 0) {
@@ -1573,7 +1583,7 @@ export default function Poke({
                     {" "}
                     <img
                       src={
-                        speciesData[item] === 1026
+                        speciesData[item] === 1025
                           ? isShinyState
                             ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
                               speciesData[item] +
@@ -1656,8 +1666,87 @@ export default function Poke({
         <button id="randomBtn" onClick={Randomize} className="noSelect">
           Randomize
         </button>
+        {forms.length > 0 || varieties.length > 0 ? (
+          <select
+            id="optionsMenu"
+            className="noSelect"
+            onChange={async (e) => {
+              let formCheck = forms.find(
+                (form) => form.name === e.target.value
+              );
+              if (formCheck) {
+                setIsForm(true);
+                let formRes = await axios.get(
+                  forms.find((form) => form.name === e.target.value).url
+                );
+                console.log(formRes);
+                console.log(
+                  formRes.data.id + e.target.value.replace(pokemon.name, "")
+                );
+                setPokemon((prevPokemon) => ({
+                  ...prevPokemon,
+                  current_form: e.target.value,
+                  national_id: prevPokemon.national_id,
+                  isForm: true,
+                  formId:
+                    prevPokemon.national_id +
+                    e.target.value.replace(pokemon.name, ""),
+                  // id: prevPokemon.id + e.target.value.replace(pokemon.name, ""),
+                }));
+              } else {
+                let varietyRes = await axios.get(
+                  `https://pokeapi.co/api/v2/pokemon/${e.target.value}`
+                );
+                setPokemon((prevPokemon) => ({
+                  ...prevPokemon,
+                  current_form: e.target.value,
+                  national_id: prevPokemon.national_id,
+                  id: varietyRes.data.id,
+                }));
+              }
+            }}
+          >
+            {/* <option value={pokemon.name}>Default form</option> */}
+            {forms.length > 0
+              ? forms.map((form, index) => {
+                  return (
+                    //some option attr to show it is a form not a variety
+                    <option key={index} value={form.name}>
+                      {
+                        //the form name is in the format "pokemon-name-form-name", so we need to remove the pokemon name from it, and capitalize the first letter of the form name
+                        form.name
+                          .replace(pokemon.name + "-", "")
+                          .charAt(0)
+                          .toUpperCase() +
+                          form.name.replace(pokemon.name + "-", "").slice(1) +
+                          " Form"
+                      }
+                    </option>
+                  );
+                })
+              : null}
+            {varieties.length > 0
+              ? varieties.map((variety, index) => {
+                  return (
+                    <option key={index} value={variety.pokemon.name}>
+                      {/* {variety.pokemon.name} */}
+                      {(variety.is_default
+                        ? "Default"
+                        : //the variety name is in the format "pokemon-name-variety-name", so we need to remove the pokemon name from it, and capitalize the first letter of the variety name
+                          variety.pokemon.name
+                            .replace(pokemon.name + "-", "")
+                            .charAt(0)
+                            .toUpperCase() +
+                          variety.pokemon.name
+                            .replace(pokemon.name + "-", "")
+                            .slice(1)) + " Form"}
+                    </option>
+                  );
+                })
+              : null}
+          </select>
+        ) : null}
       </div>
-      <img src={artURL} style={{ display: "none" }} alt="hiddenPokemon" />
     </div>
   );
 }
