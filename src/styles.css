@@ -1428,7 +1428,8 @@ body::-webkit-scrollbar {
     top: 1.2rem;
   }
   .pokeCard #imgData {
-    width: 60%;
+    height: 50vw;
+    width: 50vw;
   }
   .pokeCard #suggestionsWrapper #suggestions {
     max-height: 30vh;
