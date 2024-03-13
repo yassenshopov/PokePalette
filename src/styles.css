@@ -146,6 +146,17 @@ body::-webkit-scrollbar {
   line-height: 1;
   width: fit-content;
 }
+@keyframes buttonAnimation {
+  0% {
+    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
+  }
+  50% {
+    box-shadow: 0 0 0 6px rgba(0, 0, 0, 0.8);
+  }
+  100% {
+    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
+  }
+}
 .App {
   display: flex;
   flex-direction: row;
@@ -155,7 +166,7 @@ body::-webkit-scrollbar {
 .poke {
   width: 30vw;
   position: fixed;
-  z-index: 10;
+  z-index: 9999;
 }
 .pokeCard {
   position: relative;
@@ -186,7 +197,7 @@ body::-webkit-scrollbar {
   height: 50px;
   position: absolute;
   top: 2rem;
-  left: 43%;
+  left: 3rem;
   background: radial-gradient(circle, #000000 0%, #000000 70%, #00000000 70%, #00000000 100%);
   transform: rotate(45deg);
   display: flex;
@@ -229,6 +240,261 @@ body::-webkit-scrollbar {
   width: 100%;
   z-index: 0;
   transform: translateY(5%);
+}
+.pokeCard #profileMenu {
+  position: absolute;
+  right: 2rem;
+  top: 2rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+.pokeCard #profileMenu > * {
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.pokeCard #profileMenu > * button {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font1);
+  font-weight: 1000;
+  gap: 0.4vw;
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  background-color: var(--color2);
+  animation: buttonAnimation 1s infinite;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  color: var(--hsp2);
+}
+.pokeCard #profileMenu > * button svg {
+  font-size: 1.2rem;
+  padding: 0;
+}
+.pokeCard #profileMenu > * button:hover {
+  background-color: var(--color3);
+  color: var(--hsp3);
+}
+.pokeCard #profileMenu #saveBtn.saved button {
+  background-color: transparent;
+  animation: none;
+  border: 2px solid var(--hsp2);
+}
+.pokeCard #profileMenu #profileBtn button {
+  max-width: 2rem;
+  animation: none;
+  border: 2px solid var(--hsp2);
+  background-color: transparent;
+  border-radius: 50%;
+  padding: 0;
+  overflow: hidden;
+}
+.pokeCard #profileMenu #profileBtn button img {
+  width: 100%;
+}
+.pokeCard #profileMenu #profileBtn button svg {
+  font-size: 1.5rem;
+}
+.pokeCard #profileMenu #profileBtn button:hover {
+  border: 2px solid var(--anti_hsp2);
+  background-color: white;
+}
+.pokeCard #profileDashboard {
+  background: #00000000;
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: auto;
+  width: 70vw;
+  margin-left: 30vw;
+  height: 100vh;
+  border: none;
+  box-sizing: border-box;
+  color: var(--color1);
+  padding: 1rem 6rem;
+}
+.pokeCard #profileDashboard .backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #00000050;
+  z-index: -9999;
+  backdrop-filter: blur(30px);
+}
+.pokeCard #profileDashboard[open] {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pokeCard #profileDashboard #profileDashboardContent {
+  background-color: #171717;
+  border-radius: 2rem;
+  max-height: 95%;
+  width: 100%;
+  box-sizing: border-box;
+  overflow-y: auto;
+  padding: 1rem 0;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardHeader {
+  position: relative;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardHeader #closeProfileDashboard {
+  position: absolute;
+  top: 1rem;
+  right: 2rem;
+  font-size: 1.5rem;
+  font-weight: 1000;
+  color: var(--color1);
+  border: 2px solid var(--color1);
+  background-color: var(--mainDark);
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  width: 2rem;
+  height: 2rem;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardHeader #closeProfileDashboard:hover {
+  background-color: var(--color3);
+  color: var(--hsp3);
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  justify-content: flex-start;
+  gap: 1rem;
+  padding: 0 2rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserImg {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  overflow: hidden;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserImg img {
+  width: 100%;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserDetails {
+  text-align: left;
+  gap: 0.5rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser .signOutBtn {
+  background-color: var(--color3);
+  color: var(--hsp3);
+  border: none;
+  border-radius: 0.4rem;
+  padding: 0.6rem 0.8rem;
+  font-family: var(--font1);
+  font-weight: 1000;
+  cursor: pointer;
+  transition: all 200ms ease-in-out;
+  margin-left: 2rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser .signOutBtn:hover {
+  background-color: var(--color4);
+  color: var(--hsp4);
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved {
+  width: 100%;
+  padding: 2rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(10vw, 1fr));
+  gap: 1rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon {
+  transition: all 200ms ease-in-out;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  border-radius: 1rem;
+  cursor: pointer;
+  position: relative;
+  background: linear-gradient(120deg, #363636ac 0%, #36363630 33%, #36363620 66%, #36363660 100%);
+  border: 2px solid transparent;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon.current {
+  border: 2px solid var(--color3);
+  background: linear-gradient(120deg, #363636aa 0%, #3636368f 33%, #36363699 66%, #36363640 100%);
+  background-color: var(--color3);
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .clickOverlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background: transparent;
+  z-index: 1;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .delete {
+  position: absolute;
+  bottom: 0.5rem;
+  right: 0.5rem;
+  transition: all 200ms ease-in-out;
+  border-radius: 0.4rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  height: 1.5rem;
+  width: 1.5rem;
+  border: 2px solid var(--color1);
+  z-index: 2;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .delete:hover {
+  background-color: var(--mainDark);
+  color: var(--color1);
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .shiny {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .palette {
+  position: static;
+  left: 1rem;
+  top: 1rem;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon .palette div {
+  width: 1.5rem;
+  height: 1.5rem;
+  border-radius: 0.2rem;
+  margin: 0.5rem 0;
+}
+.pokeCard #profileDashboard #profileDashboardContent #profileDashboardSaved #profileDashboardSavedList .savedPokemon:hover {
+  background: linear-gradient(120deg, #363636ac 0%, #36363630 33%, #36363620 66%, #36363660 100%);
+  background-color: var(--color1);
+  color: var(--mainDark);
+  transform: scale(1.05);
 }
 .pokeCard #suggestionsWrapper {
   position: absolute;
@@ -1365,17 +1631,6 @@ body::-webkit-scrollbar {
   display: flex;
   z-index: 2;
 }
-@keyframes buttonAnimation {
-  0% {
-    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
-  }
-  50% {
-    box-shadow: 0 0 0 10px rgba(0, 0, 0, 0.8);
-  }
-  100% {
-    box-shadow: 0 0 0 2px hsla(0, 0%, 100%, 0.1);
-  }
-}
 .Game dialog[open] button {
   z-index: 2;
   padding: 1rem 2vw;
@@ -1426,6 +1681,70 @@ body::-webkit-scrollbar {
   .pokeCard #logo #pokeball {
     left: 10%;
     top: 1.2rem;
+  }
+  .pokeCard #saveBtn button {
+    top: auto;
+    bottom: 1.2rem;
+    font-size: 1.2rem;
+    background-color: var(--color4);
+    color: var(--hsp4);
+  }
+  .pokeCard #saveBtn button svg {
+    font-size: 1.4rem;
+  }
+  .pokeCard #profileDashboard {
+    gap: 2vw;
+    width: 100%;
+    z-index: 3;
+    padding: 0 2vw;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent {
+    border-radius: 1rem;
+    padding: 2rem 0;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser {
+    flex-direction: column;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserImg {
+    width: 50px;
+    height: 50px;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserImg img {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserDetails {
+    font-size: 1rem;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserBtns {
+    width: 100%;
+    box-sizing: border-box;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardUser #profileDashboardUserBtns button {
+    margin: 0;
+    width: 100%;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+  }
+  .pokeCard #profileDashboard #profileDashboardContent #profileDashboardBody #profileDashboardSaved #profileDashboardSavedList {
+    grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+    width: 100%;
+  }
+  .pokeCard #profileMenu {
+    left: auto;
+    right: 5vw;
+    bottom: 1rem;
+    top: auto;
+    display: flex;
+    flex-direction: row-reverse;
+    align-items: center;
+    justify-content: center;
+  }
+  .pokeCard #profileMenu #profileBtn button {
+    max-width: 2.5rem;
   }
   .pokeCard #imgData {
     height: 50vw;

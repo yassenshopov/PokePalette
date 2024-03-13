@@ -1,9 +1,49 @@
 import React, { useState, useEffect } from "react";
 import { BsArrowDownSquareFill, BsArrowUpSquareFill } from "react-icons/bs";
 import { IoSparkles, IoSparklesOutline } from "react-icons/io5";
-import { RiLoader4Fill } from "react-icons/ri";
+import { RiLoader4Fill, RiSave3Line } from "react-icons/ri";
 import axios from "axios";
 import speciesData from "./json/species.json";
+import { getApp, initializeApp } from "firebase/app";
+import { getFirestore, getDoc, doc, updateDoc } from "firebase/firestore/lite";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  onAuthStateChanged,
+  signInWithPopup,
+} from "firebase/auth";
+import {
+  MdAccountCircle,
+  MdBookmarkAdd,
+  MdBookmarkAdded,
+  MdClose,
+  MdDelete,
+  MdLogout,
+  MdMoreVert,
+} from "react-icons/md";
+
+// FIREBASE CONFIGURATION
+const firebaseConfig = {
+  apiKey: "AIzaSyC9YCslpVt_W8QyQKeI9gwaLeHeVWF6Kec",
+  authDomain: "inkmorphism.firebaseapp.com",
+  projectId: "inkmorphism",
+  storageBucket: "inkmorphism.appspot.com",
+  messagingSenderId: "958500926197",
+  appId: "1:958500926197:web:7100568f3d871252924bbc",
+};
+
+function createFirebaseApp(creds) {
+  try {
+    return getApp();
+  } catch {
+    return initializeApp(creds);
+  }
+}
+
+const app = createFirebaseApp(firebaseConfig);
+const db = getFirestore(app);
+
+// END OF FIREBASE CONFIGURATION
 
 let color2, color3, color4, color5, color6, color7, color8, color9, color10;
 const urlParams = new URLSearchParams(window.location.search);
@@ -134,6 +174,86 @@ export default function Poke({
   updateTypeBall2,
   updatePokemon,
 }) {
+  useEffect(() => {
+    const auth = getAuth(app);
+    const unsubscribe = onAuthStateChanged(auth, () => {
+      setAuth(auth);
+      setCurrentUser(auth.currentUser);
+    });
+
+    // Cleanup subscription
+    return () => unsubscribe();
+  }, []);
+
+  async function saveToFirestore(pokemonID, pokemonName, isShiny, palette) {
+    //check if the user is signed in
+    if (auth && auth.currentUser) {
+      const uid = auth.currentUser.uid;
+      const userDoc = await getDoc(doc(db, "users", uid));
+      if (userDoc.exists()) {
+        // check if user has a "pokemon" array
+        if (userDoc.data().pokemon) {
+          // check if the pokemon is already in the array
+          if (
+            userDoc.data().pokemon.filter((item) => item.id === pokemonID)
+              .length === 0
+          ) {
+            // if the pokemon is not in the array, add it
+            await updateDoc(doc(db, "users", uid), {
+              pokemon: [
+                ...userDoc.data().pokemon,
+                {
+                  id: pokemonID,
+                  name: pokemonName,
+                  shiny: isShiny,
+                  palette: palette,
+                },
+              ],
+            });
+          } else {
+          }
+        } else {
+          // if the user does not have a "pokemon" array, create it and add the pokemon
+          // while keeping the existing data
+          await updateDoc(doc(db, "users", uid), {
+            pokemon: [
+              {
+                id: pokemonID,
+                name: pokemonName,
+                shiny: isShiny,
+                palette: palette,
+              },
+            ],
+          });
+        }
+      } else {
+      }
+    } else {
+      //if the user is not signed in, sign in
+      const provider = new GoogleAuthProvider();
+      signInWithPopup(auth, provider);
+    }
+  }
+
+  async function deleteFromFirestore(pokemonID, pokemonName, isShiny) {
+    if (auth && auth.currentUser) {
+      const uid = auth.currentUser.uid;
+      const userDoc = await getDoc(doc(db, "users", uid));
+      if (userDoc.exists()) {
+        if (userDoc.data().pokemon) {
+          const newPokemonArray = userDoc
+            .data()
+            .pokemon.filter(
+              (item) => !(item.shiny === isShiny && item.id === pokemonID)
+            );
+          await updateDoc(doc(db, "users", uid), {
+            pokemon: newPokemonArray,
+          });
+        }
+      }
+    }
+  }
+
   const [colorRefresher, colorRefresh] = useState(false);
   const [formId, setFormId] = useState(0);
   const [isShinyState, setIsShinyState] = useState(false);
@@ -450,14 +570,12 @@ export default function Poke({
   const Randomize = () => {
     setIsLoading(true);
     let random = 1 + Math.floor(Math.random() * 1008);
-    setStateFind(Object.keys(speciesData)[random]);
     setSuggestions([]);
+    setForms([]);
+    setVarieties([]);
+    setStateFind(Object.keys(speciesData)[random]);
   };
 
-  let [Img, setImg] = useState("");
-  let [artURL, setURL] = useState(
-    "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/249.png"
-  );
   const [resCopy, setResCopy] = useState({});
   const [evoRes, setEvoRes] = useState({});
   const [pkmnInfoBg, setPkmnInfoBg] = useState("");
@@ -465,9 +583,103 @@ export default function Poke({
   const [forms, setForms] = useState([]);
   const [varieties, setVarieties] = useState([]);
   const [isForm, setIsForm] = useState(false);
+  const [userPokemon, setUserPokemon] = useState([]);
+  const [auth, setAuth] = useState(null);
+  const [currentUser, setCurrentUser] = useState(null);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    //if user is signed in, get the pokemon array from the firestore
+    console.log("Auth change");
+    if (auth && auth.currentUser) {
+      async function getPokemonFromFirestore() {
+        if (auth && auth.currentUser) {
+          const uid = auth.currentUser.uid;
+          const userDoc = await getDoc(doc(db, "users", uid));
+          if (userDoc.exists()) {
+            setUserPokemon(userDoc.data().pokemon.reverse());
+          }
+        }
+      }
+      getPokemonFromFirestore();
+    } else {
+      setUserPokemon([]);
+    }
+  }, [auth && auth.currentUser]);
+
+  useEffect(() => {
+    const userAgent = navigator.userAgent || navigator.vendor || window.opera;
+
+    setIsMobile(
+      /android|iphone|ipad|ipod|blackberry|iemobile|opera mini/i.test(
+        userAgent.toLowerCase()
+      )
+    );
+  }, []);
+
+  async function getPokemonFromFirestore() {
+    if (auth && auth.currentUser) {
+      const uid = auth.currentUser.uid;
+      const userDoc = await getDoc(doc(db, "users", uid));
+      if (userDoc.exists()) {
+        setUserPokemon(userDoc.data().pokemon.reverse());
+      }
+    }
+  }
+
+  useEffect(() => {
+    getPokemonFromFirestore();
+  }, [auth, currentUser]);
+
+  const [nextEvoBtn, setNextEvoBtn] = useState([]);
 
   useEffect(() => {
     async function getEvoData() {
+      console.log(evoRes);
+      //check if the pokemon evolves into another pokemon
+      try {
+        //fetch evolution_chain data
+        let evoChain = await axios.get(evoRes.data.evolution_chain.url);
+        console.log(evoChain.data);
+        if (evoChain.data.chain.evolves_to.length == 0) {
+          console.log("Single stage");
+          setNextEvoBtn([]);
+        } else if (evoChain.data.chain.evolves_to.length > 0) {
+          console.log("Multi stage");
+          if (evoChain.data.chain.species.name === pokemon.species.name) {
+            console.log("First stage");
+            setNextEvoBtn([]);
+            evoChain.data.chain.evolves_to.map((item) => {
+              //add it to the nextEvoBtn array
+              setNextEvoBtn((prevArray) => [...prevArray, item.species.name]);
+            });
+          } else if (
+            evoChain.data.chain.evolves_to.some(
+              (item) => item.species.name === pokemon.species.name
+            )
+          ) {
+            console.log("Second stage");
+            //get the index of the second stage
+            let index = evoChain.data.chain.evolves_to.findIndex(
+              (item) => item.species.name === pokemon.species.name
+            );
+            if (evoChain.data.chain.evolves_to[index].evolves_to.length > 0) {
+              setNextEvoBtn([]);
+              evoChain.data.chain.evolves_to[index].evolves_to.map((item) => {
+                //add it to the nextEvoBtn array
+                setNextEvoBtn((prevArray) => [...prevArray, item.species.name]);
+              });
+            } else {
+              setNextEvoBtn([]);
+            }
+          } else {
+            console.log("Third stage");
+            setNextEvoBtn([]);
+          }
+        }
+      } catch (err) {
+        console.log(err);
+      }
       try {
         if (evoRes.data.varieties && evoRes.data.varieties.length > 1) {
           setVarieties(evoRes.data.varieties);
@@ -478,11 +690,13 @@ export default function Poke({
           (item) => item.language.name === "en"
         );
 
-        // setPokemon((prevPokemon) => ({
-        //   ...prevPokemon,
-        //   flavor_text_entries: filteredFlavorText,
-        // }));
-        pokemon.flavor_text_entries = filteredFlavorText;
+        //check if the flavor text is the same in the previous pokemon
+
+        setPokemon((prevPokemon) => ({
+          ...prevPokemon,
+          flavor_text_entries: filteredFlavorText,
+        }));
+
         setPkmnInfoBg("var(--color3)");
       } catch (err) {
         console.log(err);
@@ -589,7 +803,6 @@ export default function Poke({
             let res = await axios.get(
               `https://pokeapi.co/api/v2/pokemon/${nameValue.toLowerCase()}`
             );
-            console.log(res.data);
             setPokemon(res.data);
             setLogoAnimation(true);
             setResCopy(res);
@@ -599,18 +812,8 @@ export default function Poke({
 
             if (pokemon.forms && pokemon.forms.length > 1) {
               setForms(pokemon.forms);
-              console.log(pokemon.forms);
             } else {
               setForms([]);
-            }
-
-            // Compulsory clean-up: this removes old data from the evoBtn and sets the stage for a new one
-
-            if (
-              typeof document.getElementById("evoBtn") != "undefined" &&
-              document.getElementById("evoBtn") != null
-            ) {
-              document.getElementById("evoBtn").remove();
             }
 
             setEvoRes(
@@ -644,164 +847,6 @@ export default function Poke({
             } catch (err) {
               console.log(err);
             }
-
-            let evoData;
-
-            try {
-              try {
-                let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-                let stageNumber = 1;
-
-                if (evoChain.data.chain.evolves_to.length !== 0) {
-                  // This check eliminates single-stage mons
-
-                  evoData = evoChain.data.chain.evolves_to[0].species.name;
-
-                  // This check determines the length of the evolution family
-                  if (
-                    evoChain.data.chain.evolves_to[0].evolves_to.length === 0
-                  ) {
-                    stageNumber = 2;
-                  } else {
-                    stageNumber = 3;
-                  }
-                  let randInt = 0;
-                  switch (stageNumber) {
-                    case 2:
-                      if (nameValue !== evoChain.data.chain.species.name) {
-                        evoBtnCheck = false;
-                      } else {
-                        evoBtnCheck = true;
-                        // Check for branch-evos
-                        if (evoChain.data.chain.evolves_to.length > 1) {
-                          randInt = Math.floor(
-                            Math.random() *
-                              evoChain.data.chain.evolves_to.length
-                          );
-                          evoData =
-                            evoChain.data.chain.evolves_to[randInt].species
-                              .name;
-                        }
-                        evoData =
-                          evoChain.data.chain.evolves_to[randInt].species.name;
-                      }
-                      break;
-                    case 3:
-                      if (
-                        nameValue !== "cascoon" &&
-                        nameValue !== evoData &&
-                        nameValue !== evoChain.data.chain.species.name
-                      ) {
-                        // This check eliminates mons that are final stages
-                        evoBtnCheck = false;
-                        if (
-                          typeof document.getElementById("evoBtn") !==
-                            "undefined" &&
-                          document.getElementById("evoBtn") !== null
-                        ) {
-                          document.getElementById("evoBtn").remove();
-                          break;
-                        }
-                      } else if (
-                        nameValue === evoData &&
-                        nameValue !== evoChain.data.chain.species.name
-                      ) {
-                        evoBtnCheck = true;
-                        // Check for branch-evos
-                        let randInt = 0;
-                        if (
-                          evoChain.data.chain.evolves_to[0].evolves_to.length >
-                          1
-                        ) {
-                          randInt = Math.floor(
-                            Math.random() *
-                              evoChain.data.chain.evolves_to[0].evolves_to
-                                .length
-                          );
-                          evoData =
-                            evoChain.data.chain.evolves_to[0].evolves_to[
-                              randInt
-                            ].species.name;
-                        }
-                        evoData =
-                          evoChain.data.chain.evolves_to[0].evolves_to[randInt]
-                            .species.name;
-                      } else if (nameValue === "cascoon") {
-                        evoBtnCheck = true;
-                        evoData = "dustox";
-                      } else {
-                        evoBtnCheck = true;
-                        // Check for branch-evos
-                        let randInt = 0;
-                        if (evoChain.data.chain.evolves_to.length > 1) {
-                          randInt = Math.floor(
-                            Math.random() *
-                              evoChain.data.chain.evolves_to.length
-                          );
-                          evoData =
-                            evoChain.data.chain.evolves_to[randInt].species
-                              .name;
-                        }
-                        evoData =
-                          evoChain.data.chain.evolves_to[randInt].species.name;
-                      }
-                      break;
-                    default:
-                      evoBtnCheck = false;
-                  }
-                } else {
-                  if (
-                    typeof document.getElementById("evoBtn") !== "undefined" &&
-                    document.getElementById("evoBtn") !== null
-                  ) {
-                    document.getElementById("evoBtn").remove();
-                  }
-                }
-              } catch (err) {
-                try {
-                  evoData = await axios.get(
-                    evoRes.data.evolves_from_species.name
-                  );
-                } catch (err) {
-                  console.log(err);
-                }
-                evoBtnCheck = false;
-              }
-
-              if (evoBtnCheck) {
-                // Only create evoBtn if all conditions are right
-                let evoBtn = document.createElement("button");
-                evoBtn.innerHTML = "Evolve!";
-                evoBtn.id = "evoBtn";
-
-                evoBtn.onclick = () => {
-                  // Check for branch-evos
-                  setIsLoading(true);
-
-                  setTimeout(() => {
-                    setStateFind(evoData);
-                  }, 1000);
-                };
-                evoBtn.classList.toggle("noSelect");
-                // document.getElementById("buttons").appendChild(evoBtn);
-              }
-            } catch (err) {
-              console.log(err);
-            }
-            if (shiny === true) {
-              if (res.data.sprites.front_shiny) {
-                setImg(res.data.sprites.front_shiny);
-              } else {
-                setImg(res.data.sprites.other["home"].front_shiny);
-              }
-            } else {
-              if (res.data.sprites.front_default) {
-                setImg(res.data.sprites.front_default);
-              } else {
-                setImg(res.data.sprites.other["home"].front_default);
-              }
-            }
-
             const filteredGenera = evoRes.data.genera
               .filter((item) => item.language.name === "en")
               .map((item) => item.genus);
@@ -1330,8 +1375,6 @@ export default function Poke({
         i++;
       }
 
-      let fullArtURL = "url('" + artURL + "')";
-
       root.style.setProperty("--color2", color2);
       root.style.setProperty("--color3", color3);
       root.style.setProperty("--color4", color4);
@@ -1352,7 +1395,6 @@ export default function Poke({
       root.style.setProperty("--color9word", `"${color9.toUpperCase()}"`);
       root.style.setProperty("--color10word", `"${color10.toUpperCase()}"`);
 
-      root.style.setProperty("--artURL", fullArtURL);
       root.style.setProperty("--pkmnInfoBg", pkmnInfoBg);
 
       const colorEmojiArr = [
@@ -1448,15 +1490,254 @@ export default function Poke({
   }
 
   const [isLoading, setIsLoading] = useState(false);
+  const [isProfileDashboardOpen, setIsProfileDashboardOpen] = useState(false);
 
   return (
     <div className="pokeCard">
       {isLoading ? <div id="hideWhileLoading"></div> : null}
+      <dialog id="profileDashboard" open={isProfileDashboardOpen}>
+        <div
+          className="backdrop"
+          onClick={() => {
+            setIsProfileDashboardOpen((prev) => !prev);
+          }}
+        ></div>
+        <div id="profileDashboardContent">
+          <div id="profileDashboardHeader">
+            <button
+              id="closeProfileDashboard"
+              onClick={() => {
+                setIsProfileDashboardOpen((prev) => !prev);
+              }}
+            >
+              <MdClose />
+            </button>
+          </div>
+          <div id="profileDashboardBody">
+            <div id="profileDashboardUser">
+              <div id="profileDashboardUserImg">
+                {auth && auth.currentUser && auth.currentUser.photoURL ? (
+                  <img src={auth.currentUser.photoURL} alt="Profile" />
+                ) : (
+                  <MdAccountCircle />
+                )}
+              </div>
+              <div id="profileDashboardUserDetails">
+                <h3>
+                  {auth && auth.currentUser && auth.currentUser.displayName
+                    ? auth.currentUser.displayName
+                    : "-"}
+                </h3>
+                <p>
+                  {auth && auth.currentUser && auth.currentUser.email
+                    ? auth.currentUser.email
+                    : "-"}
+                </p>
+              </div>
+              <div id="profileDashboardUserBtns">
+                <button
+                  onClick={() => {
+                    auth.signOut();
+                    setCurrentUser(null);
+                    setIsProfileDashboardOpen((prev) => !prev);
+                    setUserPokemon([]);
+                  }}
+                  className="signOutBtn"
+                >
+                  Sign Out <MdLogout />
+                </button>
+              </div>
+            </div>
+            <div id="profileDashboardSaved">
+              <h3>Saved Pokémon</h3>
+              <div id="profileDashboardSavedList">
+                {userPokemon.map((item, index) => {
+                  return (
+                    <div
+                      key={index}
+                      className={
+                        "savedPokemon" +
+                        (item.id === pokemon.id && item.shiny === isShinyState
+                          ? " current"
+                          : "")
+                      }
+                    >
+                      <img
+                        src={
+                          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+                          (item.shiny ? "shiny/" : "") +
+                          item.id +
+                          ".png"
+                        }
+                        alt={item.name}
+                      />
+                      <p>
+                        {item.name.charAt(0).toUpperCase() + item.name.slice(1)}
+                      </p>
+                      {item.shiny ? (
+                        <span className="shiny">
+                          <IoSparkles />
+                        </span>
+                      ) : null}
+                      {item.palette ? (
+                        <div className="palette">
+                          {item.palette.map((color, index) => {
+                            return (
+                              <div
+                                key={index}
+                                style={{ backgroundColor: color }}
+                              ></div>
+                            );
+                          })}
+                        </div>
+                      ) : null}
+                      <span className="delete">
+                        <MdDelete
+                          onClick={() => {
+                            deleteFromFirestore(item.id, item.name, item.shiny);
+                            setUserPokemon((prev) => {
+                              return prev.filter(
+                                (entry) =>
+                                  !(
+                                    entry.shiny === item.shiny &&
+                                    entry.id === item.id
+                                  )
+                              );
+                            });
+                          }}
+                        />
+                      </span>
+                      <div
+                        className="clickOverlay"
+                        onClick={() => {
+                          setStateFind(item.name);
+                          setIsShinyState(item.shiny);
+                          if (isMobile) {
+                            setIsProfileDashboardOpen((prev) => !prev);
+                          }
+                        }}
+                      ></div>
+                    </div>
+                  );
+                })}
+              </div>
+            </div>
+          </div>
+        </div>
+      </dialog>
       <div id="logo">
         <div id="pokeball" className={logoAnimation ? "animated" : ""}>
           <div id="pokeballTop"></div>
           <div id="pokeballMiddle"></div>
           <div id="pokeballBottom"></div>
+        </div>
+      </div>
+      <div id="profileMenu">
+        <div
+          id="saveBtn"
+          className={
+            userPokemon.some(
+              (item) => item.shiny === isShinyState && item.id === pokemon.id
+            )
+              ? "saved"
+              : ""
+          }
+        >
+          <button
+            onClick={() => {
+              if (
+                userPokemon.some(
+                  (item) =>
+                    item.shiny === isShinyState && item.id === pokemon.id
+                )
+              ) {
+                deleteFromFirestore(pokemon.id, pokemon.name, isShinyState);
+                setUserPokemon((prev) => {
+                  return prev.filter(
+                    (entry) =>
+                      !(entry.shiny === isShinyState && entry.id === pokemon.id)
+                  );
+                });
+                return;
+              } else {
+                const palette = [
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--color2"
+                  ),
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--color3"
+                  ),
+                  getComputedStyle(document.documentElement).getPropertyValue(
+                    "--color4"
+                  ),
+                ];
+                //check if user is signed in
+                if (!auth || !auth.currentUser) {
+                  //if not, prompt them to sign in
+                  alert("You need to sign in to save Pokémon!");
+                  const provider = new GoogleAuthProvider();
+                  signInWithPopup(auth, provider);
+                  return;
+                }
+                saveToFirestore(
+                  pokemon.id,
+                  pokemon.name,
+                  isShinyState,
+                  palette
+                );
+                setUserPokemon((prev) => {
+                  //add the current pokemon to the user's saved pokemon array, to the back
+                  return [
+                    {
+                      id: pokemon.id,
+                      name: pokemon.name,
+                      shiny: isShinyState,
+                      palette: palette,
+                    },
+                    ...prev,
+                  ];
+                });
+              }
+            }}
+            aria-label="Save Palette"
+          >
+            {userPokemon.some(
+              (item) => item.shiny === isShinyState && item.id === pokemon.id
+            ) ? (
+              <>
+                <MdBookmarkAdded />
+                Saved!
+              </>
+            ) : (
+              <>
+                <MdBookmarkAdd />
+                Save
+              </>
+            )}
+          </button>
+        </div>
+        <div id="profileBtn">
+          <button
+            onClick={() => {
+              //check if user is signed in
+              if (!auth || !auth.currentUser) {
+                //if not, prompt them to sign in
+                alert("You need to sign in to view your profile!");
+                const provider = new GoogleAuthProvider();
+                signInWithPopup(auth, provider);
+                return;
+              } else {
+                setIsProfileDashboardOpen((prev) => !prev);
+              }
+            }}
+            aria-label="Profile Menu"
+          >
+            {auth && auth.currentUser && auth.currentUser.photoURL ? (
+              <img src={auth.currentUser.photoURL} alt="Profile" />
+            ) : (
+              <MdAccountCircle />
+            )}
+          </button>
         </div>
       </div>
       <div id="colorBg">
@@ -1543,18 +1824,6 @@ export default function Poke({
                   key={index}
                   onClick={() => {
                     setIsLoading(true);
-                    // //switch case for special cases
-                    // switch (item) {
-                    //   case "basculin":
-                    //     item = item + "-red-striped";
-                    //     setStateFind(item);
-                    //     break;
-                    //   case "burmy":
-                    //     item = item + "-plant";
-                    //     break;
-                    //   default:
-                    //     break;
-                    // }
                     setStateFind(item);
                     setSuggestions([]);
                   }}
@@ -1679,10 +1948,6 @@ export default function Poke({
                 let formRes = await axios.get(
                   forms.find((form) => form.name === e.target.value).url
                 );
-                console.log(formRes);
-                console.log(
-                  formRes.data.id + e.target.value.replace(pokemon.name, "")
-                );
                 setPokemon((prevPokemon) => ({
                   ...prevPokemon,
                   current_form: e.target.value,
@@ -1745,6 +2010,19 @@ export default function Poke({
                 })
               : null}
           </select>
+        ) : null}
+        {nextEvoBtn.length > 0 ? (
+          <button
+            onClick={() => {
+              setIsLoading(true);
+              //random number between 0 and nextEvoBtn.length
+              let randomIndex = Math.floor(Math.random() * nextEvoBtn.length);
+              setStateFind(nextEvoBtn[randomIndex]);              
+            }}
+            className="noSelect"
+          >
+            Evolve!
+          </button>
         ) : null}
       </div>
     </div>
