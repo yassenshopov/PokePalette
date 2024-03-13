@@ -24,12 +24,7 @@ import {
 
 // FIREBASE CONFIGURATION
 const firebaseConfig = {
-  apiKey: "AIzaSyC9YCslpVt_W8QyQKeI9gwaLeHeVWF6Kec",
-  authDomain: "inkmorphism.firebaseapp.com",
-  projectId: "inkmorphism",
-  storageBucket: "inkmorphism.appspot.com",
-  messagingSenderId: "958500926197",
-  appId: "1:958500926197:web:7100568f3d871252924bbc",
+
 };
 
 function createFirebaseApp(creds) {
