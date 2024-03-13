@@ -1736,8 +1736,7 @@ body::-webkit-scrollbar {
   .pokeCard #profileMenu {
     left: auto;
     right: 5vw;
-    bottom: 1rem;
-    top: auto;
+    top: 1.5rem;
     display: flex;
     flex-direction: row-reverse;
     align-items: center;
