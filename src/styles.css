@@ -829,9 +829,7 @@ body::-webkit-scrollbar {
   min-height: 200px;
   font-family: carnacLight;
   scrollbar-width: none;
-  /* Firefox */
   -ms-overflow-style: none;
-  /* Internet Explorer and Microsoft Edge */
   resize: vertical;
 }
 .example #shareWidgets .tweet-popup .tweet-input::-webkit-scrollbar {
