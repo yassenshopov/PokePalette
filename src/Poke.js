@@ -1674,7 +1674,6 @@ export default function Poke({
                 //check if user is signed in
                 if (!auth || !auth.currentUser) {
                   //if not, prompt them to sign in
-                  alert("You need to sign in to save Pokémon!");
                   const provider = new GoogleAuthProvider();
                   signInWithPopup(auth, provider);
                   return;
@@ -1722,7 +1721,6 @@ export default function Poke({
               //check if user is signed in
               if (!auth || !auth.currentUser) {
                 //if not, prompt them to sign in
-                alert("You need to sign in to view your profile!");
                 const provider = new GoogleAuthProvider();
                 signInWithPopup(auth, provider);
                 return;
