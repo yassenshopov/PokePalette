@@ -5,7 +5,7 @@ import { RiLoader4Fill, RiSave3Line } from "react-icons/ri";
 import axios from "axios";
 import speciesData from "./json/species.json";
 import { getApp, initializeApp } from "firebase/app";
-import { getFirestore, getDoc, doc, updateDoc } from "firebase/firestore/lite";
+import { getFirestore, getDoc, doc, updateDoc, setDoc } from "firebase/firestore/lite";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -227,6 +227,18 @@ export default function Poke({
           });
         }
       } else {
+        //if user does not exist, create a new user and add the pokemon
+        alert(uid);
+        await setDoc(doc(db, "users", uid), {
+          pokemon: [
+            {
+              id: pokemonID,
+              name: pokemonName,
+              shiny: isShiny,
+              palette: palette,
+            },
+          ],
+        });
       }
     } else {
       //if the user is not signed in, sign in
