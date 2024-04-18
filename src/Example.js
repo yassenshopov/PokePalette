@@ -490,7 +490,6 @@ export default function Example({ dynamicContent, pokemon }) {
         <aside>
           <img
             id="artCanvas"
-            loading="lazy"
             fetchpriority="high"
             src={
               pokemon.isForm
@@ -498,11 +497,11 @@ export default function Example({ dynamicContent, pokemon }) {
                 :
                   (pokemon.sprites &&
                   pokemon.sprites.other["official-artwork"].front_default
-                    ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
+                    ? pokemon.id === undefined ? "https://pokemonpalette.com/randomizerDefault.png" : ("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork" +
                       (pokemon.isShiny ? "/shiny/" : "/") +
                       pokemon.id +
-                      ".png"
-                    : //use the Home sprite if the official artwork is not available
+                      ".png")
+                    : 
                       "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home" +
                       (pokemon.isShiny ? "/shiny/" : "/") +
                       pokemon.id +

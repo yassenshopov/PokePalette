@@ -5,7 +5,13 @@ import { RiLoader4Fill, RiSave3Line } from "react-icons/ri";
 import axios from "axios";
 import speciesData from "./json/species.json";
 import { getApp, initializeApp } from "firebase/app";
-import { getFirestore, getDoc, doc, updateDoc, setDoc } from "firebase/firestore/lite";
+import {
+  getFirestore,
+  getDoc,
+  doc,
+  updateDoc,
+  setDoc,
+} from "firebase/firestore/lite";
 import {
   getAuth,
   GoogleAuthProvider,
@@ -19,7 +25,6 @@ import {
   MdClose,
   MdDelete,
   MdLogout,
-  MdMoreVert,
 } from "react-icons/md";
 
 // FIREBASE CONFIGURATION
@@ -166,6 +171,71 @@ if (paramRaw && speciesData[paramRaw.toLowerCase()]) {
   };
 }
 
+let paramRandomizer = urlParams.get("pokeRandomizer"); //true or false
+let randomizer;
+let randomizerDefault;
+if (paramRandomizer) {
+  randomizer = paramRandomizer === "true" ? true : false;
+  randomizerDefault = {
+    base_experience: null,
+    game_indices: [],
+    height: 16,
+    held_items: [],
+    id: speciesData[param],
+    is_default: true,
+    name: param,
+    order: 1005,
+    past_abilities: [],
+    past_types: [],
+    species: {
+      name: "Pokemon",
+      url:
+        "https://pokeapi.co/api/v2/pokemon-species/" + speciesData[param] + "/",
+    },
+    sprites: {
+      back_default: null,
+      back_female: null,
+      back_shiny: null,
+      back_shiny_female: null,
+      front_default: "https://pokemonpalette.com/logo512.png",
+      front_female: null,
+      front_shiny:
+      "https://pokemonpalette.com/logo512.png",
+      front_shiny_female: null,
+      other: {
+        dream_world: {
+          front_default: null,
+          front_female: null,
+        },
+        home: {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
+            speciesData[param] +
+            ".png",
+          front_female: null,
+          front_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
+            speciesData[param] +
+            ".png",
+          front_shiny_female: null,
+        },
+        "official-artwork": {
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/" +
+            speciesData[param] +
+            ".png",
+          front_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/" +
+            speciesData[param] +
+            ".png",
+        },
+      },
+    },
+    isShiny: false,
+    national_id: speciesData[param],
+  };
+}
+
 export default function Poke({
   updateColor2,
   updateColor3,
@@ -269,158 +339,64 @@ export default function Poke({
   const [colorRefresher, colorRefresh] = useState(false);
   const [formId, setFormId] = useState(0);
   const [isShinyState, setIsShinyState] = useState(false);
-  const [genera, setGenera] = useState("Fire Blades Pokémon");
+  const [genera, setGenera] = useState("Choose a Pokémon");
   const [pokemon, setPokemon] = useState(
-    paramPokemon || {
-      current_form: "ceruledge",
-      base_experience: null,
-      forms: [
-        {
-          name: "ceruledge",
-          url: "https://pokeapi.co/api/v2/pokemon-form/937/",
-        },
-      ],
-      game_indices: [],
-      height: 16,
-      held_items: [],
-      id: 937,
-      is_default: true,
-      location_area_encounters:
-        "https://pokeapi.co/api/v2/pokemon/937/encounters",
-      name: "ceruledge",
-      order: 1005,
-      past_abilities: [],
-      past_types: [],
-      species: {
+    paramPokemon ||
+      randomizerDefault || {
+        current_form: "ceruledge",
+        base_experience: null,
+        forms: [
+          {
+            name: "ceruledge",
+            url: "https://pokeapi.co/api/v2/pokemon-form/937/",
+          },
+        ],
+        game_indices: [],
+        height: 16,
+        held_items: [],
+        id: 937,
+        is_default: true,
+        location_area_encounters:
+          "https://pokeapi.co/api/v2/pokemon/937/encounters",
         name: "ceruledge",
-        url: "https://pokeapi.co/api/v2/pokemon-species/937/",
-      },
-      sprites: {
-        back_default: null,
-        back_female: null,
-        back_shiny: null,
-        back_shiny_female: null,
-        front_default:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/937.png",
-        front_female: null,
-        front_shiny:
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/937.png",
-        front_shiny_female: null,
-        other: {
-          dream_world: {
-            front_default: null,
-            front_female: null,
-          },
-          home: {
-            front_default:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/937.png",
-            front_female: null,
-            front_shiny:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/937.png",
-            front_shiny_female: null,
-          },
-          "official-artwork": {
-            front_default:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/937.png",
-            front_shiny:
-              "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/937.png",
-          },
-          showdown: {
-            back_default: null,
-            back_female: null,
-            back_shiny: null,
-            back_shiny_female: null,
-            front_default: null,
-            front_female: null,
-            front_shiny: null,
-            front_shiny_female: null,
-          },
+        order: 1005,
+        past_abilities: [],
+        past_types: [],
+        species: {
+          name: "ceruledge",
+          url: "https://pokeapi.co/api/v2/pokemon-species/937/",
         },
-        versions: {
-          "generation-i": {
-            "red-blue": {
-              back_default: null,
-              back_gray: null,
-              back_transparent: null,
-              front_default: null,
-              front_gray: null,
-              front_transparent: null,
-            },
-            yellow: {
-              back_default: null,
-              back_gray: null,
-              back_transparent: null,
-              front_default: null,
-              front_gray: null,
-              front_transparent: null,
-            },
-          },
-          "generation-ii": {
-            crystal: {
-              back_default: null,
-              back_shiny: null,
-              back_shiny_transparent: null,
-              back_transparent: null,
-              front_default: null,
-              front_shiny: null,
-              front_shiny_transparent: null,
-              front_transparent: null,
-            },
-            gold: {
-              back_default: null,
-              back_shiny: null,
-              front_default: null,
-              front_shiny: null,
-              front_transparent: null,
-            },
-            silver: {
-              back_default: null,
-              back_shiny: null,
-              front_default: null,
-              front_shiny: null,
-              front_transparent: null,
-            },
-          },
-          "generation-iii": {
-            emerald: {
-              front_default: null,
-              front_shiny: null,
-            },
-            "firered-leafgreen": {
-              back_default: null,
-              back_shiny: null,
-              front_default: null,
-              front_shiny: null,
-            },
-            "ruby-sapphire": {
-              back_default: null,
-              back_shiny: null,
-              front_default: null,
-              front_shiny: null,
-            },
-          },
-          "generation-iv": {
-            "diamond-pearl": {
-              back_default: null,
-              back_female: null,
-              back_shiny: null,
-              back_shiny_female: null,
+        sprites: {
+          back_default: null,
+          back_female: null,
+          back_shiny: null,
+          back_shiny_female: null,
+          front_default:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/937.png",
+          front_female: null,
+          front_shiny:
+            "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/937.png",
+          front_shiny_female: null,
+          other: {
+            dream_world: {
               front_default: null,
               front_female: null,
-              front_shiny: null,
-              front_shiny_female: null,
             },
-            "heartgold-soulsilver": {
-              back_default: null,
-              back_female: null,
-              back_shiny: null,
-              back_shiny_female: null,
-              front_default: null,
+            home: {
+              front_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/937.png",
               front_female: null,
-              front_shiny: null,
+              front_shiny:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/937.png",
               front_shiny_female: null,
             },
-            platinum: {
+            "official-artwork": {
+              front_default:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/937.png",
+              front_shiny:
+                "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/official-artwork/shiny/937.png",
+            },
+            showdown: {
               back_default: null,
               back_female: null,
               back_shiny: null,
@@ -431,9 +407,71 @@ export default function Poke({
               front_shiny_female: null,
             },
           },
-          "generation-v": {
-            "black-white": {
-              animated: {
+          versions: {
+            "generation-i": {
+              "red-blue": {
+                back_default: null,
+                back_gray: null,
+                back_transparent: null,
+                front_default: null,
+                front_gray: null,
+                front_transparent: null,
+              },
+              yellow: {
+                back_default: null,
+                back_gray: null,
+                back_transparent: null,
+                front_default: null,
+                front_gray: null,
+                front_transparent: null,
+              },
+            },
+            "generation-ii": {
+              crystal: {
+                back_default: null,
+                back_shiny: null,
+                back_shiny_transparent: null,
+                back_transparent: null,
+                front_default: null,
+                front_shiny: null,
+                front_shiny_transparent: null,
+                front_transparent: null,
+              },
+              gold: {
+                back_default: null,
+                back_shiny: null,
+                front_default: null,
+                front_shiny: null,
+                front_transparent: null,
+              },
+              silver: {
+                back_default: null,
+                back_shiny: null,
+                front_default: null,
+                front_shiny: null,
+                front_transparent: null,
+              },
+            },
+            "generation-iii": {
+              emerald: {
+                front_default: null,
+                front_shiny: null,
+              },
+              "firered-leafgreen": {
+                back_default: null,
+                back_shiny: null,
+                front_default: null,
+                front_shiny: null,
+              },
+              "ruby-sapphire": {
+                back_default: null,
+                back_shiny: null,
+                front_default: null,
+                front_shiny: null,
+              },
+            },
+            "generation-iv": {
+              "diamond-pearl": {
                 back_default: null,
                 back_female: null,
                 back_shiny: null,
@@ -443,96 +481,129 @@ export default function Poke({
                 front_shiny: null,
                 front_shiny_female: null,
               },
-              back_default: null,
-              back_female: null,
-              back_shiny: null,
-              back_shiny_female: null,
-              front_default: null,
-              front_female: null,
-              front_shiny: null,
-              front_shiny_female: null,
+              "heartgold-soulsilver": {
+                back_default: null,
+                back_female: null,
+                back_shiny: null,
+                back_shiny_female: null,
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
+              platinum: {
+                back_default: null,
+                back_female: null,
+                back_shiny: null,
+                back_shiny_female: null,
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
             },
-          },
-          "generation-vi": {
-            "omegaruby-alphasapphire": {
-              front_default: null,
-              front_female: null,
-              front_shiny: null,
-              front_shiny_female: null,
+            "generation-v": {
+              "black-white": {
+                animated: {
+                  back_default: null,
+                  back_female: null,
+                  back_shiny: null,
+                  back_shiny_female: null,
+                  front_default: null,
+                  front_female: null,
+                  front_shiny: null,
+                  front_shiny_female: null,
+                },
+                back_default: null,
+                back_female: null,
+                back_shiny: null,
+                back_shiny_female: null,
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
             },
-            "x-y": {
-              front_default: null,
-              front_female: null,
-              front_shiny: null,
-              front_shiny_female: null,
+            "generation-vi": {
+              "omegaruby-alphasapphire": {
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
+              "x-y": {
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
             },
-          },
-          "generation-vii": {
-            icons: {
-              front_default: null,
-              front_female: null,
+            "generation-vii": {
+              icons: {
+                front_default: null,
+                front_female: null,
+              },
+              "ultra-sun-ultra-moon": {
+                front_default: null,
+                front_female: null,
+                front_shiny: null,
+                front_shiny_female: null,
+              },
             },
-            "ultra-sun-ultra-moon": {
-              front_default: null,
-              front_female: null,
-              front_shiny: null,
-              front_shiny_female: null,
-            },
-          },
-          "generation-viii": {
-            icons: {
-              front_default: null,
-              front_female: null,
+            "generation-viii": {
+              icons: {
+                front_default: null,
+                front_female: null,
+              },
             },
           },
         },
-      },
-      types: [
-        {
-          slot: 1,
-          type: {
-            name: "fire",
-            url: "https://pokeapi.co/api/v2/type/10/",
+        types: [
+          {
+            slot: 1,
+            type: {
+              name: "fire",
+              url: "https://pokeapi.co/api/v2/type/10/",
+            },
           },
-        },
-        {
-          slot: 2,
-          type: {
-            name: "ghost",
-            url: "https://pokeapi.co/api/v2/type/8/",
+          {
+            slot: 2,
+            type: {
+              name: "ghost",
+              url: "https://pokeapi.co/api/v2/type/8/",
+            },
           },
-        },
-      ],
-      weight: 620,
-      isShiny: false,
-      national_id: 937,
-      flavor_text_entries: [
-        {
-          flavor_text:
-            "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
-          language: {
-            name: "en",
-            url: "https://pokeapi.co/api/v2/language/9/",
+        ],
+        weight: 620,
+        isShiny: false,
+        national_id: 937,
+        flavor_text_entries: [
+          {
+            flavor_text:
+              "The fiery blades on its arms burn fiercely with the lingering resentment of a sword wielder who fell before accomplishing their goal.",
+            language: {
+              name: "en",
+              url: "https://pokeapi.co/api/v2/language/9/",
+            },
+            version: {
+              name: "scarlet",
+              url: "https://pokeapi.co/api/v2/version/40/",
+            },
           },
-          version: {
-            name: "scarlet",
-            url: "https://pokeapi.co/api/v2/version/40/",
+          {
+            flavor_text:
+              "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
+            language: {
+              name: "en",
+              url: "https://pokeapi.co/api/v2/language/9/",
+            },
+            version: {
+              name: "violet",
+              url: "https://pokeapi.co/api/v2/version/41/",
+            },
           },
-        },
-        {
-          flavor_text:
-            "An old set of armor steeped in grudges caused this Pokémon’s evolution. Ceruledge cuts its enemies to pieces without mercy.",
-          language: {
-            name: "en",
-            url: "https://pokeapi.co/api/v2/language/9/",
-          },
-          version: {
-            name: "violet",
-            url: "https://pokeapi.co/api/v2/version/41/",
-          },
-        },
-      ],
-    }
+        ],
+      }
   );
 
   useEffect(() => {
@@ -581,6 +652,8 @@ export default function Poke({
 
   const Randomize = () => {
     setIsLoading(true);
+    randomizer = false;
+    paramRandomizer = false;
     let random = 1 + Math.floor(Math.random() * 1008);
     setSuggestions([]);
     setForms([]);
@@ -883,6 +956,8 @@ export default function Poke({
         paramPokemon = null;
         param = null;
       }, 1000);
+    } else if (randomizer) {
+      randomizer = false;
     } else {
       getData();
     }
@@ -1763,10 +1838,11 @@ export default function Poke({
         src={
           // "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/" +
           //^this is the animated version
+          (paramRandomizer) ? "https://pokemonpalette.com/logo512.png" : (
           "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
           (isShinyState ? "shiny/" : "") +
           (pokemon.formId ? pokemon.formId : pokemon.id) +
-          ".png"
+          ".png")
         }
         alt=""
         onError={(e) => {
@@ -1788,7 +1864,7 @@ export default function Poke({
             <RiLoader4Fill />
           </div>
         ) : genera ? (
-          "The " + genera
+          genera === "Choose a Pokémon" ? genera : ("The " + genera)
         ) : (
           pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
         )}
@@ -2027,7 +2103,7 @@ export default function Poke({
               setIsLoading(true);
               //random number between 0 and nextEvoBtn.length
               let randomIndex = Math.floor(Math.random() * nextEvoBtn.length);
-              setStateFind(nextEvoBtn[randomIndex]);              
+              setStateFind(nextEvoBtn[randomIndex]);
             }}
             className="noSelect"
           >
