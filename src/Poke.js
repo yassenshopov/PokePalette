@@ -199,8 +199,7 @@ if (paramRandomizer) {
       back_shiny_female: null,
       front_default: "https://pokemonpalette.com/logo512.png",
       front_female: null,
-      front_shiny:
-      "https://pokemonpalette.com/logo512.png",
+      front_shiny: "https://pokemonpalette.com/logo512.png",
       front_shiny_female: null,
       other: {
         dream_world: {
@@ -675,7 +674,6 @@ export default function Poke({
 
   useEffect(() => {
     //if user is signed in, get the pokemon array from the firestore
-    console.log("Auth change");
     if (auth && auth.currentUser) {
       async function getPokemonFromFirestore() {
         if (auth && auth.currentUser) {
@@ -720,19 +718,14 @@ export default function Poke({
 
   useEffect(() => {
     async function getEvoData() {
-      console.log(evoRes);
       //check if the pokemon evolves into another pokemon
       try {
         //fetch evolution_chain data
         let evoChain = await axios.get(evoRes.data.evolution_chain.url);
-        console.log(evoChain.data);
         if (evoChain.data.chain.evolves_to.length == 0) {
-          console.log("Single stage");
           setNextEvoBtn([]);
         } else if (evoChain.data.chain.evolves_to.length > 0) {
-          console.log("Multi stage");
           if (evoChain.data.chain.species.name === pokemon.species.name) {
-            console.log("First stage");
             setNextEvoBtn([]);
             evoChain.data.chain.evolves_to.map((item) => {
               //add it to the nextEvoBtn array
@@ -743,7 +736,6 @@ export default function Poke({
               (item) => item.species.name === pokemon.species.name
             )
           ) {
-            console.log("Second stage");
             //get the index of the second stage
             let index = evoChain.data.chain.evolves_to.findIndex(
               (item) => item.species.name === pokemon.species.name
@@ -758,7 +750,6 @@ export default function Poke({
               setNextEvoBtn([]);
             }
           } else {
-            console.log("Third stage");
             setNextEvoBtn([]);
           }
         }
@@ -1732,57 +1723,65 @@ export default function Poke({
         >
           <button
             onClick={() => {
-              if (
-                userPokemon.some(
-                  (item) =>
-                    item.shiny === isShinyState && item.id === pokemon.id
-                )
-              ) {
-                deleteFromFirestore(pokemon.id, pokemon.name, isShinyState);
-                setUserPokemon((prev) => {
-                  return prev.filter(
-                    (entry) =>
-                      !(entry.shiny === isShinyState && entry.id === pokemon.id)
-                  );
-                });
-                return;
-              } else {
-                const palette = [
-                  getComputedStyle(document.documentElement).getPropertyValue(
-                    "--color2"
-                  ),
-                  getComputedStyle(document.documentElement).getPropertyValue(
-                    "--color3"
-                  ),
-                  getComputedStyle(document.documentElement).getPropertyValue(
-                    "--color4"
-                  ),
-                ];
-                //check if user is signed in
-                if (!auth || !auth.currentUser) {
-                  //if not, prompt them to sign in
-                  const provider = new GoogleAuthProvider();
-                  signInWithPopup(auth, provider);
+              // Make a limit of 10 saved pokemon
+              if (userPokemon.length <= 80) {
+                if (
+                  userPokemon.some(
+                    (item) =>
+                      item.shiny === isShinyState && item.id === pokemon.id
+                  )
+                ) {
+                  deleteFromFirestore(pokemon.id, pokemon.name, isShinyState);
+                  setUserPokemon((prev) => {
+                    return prev.filter(
+                      (entry) =>
+                        !(
+                          entry.shiny === isShinyState &&
+                          entry.id === pokemon.id
+                        )
+                    );
+                  });
                   return;
-                }
-                saveToFirestore(
-                  pokemon.id,
-                  pokemon.name,
-                  isShinyState,
-                  palette
-                );
-                setUserPokemon((prev) => {
-                  //add the current pokemon to the user's saved pokemon array, to the back
-                  return [
-                    {
-                      id: pokemon.id,
-                      name: pokemon.name,
-                      shiny: isShinyState,
-                      palette: palette,
-                    },
-                    ...prev,
+                } else {
+                  const palette = [
+                    getComputedStyle(document.documentElement).getPropertyValue(
+                      "--color2"
+                    ),
+                    getComputedStyle(document.documentElement).getPropertyValue(
+                      "--color3"
+                    ),
+                    getComputedStyle(document.documentElement).getPropertyValue(
+                      "--color4"
+                    ),
                   ];
-                });
+                  //check if user is signed in
+                  if (!auth || !auth.currentUser) {
+                    //if not, prompt them to sign in
+                    const provider = new GoogleAuthProvider();
+                    signInWithPopup(auth, provider);
+                    return;
+                  }
+                  saveToFirestore(
+                    pokemon.id,
+                    pokemon.name,
+                    isShinyState,
+                    palette
+                  );
+                  setUserPokemon((prev) => {
+                    //add the current pokemon to the user's saved pokemon array, to the back
+                    return [
+                      {
+                        id: pokemon.id,
+                        name: pokemon.name,
+                        shiny: isShinyState,
+                        palette: palette,
+                      },
+                      ...prev,
+                    ];
+                  });
+                }
+              } else {
+                alert("You have exceeded the maximum number of saved Pokémon.");
               }
             }}
             aria-label="Save Palette"
@@ -1838,11 +1837,12 @@ export default function Poke({
         src={
           // "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/versions/generation-v/black-white/animated/" +
           //^this is the animated version
-          (paramRandomizer) ? "https://pokemonpalette.com/logo512.png" : (
-          "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-          (isShinyState ? "shiny/" : "") +
-          (pokemon.formId ? pokemon.formId : pokemon.id) +
-          ".png")
+          paramRandomizer
+            ? "https://pokemonpalette.com/logo512.png"
+            : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
+              (isShinyState ? "shiny/" : "") +
+              (pokemon.formId ? pokemon.formId : pokemon.id) +
+              ".png"
         }
         alt=""
         onError={(e) => {
@@ -1864,7 +1864,11 @@ export default function Poke({
             <RiLoader4Fill />
           </div>
         ) : genera ? (
-          genera === "Choose a Pokémon" ? genera : ("The " + genera)
+          genera === "Choose a Pokémon" ? (
+            genera
+          ) : (
+            "The " + genera
+          )
         ) : (
           pokemon.name.charAt(0).toUpperCase() + pokemon.name.slice(1)
         )}
