@@ -235,17 +235,17 @@ export default function Game() {
                 species[pokemon] === 1026
                   ? isShiny
                     ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png"
                     : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png"
                   : isShiny
                   ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png" || ""
                   : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png" || ""
               }
               alt="sillhouette"
@@ -351,17 +351,17 @@ export default function Game() {
                         species[item] === 1026
                           ? isShiny
                             ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
-                              species[item] +
+                              encodeURIComponent(species[item]) +
                               ".png"
                             : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-                              species[item] +
+                              encodeURIComponent(species[item]) +
                               ".png"
                           : isShiny
                           ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
-                              species[item] +
+                              encodeURIComponent(species[item]) +
                               ".png" || ""
                           : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                              species[item] +
+                              encodeURIComponent(species[item]) +
                               ".png" || ""
                       }
                       alt="sprite"
@@ -431,17 +431,17 @@ export default function Game() {
             species[pokemon] === 1026
               ? isShiny
                 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
-                  species[pokemon] +
+                  encodeURIComponent(species[pokemon]) +
                   ".png"
                 : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-                  species[pokemon] +
+                  encodeURIComponent(species[pokemon]) +
                   ".png"
               : isShiny
               ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
-                  species[pokemon] +
+                  encodeURIComponent(species[pokemon]) +
                   ".png" || ""
               : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                  species[pokemon] +
+                  encodeURIComponent(species[pokemon]) +
                   ".png" || ""
           }
           alt={pokeData.name}
@@ -502,17 +502,17 @@ export default function Game() {
                 species[pokemon] === 1026
                   ? isShiny
                     ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png"
                     : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png"
                   : isShiny
                   ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png" || ""
                   : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                      species[pokemon] +
+                      encodeURIComponent(species[pokemon]) +
                       ".png" || ""
               }
               alt={pokeData.name}
@@ -583,17 +583,17 @@ export default function Game() {
               species[pokemon] === 1026
                 ? isShiny
                   ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/shiny/" +
-                    species[pokemon] +
+                    encodeURIComponent(species[pokemon]) +
                     ".png"
                   : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/other/home/" +
-                    species[pokemon] +
+                    encodeURIComponent(species[pokemon]) +
                     ".png"
                 : isShiny
                 ? "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/shiny/" +
-                    species[pokemon] +
+                    encodeURIComponent(species[pokemon]) +
                     ".png" || ""
                 : "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/" +
-                    species[pokemon] +
+                    encodeURIComponent(species[pokemon]) +
                     ".png" || ""
             }
             alt={pokeData.name}
